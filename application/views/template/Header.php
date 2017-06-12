@@ -14,6 +14,8 @@
     <!-- Custom CSS -->
     <link href="<?php echo base_url()?>assets/css/heroic-features.css" rel="stylesheet"> 
 
+    <link href="<?php echo base_url()?>assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
     <!-- jQuery -->
     <script src="<?php echo base_url()?>assets/js/jquery.js"></script>
 
