@@ -143,10 +143,7 @@ class Packfunction {
                                 <a href="'.base_url().'/authen/logout">Logout</a>
                             </li> 
                         </ul>
-                    </li>
-                    <li >
-                        <a href="'.base_url().'" title="Go to Event List"> <i class="glyphicon glyphicon-th"></i></a> 
-                    </li>
+                    </li> 
 					'; 
 		return $html; 
 	} 

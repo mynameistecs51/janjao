@@ -29,13 +29,17 @@
     </div>
     <hr class="bd-header">  
     <!-- Page Content -->  
-    <div class="col-lg-12" style="font-size: 16px;margin-bottom: 15px;">
+    <div class="col-lg-6" style="font-size: 16px;margin-bottom: 15px;">
      <i class="btn btn-warning btn-sm">&nbsp;&nbsp;</i> จอง, 
-     <i class="btn btn-danger btn-sm">&nbsp;&nbsp;</i> เข้าพัก, 
+     <i class="btn btn-danger btn-sm" disabled>&nbsp;&nbsp;</i> เข้าพัก, 
      <i class="btn btn-success btn-sm">&nbsp;&nbsp;</i> กำลังทำความสะอาด, 
      <i class="btn btn-default btn-sm">&nbsp;&nbsp;</i> ว่าง
     </div> 
-    
+    <div class="col-lg-6" style="font-size: 16px;margin-bottom: 15px;" align="right">
+        <span class="btn btn-warning btm-sm"><i class="state-icon glyphicon glyphicon-check"></i> BOOKING</span>
+        <span class="btn btn-danger btm-sm"><i class="state-icon glyphicon glyphicon-check"></i> CHECKIN</span>
+    </div>
+
     <div class="col-lg-12">
         <h3 >FLOOR 2 </h3>
     </div>
@@ -43,40 +47,40 @@
         <div class=" col-sm-12 text-center"  >
             <div class="col-sm-1 " style="margin:10px;">
                 <span class="button-checkbox ">
-                    <button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
+                    <button type="button" class="btn btn_room" data-color="danger" style="width:120px;" disabled>
                         <i class="fa fa-bed fa-2x" aria-hidden="true">&nbsp;</i><i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-                        <h4>202 <i class="fa fa-square " aria-hidden="true" style="background-color:orange;color:orange;" ></i></h4>
+                        <h4>202</h4><i>out:14/06/2017</i> 
                     </button>
-                    <input type="checkbox" class="hidden check_room" name="check_room[]" id="room202" value="room202" />
+                    <input type="checkbox" class="hidden check_room" name="check_room[]" id="room202" value="room202" checked disabled readonly/>
                 </span>
             </div>
             
             <div class="col-sm-1 " style="margin:10px;">
                 <span class="button-checkbox ">
-                    <button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
+                    <button type="button" class="btn btn_room" data-color="danger" style="width:120px;" disabled>
                         <i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-                        <h4>204</h4>
+                        <h4>204</h4><i>out:14/06/2017</i>
                     </button>
-                    <input type="checkbox" class="hidden check_room" name="check_room[]" id="room204" value="room204" />
+                    <input type="checkbox" class="hidden check_room" name="check_room[]" id="room204" value="room204" checked disabled readonly/>
                 </span>
             </div>
              
             <div class="col-sm-1 " style="margin:10px;">
                 <span class="button-checkbox ">
-                    <button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
+                    <button type="button" class="btn btn_room" data-color="danger" style="width:120px;" disabled>
                         <i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-                        <h4>206 VIP</h4>
+                        <h4>206 VIP</h4><i>out:14/06/2017</i>
                     </button>
-                    <input type="checkbox" class="hidden check_room" name="check_room[]" id="room206" value="room206" />
+                    <input type="checkbox" class="hidden check_room" name="check_room[]" id="room206" value="room206" checked disabled readonly/>
                 </span>
             </div>
             <div class="col-sm-1 " style="margin:10px;">
                 <span class="button-checkbox ">
-                    <button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
+                    <button type="button" class="btn btn_room" data-color="danger" style="width:120px;" disabled>
                         <i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-                        <h4>208 VIP</h4>
+                        <h4>208 VIP</h4><i>out:14/06/2017</i>
                     </button>
-                    <input type="checkbox" class="hidden check_room" name="check_room[]" id="room208" value="room208" />
+                    <input type="checkbox" class="hidden check_room" name="check_room[]" id="room208" value="room208" checked disabled readonly/>
                 </span>
             </div>
             <div class="col-sm-1 " style="margin:10px;">
@@ -108,29 +112,29 @@
             </div>
             <div class="col-sm-1 " style="margin:10px;">
                 <span class="button-checkbox ">
-                    <button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
+                    <button type="button" class="btn btn_room" data-color="success" style="width:120px;" >
                         <i class="fa fa-bed fa-2x" aria-hidden="true"></i>
                         <h4>216 VIP</h4>
                     </button>
-                    <input type="checkbox" class="hidden check_room" name="check_room[]" id="room216" value="room216" />
+                    <input type="checkbox" class="hidden check_room" name="check_room[]" id="room216" value="room216" checked disabled />
                 </span>
             </div>
             <div class="col-sm-1 " style="margin:10px;">
-                <span class="button-checkbox ">
-                    <button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
+                <span class="button-checkbox " >
+                    <button type="button" class="btn btn_room" data-color="warning" style="width:120px;" disabled>
                         <i class="fa fa-bed fa-2x" aria-hidden="true"></i>
                         <h4>218 VIP</h4>
                     </button>
-                    <input type="checkbox" class="hidden check_room" name="check_room[]" id="room218" value="room218" />
+                    <input type="checkbox" class="hidden check_room" name="check_room[]" id="room218" value="room218" checked disabled />
                 </span>
             </div>
             <div class="col-sm-1 " style="margin:10px;">
-                <span class="button-checkbox ">
-                    <button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
+                <span class="button-checkbox " >
+                    <button type="button" class="btn btn_room" data-color="warning" style="width:120px;" disabled>
                         <i class="fa fa-bed fa-2x" aria-hidden="true"></i>
                         <h4>220 VIP</h4>
                     </button>
-                    <input type="checkbox" class="hidden check_room" name="check_room[]" id="room220" value="room220" />
+                    <input type="checkbox" class="hidden check_room" name="check_room[]" id="room220" value="room220" checked disabled />
                 </span>
             </div>
              
@@ -142,7 +146,7 @@
                 <span class="button-checkbox ">
                     <button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
                         <i class="fa fa-bed fa-2x" aria-hidden="true">&nbsp;</i><i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-                        <h4>201 <i class="fa fa-square " aria-hidden="true" style="background-color:orange;color:orange;" ></i></h4>
+                        <h4>201 </h4>
                     </button>
                     <input type="checkbox" class="hidden check_room" name="check_room[]" id="room201" value="room201" />
                 </span>
@@ -235,11 +239,11 @@
         <div class=" col-sm-12 text-center"  >
             <div class="col-sm-1 " style="margin:10px;">
                 <span class="button-checkbox ">
-                    <button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
+                    <button type="button" class="btn btn_room" data-color="danger" style="width:120px;" disabled>
                         <i class="fa fa-bed fa-2x" aria-hidden="true">&nbsp;</i><i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-                        <h4>302 <i class="fa fa-square " aria-hidden="true" style="background-color:orange;color:orange;" ></i></h4>
+                        <h4>302 </h4><i>out:15/06/2017</i>
                     </button>
-                    <input type="checkbox" class="hidden check_room" name="check_room[]" id="room302" value="room302" />
+                    <input type="checkbox" class="hidden check_room" name="check_room[]" id="room302" value="room302" checked disabled readonly/>
                 </span>
             </div>
             
@@ -255,11 +259,11 @@
              
             <div class="col-sm-1 " style="margin:10px;">
                 <span class="button-checkbox ">
-                    <button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
+                    <button type="button" class="btn btn_room" data-color="danger" style="width:120px;" disabled>
                         <i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-                        <h4>306 VIP</h4>
+                        <h4>306 VIP</h4><i>out:15/06/2017</i>
                     </button>
-                    <input type="checkbox" class="hidden check_room" name="check_room[]" id="room306" value="room306" />
+                    <input type="checkbox" class="hidden check_room" name="check_room[]" id="room306" value="room306" checked disabled readonly/>
                 </span>
             </div>
             <div class="col-sm-1 " style="margin:10px;">
@@ -334,7 +338,7 @@
                 <span class="button-checkbox ">
                     <button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
                         <i class="fa fa-bed fa-2x" aria-hidden="true">&nbsp;</i><i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-                        <h4>301 <i class="fa fa-square " aria-hidden="true" style="background-color:orange;color:orange;" ></i></h4>
+                        <h4>301 </h4>
                     </button>
                     <input type="checkbox" class="hidden check_room" name="check_room[]" id="room301" value="room301" />
                 </span>
@@ -429,7 +433,7 @@
                 <span class="button-checkbox ">
                     <button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
                         <i class="fa fa-bed fa-2x" aria-hidden="true">&nbsp;</i><i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-                        <h4>402 <i class="fa fa-square " aria-hidden="true" style="background-color:orange;color:orange;" ></i></h4>
+                        <h4>402 </h4>
                     </button>
                     <input type="checkbox" class="hidden check_room" name="check_room[]" id="room402" value="room402" />
                 </span>
@@ -526,7 +530,7 @@
                 <span class="button-checkbox ">
                     <button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
                         <i class="fa fa-bed fa-2x" aria-hidden="true">&nbsp;</i><i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-                        <h4>401 <i class="fa fa-square " aria-hidden="true" style="background-color:orange;color:orange;" ></i></h4>
+                        <h4>401 </h4>
                     </button>
                     <input type="checkbox" class="hidden check_room" name="check_room[]" id="room401" value="room401" />
                 </span>
