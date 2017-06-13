@@ -653,7 +653,7 @@
 		div+='<div class="modal modal-wide fade" id="myModal'+n+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">';
 		div+='<div class="modal-dialog" style="width:90%;">';
 		div+='<div class="modal-content">';
-		div+='<div class="modal-header" style="background:#d9534f;color:#FFFFFF;">';
+		div+='<div class="modal-header bg-primary" style="color:#FFFFFF;">';
 		div+='<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
 		div+='<h4 class="modal-title">'+screenname+'</h4>';
 		div+='</div>';
