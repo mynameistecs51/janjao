@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 12, 2017 at 07:32 PM
+-- Generation Time: Jun 13, 2017 at 04:43 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -76,14 +76,6 @@ CREATE TABLE `qr_checklogin` (
 ,`status` varchar(10)
 ,`usergroupID` int(11)
 ,`imgProfile` varchar(100)
-);
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `qr_session`
---
-CREATE TABLE `qr_session` (
 );
 
 -- --------------------------------------------------------
@@ -543,15 +535,6 @@ CREATE TABLE `ts_log` (
 DROP TABLE IF EXISTS `qr_checklogin`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `qr_checklogin`  AS  select `tm_user`.`userID` AS `userID`,`tm_user`.`username` AS `username`,`tm_user`.`password` AS `password`,`tm_user`.`useremail` AS `useremail`,`tm_user`.`userFname` AS `userFname`,`tm_user`.`userLname` AS `userLname`,`tm_user`.`status` AS `status`,`tm_user`.`usergroupID` AS `usergroupID`,`tm_user`.`imgProfile` AS `imgProfile` from `tm_user` where (`tm_user`.`status` = 'ON') ;
-
--- --------------------------------------------------------
-
---
--- Structure for view `qr_session`
---
-DROP TABLE IF EXISTS `qr_session`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `qr_session`  AS  select `a`.`SessionID` AS `SessionID`,`a`.`SessionDevice` AS `SessionDevice`,`a`.`SessionIPAddress` AS `SessionIPAddress`,`a`.`SessionMAC` AS `SessionMAC`,`a`.`SessionUserName` AS `SessionUserName`,`a`.`SessionStatus` AS `SessionStatus`,`a`.`SessionUserID` AS `SessionUserID`,`a`.`SessionUserGroupID` AS `SessionUserGroupID` from `ts_session` `a` ;
 
 --
 -- Indexes for dumped tables
