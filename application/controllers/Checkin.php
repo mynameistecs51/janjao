@@ -27,7 +27,7 @@ class Checkin extends CI_Controller {
 		$this->packfunction->packView($this->data,"checkin/CheckinList");
 	}
 
-	public function formCheckin()
+	public function CheckinForm()
 	{
 		$this->data['viewName']=$this->pagename;
 		$this->data['keyword']='';
