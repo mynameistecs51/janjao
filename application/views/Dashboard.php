@@ -665,7 +665,7 @@
 		div+='</div>';
 		div+='<div class="modal-footer" style="text-align:center; background:#F6CECE;">';
 		div+='<button type="submit" id="save" class="btn btn-modal"><span class="   glyphicon glyphicon-floppy-saved"> บันทึก</span></button>';
-		div+='<button type="reset" class="btn btn-modal" data-dismiss="modal"><span class="   glyphicon glyphicon-floppy-remove"> ยกเลิก</span></button>';
+		div+='<button type="reset" class="btn btn-modal " data-dismiss="modal"><span class="glyphicon glyphicon-floppy-remove"> ยกเลิก</span></button>';
 		div+='</div>';
 		div+='</div><!-- /.modal-content -->';
 		div+='</div><!-- /.modal-dialog -->';

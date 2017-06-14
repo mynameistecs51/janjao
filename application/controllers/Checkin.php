@@ -37,6 +37,11 @@ class Checkin extends CI_Controller {
 		$this->packfunction->packView($this->data,"checkin/CheckinForm");
 	}
 
+	public function bill()
+	{
+		$this->load->view('checkin/Bill');
+	}
+
 	public function search(){
 		$this->data['viewName']=$this->pagename;
 		$this->data['keyword']=$this->input->post('keyword');
