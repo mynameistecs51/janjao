@@ -1,5 +1,5 @@
 
-<div class="col-sm-12 ">
+<div class="container ">
 	<div class="col-sm-3">	</div>
 	<div class="col-sm-6">
 
@@ -73,17 +73,22 @@
 			</tfoot>
 		</table>
 	</div>
+	<div class="col-sm-12 clearfix"></div>
+	<div class="col-sm-12">
+		<div class="col-sm-5 clearfix"><br></div>
+		<p class="text-center col-sm-7">
+			<button class="btn btn-primary btn_print"><span class="fa fa-print"> ปริ๊น</span></button>
+		</p>
+	</div>
 </div>
-<div class="col-sm-12">
-	<div class="col-sm-5"></div>
-	<p class="text-center">
-		<button class="btn btn-primary btn_print"><span class="fa fa-print"> ปริ๊น</span></button>
-	</p>
-</div>
+
 <script type="text/javascript">
-	// var data = document.getElementById('example');
-	// newWin = window.open("");
-	// newWin.document.write(data.outerHTML);
-	// newWin.print();
-	// newWin.close();
+	$('.btn_print').click(function(){
+
+		var data = document.getElementById('example');
+		newWin = window.open("");
+		newWin.document.write(data.outerHTML);
+		newWin.print();
+		newWin.close();
+	});
 </script>
