@@ -31,6 +31,8 @@ class Checkin extends CI_Controller {
 	{
 		$this->data['viewName']=$this->pagename;
 		$this->data['keyword']='';
+		$this->data['getMonth'] = $this->packfunction->getMonth();
+		$this->data['getYear'] = $this->packfunction->getYear();
 		$this->data['getlist']=$this->Mdl_user->getList($this->data['keyword']);
 		$this->packfunction->packView($this->data,"checkin/CheckinForm");
 	}
