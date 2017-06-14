@@ -615,6 +615,10 @@
 
 	</div>
 </div>
+ 
+<div class="col-lg-12">
+	<hr style="margin-top: 40xp;margin-left: -15px; margin-right: -15px;">  
+</div>
 <div class="div_modal"> <!-- show modal checkinform --> </div>
 <script type="text/javascript">
 	$(function(){

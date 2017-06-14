@@ -25,42 +25,42 @@
     				<thead>
     					<tr >
     						<th  style="text-align: center;width: 40px;">No.</th>
-    						<th style="text-align: center;width:  150px;">Serial Number</th>
-    						<th  >NAME </th>
-    						<th style="text-align: center;width:  150px;">BOOKING DATE</th>
-                            <th style="text-align: center;width:  80px;">ROOM</th>
-    						<th style="text-align: center;width:  200px;">CHECK IN DATE</th>
+    						<th style="text-align: center;width:  150px;">BOOKED NUMBER</th>
+    						<th style="text-align: center;width:  300px;">NAME </th>
+    						<th style="text-align: center;width:  80px;">ROOM</th>
+    						<th style="text-align: center;width:  150px;">BOOKED DATE</th>
+    						<th style="text-align: center;width:  200px;">CHECK DATE</th>
     						<th style="text-align: center;width:  100px;"> CREATE BY</th>
-    						<th width="300">#</th>
+    						<th style="text-align: center;width:  300px;">#</th>
     					</tr>
     				</thead>
     				<tbody>
     					<tr>
     						<td>1</td>
-    						<td>BK170613201001</td>
+    						<td>CI170613201001</td>
     						<td>นายไชยวัฒน์  หอมแสง</td>
-                            <td>13/06/2017 13:00</td>
     						<td>201</td>
+    						<td>13/06/2017 13:00</td>
     						<td>15/06/2017 12:00</td>
     						<td>Administrator</td>
-    						<td >
-    							<button class="btn btn-warning   btn-sm" style="width: 90px;">SERVICE</button>
-    							<button class="btn btn-sm" style="width: 90px;" >EDIT</button>
-    							<button class="btn btn-info  btn-sm"  style="width: 90px;">VIEW</button>
+    						<td class="col-sm-3">
+    							<button class="btn btn-warning   btn-xs" style="width: 90px;">SERVICE</button>
+    							<button class="btn btn-primary  btn-xs" style="width: 90px;" >CHECKOUT</button>
+    							<button class="btn btn-info  btn-xs"  style="width: 90px;">VIEW</button>
     						</td>
     					</tr>
     					<tr>
     						<td>2</td>
-    						<td>BK170613205001</td>
+    						<td>CI170613205001</td>
     						<td>นายอาสา  มาครับ</td>
-                            <td>13/06/2017 13:00</td>
-    						<td>205<br>206</td>
-    						<td></td>
+    						<td>205</td>
+    						<td>13/06/2017 13:00</td>
+    						<td>15/06/2017 12:00</td>
     						<td>Administrator</td>
     						<td >
-    							<button class="btn btn-warning   btn-sm" style="width: 90px;">SERVICE</button>
-    							<button class="btn btn-danger  btn-sm" style="width: 90px;" >CHECK IN</button>
-    							<button class="btn btn-info  btn-sm"  style="width: 90px;">VIEW</button>
+    							<button class="btn btn-warning   btn-xs" style="width: 90px;">SERVICE</button>
+    							<button class="btn btn-primary  btn-xs" style="width: 90px;" >CHECKOUT</button>
+    							<button class="btn btn-info  btn-xs"  style="width: 90px;">VIEW</button>
     						</td>
     					</tr>
     				</tbody>

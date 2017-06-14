@@ -1,6 +1,5 @@
 
     <!-- /.container -->
-    <hr class="bd-footer" >  
  
     <!-- Footer -->
     <!-- <footer> -->
