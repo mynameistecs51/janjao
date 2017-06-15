@@ -39,7 +39,9 @@ class Checkin extends CI_Controller {
 
 	public function bill()
 	{
-		$this->load->view('checkin/Bill');
+		$this->data['getMonth'] = $this->packfunction->getMonth();
+		$this->data['getYear'] = $this->packfunction->getYear();
+		$this->load->view('checkin/Bill',$this->data);
 	}
 
 	public function search(){

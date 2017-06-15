@@ -615,9 +615,9 @@
 
 	</div>
 </div>
- 
+
 <div class="col-lg-12">
-	<hr style="margin-top: 40xp;margin-left: -15px; margin-right: -15px;">  
+	<hr style="margin-top: 40xp;margin-left: -15px; margin-right: -15px;">
 </div>
 <div class="div_modal"> <!-- show modal checkinform --> </div>
 <script type="text/javascript">
@@ -630,7 +630,7 @@
 		});
 		$('.btn_checkin').click(function(){
 			load_page('<?php echo base_url()."/home/CheckinForm/"; ?>','.:: Data Checkin::.','#');
-			// console.log(selectRoom.filter(String));
+			console.log(selectRoom.filter(String));
 		});
 	});
 
