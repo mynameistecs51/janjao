@@ -630,7 +630,7 @@
 		});
 		$('.btn_checkin').click(function(){
 			load_page('<?php echo base_url()."/home/CheckinForm/"; ?>','.:: Data Checkin::.','#');
-			console.log(selectRoom.filter(String));
+			alert(selectRoom.filter(String));
 		});
 	});
 
