@@ -105,6 +105,12 @@
 			</div>
 		</div>
 		<div class="form-group">
+			<label for="inputtext3" class="col-sm-2 control-label">วันที่ จอง</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" id="inputtext3" placeholder="1211300153330">
+			</div>
+		</div>
+		<div class="form-group">
 			<label for="inputtext3" class="col-sm-2 control-label">วันที่ Checkin</label>
 			<div class="col-sm-6">
 				<input type="text" class="form-control" id="inputtext3" placeholder="1211300153330">

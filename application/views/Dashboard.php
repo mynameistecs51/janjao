@@ -36,7 +36,7 @@
 	<i class="btn btn-default btn-sm">&nbsp;&nbsp;</i> ว่าง
 </div>
 <div class="col-lg-6" style="font-size: 16px;margin-bottom: 15px;" align="right">
-	<span class="btn btn-warning btm-sm"><i class="state-icon glyphicon glyphicon-check"></i> BOOKING</span>
+	<span class="btn btn-warning btm-sm btn_booking"><i class="state-icon glyphicon glyphicon-check"></i> BOOKING</span>
 	<span class="btn btn-danger btm-sm btn_checkin"><i class="state-icon glyphicon glyphicon-check"></i> CHECKIN</span>
 </div>
 
@@ -622,6 +622,11 @@
 <div class="div_modal"> <!-- show modal checkinform --> </div>
 <script type="text/javascript">
 	$(function(){
+		checkIn();
+		booking();
+	});
+
+	function checkIn() {
 		var selectRoom =[];
 		$('.button-checkbox > .check_room').on('change',function(){
 
@@ -629,11 +634,23 @@
 			selectRoom.push(numCheck);
 		});
 		$('.btn_checkin').click(function(){
-			load_page('<?php echo base_url()."/home/CheckinForm/"; ?>','.:: Data Checkin::.','#');
+			load_page('<?php echo base_url()."home/CheckinForm/"; ?>','.:: Data Checkin::.','#');
 			alert(selectRoom.filter(String));
 		});
-	});
+	}
 
+	function booking() {
+		var selectRoom =[];
+		$('.button-checkbox > .check_room').on('change',function(){
+
+			var numCheck = $(this).is(':checked')?$(this).val():'';
+			selectRoom.push(numCheck);
+		});
+		$('.btn_booking').click(function(){
+			load_page('<?php echo base_url()."home/BookingForm/"; ?>','.:: Data Booking ::.','#');
+			alert(selectRoom.filter(String));
+		});
+	}
 
 	function load_page(loadUrl,texttitle,urlsend){
 		var screenname= texttitle;

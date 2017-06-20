@@ -27,7 +27,14 @@ class Home extends CI_Controller {
 
 	public function CheckinForm()
 	{
-		$this->load->view('checkin/CheckinForm');
+		$this->data['getMonth'] = $this->packfunction->getMonth();
+		$this->data['getYear'] = $this->packfunction->getYear();
+		$this->load->view('checkin/CheckinForm',$this->data);
+	}
+
+	public function BookingForm()
+	{
+		$this->load->view('booked/BookedFormAdd');
 	}
 
 	public function search(){
