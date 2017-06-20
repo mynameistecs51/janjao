@@ -125,18 +125,18 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="deposit" class="col-sm-2 control-label">เงินมัดจำ</label>
-			<div class="input-group col-sm-6">
-				<input type="text" class="form-control" id="deposit" placeholder="1211300153330">
-				<span class="input-group-addon"> บาท</span>
-			</div>
-		</div>
-		<div class="form-group">
 			<label for="is_breakfast" class="col-sm-2 control-label">อาหารเช้า</label>
 			<div class="col-sm-6">
 				<label><input type="radio" name="is_breakfast" id="breakfast0" value="0" class="control-label"> <b class="btn btn-danger btn-md">  ไม่รับอาหารเช้า</b></label>
 				&nbsp;&nbsp;&nbsp;
 				<label><input type="radio" name="is_breakfast" id="breakfast1" value="1" class="control-label"> <b class="btn btn-success btn-md"> รับอาหารเช้า</b></label>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="deposit" class="col-sm-2 control-label">มัดจำ</label>
+			<div class="input-group col-sm-6">
+				<input type="text" class="form-control" id="deposit" placeholder="1211300153330">
+				<span class="input-group-addon"> บาท</span>
 			</div>
 		</div>
 		<div class="form-group">

@@ -1,3 +1,16 @@
+<style type="text/css">
+	@page{
+		size: a4;
+	}
+	@font-face {
+		font-family: TH_Charmonman;
+		src: url("<?php echo base_url(); ?>assets/fonts/TH Charmonman.ttf");
+	}
+	.headname{
+		font-family: "TH_Charmonman";
+		font-size: 16px;
+	}
+</style>
 <div class="row">
 	<div class="col-sm-12">
 		<div class="col-sm-5 clearfix"><br></div>
@@ -20,7 +33,8 @@
 						</tr>
 						<tr>
 							<td class="col-sm-3" colspan="2"  style="widows: 100%;text-align: left;">
-								จันทร์เจ้า โฮเทล <br>
+								<div class="headname">janjao hotel</div>
+								จันทร์เจ้า โฮเทล  <br>
 								666 หมู่ 6	ถ.โพนพิสัย ต.หมากแข้ง 	อ.เมือง จ.อุดรธานี 41000 <br>
 								โทร 0910571616 <br>
 								หมายเลขผู้เสียภาษี  111111111111

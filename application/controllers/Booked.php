@@ -16,7 +16,7 @@ class Booked extends CI_Controller {
 		if($this->userID==""){
 			// ถ้าไม่มี session หรือ ไม่มีการ Login ให้กลับไป authen
 			redirect('authen/');
-	    }
+		}
 
 	}
 
@@ -25,6 +25,13 @@ class Booked extends CI_Controller {
 		$this->data['keyword']='';
 		$this->data['getlist']=$this->Mdl_user->getList($this->data['keyword']);
 		$this->packfunction->packView($this->data,"booked/BookedList");
+	}
+
+	public function BookedFormEdit()
+	{
+		$this->data['getMonth'] = $this->packfunction->getMonth();
+		$this->data['getYear'] = $this->packfunction->getYear();
+		$this->load->view('booked/BookedFormEdit',$this->data);
 	}
 
 	public function search(){
@@ -80,7 +87,7 @@ class Booked extends CI_Controller {
 				"createBY"		=>$this->UserName,
 				"updateDT"		=>$this->packfunction->dtYMDnow(),
 				"updateBY"		=>$this->UserName
-			);
+				);
 			$userID = $this->Mdl_user->addNewData($data,'tm_user');
 
 			// echo "<pre>";
@@ -121,7 +128,7 @@ class Booked extends CI_Controller {
 				"createBY"		=>$this->UserName,
 				"updateDT"		=>$this->packfunction->dtYMDnow(),
 				"updateBY"		=>$this->UserName
-			);
+				);
 			$userID = $_POST['userID'];
 			$this->Mdl_user->updateData($data,'tm_user',$userID);
 			redirect('user/last/'.md5($userID));

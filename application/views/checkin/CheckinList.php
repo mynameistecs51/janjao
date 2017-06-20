@@ -43,7 +43,6 @@
     						<td>201</td>
     						<td>15/06/2017 12:00</td>
     						<td>Administrator</td>
-
     						<td class="col-sm-3">
     							<button class="btn btn-warning   btn-xs" style="width: 90px;">SERVICE</button>
     							<button class="btn btn-primary  btn-xs btn_checkout" style="width: 90px;" >CHECKOUT</button>
@@ -132,7 +131,7 @@
 			div+='</div>';
 			div+='<div class="modal-footer" style="text-align:center; background:#F6CECE;">';
 			// div+='<button type="submit" id="save" class="btn btn-modal"><span class="   glyphicon glyphicon-floppy-saved"> บันทึก</span></button>';
-			// div+='<button type="reset" class="btn btn-modal " data-dismiss="modal"><span class="glyphicon glyphicon-floppy-remove"> ยกเลิก</span></button>';
+			div+='<button type="reset" class="btn btn-modal " data-dismiss="modal"><span class="glyphicon glyphicon-floppy-remove"> ยกเลิก</span></button>';
 			div+='</div>';
 			div+='</div><!-- /.modal-content -->';
 			div+='</div><!-- /.modal-dialog -->';
