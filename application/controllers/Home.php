@@ -8,6 +8,7 @@ class Home extends CI_Controller {
 		parent::__construct();
 		$this->ctl="Home";
 		$this->pagename="HOME";
+		$this->load->model('Mdl_getprovince');
 		$this->userID = $this->session->userdata('userID');
 		$this->UserName = $this->session->userdata('UserName');
 		$this->UserGroupID = $this->session->userdata('usergroupID');
@@ -25,14 +26,30 @@ class Home extends CI_Controller {
 		$this->packfunction->packView($this->data,'Dashboard');
 	}
 
-	public function CheckinForm()
+	public function CheckinFormAdd()
 	{
 		$this->data['getMonth'] = $this->packfunction->getMonth();
 		$this->data['getYear'] = $this->packfunction->getYear();
 		$this->load->view('checkin/CheckinFormAdd',$this->data);
 	}
 
-	public function BookingForm()
+	public function getProvince() //แสดงรายการ รหัสไปรษณีย์ จังหวัด อำเภอ ตำบล
+	{
+		$zipcode =  $_POST['zipcode'];
+		$showdata = $this->Mdl_getprovince->getProvince($zipcode);
+
+		$province = array('province_id'=>$showdata[0]['PROVINCE_ID'],'province_name' => $showdata[0]['PROVINCE_NAME'],'amphur_id'=>$showdata[0]['AMPHUR_ID'],'amphur_name' => $showdata[0]['AMPHUR_NAME'],'zipcode ' => $showdata[0]['ZIPCODE']);
+		foreach ($showdata as $rowProvince) {
+			$dataProvince = array(
+				'district_id' => $rowProvince['DISTRICT_ID'],
+				'district_name' => $rowProvince['DISTRICT_NAME'],
+				);
+			array_push($province,array('district_name'=>$dataProvince['district_name'],'district_id'=>$dataProvince['district_id']));
+		}
+		echo json_encode($showdata);
+
+	}
+	public function BookingFormAdd()
 	{
 		$this->load->view('booked/BookedFormAdd');
 	}

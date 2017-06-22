@@ -51,7 +51,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true">&nbsp;</i><i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>202</h4><i>out:14/06/2017</i>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room202" value="room202" checked disabled readonly/>
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room202" value="room202" checked disabled readonly/>
 			</span>
 		</div>
 
@@ -61,7 +61,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>204</h4><i>out:14/06/2017</i>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room204" value="room204" checked disabled readonly/>
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room204" value="room204" checked disabled readonly/>
 			</span>
 		</div>
 
@@ -71,7 +71,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>206 VIP</h4><i>out:14/06/2017</i>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room206" value="room206" checked disabled readonly/>
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room206" value="room206" checked disabled readonly/>
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -80,7 +80,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>208 VIP</h4><i>out:14/06/2017</i>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room208" value="room208" checked disabled readonly/>
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room208" value="room208" checked disabled readonly/>
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -89,7 +89,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>210 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='0' id="room210" value="room210" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room210" value="room210" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -98,7 +98,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>212 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='0' id="room212" value="room212" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room212" value="room212" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -107,7 +107,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>214 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room214" value="room214" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room214" value="room214" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -148,7 +148,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true">&nbsp;</i><i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>201 </h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room201" value="room201" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room201" value="room201" />
 			</span>
 		</div>
 
@@ -158,7 +158,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>203</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room203" value="room203" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room203" value="room203" />
 			</span>
 		</div>
 
@@ -168,7 +168,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>205 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room205" value="room205" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room205" value="room205" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -177,7 +177,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>207 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room207" value="room207" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room207" value="room207" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -186,7 +186,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>209 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room209" value="room209" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room209" value="room209" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -195,7 +195,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>211 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room211" value="room211" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room211" value="room211" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -207,7 +207,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>215 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room215" value="room215" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room215" value="room215" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -216,7 +216,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>217 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room217" value="room217" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room217" value="room217" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -225,7 +225,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>219 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room219" value="room219" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room219" value="room219" />
 			</span>
 		</div>
 
@@ -243,7 +243,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true">&nbsp;</i><i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>302 </h4><i>out:15/06/2017</i>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room302" value="room302" checked disabled readonly/>
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room302" value="room302" checked disabled readonly/>
 			</span>
 		</div>
 
@@ -253,7 +253,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>304</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room304" value="room304" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room304" value="room304" />
 			</span>
 		</div>
 
@@ -263,7 +263,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>306 VIP</h4><i>out:15/06/2017</i>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room306" value="room306" checked disabled readonly/>
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room306" value="room306" checked disabled readonly/>
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -272,7 +272,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>308 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room308" value="room308" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room308" value="room308" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -281,7 +281,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>310 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room310" value="room310" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room310" value="room310" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -290,7 +290,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>312 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room312" value="room312" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room312" value="room312" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -299,7 +299,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>314 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room314" value="room314" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room314" value="room314" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -308,7 +308,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>316 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room316" value="room316" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room316" value="room316" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -317,7 +317,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>318 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room318" value="room318" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room318" value="room318" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -326,7 +326,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>320 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room320" value="room320" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room320" value="room320" />
 			</span>
 		</div>
 
@@ -340,7 +340,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true">&nbsp;</i><i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>301 </h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room301" value="room301" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room301" value="room301" />
 			</span>
 		</div>
 
@@ -350,7 +350,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>303</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room303" value="room303" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room303" value="room303" />
 			</span>
 		</div>
 
@@ -360,7 +360,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>305 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room305" value="room205" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room305" value="room205" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -369,7 +369,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>307 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room307" value="room307" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room307" value="room307" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -378,7 +378,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>309 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room309" value="room309" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room309" value="room309" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -387,7 +387,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>311 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room311" value="room311" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room311" value="room311" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -399,7 +399,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>315 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room315" value="room315" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room315" value="room315" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -408,7 +408,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>317 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room317" value="room317" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room317" value="room317" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -417,7 +417,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>319 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room319" value="room319" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room319" value="room319" />
 			</span>
 		</div>
 
@@ -435,7 +435,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true">&nbsp;</i><i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>402 </h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room402" value="room402" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room402" value="room402" />
 			</span>
 		</div>
 
@@ -445,7 +445,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>404</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room404" value="room404" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room404" value="room404" />
 			</span>
 		</div>
 
@@ -455,7 +455,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>406 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room406" value="room406" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room406" value="room406" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -464,7 +464,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>408 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room408" value="room408" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room408" value="room408" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -473,7 +473,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>410 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room410" value="room410" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room410" value="room410" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -482,7 +482,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>412 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room412" value="room412" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room412" value="room412" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -491,7 +491,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>414 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room414" value="room414" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room414" value="room414" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -500,7 +500,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>416 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room416" value="room416" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room416" value="room416" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -509,7 +509,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>418 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room418" value="room418" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room418" value="room418" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -518,7 +518,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>320 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room320" value="room320" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room320" value="room320" />
 			</span>
 		</div>
 
@@ -532,7 +532,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true">&nbsp;</i><i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>401 </h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room401" value="room401" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room401" value="room401" />
 			</span>
 		</div>
 
@@ -542,7 +542,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>403</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room403" value="room403" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room403" value="room403" />
 			</span>
 		</div>
 
@@ -552,7 +552,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>405 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room405" value="room205" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room405" value="room205" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -561,7 +561,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>407 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room407" value="room407" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room407" value="room407" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -570,7 +570,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>409 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room409" value="room409" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room409" value="room409" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -579,7 +579,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>411 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room411" value="room411" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room411" value="room411" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -591,7 +591,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>415 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room415" value="room415" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room415" value="room415" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -600,7 +600,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>417 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room417" value="room417" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room417" value="room417" />
 			</span>
 		</div>
 		<div class="col-sm-1 " style="margin:10px;">
@@ -609,7 +609,7 @@
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
 					<h4>419 VIP</h4>
 				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" data-status='1' id="room419" value="room419" />
+				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="room419" value="room419" />
 			</span>
 		</div>
 
@@ -627,15 +627,30 @@
 	});
 
 	function checkIn() {
-		var selectRoom =[];
-		$('.button-checkbox > .check_room').on('change',function(){
+		var selectRoom = [];
+		$('.check_room').on('change',function(){
 
-			var numCheck = $(this).is(':checked')?$(this).val():'';
-			selectRoom.push(numCheck);
+			if( this.checked){
+				// console.log($(this).val());
+				selectRoom.push($(this).val());
+			}else {
+				// $(this).each(function(index, el) {
+					selectRoom.push($.grep(selectRoom > 0));
+				// });
+			}
+
+			// }
+			// $(this).each(function(index, el) {
+			// 	console.log(el.is(el.attr(':checked')));
+			// });
+			// var numCheck = $(this).is(':checked')?$(this).val() : $('check_room :checked').val();
+			// selectRoom.push(numCheck);
+			// console.log(numCheck);
 		});
 		$('.btn_checkin').click(function(){
-			load_page('<?php echo base_url()."home/CheckinForm/"; ?>','.:: Data Checkin::.','#');
-			alert(selectRoom.filter(String));
+			// load_page('<?php echo base_url().$this->ctl."/CheckinFormAdd/"; ?>','.:: Data Checkin::.','#');
+			// alert(selectRoom.filter(String));
+			console.log(selectRoom);
 		});
 	}
 
@@ -647,7 +662,7 @@
 			selectRoom.push(numCheck);
 		});
 		$('.btn_booking').click(function(){
-			load_page('<?php echo base_url()."home/BookingForm/"; ?>','.:: Data Booking ::.','#');
+			load_page('<?php echo base_url().$this->ctl."/BookingFormAdd/"; ?>','.:: Data Booking ::.','#');
 			alert(selectRoom.filter(String));
 		});
 	}
@@ -663,7 +678,7 @@
 		modal.on('show.bs.modal', function () {
 			modalBody.load(url);
 		}).modal({backdrop: 'static',keyboard: true});
-		setInterval(function(){$('#ajaxLoaderModal').remove()},5100);
+		// setInterval(function(){$('#ajaxLoaderModal').remove()},5100);
 	}
 
 	function modal_form(n,screenname,url)
@@ -759,6 +774,8 @@
               init();
             });
         });
+
+
       </script>
 
 

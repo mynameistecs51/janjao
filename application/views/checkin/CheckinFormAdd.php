@@ -55,32 +55,28 @@
 			</div>
 		</div>
 		<div class="form-group">
+			<label for="zipcode" class="col-sm-2 control-label">รหัสไปรษณีย์</label>
+			<div class="col-sm-2">
+				<input type="text" name="zipcode" id="zipcode" value=""  class="form-control" placeholder="รหัสไปรษณีย์">
+			</div>
 			<label for="province" class="col-sm-2 control-label">จังหวัด</label>
 			<div class="col-sm-2">
 				<select class="form-control" name="province" id="province">
-					<option>อุดรธานี</option>
-				</select>
-			</div>
-		<!-- </div>
-		<div class="form-group"> -->
-			<label for="district" class="col-sm-2 control-label">อำเภอ</label>
-			<div class="col-sm-2">
-				<select class="form-control" name="district" id="district">
-					<option>เมือง</option>
+
 				</select>
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="tumbon" class="col-sm-2 control-label">ตำบล</label>
+			<label for="amphur" class="col-sm-2 control-label">อำเภอ</label>
 			<div class="col-sm-2">
-				<select class="form-control" name="tumbon" id="tumbon">
-					<option>หมากแข้ง</option>
+				<select class="form-control" name="amphur" id="amphur">
+
 				</select>
 			</div>
-			<label for="postCode" class="col-sm-2 control-label">รหัสไปรษณีย์</label>
+			<label for="district" class="col-sm-2 control-label">ตำบล</label>
 			<div class="col-sm-2">
-				<select class="form-control" name="postCode" id="postCode">
-					<option>41000</option>
+				<select class="form-control" name="district" id="district">
+
 				</select>
 			</div>
 		</div>
@@ -150,8 +146,10 @@
 		</div>
 	</div>
 </div>
-</clearfix">
+
+
 <script type="text/javascript">
+	getProvince();  //เปิดการใช้งาน function
 	// Grab elements, create settings, etc.
 	var video = document.getElementById('video');
 
@@ -173,4 +171,35 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 document.getElementById("snap").addEventListener("click", function() {
 	context.drawImage(video, 0, 0, 300, 200);
 });
-</script>
+
+    // -------------- select province call zipcode --------------//
+    function getProvince(){
+    	$("input[name=zipcode]").change(function(){
+    		$.ajax({
+    			url: '<?php echo base_url().$this->ctl."/getProvince/";?>',
+    			data:"zipcode="+$("input[name=zipcode]").val(),
+    			type: 'POST',
+    			dataType: 'json',
+    			success:function(res){
+    				var district="<option >---เลือกตำบล---</option>";
+    				$.each(res, function( index, value ) {
+    					province = "<option value="+value['PROVINCE_ID']+"> "+value['PROVINCE_NAME']+"</option>";
+    					amphur = "<option value="+value['AMPHUR_ID']+"> "+value['AMPHUR_NAME']+"</option>";
+    					district += "<option value="+value['DISTRICT_ID']+"> "+value['DISTRICT_NAME']+"</option>";
+    				});
+    				$('#province').html(province);
+    				$('#amphur').html(amphur);
+    				$('#district').html(district);
+
+    			},
+    			error:function(err){
+    				alert("รหัสไปรษณีย์ไม่ถูกต้อง"+$(this).val());
+    				$('input[name=zipcode]').val('').focus();
+    				$('#province').html('');
+    				$('#amphur').html('');
+    				$('#district').html('');
+    			}
+    		});
+    	});
+    }
+  </script>
