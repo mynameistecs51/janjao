@@ -26,8 +26,9 @@ class Home extends CI_Controller {
 		$this->packfunction->packView($this->data,'Dashboard');
 	}
 
-	public function CheckinFormAdd()
+	public function CheckinFormAdd($selectRoom)
 	{
+		$this->data['selectRoom'] = $selectRoom;
 		$this->data['getMonth'] = $this->packfunction->getMonth();
 		$this->data['getYear'] = $this->packfunction->getYear();
 		$this->load->view('checkin/CheckinFormAdd',$this->data);

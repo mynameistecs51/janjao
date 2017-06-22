@@ -627,30 +627,25 @@
 	});
 
 	function checkIn() {
-		var selectRoom = [];
+		var selectRoom=[];
 		$('.check_room').on('change',function(){
 
 			if( this.checked){
-				// console.log($(this).val());
 				selectRoom.push($(this).val());
 			}else {
-				// $(this).each(function(index, el) {
-					selectRoom.push($.grep(selectRoom > 0));
-				// });
+				$(this).each(function(index, el) {
+					selectRoom.push($(this).val());
+					selectRoom  = $.grep(selectRoom, function( a ) {
+						return a !== el.id;
+					});
+				});
 			}
-
-			// }
-			// $(this).each(function(index, el) {
-			// 	console.log(el.is(el.attr(':checked')));
-			// });
-			// var numCheck = $(this).is(':checked')?$(this).val() : $('check_room :checked').val();
-			// selectRoom.push(numCheck);
-			// console.log(numCheck);
 		});
 		$('.btn_checkin').click(function(){
-			// load_page('<?php echo base_url().$this->ctl."/CheckinFormAdd/"; ?>','.:: Data Checkin::.','#');
-			// alert(selectRoom.filter(String));
-			console.log(selectRoom);
+			// var data = selectRoom.toString();
+			var room = selectRoom.join('_')
+			// console.log(selectRoom.join('_'));
+			load_page('<?php echo base_url().$this->ctl."/CheckinFormAdd/"; ?>'+room,'.:: Data Checkin::.','#');
 		});
 	}
 

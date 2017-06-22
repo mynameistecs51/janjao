@@ -3,6 +3,7 @@
 		<div class="form-group">
 			<label for="idcardno" class="col-sm-2 control-label">เลขประจำประชาชน</label>
 			<div class="col-sm-6">
+			ห้องที่เลือก : <?php echo $selectRoom; ?>
 				<input type="text" class="form-control" id="idcardno" placeholder="1211300153330">
 			</div>
 		</div>
