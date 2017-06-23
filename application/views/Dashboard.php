@@ -642,23 +642,29 @@
 			}
 		});
 		$('.btn_checkin').click(function(){
-			// var data = selectRoom.toString();
 			var room = selectRoom.join('_')
-			// console.log(selectRoom.join('_'));
 			load_page('<?php echo base_url().$this->ctl."/CheckinFormAdd/"; ?>'+room,'.:: Data Checkin::.','#');
 		});
 	}
 
 	function booking() {
-		var selectRoom =[];
-		$('.button-checkbox > .check_room').on('change',function(){
+		var selectRoom=[];
+		$('.check_room').on('change',function(){
 
-			var numCheck = $(this).is(':checked')?$(this).val():'';
-			selectRoom.push(numCheck);
+			if( this.checked){
+				selectRoom.push($(this).val());
+			}else {
+				$(this).each(function(index, el) {
+					selectRoom.push($(this).val());
+					selectRoom  = $.grep(selectRoom, function( a ) {
+						return a !== el.id;
+					});
+				});
+			}
 		});
 		$('.btn_booking').click(function(){
-			load_page('<?php echo base_url().$this->ctl."/BookingFormAdd/"; ?>','.:: Data Booking ::.','#');
-			alert(selectRoom.filter(String));
+			var room = selectRoom.join('_')
+			load_page('<?php echo base_url().$this->ctl."/BookingFormAdd/"; ?>'+room,'.:: Data Booking ::.','<?php echo base_url()."Booked/saveAdd/"; ?>');
 		});
 	}
 

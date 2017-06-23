@@ -34,6 +34,25 @@ class Home extends CI_Controller {
 		$this->load->view('checkin/CheckinFormAdd',$this->data);
 	}
 
+
+	public function BookingFormAdd($selectRoom)
+	{
+		$this->data['selectRoom'] = $selectRoom;
+		$this->data['getMonth'] = $this->packfunction->getMonth();
+		$this->data['getYear'] = $this->packfunction->getYear();
+		$this->load->view('booked/BookedFormAdd',$this->data);
+	}
+
+public function testArray()
+{
+	$this->data['data'] = "room210_room212_room214";
+	// $a = str_replace('_',"','",$data);
+	$b = explode('_',$this->data['data']);
+	// print_r($b);
+	print_r($b);
+
+}
+
 	public function getProvince() //แสดงรายการ รหัสไปรษณีย์ จังหวัด อำเภอ ตำบล
 	{
 		$zipcode =  $_POST['zipcode'];
@@ -49,10 +68,6 @@ class Home extends CI_Controller {
 		}
 		echo json_encode($showdata);
 
-	}
-	public function BookingFormAdd()
-	{
-		$this->load->view('booked/BookedFormAdd');
 	}
 
 	public function search(){

@@ -8,6 +8,7 @@ class Booked extends CI_Controller {
 		parent::__construct();
 		$this->ctl="Booked";
 		$this->pagename="BOOKED";
+		$this->load->model('Mdl_booked');
 		$this->load->model('Mdl_user');
 		$this->dtnow = $this->packfunction->dtYMDnow();
 		$this->ip_addr = $this->input->ip_address();
@@ -25,6 +26,11 @@ class Booked extends CI_Controller {
 		$this->data['keyword']='';
 		$this->data['getlist']=$this->Mdl_user->getList($this->data['keyword']);
 		$this->packfunction->packView($this->data,"booked/BookedList");
+	}
+
+	public function saveAdd()
+	{
+		$this->Mdl_booked->saveAdd();
 	}
 
 	public function BookedFormEdit()
