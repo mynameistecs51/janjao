@@ -169,13 +169,14 @@
 			<video id="video" class="bg-info " width="300" height="200" autoplay></video>
 
 			<canvas id="canvas"  name="idcardPicture"  class="bg-primary " width="300" height="200"  ></canvas>
-			<input type="file" id="images" name="images">
+			<input type="file" name="images" id="images">
 		</div>
 	</div>
 </div>
 </div>
-</clearfix">
+
 <script type="text/javascript">
+
 	getProvince(); // เปิดใช้งาน function getProvince
 
 	// Grab elements, create settings, etc.
@@ -192,21 +193,32 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
   // Elements for taking the snapshot
   var canvas = document.getElementById('canvas');
+
   var context = canvas.getContext('2d');
   var video = document.getElementById('video');
-  // var mirror = document.getElementById('mirror');
-  var file = document.getElementById('image');
 
-  var button = document.getElementById('btn-download');
+  var filesup = document.getElementById('images');
 // Trigger photo take
 document.getElementById("snap").addEventListener("click", function() {
-	context.drawImage(video, 0, 0, 300, 200);
-	var dataURL = canvas.toDataURL('image/png');
-	// window.open('about:blank','image from canvas').document.write("<img src='"+dataURL+"' alt='from canvas'/>");
-	document.getElementById('images').value  = dataURL;
-	// console.log(dataURL);
-	// button.href = dataURL;
+	// var img = new Image();
+	var data = context.drawImage(video, 0, 0, 300, 200);
+
+	var imageData = canvas.toDataURL('image/png');
+	var img = dataURLtoFile(imageData,'test.png',);
+
+	filesup.setAttribute('value',img.dataTransfer);
+	// var newdata =imgdata.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+	console.log(filesup);
 });
+
+function dataURLtoFile(dataurl, filename) {
+	var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+	bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+	while(n--){
+		u8arr[n] = bstr.charCodeAt(n);
+	}
+	return new File([u8arr], filename, {type:mime});
+}
 
 function getProvince(){
 	$("input[name=zipcode]").change(function(){

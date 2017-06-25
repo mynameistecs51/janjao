@@ -12,6 +12,7 @@ class Mdl_booked extends CI_Model {
 
 	public function saveAdd()
 	{
+		// $idcardnoPath = $this->base64_to_png($this->input->post('images'),'test.png');  //อันนี้มันติด data permission รับข้อมูลมาจาก imageData จาก BookedFormAdd
 		$data = array(
 			'bookedID' => '',
 			'bookedCode' => '',
@@ -45,6 +46,15 @@ class Mdl_booked extends CI_Model {
 			);
 		echo "<pre>";
 		print_r($data);
+	}
+
+
+	function base64_to_png( $base64_string, $output_file ) {
+		exec('chmod 777'. fopen( $output_file, "wb" ));
+		$ifp = fopen( $output_file, "wb" );
+		fwrite( $ifp, base64_decode( $base64_string) );
+		fclose( $ifp );
+		return( $output_file );
 	}
 
 }
