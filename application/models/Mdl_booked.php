@@ -12,12 +12,22 @@ class Mdl_booked extends CI_Model {
 
 	public function saveAdd()
 	{
+
+		$img = $this->input->post('images');
+		// $img = $_POST['images'];
+		$img = str_replace('data:image/png;base64,', '', $img);
+		$img = str_replace(' ', '+', $img);
+		$data = base64_decode($img);
+		$file = 'assets/images/imgcard/test2.png';
+		$success = file_put_contents($file, $data);
+		print $success ? $file : 'Unable to save the file.';
 		// $idcardnoPath = $this->base64_to_png($this->input->post('images'),'test.png');  //อันนี้มันติด data permission รับข้อมูลมาจาก imageData จาก BookedFormAdd
-		$data = array(
+
+		$data1= array(
 			'bookedID' => '',
 			'bookedCode' => '',
 			'idcardno' => $this->input->post('idcardno'),
-			'idcardnoPath' => $_FILES['images'],
+			'idcardnoPath' => '',
 			'titleName' => $this->input->post('gender'),
 			'firstName' => $this->input->post('firstName'),
 			'middleName' => '',
@@ -45,13 +55,14 @@ class Mdl_booked extends CI_Model {
 			'updateBY' => '',
 			);
 		echo "<pre>";
-		print_r($data);
+		// print_r(base64_decode($_POST['images']));
+
 	}
 
 
 	function base64_to_png( $base64_string, $output_file ) {
-		exec('chmod 777'. fopen( $output_file, "wb" ));
-		$ifp = fopen( $output_file, "wb" );
+		fopen($base64_string,'w');
+		$ifp = fopen( $output_file, "r+" );
 		fwrite( $ifp, base64_decode( $base64_string) );
 		fclose( $ifp );
 		return( $output_file );

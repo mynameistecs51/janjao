@@ -169,7 +169,7 @@
 			<video id="video" class="bg-info " width="300" height="200" autoplay></video>
 
 			<canvas id="canvas"  name="idcardPicture"  class="bg-primary " width="300" height="200"  ></canvas>
-			<input type="file" name="images" id="images">
+			<input type="hidden" name="images" id="images">
 		</div>
 	</div>
 </div>
@@ -204,11 +204,12 @@ document.getElementById("snap").addEventListener("click", function() {
 	var data = context.drawImage(video, 0, 0, 300, 200);
 
 	var imageData = canvas.toDataURL('image/png');
-	var img = dataURLtoFile(imageData,'test.png',);
-
-	filesup.setAttribute('value',img.dataTransfer);
+	// var img = dataURLtoFile(imageData,'test.png',);
+	// var dataimg = e.dataTransfer.setData('test.png',imageData);
+	// filesup.attributes('value',img);
+	filesup.setAttribute('value',imageData);
 	// var newdata =imgdata.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
-	console.log(filesup);
+	// console.log(filesup);
 });
 
 function dataURLtoFile(dataurl, filename) {
