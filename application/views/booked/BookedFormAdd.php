@@ -23,7 +23,7 @@
 	<div class="form-group">
 		<label for="idcardno" class="col-sm-2 control-label">เลขประจำประชาชน</label>
 		<div class="col-sm-6">
-			<input type="text" class="form-control" name="idcardno" id="idcardno" placeholder="1211300153330">
+			<input type="text" class="form-control" name="idcardno" id="idcardno" placeholder="1234567890987" minlength="13">
 		</div>
 	</div>
 	<div class="form-group">
@@ -121,29 +121,29 @@
 	<div class="form-group">
 		<label for="bookedDate" class="col-sm-2 control-label">วันที่ จอง</label>
 		<div class="col-sm-6">
-			<input type="text" class="form-control" id="bookedDate" name="bookedDate" placeholder="1211300153330">
+			<input type="datetime-local" class="form-control" id="bookedDate" name="bookedDate" placeholder="1211300153330">
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="checkinDate" class="col-sm-2 control-label">วันที่ Checkin</label>
-		<div class="col-sm-6">
-			<input type="text" class="form-control" id="checkinDate" name="checkinDate" placeholder="1211300153330">
+		<div class="col-sm-2">
+			<input type="datetime-local" class="form-control" id="checkinDate" name="checkinDate" placeholder="1211300153330">
+		</div>
+	<!-- </div>
+	<div class="form-group"> -->
+		<label for="checkOutDate" class="col-sm-2 control-label">ถึงวันที่ Checkout</label>
+		<div class="col-sm-2">
+			<input type="datetime-local" class="form-control" id="checkOutDate" name="checkOutDate" placeholder="1211300153330">
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="checkOutDate" class="col-sm-2 control-label">วันที่ Checkout</label>
+		<label for="bookedType" class="col-sm-2 control-label">เช่าแบบ</label>
 		<div class="col-sm-6">
-			<input type="text" class="form-control" id="checkOutDate" name="checkOutDate" placeholder="1211300153330">
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="checkinType" class="col-sm-2 control-label">เช่าแบบ</label>
-		<div class="col-sm-6">
-			<label><input type="radio" name="checkinType" id="Time" value="Time" class="control-label"> <b class="btn btn-info btn-md">  ชั่วคราว</b></label>
+			<label><input type="radio" name="bookedType" id="SHORT" value="SHORT" class="control-label"> <b class="btn btn-info btn-md">  ชั่วคราว</b></label>
 			&nbsp;&nbsp;&nbsp;
-			<label><input type="radio" name="checkinType" id="Date" value="Date" class="control-label"> <b class="btn btn-warning btn-md"> รายวัน</b></label>
+			<label><input type="radio" name="bookedType" id="DAY" value="DAY" class="control-label" checked> <b class="btn btn-warning btn-md"> รายวัน</b></label>
 			&nbsp;&nbsp;&nbsp;
-			<label><input type="radio" name="checkinType" id="Month" value="Month" class="control-label"> <b class="btn btn-primary btn-md"> รายเดือน</b></label>
+			<label><input type="radio" name="bookedType" id="MONTH" value="MONTH" class="control-label"> <b class="btn btn-primary btn-md"> รายเดือน</b></label>
 		</div>
 	</div>
 	<div class="form-group">
@@ -162,7 +162,12 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<a href="#" class="button" id="btn-download">Download</a>
+		<label for="deposit" class="col-sm-2 control-label">Comment</label>
+		<div class="input-group col-sm-6">
+				<textarea name="comment" id="comment" class="form-control"></textarea>
+		</div>
+	</div>
+	<div class="form-group">
 		<label for="btnsnap"  id="snap" class="col-sm-2 control-label"><i class="fa fa-camera btn btn-primary " id="snap"> ถ่ายภาพ</i></label>
 		<div class="col-sm-10">
 
@@ -200,16 +205,13 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
   var filesup = document.getElementById('images');
 // Trigger photo take
 document.getElementById("snap").addEventListener("click", function() {
-	// var img = new Image();
+
 	var data = context.drawImage(video, 0, 0, 300, 200);
 
 	var imageData = canvas.toDataURL('image/png');
-	// var img = dataURLtoFile(imageData,'test.png',);
-	// var dataimg = e.dataTransfer.setData('test.png',imageData);
-	// filesup.attributes('value',img);
+
 	filesup.setAttribute('value',imageData);
-	// var newdata =imgdata.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
-	// console.log(filesup);
+
 });
 
 function dataURLtoFile(dataurl, filename) {

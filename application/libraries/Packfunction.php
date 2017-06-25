@@ -91,9 +91,9 @@ class Packfunction {
 
 	public static function getYear() {
 		$arr = array();
-		$y = date('Y')-2;
+		$y = date('Y')-50;
 
-		for ($i = $y; $i <= ($y + 4); $i++) {
+		for ($i = $y; $i <= ($y +50); $i++) {
 			$arr[$i] = $i+543;
 		}
 		return $arr;

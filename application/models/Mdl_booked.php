@@ -14,20 +14,17 @@ class Mdl_booked extends CI_Model {
 	{
 
 		$img = $this->input->post('images');
-		// $img = $_POST['images'];
 		$img = str_replace('data:image/png;base64,', '', $img);
 		$img = str_replace(' ', '+', $img);
 		$data = base64_decode($img);
-		$file = 'assets/images/imgcard/test2.png';
+		$file = 'assets/images/imgcard/'.$this->input->post('idcardno').'.png';
 		$success = file_put_contents($file, $data);
-		print $success ? $file : 'Unable to save the file.';
-		// $idcardnoPath = $this->base64_to_png($this->input->post('images'),'test.png');  //อันนี้มันติด data permission รับข้อมูลมาจาก imageData จาก BookedFormAdd
 
-		$data1= array(
+		$saveAdd= array(
 			'bookedID' => '',
-			'bookedCode' => '',
+			'bookedCode' => '2',
 			'idcardno' => $this->input->post('idcardno'),
-			'idcardnoPath' => '',
+			'idcardnoPath' => $this->input->post('idcardno').'.png',
 			'titleName' => $this->input->post('gender'),
 			'firstName' => $this->input->post('firstName'),
 			'middleName' => '',
@@ -44,21 +41,46 @@ class Mdl_booked extends CI_Model {
 			'checkInAppointDate' => $this->input->post('checkinDate'),
 			'checkOutAppointDate' => $this->input->post('checkOutDate'),
 			'is_breakfast' => $this->input->post('is_breakfast'),
-			'bookedType' => '',
+			'bookedType' => $this->input->post('bookedType'),
 			'cashPledge' => '',
 			'cashPledgePath' => '',
-			'comment' => '',
-			'status' => '',
-			'createDT' =>$this->dtnow,
-			'createBY' => '',
-			'updateDT' => $this->dtnow,
-			'updateBY' => '',
+			'comment' => $this->input->post('comment'),
+			'status' => 'ON',
+			"createDT"		=>$this->packfunction->dtYMDnow(),
+			"createBY"		=>$this->UserName,
+			"updateDT"		=>$this->packfunction->dtYMDnow(),
+			"updateBY"		=>$this->UserName
 			);
-		echo "<pre>";
-		// print_r(base64_decode($_POST['images']));
+		$idBooked = $this->db->insert_id('ts_booked',$saveAdd);
 
+		// $saveBookedRoom = array(
+		// 	'bookedroomID' => '',
+		// 	'bookedID '     => $idBooked,
+		// 	'roomID '       => '1',
+		// 	'checkinDate '  => $this->input->post('checkinDate'),
+		// 	'checkoutDate ' => $this->input->post('checkOutDate'),
+		// 	'comment '      => $this->input->post('comment'),
+		// 	'status '       => 'BOOKED',
+		// 	"createDT"		    => $this->packfunction->dtYMDnow(),
+		// 	"createBY"		    => $this->UserName,
+		// 	"updateDT"		    => $this->packfunction->dtYMDnow(),
+		// 	"updateBY"		    => $this->UserName
+		// 	);
+		// $idBookedRoom = $this->db->insert_id('ts_booked_room',$saveBookedRoom);
+
+		// $saveBookedRoomLog = array(
+		// 	'bookedroomID' => $idBookedRoom,
+		// 	'roomID' => '1',
+		// 	'logDate' => '',
+		// 	'comment' => $this->input->post('comment'),
+		// 	'status' => 'BOOKED',
+		// 	"createDT"		    => $this->packfunction->dtYMDnow(),
+		// 	"createBY"		    => $this->UserName,
+		// 	"updateDT"		    => $this->packfunction->dtYMDnow(),
+		// 	"updateBY"		    => $this->UserName
+		// 	);
+		// $this->db->insert('ts_booked_room_log',$saveBookedRoomLog);
 	}
-
 
 	function base64_to_png( $base64_string, $output_file ) {
 		fopen($base64_string,'w');

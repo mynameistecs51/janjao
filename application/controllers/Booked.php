@@ -30,7 +30,8 @@ class Booked extends CI_Controller {
 
 	public function saveAdd()
 	{
-		$this->Mdl_booked->saveAdd();
+		 $this->Mdl_booked->saveAdd();
+
 	}
 
 	public function BookedFormEdit()
