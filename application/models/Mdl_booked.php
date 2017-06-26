@@ -21,8 +21,7 @@ class Mdl_booked extends CI_Model {
 		$success = file_put_contents($file, $data);
 
 		$saveAdd= array(
-			'bookedID' => '',
-			'bookedCode' => '2',
+			'bookedCode' => '1',
 			'idcardno' => $this->input->post('idcardno'),
 			'idcardnoPath' => $this->input->post('idcardno').'.png',
 			'titleName' => $this->input->post('gender'),
@@ -51,35 +50,50 @@ class Mdl_booked extends CI_Model {
 			"updateDT"		=>$this->packfunction->dtYMDnow(),
 			"updateBY"		=>$this->UserName
 			);
-		$idBooked = $this->db->insert_id('ts_booked',$saveAdd);
+		$this->db->insert('ts_booked',$saveAdd);
+		$idBooked= $this->db->insert_id();
+	// }
 
-		// $saveBookedRoom = array(
-		// 	'bookedroomID' => '',
-		// 	'bookedID '     => $idBooked,
-		// 	'roomID '       => '1',
-		// 	'checkinDate '  => $this->input->post('checkinDate'),
-		// 	'checkoutDate ' => $this->input->post('checkOutDate'),
-		// 	'comment '      => $this->input->post('comment'),
-		// 	'status '       => 'BOOKED',
-		// 	"createDT"		    => $this->packfunction->dtYMDnow(),
-		// 	"createBY"		    => $this->UserName,
-		// 	"updateDT"		    => $this->packfunction->dtYMDnow(),
-		// 	"updateBY"		    => $this->UserName
-		// 	);
-		// $idBookedRoom = $this->db->insert_id('ts_booked_room',$saveBookedRoom);
+	// public function saveAddBookedRoom($idBooked)
+	// {
+		$selectRoom = $this->input->post('selectRoom');
+		$room = explode('_',$selectRoom);
+		for ($i=0; $i < count($room) ; $i++) :
+			$saveBookedRoom[$i] = array(
+				'bookedID '     => $idBooked,
+				'roomID '       => $room[$i],
+				'checkinDate '  => $_POST['checkinDate'],
+				'checkoutDate ' => $this->input->post('checkOutDate'),
+				'comment '      => $this->input->post('comment'),
+				'status '       => 'BOOKED',
+				"createDT"		    => $this->packfunction->dtYMDnow(),
+				"createBY"		    => $this->UserName,
+				"updateDT"		    => $this->packfunction->dtYMDnow(),
+				"updateBY"		    => $this->UserName
+				);
+		$this->db->insert('ts_booked_room',$saveBookedRoom[$i]);
+		$idBookedRoom[$i] = $this->db->insert_id();
+		endfor;
+	// }
 
-		// $saveBookedRoomLog = array(
-		// 	'bookedroomID' => $idBookedRoom,
-		// 	'roomID' => '1',
-		// 	'logDate' => '',
-		// 	'comment' => $this->input->post('comment'),
-		// 	'status' => 'BOOKED',
-		// 	"createDT"		    => $this->packfunction->dtYMDnow(),
-		// 	"createBY"		    => $this->UserName,
-		// 	"updateDT"		    => $this->packfunction->dtYMDnow(),
-		// 	"updateBY"		    => $this->UserName
-		// 	);
-		// $this->db->insert('ts_booked_room_log',$saveBookedRoomLog);
+	// public function saveAddBookedRoomLog($idBookedRoom)
+	// {
+		$selectRoom = $this->input->post('selectRoom');
+		$room = explode('_',$selectRoom);
+		for ($i=0; $i < count($room) ; $i++) :
+			$saveBookedRoomLog[$i] = array(
+				'bookedroomID' => $idBookedRoom[$i],
+				'roomID'       => $room[$i],
+				'logDate'      => $this->packfunction->dtYMDnow(),
+				'comment'      => $this->input->post('comment'),
+				'status'       => 'BOOKED',
+				"createDT"		   => $this->packfunction->dtYMDnow(),
+				"createBY"		   => $this->UserName,
+				"updateDT"		   => $this->packfunction->dtYMDnow(),
+				"updateBY"		   => $this->UserName
+				);
+		$this->db->insert('ts_booked_room_log',$saveBookedRoomLog[$i]);
+		endfor;
 	}
 
 	function base64_to_png( $base64_string, $output_file ) {

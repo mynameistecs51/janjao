@@ -30,7 +30,9 @@ class Booked extends CI_Controller {
 
 	public function saveAdd()
 	{
-		 $this->Mdl_booked->saveAdd();
+		$idBooked = $this->Mdl_booked->saveAdd();
+		// $idBookedRoom = $this->Mdl_booked->saveAddBookedRoom($idBooked);
+		// $bookedRoomLog = $this->Mdl_booked->saveAddBookedRoomLog($idBookedRoom);
 
 	}
 

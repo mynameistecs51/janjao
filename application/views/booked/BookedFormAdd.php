@@ -13,7 +13,7 @@
 					<span class="button-checkbox ">
 						<button type="button" class="btn btn_room btn-danger btn-xs" data-color="danger" disabled >
 							<i class="fa fa-bed" aria-hidden="true"></i>
-							<h4><?php echo $room[$i]; ?></h4>
+							<h4><?php echo 'Room '.$room[$i]; ?></h4>
 						</button>
 					</span>
 				</div>
