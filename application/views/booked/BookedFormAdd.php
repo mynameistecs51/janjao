@@ -1,10 +1,12 @@
-<div class="row form_input" style="text-align:left; margin-bottom:20px">
-	<div class="form-horizontal">
-		<div class="form-group">
-			<label for="selectRoom" class="col-sm-2 control-label">ห้องที่เลือก</label>
-			<div class="col-sm-10">
-				<?php
-				$room =explode('_',$selectRoom);
+  <!-- <link href="<?php echo base_url()?>assets/css/bootstrap-select.min.css" rel="stylesheet"> -->
+  <link href="<?php echo base_url()?>assets/css/jquery.datetimepicker.css" rel="stylesheet">
+  <div class="row form_input" style="text-align:left; margin-bottom:20px">
+  	<div class="form-horizontal">
+  		<div class="form-group">
+  			<label for="selectRoom" class="col-sm-2 control-label">ห้องที่เลือก</label>
+  			<div class="col-sm-10">
+  				<?php
+  				$room =explode('_',$selectRoom);
 				echo '<input type="hidden" name="selectRoom" value="'.$selectRoom.'">';  //input hidden selectRoom
 
 				for ($i=0; $i < count($room); $i++) :
@@ -23,7 +25,7 @@
 	<div class="form-group">
 		<label for="idcardno" class="col-sm-2 control-label">เลขประจำประชาชน</label>
 		<div class="col-sm-6">
-			<input type="text" class="form-control" name="idcardno" id="idcardno" placeholder="1234567890987" minlength="13">
+			<input type="text" class="form-control" name="idcardno" id="idcardno" placeholder="เลขประจำประชาชน 13 หลัก" minlength="13">
 		</div>
 	</div>
 	<div class="form-group">
@@ -42,6 +44,12 @@
 	</div>
 	<div class="form-group">
 		<label for="birthDate" class="col-sm-2 control-label">วัน เดือน ปี เกิด</label>
+		<div class="col-sm-6">
+			<input type="text" class="form-control" name="birthDate" id="birthDate" >
+		</div>
+	</div>
+	<!-- <div class="form-group">
+		<label for="birthDate" class="col-sm-2 control-label">วัน เดือน ปี เกิด</label>
 		<div class="col-sm-2">
 			<select name="birthDate" id="birthDate" class="form-control" >
 				<?php for ($i=1; $i <= 31 ; $i++) :?>
@@ -58,7 +66,7 @@
 				option
 			</select>
 		</div>
-		<!-- <label for="birthDate" class="col-sm-1 control-label">พ.ศ.</label> -->
+		<label for="birthDate" class="col-sm-1 control-label">พ.ศ.</label>
 		<div class="col-sm-2">
 			<select name="birthYear" id="birthYear" class="form-control" >
 				<?php foreach ($getYear as $EngYear => $ThaiYear) :?>
@@ -67,7 +75,7 @@
 				option
 			</select>
 		</div>
-	</div>
+	</div> -->
 	<div class="form-group">
 		<label for="addDress" class="col-sm-2 control-label">ที่อยู่</label>
 		<div class="col-sm-6">
@@ -95,7 +103,7 @@
 		</div>
 		<label for="district" class="col-sm-2 control-label">ตำบล</label>
 		<div class="col-sm-2">
-			<select class="form-control" name="district" id="district">
+			<select class="form-control selectpicker" data-live-search="true" name="district" id="district">
 
 			</select>
 		</div>
@@ -115,25 +123,25 @@
 	<div class="form-group">
 		<label for="email" class="col-sm-2 control-label">อีเมลล์</label>
 		<div class="col-sm-6">
-			<input type="email" class="form-control" id="email" name="email" placeholder="1211300153330">
+			<input type="email" class="form-control" id="email" name="email" placeholder="example@youmail.com">
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="bookedDate" class="col-sm-2 control-label">วันที่ จอง</label>
 		<div class="col-sm-6">
-			<input type="datetime-local" class="form-control" id="bookedDate" name="bookedDate" placeholder="1211300153330">
+			<input type="text" class="form-control" id="bookedDate" name="bookedDate" >
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="checkinDate" class="col-sm-2 control-label">วันที่ Checkin</label>
 		<div class="col-sm-2">
-			<input type="datetime-local" class="form-control" id="checkinDate" name="checkinDate" placeholder="1211300153330">
+			<input type="text" class="form-control" id="checkinDate" name="checkinDate">
 		</div>
 	<!-- </div>
 	<div class="form-group"> -->
 		<label for="checkOutDate" class="col-sm-2 control-label">ถึงวันที่ Checkout</label>
 		<div class="col-sm-2">
-			<input type="datetime-local" class="form-control" id="checkOutDate" name="checkOutDate" placeholder="1211300153330">
+			<input type="text" class="form-control" id="checkOutDate" name="checkOutDate" >
 		</div>
 	</div>
 	<div class="form-group">
@@ -149,7 +157,7 @@
 	<div class="form-group">
 		<label for="deposit" class="col-sm-2 control-label">เงินมัดจำ</label>
 		<div class="input-group col-sm-6">
-			<input type="text" class="form-control" id="deposit" name="deposit" placeholder="1211300153330">
+			<input type="text" class="form-control" id="deposit" name="deposit" placeholder="100 200 300 400 500">
 			<span class="input-group-addon">บาท</span>
 		</div>
 	</div>
@@ -164,7 +172,7 @@
 	<div class="form-group">
 		<label for="deposit" class="col-sm-2 control-label">Comment</label>
 		<div class="input-group col-sm-6">
-				<textarea name="comment" id="comment" class="form-control"></textarea>
+			<textarea name="comment" id="comment" class="form-control"></textarea>
 		</div>
 	</div>
 	<div class="form-group">
@@ -179,10 +187,22 @@
 	</div>
 </div>
 </div>
-
+<!-- <script src="<?php echo base_url()?>assets/js/bootstrap-select.min.js"></script> -->
+<script src="<?php echo base_url()?>assets/js/jquery.datetimepicker.full.min.js"></script>
 <script type="text/javascript">
 
 	getProvince(); // เปิดใช้งาน function getProvince
+	// $('.selectpicker').selectpicker({
+	// });
+
+$.datetimepicker.setLocale('th'); // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+$('#bookedDate, #checkinDate, #checkOutDate, #birthDate').datetimepicker({
+	timepicker:true,
+	mask:true,
+        format:'d-m-Y H:i:s',  // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000
+        lang:'th',  // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+      });
+
 
 	// Grab elements, create settings, etc.
 	var video = document.getElementById('video');
@@ -240,10 +260,9 @@ function getProvince(){
 				$('#province').html(province);
 				$('#amphur').html(amphur);
 				$('#district').html(district);
-
 			},
-			error:function(err){
-				alert("รหัสไปรษณีย์ไม่ถูกต้อง"+$(this).val());
+			error:function(res){
+				alert("รหัสไปรษณีย์ไม่ถูกต้อง");
 				$('input[name=zipcode]').val('').focus();
 				$('#province').html('');
 				$('#amphur').html('');

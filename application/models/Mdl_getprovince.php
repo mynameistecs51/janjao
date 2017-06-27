@@ -23,6 +23,29 @@ class Mdl_getprovince extends CI_Model {
 		$query = $this->db->query($sql_query)->result_array();
 		return $query;
 	}
+
+	public function getDistrict()
+	{
+		$sql = "
+		SELECT
+		z.ZIPCODE,
+		p.PROVINCE_ID,
+		p.PROVINCE_NAME,
+		a.AMPHUR_ID,
+		a.AMPHUR_NAME,
+		d.DISTRICT_ID,
+		d.DISTRICT_NAME
+		FROM district d
+		INNER JOIN province p
+		ON d.PROVINCE_ID = p.PROVINCE_ID
+		INNER JOIN amphur a
+		ON d.AMPHUR_ID = a.AMPHUR_ID
+		INNER JOIN zipcode z
+		ON z.DISTRICT_ID=d.DISTRICT_ID
+		";
+		$query = $this->db->query($sql)->result_array();
+		return $query;
+	}
 }
 
 /* End of file Mdl_getprovince.php */

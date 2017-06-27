@@ -43,16 +43,6 @@ class Home extends CI_Controller {
 		$this->load->view('booked/BookedFormAdd',$this->data);
 	}
 
-public function testArray()
-{
-	$this->data['data'] = "room210_room212_room214";
-	// $a = str_replace('_',"','",$data);
-	$b = explode('_',$this->data['data']);
-	// print_r($b);
-	print_r($b);
-
-}
-
 	public function getProvince() //แสดงรายการ รหัสไปรษณีย์ จังหวัด อำเภอ ตำบล
 	{
 		$zipcode =  $_POST['zipcode'];
@@ -68,6 +58,12 @@ public function testArray()
 		}
 		echo json_encode($showdata);
 
+	}
+
+	public function getDistrict()
+	{
+		$district = $this->Mdl_getprovince->getDistrict();
+		echo json_encode($district);
 	}
 
 	public function search(){

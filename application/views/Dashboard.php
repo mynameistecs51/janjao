@@ -123,7 +123,7 @@
 			<span class="button-checkbox " >
 				<button type="button" class="btn btn_room" data-color="warning" style="width:120px;" disabled>
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>218 VIP</h4>
+					<h4>218 VIP</h4><i>in:14/08/60</i>
 				</button>
 				<input type="checkbox" class="hidden check_room" name="check_room[]" id="218" value="218" checked disabled />
 			</span>
@@ -132,7 +132,7 @@
 			<span class="button-checkbox " >
 				<button type="button" class="btn btn_room" data-color="warning" style="width:120px;" disabled>
 					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>220 VIP</h4>
+					<h4>220 VIP</h4><i>in:14/08/60</i>
 				</button>
 				<input type="checkbox" class="hidden check_room" name="check_room[]" id="220" value="220" checked disabled />
 			</span>
