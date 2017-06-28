@@ -642,8 +642,12 @@
 			}
 		});
 		$('.btn_checkin').click(function(){
-			var room = selectRoom.join('_')
-			load_page('<?php echo base_url().$this->ctl."/CheckinFormAdd/"; ?>'+room,'.:: Data Checkin::.','#');
+			if(selectRoom.length > 0){
+				var room = selectRoom.join('_')
+				load_page('<?php echo base_url().$this->ctl."/CheckinFormAdd/"; ?>'+room,'.:: Data Checkin::.','<?php echo base_url()."Checkin/saveAdd/"; ?>');
+			}else{
+				alert("กรุณาเลือกห้องพัก !!");
+			}
 		});
 	}
 

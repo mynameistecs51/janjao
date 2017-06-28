@@ -22,6 +22,17 @@ class Packfunction {
 		$this->CI->load->view('templatePublic/Footer',$data);
 	}
 
+	public function dtTosql($datetime)
+	{
+		if(!empty($datetime)){
+			$dateChar = explode('-',$datetime);
+			$dateCharYear = explode(' ',$dateChar[2]);
+			return $dateCharYear[0].'-'.$dateChar[1].'-'.$dateChar[0].' '.$dateCharYear[1];
+		}else{
+			return "";
+		}
+	}
+
 	public function dtYMDnow()
 	{
 		date_default_timezone_set('Asia/Bangkok');

@@ -1,21 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Mdl_booked extends CI_Model {
+class Mdl_checkin extends CI_Model {
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->dtnow = $this->packfunction->dtYMDnow();
 
 	}
 
-	// public function getAll()
-	// {
-	// 	$sql = "
-
-	// 	"
-	// }
 
 	public function saveAdd()
 	{
@@ -43,7 +36,7 @@ class Mdl_booked extends CI_Model {
 			'postcode' => $this->input->post('zipcode'),
 			'mobile' => $this->input->post('mobile'),
 			'email' => $this->input->post('email'),
-			'bookedDate' => $this->packfunction->dtTosql($this->input->post('bookedDate')),
+			'bookedDate' => $this->packfunction->dtYMDnow(),
 			'checkInAppointDate' => $this->packfunction->dtTosql($this->input->post('checkinDate')),
 			'checkOutAppointDate' => $this->packfunction->dtTosql($this->input->post('checkOutDate')),
 			'is_breakfast' => $this->input->post('is_breakfast'),
@@ -58,38 +51,38 @@ class Mdl_booked extends CI_Model {
 			"updateBY"		=>$this->UserName
 			);
 		$this->db->insert('ts_booked',$saveAdd);
-		$idBooked= $this->db->insert_id();
+		$idCheckin= $this->db->insert_id();
 	// }
 
-	// public function saveAddBookedRoom($idBooked)
+	// public function saveAddBookedRoom($idCheckin)
 	// {
 		$selectRoom = $this->input->post('selectRoom');
 		$room = explode('_',$selectRoom);
 		for ($i=0; $i < count($room) ; $i++) :
-			$saveBookedRoom[$i] = array(
-				'bookedID '     => $idBooked,
+			$saveCheckin[$i] = array(
+				'bookedID '     => $idCheckin,
 				'roomID '       => $room[$i],
 				'checkinDate '  => $this->packfunction->dtTosql($_POST['checkinDate']),
 				'checkoutDate ' => $this->packfunction->dtTosql($this->input->post('checkOutDate')),
 				'comment '      => $this->input->post('comment'),
-				'status '       => 'BOOKED',
+				'status '       => 'CHECKIN',
 				"createDT"		    => $this->packfunction->dtYMDnow(),
 				"createBY"		    => $this->UserName,
 				"updateDT"		    => $this->packfunction->dtYMDnow(),
 				"updateBY"		    => $this->UserName
 				);
-		$this->db->insert('ts_booked_room',$saveBookedRoom[$i]);
-		$idBookedRoom[$i] = $this->db->insert_id();
+		$this->db->insert('ts_booked_room',$saveCheckin[$i]);
+		$idCheckinRoom[$i] = $this->db->insert_id();
 		endfor;
 	// }
 
-	// public function saveAddBookedRoomLog($idBookedRoom)
+	// public function saveAddBookedRoomLog($idCheckinRoom)
 	// {
 		$selectRoom = $this->input->post('selectRoom');
 		$room = explode('_',$selectRoom);
 		for ($i=0; $i < count($room) ; $i++) :
-			$saveBookedRoomLog[$i] = array(
-				'bookedroomID' => $idBookedRoom[$i],
+			$saveCheckinLog[$i] = array(
+				'bookedroomID' => $idCheckinRoom[$i],
 				'roomID'       => $room[$i],
 				'logDate'      => $this->packfunction->dtYMDnow(),
 				'comment'      => $this->input->post('comment'),
@@ -99,7 +92,7 @@ class Mdl_booked extends CI_Model {
 				"updateDT"		   => $this->packfunction->dtYMDnow(),
 				"updateBY"		   => $this->UserName
 				);
-		$this->db->insert('ts_booked_room_log',$saveBookedRoomLog[$i]);
+		$this->db->insert('ts_booked_room_log',$saveCheckinLog[$i]);
 		endfor;
 	}
 
@@ -110,8 +103,7 @@ class Mdl_booked extends CI_Model {
 		fclose( $ifp );
 		return( $output_file );
 	}
-
 }
 
-/* End of file Mdl_booked.php */
-/* Location: ./application/models/Mdl_booked.php */
+/* End of file Mdl_checkin.php */
+/* Location: ./application/models/Mdl_checkin.php */

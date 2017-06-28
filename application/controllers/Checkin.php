@@ -9,6 +9,7 @@ class Checkin extends CI_Controller {
 		$this->ctl="Checkin";
 		$this->pagename="CHECKIN";
 		$this->load->model('Mdl_user');
+		$this->load->model('Mdl_checkin');
 		$this->dtnow = $this->packfunction->dtYMDnow();
 		$this->ip_addr = $this->input->ip_address();
 		$this->userID = $this->session->userdata('userID'); // ID จากตาราง Session
@@ -35,6 +36,11 @@ class Checkin extends CI_Controller {
 		$this->data['getYear'] = $this->packfunction->getYear();
 		$this->data['getlist']=$this->Mdl_user->getList($this->data['keyword']);
 		$this->packfunction->packView($this->data,"checkin/CheckinForm");
+	}
+
+	public function saveAdd()
+	{
+		$idCheckin = $this->Mdl_checkin->saveAdd();
 	}
 
 	public function bill()

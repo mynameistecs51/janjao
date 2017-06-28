@@ -25,6 +25,7 @@ class Booked extends CI_Controller {
 		$this->data['viewName']=$this->pagename;
 		$this->data['keyword']='';
 		$this->data['getlist']=$this->Mdl_user->getList($this->data['keyword']);
+		$this->data['getBooked'] = $this->Mdl_booked->getAll();
 		$this->packfunction->packView($this->data,"booked/BookedList");
 	}
 
