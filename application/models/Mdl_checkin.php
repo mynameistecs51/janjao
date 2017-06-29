@@ -103,6 +103,54 @@ class Mdl_checkin extends CI_Model {
 		fclose( $ifp );
 		return( $output_file );
 	}
+
+	public function getCheckinAll()
+	{
+		$sql = "
+		SELECT
+		tb.bookedID,
+		tb.bookedCode,
+		tb.idcardno,
+		tb.idcardnoPath,
+		tb.titleName,
+		tb.firstName,
+		tb.middleName,
+		tb.lastName,
+		tb.birthdate,
+		tb.address,
+		tb.district,
+		tb.province,
+		tb.country,
+		tb.postcode,
+		tb.mobile,
+		tb.email,
+		tb.bookedDate,
+		tb.checkInAppointDate,
+		tb.checkOutAppointDate,
+		tb.is_breakfast,
+		tb.bookedType,
+		tb.cashPledge,
+		tb.cashPledgePath,
+		tb.comment,
+		tb.status,
+		tb.createDT,
+		tb.createBY,
+		tb.updateDT,
+		tb.updateBY,
+		tbr.bookedroomID,
+		tbr.roomID,
+		tbr.checkinDate,
+		tbr.checkoutDate,
+		tbr.comment,
+		tbr.status
+		FROM ts_booked tb
+		INNER JOIN ts_booked_room tbr
+		ON tbr.bookedID = tb.bookedID
+		WHERE tbr.status = 'CHECKIN'
+		";
+		$data = $this->db->query($sql)->result_array();
+		return $data;
+	}
 }
 
 /* End of file Mdl_checkin.php */

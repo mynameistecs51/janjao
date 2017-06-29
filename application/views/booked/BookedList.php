@@ -4,8 +4,6 @@
     	<i style="font-size: 18px;">BOOKED LIST</i>
     </div>
     <hr style="margin-top: 30px;">
-
-
     <!-- Page Content -->
     <div class="col-lg-12">
     	<!-- Page Features -->
@@ -21,21 +19,54 @@
     	</div>
     	<div class="row text-center" style="margin-top: 10px;">
     		<div class="col-lg-12" align="left">
-    			<table id="fairlist" class="table table-striped table-bordered" cellspacing="0" width="100%" >
-    				<thead>
-    					<tr >
-    						<th  style="text-align: center;width: 40px;">No.</th>
-    						<th style="text-align: center;width:  150px;">BOOKED NUMBER</th>
-    						<th style="text-align: center;width:  300px;">NAME </th>
-    						<th style="text-align: center;width:  80px;">ROOM</th>
-    						<th style="text-align: center;width:  100px;">BOOKED DATE</th>
-    						<th style="text-align: center;width:  100px;">CHECKIN DATE</th>
-    						<th style="text-align: center;width:  100px;"> CREATE BY</th>
-    						<th style="text-align: center;width:  150px;">#</th>
-    					</tr>
-    				</thead>
-    				<tbody>
+    		<!-- <?php echo "<pre>"; ?>
+    		<?php print_r($getBooked); ?> -->
+    		<table id="fairlist" class="table table-striped table-bordered" cellspacing="0" width="100%" >
+    			<thead>
+    				<tr >
+    					<th  style="text-align: center;width: 40px;">No.</th>
+    					<th style="text-align: center;width:  150px;">BOOKED NUMBER</th>
+    					<th style="text-align: center;width:  150px;">NAME </th>
+    					<th style="text-align: center;width:  150px;">ROOM</th>
+    					<th style="text-align: center;width:  100px;">BOOKED DATE</th>
+    					<th style="text-align: center;width:  100px;">CHECKIN DATE</th>
+    					<th style="text-align: center;width:  80px;"> CREATE BY</th>
+    					<th style="text-align: center;width:  150px;">#</th>
+    				</tr>
+    			</thead>
+    			<tbody>
+    				<?php $i=1; ?>
+    				<?php foreach ($getBooked as $key => $rowbooked) :?>
+    					<?php $numRoom = count($rowbooked['selectRoom']); ?>
     					<tr>
+    						<td><?php echo $i++; ?></td>
+    						<td><?php echo $rowbooked['bookedCode'] ?></td>
+    						<td><?php echo $rowbooked['firstName']." ".$rowbooked['lastName']; ?></td>
+    						<td style="text-align: center;">
+    								<?php //echo $numRoom ;
+    								for($i=0;$i < $numRoom; $i++)
+    								{
+    									echo "<button class='col-sm-3 btn-warning' style='text-align:center;margin-left:5px;'>",$rowbooked['selectRoom'][$i]['roomID']."</button> ";
+    								}
+    								?>
+    							</td>
+    							<td><?php echo $rowbooked['checkInAppointDate']; ?></td>
+    							<td><?php echo $rowbooked['checkOutAppointDate']; ?></td>
+    							<td><?php echo $rowbooked['updateBY']; ?></td>
+    							<td >
+    								<button class="btn btn-primary col-sm-3  btn-xs btn_edit" title="edit" style='margin-left:5px;'>
+    									<i class="fa fa-edit fa-2x"></i>
+    								</button>
+    								<button class="btn btn-warning col-sm-3  btn-xs btn_cancel" title="cancel" style='margin-left:5px;'>
+    									<i class="fa fa-close fa-2x"></i>
+    								</button>
+    								<button class="btn btn-info col-sm-3  btn-xs btn_info" title="view" style='margin-left:5px;'>
+    									<i class="fa fa-list fa-2x"></i>
+    								</button>
+    							</td>
+    						</tr>
+    					<?php endforeach; ?>
+    					<!-- <tr>
     						<td>1</td>
     						<td>BK170613201001</td>
     						<td>นายไชยวัฒน์  หอมแสง</td>
@@ -60,7 +91,7 @@
     							<button class="btn btn-primary col-sm-5 pull-left btn-xs btn_edit">แก้ไข</button>
     							<button class="btn btn-warning col-sm-5 pull-right btn-xs btn_cancel">ยกเลิก</button>
     						</td>
-    					</tr>
+    					</tr> -->
     				</tbody>
     			</table>
     		</div>
