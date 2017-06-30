@@ -111,7 +111,7 @@
 	<div class="form-group">
 		<label for="mobile" class="col-sm-2 control-label">เบอร์มือถือ</label>
 		<div class="col-sm-6">
-			<input type="tel" class="form-control" id="mobile" name="mobile" minlength="10" placeholder="1211300153330">
+			<input type="tel" class="form-control" id="mobile" name="mobile" minlength="9" placeholder="1211300153330">
 		</div>
 	</div>
 	<div class="form-group">

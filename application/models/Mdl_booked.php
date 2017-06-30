@@ -61,18 +61,22 @@ class Mdl_booked extends CI_Model {
 	public function saveAdd()
 	{
 		$bookedCode =  $this->db->query("SELECT fn_gen_sn('TS', 'TS1706') AS CODE")->result_array();
-		// ALTER TABLE tsc_gensn CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci
-		$img = $this->input->post('images');
-		$img = str_replace('data:image/png;base64,', '', $img);
-		$img = str_replace(' ', '+', $img);
-		$data = base64_decode($img);
-		$file = 'assets/images/imgcard/'.$this->input->post('idcardno').'.png';
-		$success = file_put_contents($file, $data);
+		$fileName = '';
+		if( !empty($this->input->post('images'))){
+			$img = str_replace('data:image/png;base64,', '', $img);
+			$img = str_replace(' ', '+', $img);
+			$data = base64_decode($img);
+			$file = 'assets/images/imgcard/'.$this->input->post('idcardno').'.png';
+			$success = file_put_contents($file, $data);
+			$fileName = $this->input->post('idcardno').'.png';
+		}else{
+			$fileName ="";
+		}
 
 		$saveAdd= array(
 			'bookedCode' => $bookedCode[0]['CODE'],
 			'idcardno' => $this->input->post('idcardno'),
-			'idcardnoPath' => $this->input->post('idcardno').'.png',
+			'idcardnoPath' =>$fileName,
 			'titleName' => $this->input->post('gender'),
 			'firstName' => $this->input->post('firstName'),
 			'middleName' => '',
@@ -101,10 +105,7 @@ class Mdl_booked extends CI_Model {
 			);
 		$this->db->insert('ts_booked',$saveAdd);
 		$idBooked= $this->db->insert_id();
-	// }
 
-	// public function saveAddBookedRoom($idBooked)
-	// {
 		$selectRoom = $this->input->post('selectRoom');
 		$room = explode('_',$selectRoom);
 		for ($i=0; $i < count($room) ; $i++) :
@@ -123,10 +124,7 @@ class Mdl_booked extends CI_Model {
 		$this->db->insert('ts_booked_room',$saveBookedRoom[$i]);
 		$idBookedRoom[$i] = $this->db->insert_id();
 		endfor;
-	// }
 
-	// public function saveAddBookedRoomLog($idBookedRoom)
-	// {
 		$selectRoom = $this->input->post('selectRoom');
 		$room = explode('_',$selectRoom);
 		for ($i=0; $i < count($room) ; $i++) :
@@ -145,7 +143,7 @@ class Mdl_booked extends CI_Model {
 		endfor;
 	}
 
-	function base64_to_png( $base64_string, $output_file ) {
+	function base64_to_png( $base64_string, $output_file ) {  //create picture
 		fopen($base64_string,'w');
 		$ifp = fopen( $output_file, "r+" );
 		fwrite( $ifp, base64_decode( $base64_string) );
@@ -155,24 +153,24 @@ class Mdl_booked extends CI_Model {
 
 	function getRoom($floor='',$zone=''){
 		$sql = "
-				SELECT
-					r.roomID,
-					r.roomtypeID,
-					rt.roomtypeCode,
-					rt.bed,
-					r.roomCODE,
-					r.transaction,
-					r.floor,
-					'28/06/2017' AS checkinDate,
-					'30/06/2017' AS checkoutDate
-				FROM tm_room r
-				LEFT JOIN tm_roomtype rt ON r.roomtypeID=rt.roomtypeID
-				WHERE r.status='ON'
-				AND r.floor = '".$floor."'
-				ORDER BY r.roomID ASC
-				";
-				$data = $this->db->query($sql);
-				return $data->result_array();
+		SELECT
+		r.roomID,
+		r.roomtypeID,
+		rt.roomtypeCode,
+		rt.bed,
+		r.roomCODE,
+		r.transaction,
+		r.floor,
+		'28/06/2017' AS checkinDate,
+		'30/06/2017' AS checkoutDate
+		FROM tm_room r
+		LEFT JOIN tm_roomtype rt ON r.roomtypeID=rt.roomtypeID
+		WHERE r.status='ON'
+		AND r.floor = '".$floor."'
+		ORDER BY r.roomID ASC
+		";
+		$data = $this->db->query($sql);
+		return $data->result_array();
 	}
 
 }
