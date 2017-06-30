@@ -219,7 +219,7 @@
 	<div class=" col-sm-12 text-center"  >
 		<?php 
 		$html ='';
-		foreach ($getfloor3 as $f4) {  
+		foreach ($getfloor4 as $f4) {  
 			if($f4['bed']=="SINGLE"){
 				$bed = '		<i class="fa fa-bed fa-2x" aria-hidden="true"></i>';
 			}else{
