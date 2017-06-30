@@ -125,22 +125,43 @@ class Mdl_booked extends CI_Model {
 		$idBookedRoom[$i] = $this->db->insert_id();
 		endfor;
 
-		$selectRoom = $this->input->post('selectRoom');
-		$room = explode('_',$selectRoom);
-		for ($i=0; $i < count($room) ; $i++) :
-			$saveBookedRoomLog[$i] = array(
-				'bookedroomID' => $idBookedRoom[$i],
-				'roomID'       => $room[$i],
-				'logDate'      => $this->packfunction->dtYMDnow(),
-				'comment'      => $this->input->post('comment'),
-				'status'       => 'BOOKED',
-				"createDT"		   => $this->packfunction->dtYMDnow(),
-				"createBY"		   => $this->UserName,
-				"updateDT"		   => $this->packfunction->dtYMDnow(),
-				"updateBY"		   => $this->UserName
-				);
-		$this->db->insert('ts_booked_room_log',$saveBookedRoomLog[$i]);
-		endfor;
+		$startDate = date_create($this->packfunction->dtTosql($_POST['checkinDate']));
+		$endDate = date_create($this->packfunction->dtTosql($this->input->post('checkOutDate')));
+		$interval = date_diff($startDate, $endDate);
+		$a = array();
+		$runDay = array();
+		while ($startDate < $endDate) {
+			$year = $startDate->format("Y");
+			$month = $startDate->format("m");
+
+			if(!array_key_exists($year, $runDay))
+				$runDay[$year] = array();
+			if(!array_key_exists($month, $runDay[$year]))
+				$runDay[$year][$month] = 0;
+
+			$runDay[$year][$month]++;
+			$startDate->modify("+1 day");
+
+			$selectRoom = $this->input->post('selectRoom');
+			$room = explode('_',$selectRoom);
+			for ($i=0; $i < count($room) ; $i++) :
+				$saveBookedRoomLog[$i] = array(
+					'bookedroomID' => $idBookedRoom[$i],
+					'roomID'       => $room[$i],
+					'logDate'      => $startDate->format('Y-m-d H:i:s'),
+					'comment'      => $this->input->post('comment'),
+					'status'       => 'BOOKED',
+					"createDT"		   => $this->packfunction->dtYMDnow(),
+					"createBY"		   => $this->UserName,
+					"updateDT"		   => $this->packfunction->dtYMDnow(),
+					"updateBY"		   => $this->UserName
+					);
+			$this->db->insert('ts_booked_room_log',$saveBookedRoomLog[$i]);
+			endfor;
+			// array_push($a, $startDate->format('Y-m-d H:i:s'));
+
+		}
+
 	}
 
 	function base64_to_png( $base64_string, $output_file ) {  //create picture

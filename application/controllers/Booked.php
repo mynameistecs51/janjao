@@ -81,7 +81,7 @@ class Booked extends CI_Controller {
 					'updateDT' =>  $rowBooked['updateDT'],
 					'updateBY' =>  $rowBooked['updateBY'],
 					'selectRoom' => array(
-						 array(
+						array(
 							'bookedroomID' => $rowBooked['bookedroomID'],
 							'roomID' => $rowBooked['roomID'],
 							'checkinDate' => $rowBooked['checkinDate'],
@@ -100,8 +100,33 @@ class Booked extends CI_Controller {
 	public function saveAdd()
 	{
 		$idBooked = $this->Mdl_booked->saveAdd();
-		// $idBookedRoom = $this->Mdl_booked->saveAddBookedRoom($idBooked);
-		// $bookedRoomLog = $this->Mdl_booked->saveAddBookedRoomLog($idBookedRoom);
+		redirect($this->ctl,'refresh');
+	}
+
+	public function count()
+	{
+		echo "<pre>";
+		$startDate = date_create(date('Y-m-d H:i:s'));
+		$endDate = date_create('2017-07-20 03:30:30');
+		$interval = date_diff($startDate, $endDate);
+		$a = array();
+		$runDay = array();
+		while ($startDate < $endDate) {
+			$year = $startDate->format("Y");
+			$month = $startDate->format("m");
+
+			if(!array_key_exists($year, $runDay))
+				$runDay[$year] = array();
+			if(!array_key_exists($month, $runDay[$year]))
+				$runDay[$year][$month] = 0;
+
+			$runDay[$year][$month]++;
+			$startDate->modify("+1 day");
+			array_push($a, $startDate->format('Y-m-d H:i:s'));
+
+		}
+		print_r($a);
+
 
 	}
 

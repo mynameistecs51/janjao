@@ -48,34 +48,6 @@
 			<input type="text" class="form-control" name="birthDate" id="birthDate" >
 		</div>
 	</div>
-	<!-- <div class="form-group">
-		<label for="birthDate" class="col-sm-2 control-label">วัน เดือน ปี เกิด</label>
-		<div class="col-sm-2">
-			<select name="birthDate" id="birthDate" class="form-control" >
-				<?php for ($i=1; $i <= 31 ; $i++) :?>
-					<option value="<?php echo $i ?>"><?php echo $i; ?></option>
-				<?php endfor; ?>
-				option
-			</select>
-		</div>
-		<div class="col-sm-2">
-			<select name="birthMonth" id="birthMonth" class="form-control" >
-				<?php foreach ($getMonth as $numMonth => $valMonth) :?>
-					<option value="<?php echo $numMonth; ?>"><?php echo $valMonth; ?></option>
-				<?php endforeach; ?>
-				option
-			</select>
-		</div>
-		<label for="birthDate" class="col-sm-1 control-label">พ.ศ.</label>
-		<div class="col-sm-2">
-			<select name="birthYear" id="birthYear" class="form-control" >
-				<?php foreach ($getYear as $EngYear => $ThaiYear) :?>
-					<option value="<?php echo $EngYear; ?>"><?php echo $ThaiYear; ?></option>
-				<?php endforeach; ?>
-				option
-			</select>
-		</div>
-	</div> -->
 	<div class="form-group">
 		<label for="addDress" class="col-sm-2 control-label">ที่อยู่</label>
 		<div class="col-sm-6">
@@ -199,9 +171,26 @@ $.datetimepicker.setLocale('th'); // ต้องกำหนดเสมอถ�
 $('#bookedDate, #checkinDate, #checkOutDate, #birthDate').datetimepicker({
 	timepicker:true,
 	mask:true,
-        format:'d-m-Y H:i:s',  // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000
-        lang:'th',  // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
-      });
+	format:'d-m-Y H:i:s',
+	lang:'th',
+});
+// start checkinDate form  bookedDate
+$('#bookedDate').on('change',function(){
+	var startDate = $('#bookedDate').val();
+	var expoldeY= startDate.split(' ');
+	$( "#checkinDate" ).datetimepicker({
+		minDate: expoldeY[0].split('-')[2]+'-'+expoldeY[0].split('-')[1]+'-'+expoldeY[0].split('-')[0],
+	});
+});
+
+$('#checkinDate').on("change",function() {
+	var startDate = $('#checkinDate').val();
+	var expoldeY= startDate.split(' ');
+	$( "#checkOutDate" ).datetimepicker({
+		minDate: expoldeY[0].split('-')[2]+'-'+expoldeY[0].split('-')[1]+'-'+expoldeY[0].split('-')[0],
+	});
+});
+
 
 
 	// Grab elements, create settings, etc.
