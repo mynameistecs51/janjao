@@ -60,7 +60,8 @@ class Mdl_booked extends CI_Model {
 
 	public function saveAdd()
 	{
-		$bookedCode = $this->db->query("SELECT fn_gen_sn('TS', 'TS1706') AS CODE")->result_array();
+		$bookedCode =  "TS17060001";// $this->db->query("SELECT fn_gen_sn('TS', 'TS1706') AS CODE")->result_array();
+		// ALTER TABLE tsc_gensn CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci
 		$img = $this->input->post('images');
 		$img = str_replace('data:image/png;base64,', '', $img);
 		$img = str_replace(' ', '+', $img);
@@ -150,6 +151,28 @@ class Mdl_booked extends CI_Model {
 		fwrite( $ifp, base64_decode( $base64_string) );
 		fclose( $ifp );
 		return( $output_file );
+	}
+
+	function getRoom($floor='',$zone=''){
+		$sql = "
+				SELECT 
+					r.roomID,
+					r.roomtypeID,
+					rt.roomtypeCode,
+					rt.bed,
+					r.roomCODE,
+					r.transaction,
+					r.floor,
+					'28/06/2017' AS checkinDate,
+					'30/06/2017' AS checkoutDate
+				FROM tm_room r
+				LEFT JOIN tm_roomtype rt ON r.roomtypeID=rt.roomtypeID
+				WHERE r.status='ON'
+				AND r.floor = '".$floor."'
+				ORDER BY r.roomID ASC
+				";
+				$data = $this->db->query($sql);
+				return $data->result_array(); 
 	}
 
 }

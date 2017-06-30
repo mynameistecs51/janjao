@@ -31,9 +31,9 @@
 	<div class="form-group">
 		<label for="gender" class="col-sm-2 control-label">เพศ</label>
 		<div class="col-sm-2" >
-			<label><input type="radio" name="gender" id="gender" value="male" class="control-label" checked> <b class="btn btn-primary btn-md">  ชาย</b></label>
+			<label><b class="btn btn-success btn-md"><input type="radio" name="gender" id="gender" value="male" class="control-label" checked> ชาย</b></label>
 			&nbsp;&nbsp;&nbsp;
-			<label><input type="radio" name="gender" id="gender" value="Female" class="control-label"> <b class="btn btn-warning btn-md"> หญิง</b></label>
+			<label><b class="btn btn-warning btn-md"><input type="radio" name="gender" id="gender" value="Female" class="control-label">  หญิง</b></label>
 		</div>
 		<div class="col-sm-2">
 			<input type="text" class="form-control" id="firstName" name="firstName" placeholder="ชื่อ">

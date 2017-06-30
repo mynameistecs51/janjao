@@ -4,26 +4,28 @@
 </div>
 <div class="col-lg-10 search-top" align="right">
 	<div class="sh-right">
-		<form name="formSearch" id="formSearch" class="form-inline" method="POST" action="<?php echo base_url()?>event/search/">
+		<form name="formSearch" id="formSearch" class="form-inline" method="POST" action="<?php echo base_url()?>home/search/">
 			<button  type="submit" class="btn btn-primary" style="float: right;">Search</button>
 			CheckIn Date :
-			<input type="text" class="form-control"  id="keyword" style="width: 138px;margin-right: 10px;" placeholder="keyword" name="keyword" value="<?php echo $this->packfunction->dtcheckin() ?>">
+			<input type="text" class="form-control"  id="dtcheckin" style="width: 138px;margin-right: 10px;" placeholder="Check In" name="dtcheckin" value="<?php echo $dtcheckin; ?>">
 			CheckOut Date :
-			<input type="text" class="form-control"  id="keyword" style="width: 138px;margin-right: 10px;" placeholder="keyword" name="keyword" value="<?php echo $this->packfunction->dtcheckout() ?>">
+			<input type="text" class="form-control"  id="dtcheckout" style="width: 138px;margin-right: 10px;" placeholder="Check Out" name="dtcheckout" value="<?php echo $dtcheckout; ?>">
+			<!--  
 			Room Type :
-			<select class="form-control" style="width: 120px;margin-right: 10px;">
-				<option value="STANDARD" selected>STANDARD</option>
-				<option value="VIP">VIP</option>
+			<select class="form-control" name="roomType" style="width: 120px;margin-right: 10px;">
+				<option value="STANDARD" <?php echo $roomType=='STANDARD'? 'selected':''; ?> >STANDARD</option>
+				<option value="VIP" <?php echo $roomType=='VIP'? 'selected':''; ?>  >VIP</option>
 			</select>
 			Status :
-			<select class="form-control" style="width: 120px;margin-right: 10px;">
-				<option value="ALL" selected>ALL</option>
-				<option value="EMPTY">EMPTY</option>
-				<option value="BOOKED">BOOKED</option>
-				<option value="CHECKIN">CHECKIN</option>
-				<option value="CHECKIN">CHECKOUT</option>
-				<option value="CLEANING">CLEANING</option>
+			<select class="form-control" name="roomstatus" style="width: 120px;margin-right: 10px;">
+				<option value="ALL"   <?php echo $roomstatus=='ALL'? 'selected':''; ?>  >ALL</option>
+				<option value="EMPTY" <?php echo $roomstatus=='EMPTY'? 'selected':''; ?>  >EMPTY</option>
+				<option value="BOOKED"  <?php echo $roomstatus=='BOOKED'? 'selected':''; ?>  >BOOKED</option>
+				<option value="CHECKIN" <?php echo $roomstatus=='CHECKIN'? 'selected':''; ?>  >CHECKIN</option>
+				<option value="CHECKOUT" <?php echo $roomstatus=='CHECKOUT'? 'selected':''; ?>  >CHECKOUT</option>
+				<option value="CLEANING" <?php echo $roomstatus=='CLEANING'? 'selected':''; ?>  >CLEANING</option>
 			</select>
+			-->
 		</form>
 	</div>
 </div>
@@ -43,383 +45,169 @@
 <div class="col-lg-12">
 	<h3 >FLOOR 2 </h3>
 </div>
-<div class="col-lg-12">
+<div class="col-lg-12" >
 	<div class=" col-sm-12 text-center"  >
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"   style="width:120px;" disabled>
-					<i class="fa fa-bed fa-2x" aria-hidden="true">&nbsp;</i><i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>202</h4><i>out:14/06/2017</i>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="202" value="202" checked disabled readonly/>
-			</span>
-		</div>
 
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;" disabled>
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>204</h4><i>out:14/06/2017</i>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="204" value="204" checked disabled readonly/>
-			</span>
-		</div>
+	<?php 
+		$html ='';
+		foreach ($getfloor2 as $f2) {  
+			if($f2['bed']=="SINGLE"){
+				$bed = '		<i class="fa fa-bed fa-2x" aria-hidden="true"></i>';
+			}else{
+				$bed = '		<i class="fa fa-bed fa-2x" aria-hidden="true">&nbsp;</i>
+								<i class="fa fa-bed fa-2x" aria-hidden="true"></i>';
+			}
 
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;" disabled>
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>206 VIP</h4><i>out:14/06/2017</i>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="206" value="206" checked disabled readonly/>
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;" disabled>
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>208 VIP</h4><i>out:14/06/2017</i>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="208" value="208" checked disabled readonly/>
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>210 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="210" value="210" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>212 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="212" value="212" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>214 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="214" value="214" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="success" style="width:120px;" >
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>216 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" id="216" value="216" checked disabled />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox " >
-				<button type="button" class="btn btn_room" data-color="warning" style="width:120px;" disabled>
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>218 VIP</h4><i>in:14/08/60</i>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" id="218" value="218" checked disabled />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox " >
-				<button type="button" class="btn btn_room" data-color="warning" style="width:120px;" disabled>
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>220 VIP</h4><i>in:14/08/60</i>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]" id="220" value="220" checked disabled />
-			</span>
-		</div>
+			if($f2['transaction']=='EMPTY' && $f2['roomtypeCode']!='STAIRCASE'){
+					$html .= ' 
+							<div class="col-sm-1 " style="margin:10px;">
+								<span class="button-checkbox ">
+									<button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
+										'.$bed.'
+										<h4>'.$f2['roomCODE'].'</h4>'.$f2['roomtypeCode'].'
+									</button>
+									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'" value="'.$f2['roomCODE'].'" />
+								</span>
+							</div> ';
+			}else if($f2['transaction']=='BOOKED' && $f2['roomtypeCode']!='STAIRCASE'){
+				$html .= '
+						<div class="col-sm-1 " style="margin:10px;">
+							<span class="button-checkbox ">
+								<button type="button" class="btn btn_room" data-color="warning"   style="width:120px;" disabled>
+								'.$bed.'
+								<h4>'.$f2['roomCODE'].'</h4><i >IN:'.$f2['checkinDate'].'</i>
+								</button>
+								<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'" value="'.$f2['roomCODE'].'" checked disabled readonly/>
+							</span>
+						</div>';
 
-	</div>
-</div>
-<div class="col-lg-12">
-	<div class=" col-sm-12 text-center"  >
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true">&nbsp;</i><i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>201 </h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="201" value="201" />
-			</span>
-		</div>
+			}else if($f2['transaction']=='CHECKIN' && $f2['roomtypeCode']!='STAIRCASE'){
+				$html .= '
+						<div class="col-sm-1 " style="margin:10px;">
+							<span class="button-checkbox ">
+								<button type="button" class="btn btn_room" data-color="danger"   style="width:120px;" disabled>
+								'.$bed.'
+								<h4>'.$f2['roomCODE'].'</h4><i >out:'.$f2['checkoutDate'].'</i>
+								</button>
+								<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'" value="'.$f2['roomCODE'].'" checked disabled readonly/>
+							</span>
+						</div>';
 
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>203</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="203" value="203" />
-			</span>
-		</div>
+			}else if($f2['transaction']=='CHECKOUT' && $f2['roomtypeCode']!='STAIRCASE'){
+					$html .= ' 
+							<div class="col-sm-1 " style="margin:10px;">
+								<span class="button-checkbox ">
+									<button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
+										'.$bed.'
+										<h4>'.$f2['roomCODE'].' </h4>'.$f2['roomtypeCode'].'
+									</button>
+									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'" value="'.$f2['roomCODE'].'" />
+								</span>
+							</div> ';
 
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>205 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="205" value="205" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>207 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="207" value="207" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>209 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="209" value="209" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>211 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="211" value="211" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>215 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="215" value="215" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>217 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="217" value="217" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>219 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="219" value="219" />
-			</span>
-		</div>
-
+			}else if($f2['transaction']=='CLEANING' && $f2['roomtypeCode']!='STAIRCASE'){
+					$html .= ' 
+							<div class="col-sm-1 " style="margin:10px;">
+								<span class="button-checkbox ">
+									<button type="button" class="btn btn_room" data-color="success" style="width:120px;">
+										'.$bed.'
+										<h4>'.$f2['roomCODE'].' </h4>'.$f2['roomtypeCode'].'
+									</button>
+									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'" value="'.$f2['roomCODE'].'" checked disabled readonly />
+								</span>
+							</div> '; 
+			}else if($f2['roomtypeCode']=='STAIRCASE'){
+				$html .=' <div class="col-sm-1 " style="margin:10px;"> </div> ';
+			}
+		
+		
+	  	} 
+	  	echo $html;
+	  	?>  
 	</div>
 </div>
 
-<div class="col-lg-12">
+<div class="col-lg-12" >
 	<h3 >FLOOR 3 </h3>
 </div>
-<div class="col-lg-12">
+<div class="col-lg-12" >
 	<div class=" col-sm-12 text-center"  >
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;" disabled>
-					<i class="fa fa-bed fa-2x" aria-hidden="true">&nbsp;</i><i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>302 </h4><i>out:15/06/2017</i>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="302" value="302" checked disabled readonly/>
-			</span>
-		</div>
+		<?php 
+		$html ='';
+		foreach ($getfloor3 as $f3) {  
+			if($f3['bed']=="SINGLE"){
+				$bed = '		<i class="fa fa-bed fa-2x" aria-hidden="true"></i>';
+			}else{
+				$bed = '		<i class="fa fa-bed fa-2x" aria-hidden="true">&nbsp;</i>
+								<i class="fa fa-bed fa-2x" aria-hidden="true"></i>';
+			}
 
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>304</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="304" value="304" />
-			</span>
-		</div>
+			if($f3['transaction']=='EMPTY' && $f3['roomtypeCode']!='STAIRCASE'){
+					$html .= ' 
+							<div class="col-sm-1 " style="margin:10px;">
+								<span class="button-checkbox ">
+									<button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
+										'.$bed.'
+										<h4>'.$f3['roomCODE'].'</h4>'.$f3['roomtypeCode'].'
+									</button>
+									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'" value="'.$f3['roomCODE'].'" />
+								</span>
+							</div> ';
+			}else if($f3['transaction']=='BOOKED' && $f3['roomtypeCode']!='STAIRCASE'){
+				$html .= '
+						<div class="col-sm-1 " style="margin:10px;">
+							<span class="button-checkbox ">
+								<button type="button" class="btn btn_room" data-color="warning"   style="width:120px;" disabled>
+								'.$bed.'
+								<h4>'.$f3['roomCODE'].'</h4><i>in:'.$f3['checkinDate'].'</i>
+								</button>
+								<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'" value="'.$f3['roomCODE'].'" checked disabled readonly/>
+							</span>
+						</div>';
 
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;" disabled>
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>306 VIP</h4><i>out:15/06/2017</i>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="306" value="306" checked disabled readonly/>
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>308 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="308" value="308" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>310 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="310" value="310" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>312 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="312" value="312" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>314 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="314" value="314" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>316 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="316" value="316" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>318 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="318" value="318" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>320 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="320" value="320" />
-			</span>
-		</div>
+			}else if($f3['transaction']=='CHECKIN' && $f3['roomtypeCode']!='STAIRCASE'){
+				$html .= '
+						<div class="col-sm-1 " style="margin:10px;">
+							<span class="button-checkbox ">
+								<button type="button" class="btn btn_room" data-color="danger"   style="width:120px;" disabled>
+								'.$bed.'
+								<h4>'.$f3['roomCODE'].'</h4><i >out:'.$f3['checkoutDate'].'</i>
+								</button>
+								<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'" value="'.$f3['roomCODE'].'" checked disabled readonly/>
+							</span>
+						</div>';
 
-	</div>
-</div>
-<div class="col-lg-12">
-	<div class=" col-sm-12 text-center"  >
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true">&nbsp;</i><i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>301 </h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="301" value="301" />
-			</span>
-		</div>
+			}else if($f3['transaction']=='CHECKOUT' && $f3['roomtypeCode']!='STAIRCASE'){
+					$html .= ' 
+							<div class="col-sm-1 " style="margin:10px;">
+								<span class="button-checkbox ">
+									<button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
+										'.$bed.'
+										<h4>'.$f3['roomCODE'].' </h4>'.$f3['roomtypeCode'].'
+									</button>
+									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'" value="'.$f3['roomCODE'].'" />
+								</span>
+							</div> ';
 
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>303</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="303" value="303" />
-			</span>
-		</div>
-
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>305 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="305" value="205" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>307 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="307" value="307" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>309 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="309" value="309" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>311 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="311" value="311" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>315 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="315" value="315" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>317 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="317" value="317" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>319 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="319" value="319" />
-			</span>
-		</div>
+			}else if($f3['transaction']=='CLEANING' && $f3['roomtypeCode']!='STAIRCASE'){
+					$html .= ' 
+							<div class="col-sm-1 " style="margin:10px;">
+								<span class="button-checkbox ">
+									<button type="button" class="btn btn_room" data-color="success" style="width:120px;">
+										'.$bed.'
+										<h4>'.$f3['roomCODE'].' </h4>'.$f3['roomtypeCode'].'
+									</button>
+									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'" value="'.$f3['roomCODE'].'" checked disabled readonly />
+								</span>
+							</div> '; 
+			}else if($f3['roomtypeCode']=='STAIRCASE'){
+				$html .=' <div class="col-sm-1 " style="margin:10px;"> </div> ';
+			}
+		
+		
+	  	} 
+	  	echo $html;
+	  	?>  
 
 	</div>
 </div>
@@ -427,194 +215,87 @@
 <div class="col-lg-12">
 	<h3 >FLOOR 4 </h3>
 </div>
-<div class="col-lg-12">
+<div class="col-lg-12" >
 	<div class=" col-sm-12 text-center"  >
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true">&nbsp;</i><i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>402 </h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="402" value="402" />
-			</span>
-		</div>
+		<?php 
+		$html ='';
+		foreach ($getfloor3 as $f4) {  
+			if($f4['bed']=="SINGLE"){
+				$bed = '		<i class="fa fa-bed fa-2x" aria-hidden="true"></i>';
+			}else{
+				$bed = '		<i class="fa fa-bed fa-2x" aria-hidden="true">&nbsp;</i>
+								<i class="fa fa-bed fa-2x" aria-hidden="true"></i>';
+			}
 
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>404</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="404" value="404" />
-			</span>
-		</div>
+			if($f4['transaction']=='EMPTY' && $f4['roomtypeCode']!='STAIRCASE'){
+					$html .= ' 
+							<div class="col-sm-1 " style="margin:10px;">
+								<span class="button-checkbox ">
+									<button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
+										'.$bed.'
+										<h4>'.$f4['roomCODE'].'</h4>'.$f4['roomtypeCode'].'
+									</button>
+									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" value="'.$f4['roomCODE'].'" />
+								</span>
+							</div> ';
+			}else if($f4['transaction']=='BOOKED' && $f4['roomtypeCode']!='STAIRCASE'){
+				$html .= '
+						<div class="col-sm-1 " style="margin:10px;">
+							<span class="button-checkbox ">
+								<button type="button" class="btn btn_room" data-color="warning"   style="width:120px;" disabled>
+								'.$bed.'
+								<h4>'.$f4['roomCODE'].'</h4><i >in:'.$f4['checkinDate'].'</i>
+								</button>
+								<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" value="'.$f4['roomCODE'].'" checked disabled readonly/>
+							</span>
+						</div>';
 
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>406 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="406" value="406" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>408 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="408" value="408" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>410 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="410" value="410" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>412 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="412" value="412" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>414 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="414" value="414" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>416 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="416" value="416" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>418 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="418" value="418" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>320 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="320" value="320" />
-			</span>
-		</div>
+			}else if($f4['transaction']=='CHECKIN' && $f4['roomtypeCode']!='STAIRCASE'){
+				$html .= '
+						<div class="col-sm-1 " style="margin:10px;">
+							<span class="button-checkbox ">
+								<button type="button" class="btn btn_room" data-color="danger"   style="width:120px;" disabled>
+								'.$bed.'
+								<h4>'.$f4['roomCODE'].'</h4><i >out:'.$f4['checkoutDate'].'</i>
+								</button>
+								<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" value="'.$f4['roomCODE'].'" checked disabled readonly/>
+							</span>
+						</div>';
+
+			}else if($f4['transaction']=='CHECKOUT' && $f4['roomtypeCode']!='STAIRCASE'){
+					$html .= ' 
+							<div class="col-sm-1 " style="margin:10px;">
+								<span class="button-checkbox ">
+									<button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
+										'.$bed.'
+										<h4>'.$f4['roomCODE'].' </h4>'.$f4['roomtypeCode'].'
+									</button>
+									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" value="'.$f4['roomCODE'].'" />
+								</span>
+							</div> ';
+
+			}else if($f4['transaction']=='CLEANING' && $f4['roomtypeCode']!='STAIRCASE'){
+					$html .= ' 
+							<div class="col-sm-1 " style="margin:10px;">
+								<span class="button-checkbox ">
+									<button type="button" class="btn btn_room" data-color="success" style="width:120px;">
+										'.$bed.'
+										<h4>'.$f4['roomCODE'].' </h4>'.$f4['roomtypeCode'].'
+									</button>
+									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" value="'.$f4['roomCODE'].'" checked disabled readonly />
+								</span>
+							</div> '; 
+			}else if($f4['roomtypeCode']=='STAIRCASE'){
+				$html .=' <div class="col-sm-1 " style="margin:10px;"> </div> ';
+			}
+		
+		
+	  	} 
+	  	echo $html;
+	  	?>  
 
 	</div>
-</div>
-<div class="col-lg-12">
-	<div class=" col-sm-12 text-center"  >
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true">&nbsp;</i><i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>401 </h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="401" value="401" />
-			</span>
-		</div>
-
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>403</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="403" value="403" />
-			</span>
-		</div>
-
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>405 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="405" value="205" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>407 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="407" value="407" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>409 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="409" value="409" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>411 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="411" value="411" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>415 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="415" value="415" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>417 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="417" value="417" />
-			</span>
-		</div>
-		<div class="col-sm-1 " style="margin:10px;">
-			<span class="button-checkbox ">
-				<button type="button" class="btn btn_room" data-color="danger"  style="width:120px;">
-					<i class="fa fa-bed fa-2x" aria-hidden="true"></i>
-					<h4>419 VIP</h4>
-				</button>
-				<input type="checkbox" class="hidden check_room" name="check_room[]"  id="419" value="419" />
-			</span>
-		</div>
-
-	</div>
-</div>
+</div> 
 
 <div class="col-lg-12">
 	<hr style="margin-top: 40xp;margin-left: -15px; margin-right: -15px;">

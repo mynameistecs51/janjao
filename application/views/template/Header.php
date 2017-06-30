@@ -7,7 +7,7 @@
     <link rel='icon' href='<?php echo base_url();?>assets/images/janjao-logo.ico' type='image/x-icon'> 
     <meta name="description" content="">
     <meta name="author" content=""> 
-    <title>DITP-Registeration | <?php echo $viewName;?></title> 
+    <title>Janjao Hotel | <?php echo $viewName;?></title> 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url()?>assets/css/bootstrap.css" rel="stylesheet"> 
     <link href="<?php echo base_url()?>assets/css/mainstyle.css" rel="stylesheet">  
