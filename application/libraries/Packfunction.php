@@ -132,6 +132,8 @@ class Packfunction {
 		return $dmy.' 12:00';
 	}
 
+	 
+
 	public function getuserlogo($id=''){
 		$rs = $this->CI->mdl_packfunction->getuserlogo($id);
 		return $rs[0]['UserLogo'];

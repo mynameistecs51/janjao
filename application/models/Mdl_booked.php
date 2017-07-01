@@ -60,7 +60,10 @@ class Mdl_booked extends CI_Model {
 
 	public function saveAdd()
 	{
-		$bookedCode =  $this->db->query("SELECT fn_gen_sn('TS', 'TS1706') AS CODE")->result_array();
+		date_default_timezone_set('Asia/Bangkok');
+		$now = new DateTime(null, new DateTimeZone('Asia/Bangkok')); 
+
+		$bookedCode =  $this->db->query("SELECT fn_gen_sn('BK', 'BK".$now->format('ym')."') AS CODE")->result_array();
 		$fileName = '';
 		if( !empty($this->input->post('images'))){
 			$img  = $this->input->post('images');
@@ -173,7 +176,7 @@ class Mdl_booked extends CI_Model {
 		return( $output_file );
 	}
 
-	function getRoom($floor='',$zone=''){
+	function getRoom($floor='',$checkinDate='',$checkoutDate=''){
 		$sql = "
 		SELECT
 		r.roomID,
@@ -181,13 +184,24 @@ class Mdl_booked extends CI_Model {
 		rt.roomtypeCode,
 		rt.bed,
 		r.roomCODE,
-		r.transaction,
+		-- r.transaction,
+		IFNULL(log.status,'EMPTY') AS transaction,
 		r.floor,
 		'28/06/2017' AS checkinDate,
-		'30/06/2017' AS checkoutDate
+		'30/06/2017' AS checkoutDate,
+		IFNULL(log.total,0) AS total
 		FROM tm_room r
 		LEFT JOIN tm_roomtype rt ON r.roomtypeID=rt.roomtypeID
-		WHERE r.status='ON'
+		LEFT JOIN (
+			SELECT 
+				lg.roomID,
+			    COUNT(lg.logroomdateID) AS total,
+			    lg.status
+			FROM ts_booked_room_log lg 
+			WHERE lg.logDate BETWEEN '2017-06-10 12:00:00' AND '2017-07-05 12:00:00'
+			GROUP by roomID
+		) AS log ON r.roomCODE=log.roomID
+		WHERE r.status<>'DISABLE'
 		AND r.floor = '".$floor."'
 		ORDER BY r.roomID ASC
 		";
