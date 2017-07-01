@@ -23,58 +23,58 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="idcardno" class="col-sm-2 control-label">เลขประจำประชาชน</label>
-		<div class="col-sm-6">
+		<label for="idcardno" class="col-sm-2 control-label">เลขประจำประชาชน <b style="color: #FF0000">*</b></label>
+		<div class="col-sm-8">
 			<input type="text" class="form-control" name="idcardno" id="idcardno" placeholder="เลขประจำประชาชน 13 หลัก" minlength="13">
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="gender" class="col-sm-2 control-label">เพศ</label>
-		<div class="col-sm-2" >
+		<div class="col-sm-8" >
 			<label><b class="btn btn-success btn-md"><input type="radio" name="gender" id="gender" value="male" class="control-label" checked> ชาย</b></label>
 			&nbsp;&nbsp;&nbsp;
 			<label><b class="btn btn-warning btn-md"><input type="radio" name="gender" id="gender" value="Female" class="control-label">  หญิง</b></label>
 		</div>
-		<div class="col-sm-2">
+	</div>
+	<div class="form-group">
+		<label for="gender" class="col-sm-2 control-label">ชื่อ-สกุล <b style="color: #FF0000">*</b></label>
+		<div class="col-sm-4">
 			<input type="text" class="form-control" id="firstName" name="firstName" placeholder="ชื่อ">
 		</div>
-		<div class="col-sm-2">
+		<div class="col-sm-4">
 			<input type="text" class="form-control" id="lastName" name="lastName" placeholder="นามสกุล">
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="birthDate" class="col-sm-2 control-label">วัน เดือน ปี เกิด</label>
-		<div class="col-sm-6">
-			<input type="text" class="form-control" name="birthDate" id="birthDate" >
+		<div class="col-sm-8">
+			<input type="text" class="form-control" name="birthDate" id="birthDate">
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="addDress" class="col-sm-2 control-label">ที่อยู่</label>
-		<div class="col-sm-6">
+		<div class="col-sm-8">
 			<textarea name="addDress" id="addDress" class="form-control"></textarea>
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="zipcode" class="col-sm-2 control-label">รหัสไปรษณีย์</label>
-		<div class="col-sm-2">
+		<label for="zipcode" class="col-sm-2 control-label"></label>
+		<div class="col-sm-4">
 			<input type="text" name="zipcode" id="zipcode" value=""  class="form-control" placeholder="รหัสไปรษณีย์">
 		</div>
-		<label for="province" class="col-sm-2 control-label">จังหวัด</label>
-		<div class="col-sm-2">
-			<select class="form-control" name="province" id="province">
-
+		<div class="col-sm-4">
+			<select class="form-control" name="province" id="province"> 
 			</select>
 		</div>
 	</div>
-	<div class="form-group">
-		<label for="amphur" class="col-sm-2 control-label">อำเภอ</label>
-		<div class="col-sm-2">
+	<div class="form-group">  
+		<label for="amphur" class="col-sm-2 control-label"></label>
+		<div class="col-sm-4">
 			<select class="form-control" name="amphur" id="amphur">
 
 			</select>
-		</div>
-		<label for="district" class="col-sm-2 control-label">ตำบล</label>
-		<div class="col-sm-2">
+		</div> 
+		<div class="col-sm-4">
 			<select class="form-control selectpicker" data-live-search="true" name="district" id="district">
 
 			</select>
@@ -82,68 +82,70 @@
 	</div>
 	<div class="form-group">
 		<label for="mobile" class="col-sm-2 control-label">เบอร์มือถือ</label>
-		<div class="col-sm-6">
-			<input type="tel" class="form-control" id="mobile" name="mobile" minlength="9" placeholder="1211300153330">
+		<div class="col-sm-8">
+			<input type="tel" class="form-control" id="mobile" name="mobile" minlength="9" placeholder="082-2222222">
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="carNumber" class="col-sm-2 control-label">ทะเบียนรถ</label>
-		<div class="col-sm-6">
-			<input type="text" class="form-control" name="carNumber" id="carNumber" placeholder="1211300153330">
+		<div class="col-sm-8">
+			<input type="text" class="form-control" name="carNumber" id="carNumber" placeholder="1กก 1111">
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="email" class="col-sm-2 control-label">อีเมลล์</label>
-		<div class="col-sm-6">
-			<input type="email" class="form-control" id="email" name="email" placeholder="example@youmail.com">
+		<div class="col-sm-8">
+			<input type="email" class="form-control" id="email" name="email" placeholder="name@domain.com">
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="bookedDate" class="col-sm-2 control-label">วันที่ จอง</label>
-		<div class="col-sm-6">
+		<label for="bookedDate" class="col-sm-2 control-label">วันที่ จอง <b style="color: #FF0000">*</b></label>
+		<div class="col-sm-8">
 			<input type="text" class="form-control" id="bookedDate" name="bookedDate" >
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="checkinDate" class="col-sm-2 control-label">วันที่ Checkin</label>
-		<div class="col-sm-2">
+		<label for="checkinDate" class="col-sm-2 control-label">วันที่ Checkin <b style="color: #FF0000">*</b></label>
+		<div class="col-sm-3">
 			<input type="text" class="form-control" id="checkinDate" name="checkinDate">
 		</div>
 	<!-- </div>
 	<div class="form-group"> -->
-		<label for="checkOutDate" class="col-sm-2 control-label">ถึงวันที่ Checkout</label>
-		<div class="col-sm-2">
+		<label for="checkOutDate" class="col-sm-2 control-label">วันที่ Checkout <b style="color: #FF0000">*</b></label>
+		<div class="col-sm-3">
 			<input type="text" class="form-control" id="checkOutDate" name="checkOutDate" >
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="bookedType" class="col-sm-2 control-label">เช่าแบบ</label>
-		<div class="col-sm-6">
-			<label><input type="radio" name="bookedType" id="SHORT" value="SHORT" class="control-label"> <b class="btn btn-info btn-md">  ชั่วคราว</b></label>
+		<label for="bookedType" class="col-sm-2 control-label">เช่าแบบ <b style="color: #FF0000">*</b></label>
+		<div class="col-sm-8">
+			<label><b class="btn btn-info btn-md"> <input type="radio" name="bookedType" id="SHORT" value="SHORT" class="control-label">  ชั่วคราว</b></label>
 			&nbsp;&nbsp;&nbsp;
-			<label><input type="radio" name="bookedType" id="DAY" value="DAY" class="control-label" checked> <b class="btn btn-warning btn-md"> รายวัน</b></label>
+			<label><b class="btn btn-warning btn-md"> <input type="radio" name="bookedType" id="DAY" value="DAY" class="control-label" checked>  รายวัน</b></label>
 			&nbsp;&nbsp;&nbsp;
-			<label><input type="radio" name="bookedType" id="MONTH" value="MONTH" class="control-label"> <b class="btn btn-primary btn-md"> รายเดือน</b></label>
+			<label><b class="btn btn-primary btn-md"> <input type="radio" name="bookedType" id="MONTH" value="MONTH" class="control-label">  รายเดือน</b></label>
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="deposit" class="col-sm-2 control-label">เงินมัดจำ</label>
-		<div class="input-group col-sm-6">
-			<input type="text" class="form-control" id="deposit" name="deposit" placeholder="100 200 300 400 500">
+		<label for="deposit" class="col-sm-2 control-label">เงินมัดจำ <b style="color: #FF0000">*</b></label>
+		<div class="col-sm-8">
+				<div class="input-group">
+				<input type="text" class="form-control" id="deposit" name="deposit" placeholder="100 200 300 400 500">
 			<span class="input-group-addon">บาท</span>
+			</div> 
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="is_breakfast" class="col-sm-2 control-label">อาหารเช้า</label>
-		<div class="col-sm-6">
-			<label><input type="radio" name="is_breakfast" id="breakfast0" value="0" class="control-label" checked> <b class="btn btn-danger btn-md">  ไม่รับอาหารเช้า</b></label>
+		<div class="col-sm-8">
+			<label><b class="btn btn-danger btn-md"> <input type="radio" name="is_breakfast" id="breakfast0" value="0" class="control-label" checked> ไม่รับอาหารเช้า</b></label>
 			&nbsp;&nbsp;&nbsp;
-			<label><input type="radio" name="is_breakfast" id="breakfast1" value="1" class="control-label"> <b class="btn btn-success btn-md"> รับอาหารเช้า</b></label>
+			<label><b class="btn btn-success btn-md"> <input type="radio" name="is_breakfast" id="breakfast1" value="1" class="control-label"> รับอาหารเช้า</b></label>
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="deposit" class="col-sm-2 control-label">Comment</label>
-		<div class="input-group col-sm-6">
+		<div class="col-sm-8">
 			<textarea name="comment" id="comment" class="form-control"></textarea>
 		</div>
 	</div>
@@ -151,9 +153,9 @@
 		<label for="btnsnap"  id="snap" class="col-sm-2 control-label"><i class="fa fa-camera btn btn-primary " id="snap"> ถ่ายภาพ</i></label>
 		<div class="col-sm-10">
 
-			<video id="video" class="bg-info " width="300" height="200" autoplay></video>
+			<video id="video" class="" width="260" height="195" autoplay></video>
 
-			<canvas id="canvas"  name="idcardPicture"  class="bg-primary " width="300" height="200"  ></canvas>
+			<canvas id="canvas"  name="idcardPicture"  class="bg-primary " width="260" height="195"  ></canvas>
 			<input type="hidden" name="images" id="images">
 		</div>
 	</div>
@@ -168,7 +170,13 @@
 	// });
 
 $.datetimepicker.setLocale('th'); // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
-$('#bookedDate, #checkinDate, #checkOutDate, #birthDate').datetimepicker({
+$('#birthDate').datetimepicker({
+	timepicker:true,
+	mask:true,
+	format:'d-m-Y',
+	lang:'th',
+});
+$('#bookedDate, #checkinDate, #checkOutDate').datetimepicker({
 	timepicker:true,
 	mask:true,
 	format:'d-m-Y H:i:s',

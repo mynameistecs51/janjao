@@ -177,29 +177,31 @@ class Mdl_booked extends CI_Model {
 	}
 
 	function getRoom($floor='',$checkinDate='',$checkoutDate=''){
+		$df = $checkinDate[6].$checkinDate[7].$checkinDate[8].$checkinDate[9].'-'.$checkinDate[3].$checkinDate[4].'-'.$checkinDate[0].$checkinDate[1].' '.$checkinDate[11].$checkinDate[12].':'.$checkinDate[14].$checkinDate[15];
+		$dt = $checkoutDate[6].$checkoutDate[7].$checkoutDate[8].$checkoutDate[9].'-'.$checkoutDate[3].$checkoutDate[4].'-'.$checkoutDate[0].$checkoutDate[1].' '.$checkoutDate[11].$checkoutDate[12].':'.$checkoutDate[14].$checkoutDate[15];
 		$sql = "
 		SELECT
 		r.roomID,
 		r.roomtypeID,
 		rt.roomtypeCode,
 		rt.bed,
-		r.roomCODE,
-		-- r.transaction,
-		IFNULL(log.status,'EMPTY') AS transaction,
+		r.roomCODE, 
+		IFNULL(log.status,'EMPTY') AS transaction, 
 		r.floor,
-		'28/06/2017' AS checkinDate,
-		'30/06/2017' AS checkoutDate,
+		IFNULL(DATE_FORMAT(br.checkinDate,'%d/%m/%Y'),'') AS checkinDate,
+		IFNULL(DATE_FORMAT(br.checkoutDate,'%d/%m/%Y'),'') AS checkoutDate,
 		IFNULL(log.total,0) AS total
 		FROM tm_room r
 		LEFT JOIN tm_roomtype rt ON r.roomtypeID=rt.roomtypeID
+		LEFT JOIN ts_booked_room br ON r.roomCODE=br.roomID
 		LEFT JOIN (
 			SELECT 
 				lg.roomID,
 			    COUNT(lg.logroomdateID) AS total,
 			    lg.status
 			FROM ts_booked_room_log lg 
-			WHERE lg.logDate BETWEEN '2017-06-10 12:00:00' AND '2017-07-05 12:00:00'
-			GROUP by roomID
+			WHERE lg.logDate BETWEEN '".$df.":00' AND '".$dt.":00'
+			GROUP by lg.roomID
 		) AS log ON r.roomCODE=log.roomID
 		WHERE r.status<>'DISABLE'
 		AND r.floor = '".$floor."'
