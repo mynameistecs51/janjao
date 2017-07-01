@@ -85,7 +85,7 @@ class Mdl_booked extends CI_Model {
 			'firstName' => $this->input->post('firstName'),
 			'middleName' => '',
 			'lastName' => $this->input->post('lastName'),
-			'birthdate' => $this->packfunction->dtTosql($this->input->post('birthDate')),
+			'birthdate' => $this->input->post('birthdate_y').'-'.$this->input->post('birthdate_m').'-'.$this->input->post('birthdate_d').' 00:00:00',
 			'address' => $this->input->post('addDress'),
 			'district' => $this->input->post('district'),
 			'province' => $this->input->post('province'),

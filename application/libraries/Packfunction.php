@@ -25,7 +25,7 @@ class Packfunction {
 	public function dtTosql($datetime)
 	{
 		if(!empty($datetime)){
-			$dateChar = explode('-',$datetime);
+			$dateChar = explode('/',$datetime);
 			$dateCharYear = explode(' ',$dateChar[2]);
 			return $dateCharYear[0].'-'.$dateChar[1].'-'.$dateChar[0].' '.$dateCharYear[1];
 		}else{

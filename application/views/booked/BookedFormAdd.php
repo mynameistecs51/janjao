@@ -3,7 +3,7 @@
   <div class="row form_input" style="text-align:left; margin-bottom:20px">
   	<div class="form-horizontal">
   		<div class="form-group">
-  			<label for="selectRoom" class="col-sm-2 control-label">ห้องที่เลือก</label>
+  			<label for="selectRoom" class="col-sm-3 control-label">ห้องที่เลือก</label>
   			<div class="col-sm-10">
   				<?php
   				$room =explode('_',$selectRoom);
@@ -47,8 +47,71 @@
 	</div>
 	<div class="form-group">
 		<label for="birthDate" class="col-sm-2 control-label">วัน เดือน ปี เกิด</label>
-		<div class="col-sm-8">
-			<input type="text" class="form-control" name="birthDate" id="birthDate">
+		<div class="col-sm-8"> 
+			<div class="row">
+				<div class="col-sm-2">
+					<select class="form-control" name="birthdate_d">
+						<option value="01">01</option>
+						<option value="02">02</option>
+						<option value="03">03</option>
+						<option value="04">04</option>
+						<option value="05">05</option>
+						<option value="06">06</option>
+						<option value="07">07</option>
+						<option value="08">08</option>
+						<option value="09">09</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+						<option value="13">13</option>
+						<option value="14">14</option>
+						<option value="15">15</option>
+						<option value="16">16</option>
+						<option value="17">17</option>
+						<option value="18">18</option>
+						<option value="19">19</option>
+						<option value="20">20</option>
+						<option value="21">21</option>
+						<option value="22">22</option>
+						<option value="23">23</option>
+						<option value="24">24</option>
+						<option value="25">25</option>
+						<option value="26">26</option>
+						<option value="27">27</option>
+						<option value="28">28</option>
+						<option value="29">29</option>
+						<option value="30">30</option>
+						<option value="31">31</option>
+					</select>
+				</div>
+				<div class="col-sm-4">
+					<select class="form-control" name="birthdate_m">
+						<option value="01">มกราคม</option>
+						<option value="02">กุมภาพันธ์</option>
+						<option value="03">มีนาคม</option>
+						<option value="04">เมษายน</option>
+						<option value="05">พฤษภาคม</option>
+						<option value="06">มิถุนายน</option>
+						<option value="07">กรกฎาคม</option>
+						<option value="08">สิงหาคม</option>
+						<option value="09">กันยายน</option>
+						<option value="10">ตุลาคม</option>
+						<option value="11">พฤศจิกายน</option>
+						<option value="12">ธันวาคม</option> 
+					</select>
+				</div>
+				<div class="col-sm-2">
+					<select class="form-control" name="birthdate_y">
+					<?php 
+						$y = $this->packfunction->yearnow()+543;
+						for ($i=0; $i < 80; $i++) { 
+							echo '<option value="'.$y.'">'.$y.'</option> ';
+							$y--;
+						}
+					 ?>
+					</select>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="form-group">
@@ -173,13 +236,13 @@ $.datetimepicker.setLocale('th'); // ต้องกำหนดเสมอถ�
 $('#birthDate').datetimepicker({
 	timepicker:true,
 	mask:true,
-	format:'d-m-Y',
+	format:'d/m/Y',
 	lang:'th',
 });
 $('#bookedDate, #checkinDate, #checkOutDate').datetimepicker({
 	timepicker:true,
 	mask:true,
-	format:'d-m-Y H:i:s',
+	format:'d/m/Y H:i:s',
 	lang:'th',
 });
 // start checkinDate form  bookedDate

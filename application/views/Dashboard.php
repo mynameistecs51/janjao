@@ -1,3 +1,4 @@
+<link href="<?php echo base_url()?>assets/css/jquery.datetimepicker.css" rel="stylesheet">
 <!-- Page Name -->
 <div class="col-lg-2">
 	<i style="font-size: 15px;"><span class="glyphicon glyphicon-dashboard"></span> <?php echo $topPageName; ?> </i>
@@ -301,10 +302,19 @@
 	<hr style="margin-top: 40xp;margin-left: -15px; margin-right: -15px;">
 </div>
 <div class="div_modal"> <!-- show modal checkinform --> </div>
+<script src="<?php echo base_url()?>assets/js/jquery.datetimepicker.full.min.js"></script>
 <script type="text/javascript">
 	$(function(){
 		checkIn();
 		booking();
+
+	});
+	$.datetimepicker.setLocale('th');
+	$('#dtcheckin, #dtcheckout').datetimepicker({
+		timepicker:true,
+		mask:true,
+		format:'d/m/Y H:i',
+		lang:'th',
 	});
 
 	function checkIn() {
