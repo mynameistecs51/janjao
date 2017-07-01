@@ -63,6 +63,7 @@ class Mdl_booked extends CI_Model {
 		$bookedCode =  $this->db->query("SELECT fn_gen_sn('TS', 'TS1706') AS CODE")->result_array();
 		$fileName = '';
 		if( !empty($this->input->post('images'))){
+			$img  = $this->input->post('images');
 			$img = str_replace('data:image/png;base64,', '', $img);
 			$img = str_replace(' ', '+', $img);
 			$data = base64_decode($img);
