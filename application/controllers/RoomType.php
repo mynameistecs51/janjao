@@ -6,8 +6,9 @@ class RoomType extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->ctl="Home";
+		$this->ctl="RoomType";
 		$this->pagename="ROOMTYPE";
+		$this->load->model('Mdl_roomType');
 		$this->userID = $this->session->userdata('userID');
 		$this->UserName = $this->session->userdata('UserName');
 		$this->UserGroupID = $this->session->userdata('usergroupID');
@@ -23,6 +24,7 @@ class RoomType extends CI_Controller {
 		$this->data['viewName']=$this->pagename;
 		$this->data['topPageName']='<b style="color:#D70F0F;font-size:18px;">Room Status</b>';
 		$this->data['keyword']='';
+		$this->data['getRoomtypeAll'] = $this->Mdl_roomType->getRoomtypeAll();
 		$this->packfunction->packView($this->data,'roomtype/RoomtypeList');
 	}
 
@@ -34,6 +36,11 @@ class RoomType extends CI_Controller {
 	public function RoomtypeEdit()
 	{
 		$this->load->view('roomtype/RoomtypeEdit');
+	}
+
+	public function saveAdd()
+	{
+		$this->Mdl_roomType->saveAdd();
 	}
 
 }
