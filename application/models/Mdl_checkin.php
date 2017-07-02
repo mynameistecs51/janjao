@@ -170,6 +170,50 @@ class Mdl_checkin extends CI_Model {
 		$data = $this->db->query($sql)->result_array();
 		return $data;
 	}
+
+	public function booked($key){
+		$sql = 	"
+				SELECT
+					tb.bookedID,
+					tb.bookedCode,
+					tb.idcardno,
+					tb.idcardnoPath,
+					tb.titleName,
+					tb.firstName,
+					tb.middleName,
+					tb.lastName,
+					tb.birthdate,
+					tb.address,
+					tb.district,
+					tb.province,
+					tb.country,
+					tb.postcode,
+					tb.mobile,
+					tb.email,
+					tb.bookedDate,
+					tb.checkInAppointDate,
+					tb.checkOutAppointDate,
+					tb.is_breakfast,
+					tb.bookedType,
+					tb.cashPledge,
+					tb.cashPledgePath,
+					tb.comment,
+					tb.status,
+					tb.createDT,
+					tb.createBY,
+					tb.updateDT,
+					tb.updateBY
+				FROM ts_booked tb
+				WHERE MD5(tb.bookedID) = '".$key."' ";
+		$query 	= $this->db->query($sql);
+		$rs 	= $query->result_array();
+		if (count($rs) > 0) {
+			return $rs[0];
+		}else{
+			return [];
+		}
+		
+	}
 }
 
 /* End of file Mdl_checkin.php */

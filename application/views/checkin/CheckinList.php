@@ -1,7 +1,7 @@
     <!-- Page Name -->
     <!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/datatable/css/dataTables.bootstrap.min.css"> -->
     <div class="col-lg-12">
-    	<i style="font-size: 18px;">BOOKED LIST</i>
+    	<i style="font-size: 18px;">CHECKIN LIST</i>
     </div>
     <hr style="margin-top: 30px;">
     <!-- Page Content -->
@@ -10,7 +10,7 @@
     	<div class="row text-center">
     		<div class="col-lg-12" align="right">
     			<div class="sh-right">
-    				<form name="formSearch" id="formSearch" method="POST" action="<?php echo base_url()?>user/search/">
+    				<form name="formSearch" id="formSearch" method="POST" action="<?php echo base_url()?>checkin/search/">
     					<button  type="submit" class="btn btn-primary " style="float: right;">Search</button>
     					<input type="text" class="form-control"  id="keyword" style="width: 250px;margin-right: 10px;" placeholder="keyword" name="keyword" value="<?php echo $keyword; ?>">
     				</form>
@@ -54,7 +54,7 @@
     							<td><?php echo $rowCheckin['checkOutAppointDate']; ?></td>
     							<td><?php echo $rowCheckin['updateBY']; ?></td>
     							<td >
-    								<button class="btn btn-primary col-sm-3  btn-xs btn_edit" title="edit" style='margin-left:5px;'>
+    								<button class="btn btn-primary col-sm-3  btn-xs btn_edit" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="edit" style='margin-left:5px;'>
     									<i class="fa fa-edit fa-2x"></i>
     								</button>
     								<button class="btn btn-warning col-sm-3  btn-xs btn_cancel" title="cancel" style='margin-left:5px;'>
@@ -65,42 +65,13 @@
     								</button>
     							</td>
     						</tr>
-    					<?php endforeach; ?>
-    					<!-- <tr>
-    						<td>1</td>
-    						<td>BK170613201001</td>
-    						<td>นายไชยวัฒน์  หอมแสง</td>
-    						<td>201</td>
-    						<td>13/06/2017 13:00</td>
-    						<td>15/06/2017 12:00</td>
-    						<td>Administrator</td>
-    						<td>
-    							<button class="btn btn-primary col-sm-5 pull-left btn-xs btn_edit">แก้ไข</button>
-    							<button class="btn btn-warning col-sm-5 pull-right btn-xs btn_cancel">ยกเลิก</button>
-    						</td>
-    					</tr>
-    					<tr>
-    						<td>2</td>
-    						<td>BK170613205001</td>
-    						<td>นายอาสา  มาครับ</td>
-    						<td>205</td>
-    						<td>13/06/2017 13:00</td>
-    						<td>15/06/2017 12:00</td>
-    						<td>Administrator</td>
-    						<td >
-    							<button class="btn btn-primary col-sm-5 pull-left btn-xs btn_edit">แก้ไข</button>
-    							<button class="btn btn-warning col-sm-5 pull-right btn-xs btn_cancel">ยกเลิก</button>
-    						</td>
-    					</tr> -->
+    					<?php endforeach; ?> 
     				</tbody>
     			</table>
     		</div>
     	</div>
     	<div class="div_modal"> <!-- show modal Bill --> </div>
-    	<!-- /.row -->
-    	<!-- <script type="text/javascript"  src="<?php echo base_url()?>assets/datatable/js/jquery-1.12.4.js" ></script> -->
-    	<!-- <script type="text/javascript"  src="<?php echo base_url()?>assets/datatable/js/dataTables.bootstrap.min.js" ></script> -->
-    	<!-- <script type="text/javascript"  src="<?php echo base_url()?>assets/datatable/js/jquery.dataTables.min.js" ></script> -->
+    	<!-- /.row --> 
     	<!--  END Fair List -->
     	<script type="text/javascript">
     		$(function() {
@@ -109,22 +80,23 @@
 	    bookedCancel();
 	  } );
 
-    		function bookedCancel() {
-    			$('.btn_cancel').click(function(){
-    				var cfm = confirm("ยกเลิกการเช่าห้องพัก");
-    				if(cfm == true){
-    					$(this).remove();
-    				}else{
-    					return false;
-    				}
-    			});
-    		}
+		function bookedCancel() {
+			$('.btn_cancel').click(function(){
+				var cfm = confirm("ยกเลิกการเช่าห้องพัก");
+				if(cfm == true){
+					$(this).remove();
+				}else{
+					return false;
+				}
+			});
+		}
 
-    		function bookedEdit() {
-    			$('.btn_edit').click(function(){
-    				load_page('<?php echo base_url()."index.php/booked/BookedFormEdit/"; ?>','.:: Data Booking ::.','#');
-    			});
-    		}
+		function bookedEdit() {
+			$('.btn_edit').click(function(){
+                var id = $(this).attr('id');
+				load_page('<?php echo base_url()."checkin/checkinformedit/"; ?>'+id+'','.:: Data Checkin ::.','#');
+			});
+		}
 
 
     		function load_page(loadUrl,texttitle,urlsend){

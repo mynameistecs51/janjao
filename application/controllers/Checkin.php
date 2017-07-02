@@ -7,8 +7,7 @@ class Checkin extends CI_Controller {
 	{
 		parent::__construct();
 		$this->ctl="Checkin";
-		$this->pagename="CHECKIN";
-		$this->load->model('Mdl_user');
+		$this->pagename="CHECKIN"; 
 		$this->load->model('Mdl_checkin');
 		$this->dtnow = $this->packfunction->dtYMDnow();
 		$this->ip_addr = $this->input->ip_address();
@@ -23,17 +22,16 @@ class Checkin extends CI_Controller {
 
 	public function index(){
 		$this->data['viewName']=$this->pagename;
-		$this->data['keyword']='';
-		$this->data['getlist']=$this->Mdl_user->getList($this->data['keyword']);
-		$this->data['getCheckin'] = $this->showList();
+		$this->data['keyword']=''; 
+		$this->data['getCheckin'] = $this->showList($this->data['keyword']);
 		$this->packfunction->packView($this->data,"checkin/CheckinList");
 	}
 
 
-	public function showList()
+	public function showList($keyword='')
 	{
 		$data_array = array();
-		foreach ($this->Mdl_checkin->getCheckinAll() as $key => $rowBooked) {
+		foreach ($this->Mdl_checkin->getCheckinAll($keyword) as $key => $rowBooked) {
 			if(isset($data_array[$rowBooked['bookedID']]))
 			{
 				array_push($data_array[$rowBooked['bookedID']]['selectRoom'],
@@ -98,11 +96,6 @@ class Checkin extends CI_Controller {
 
 	public function CheckinForm()
 	{
-		$this->data['viewName']=$this->pagename;
-		$this->data['keyword']='';
-		$this->data['getMonth'] = $this->packfunction->getMonth();
-		$this->data['getYear'] = $this->packfunction->getYear();
-		$this->data['getlist']=$this->Mdl_user->getList($this->data['keyword']);
 		$this->packfunction->packView($this->data,"checkin/CheckinForm");
 	}
 
@@ -111,6 +104,12 @@ class Checkin extends CI_Controller {
 		$idCheckin = $this->Mdl_checkin->saveAdd();
 		redirect($this->ctl,'refresh');
 	}
+
+	public function checkinformedit($key='')
+	{ 
+		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
+		$this->load->view('checkin/CheckinFormEdit',$this->data);
+	} 
 
 	public function bill()
 	{
@@ -131,22 +130,9 @@ class Checkin extends CI_Controller {
 		$this->data['keyword']='';
 		$this->data['getlist']=$this->Mdl_user->getLast($key);
 		$this->packfunction->packView($this->data,"user/UserList");
-	}
+	} 
 
-	public function create($ref=''){
-		$this->data['viewName']=$this->pagename;
-		$this->data['usergroup']=$this->Mdl_user->getUserGroup();
-		$this->data['countryList']=$this->mdl_packFunction->getCountryList();
-		$this->packfunction->packView($this->data,"user/UserCreate");
-	}
-
-	public function edit($key=''){
-		$this->data['viewName']=$this->pagename;
-		$this->data['userDtl']=$this->Mdl_user->getDetail($key);
-		$this->data['usergroup']=$this->Mdl_user->getUserGroup();
-		$this->data['countryList']=$this->mdl_packFunction->getCountryList();
-		$this->packfunction->packView($this->data,"user/UserEdit");
-	}
+	
 
 	public function saveData()
 	{
