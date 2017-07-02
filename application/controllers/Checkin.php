@@ -105,12 +105,24 @@ class Checkin extends CI_Controller {
 		redirect($this->ctl,'refresh');
 	}
 
+	public function saveCheckin()
+	{
+		$idCheckin = $this->Mdl_checkin->saveCheckin();
+		redirect($this->ctl,'refresh');
+	}
+
 	public function checkinformedit($key='')
 	{ 
 		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
 		$this->data['checkinRoomDtl']=$this->Mdl_checkin->bookedRoom($this->data['checkinDtl']['bookedID']);
 		$this->load->view('checkin/CheckinFormEdit',$this->data);
 	} 
+
+	public function checkinformcheckin($key=''){
+		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
+		$this->data['checkinRoomDtl']=$this->Mdl_checkin->bookedRoom($this->data['checkinDtl']['bookedID']);
+		$this->load->view('checkin/CheckinFormEdit',$this->data);
+	}
 
 	public function bill()
 	{

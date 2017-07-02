@@ -102,6 +102,11 @@
                 var id = $(this).attr('id');
 				load_page('<?php echo base_url()."checkin/checkinformedit/"; ?>'+id+'','.:: Data Checkin ::.','#');
 			});
+            $('.btn_checkin').click(function(){
+                var id = $(this).attr('id');
+                load_page('<?php echo base_url()."checkin/checkinformcheckin/"; ?>'+id+'','.:: Data Checkin ::.','<?php echo base_url()."checkin/saveCheckin/"; ?>');
+            });
+            
 		}
 
 

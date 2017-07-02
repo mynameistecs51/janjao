@@ -162,7 +162,7 @@
 	<div class="form-group">
 		<label for="bookedDate" class="col-sm-2 control-label">วันที่ จอง <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-8">
-			<input type="text" class="form-control" id="bookedDate" name="bookedDate" >
+			<input type="text" class="form-control" id="bookedDate" name="bookedDate" readonly>
 		</div>
 	</div>
 	<div class="form-group">
@@ -241,7 +241,7 @@ $('#birthDate').datetimepicker({
 	format:'d/m/Y',
 	lang:'th',
 });
-$('#bookedDate, #checkinDate, #checkOutDate').datetimepicker({
+$('#checkinDate, #checkOutDate').datetimepicker({
 	timepicker:true,
 	mask:true,
 	format:'d/m/Y H:i',

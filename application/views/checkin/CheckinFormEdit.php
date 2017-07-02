@@ -1,13 +1,16 @@
   <!-- <link href="<?php echo base_url()?>assets/css/bootstrap-select.min.css" rel="stylesheet"> -->
   <link href="<?php echo base_url()?>assets/css/jquery.datetimepicker.css" rel="stylesheet">
   <input type="hidden" class="form-control" name="transaction" value="CHECKIN">
+  <input type="hidden" name="bookedID" id="bookedID" value="<?php echo $checkinDtl['bookedID']; ?> ">
+
   <div class="row form_input" style="text-align:left; margin-bottom:20px">
   <div class="form-horizontal">
   	<div class="form-group">
 		<label for="selectRoom" class="col-lg-2 control-label">ห้องที่เลือก</label>
 		<div class="col-lg-10 ">
 			<div class="row">
-			<?php foreach ($checkinRoomDtl as $crd) {  ?>
+			<?php $n = 0; $room =  "";
+				foreach ($checkinRoomDtl as $crd) {  ?>
 				<div class="col-lg-1" style="margin-right:20px;">
 					<span class="button-checkbox ">
 						<button type="button" class="btn btn_room btn-danger btn-xs" data-color="danger" disabled >
@@ -16,9 +19,17 @@
 						</button>
 					</span>
 				</div>
-			<?php  } ?>
+			<?php  
+					if($n > 0){
+						$room .= "_".$crd['roomID'];
+					}else{
+						$room .= $crd['roomID'];
+					}
+					$n++;
+				} ?>
 			</div>
 		</div> 
+		<input type="hidden" name="selectRoom" value="<?php $room; ?>">
 	</div>  
 	<div class="form-group">
 		<label for="idcardno" class="col-lg-2 control-label">เลขประจำประชาชน <b style="color: #FF0000">*</b></label>
@@ -231,6 +242,7 @@
 			<canvas id="canvas" name="idcardPicture"  class="bg-primary " width="260" height="195" ></canvas>
 			<img src="<?php echo base_url()."assets/images/imgcard/".$checkinDtl['idcardnoPath']; ?>" width="260" height="195" style="margin-top: -190px;"></img>
 			<input type="hidden" name="images" id="images" value=""> 
+			<input type="hidden" name="images_old" id="images_old" value="<?php echo $checkinDtl['idcardnoPath']; ?> "> 
 		</div>
 	</div>
 	<div class="form-group">

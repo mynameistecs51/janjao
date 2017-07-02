@@ -222,6 +222,7 @@
 			<video id="video" class="" width="260" height="195" autoplay></video> 
 			<canvas id="canvas"  name="idcardPicture"  class="bg-primary " width="260" height="195" ></canvas>
 			<input type="hidden" name="images" id="images" value=""> 
+			
 		</div>
 	</div>
 	<div class="form-group">
