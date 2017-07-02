@@ -10,7 +10,7 @@
     	<div class="row text-center">
     		<div class="col-lg-12" align="right">
     			<div class="sh-right">
-    				<form name="formSearch" id="formSearch" method="POST" action="<?php echo base_url()?>user/search/">
+    				<form name="formSearch" id="formSearch" method="POST" action="<?php echo base_url()?>booked/search/">
     					<button  type="submit" class="btn btn-primary " style="float: right;">Search</button>
     					<input type="text" class="form-control"  id="keyword" style="width: 250px;margin-right: 10px;" placeholder="keyword" name="keyword" value="<?php echo $keyword; ?>">
     				</form>
@@ -65,33 +65,7 @@
     								</button>
     							</td>
     						</tr>
-    					<?php endforeach; ?>
-    					<!-- <tr>
-    						<td>1</td>
-    						<td>BK170613201001</td>
-    						<td>นายไชยวัฒน์  หอมแสง</td>
-    						<td>201</td>
-    						<td>13/06/2017 13:00</td>
-    						<td>15/06/2017 12:00</td>
-    						<td>Administrator</td>
-    						<td>
-    							<button class="btn btn-primary col-sm-5 pull-left btn-xs btn_edit">แก้ไข</button>
-    							<button class="btn btn-warning col-sm-5 pull-right btn-xs btn_cancel">ยกเลิก</button>
-    						</td>
-    					</tr>
-    					<tr>
-    						<td>2</td>
-    						<td>BK170613205001</td>
-    						<td>นายอาสา  มาครับ</td>
-    						<td>205</td>
-    						<td>13/06/2017 13:00</td>
-    						<td>15/06/2017 12:00</td>
-    						<td>Administrator</td>
-    						<td >
-    							<button class="btn btn-primary col-sm-5 pull-left btn-xs btn_edit">แก้ไข</button>
-    							<button class="btn btn-warning col-sm-5 pull-right btn-xs btn_cancel">ยกเลิก</button>
-    						</td>
-    					</tr> -->
+    					<?php endforeach; ?> 
     				</tbody>
     			</table>
     		</div>

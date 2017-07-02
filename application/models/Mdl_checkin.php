@@ -12,10 +12,13 @@ class Mdl_checkin extends CI_Model {
 
 	public function saveAdd()
 	{
-		$bookedCode = $this->db->query("SELECT fn_gen_sn('TS', 'TS1706') AS CODE")->result_array();
+		date_default_timezone_set('Asia/Bangkok');
+		$now = new DateTime(null, new DateTimeZone('Asia/Bangkok')); 
+
+		$bookedCode =  $this->db->query("SELECT fn_gen_sn('CH', 'CH".$now->format('ym')."') AS CODE")->result_array();
 		$fileName = '';
 		if( !empty($this->input->post('images'))){
-			$img = $this->input->post('images');
+			$img  = $this->input->post('images');
 			$img = str_replace('data:image/png;base64,', '', $img);
 			$img = str_replace(' ', '+', $img);
 			$data = base64_decode($img);
@@ -29,12 +32,12 @@ class Mdl_checkin extends CI_Model {
 		$saveAdd= array(
 			'bookedCode' => $bookedCode[0]['CODE'],
 			'idcardno' => $this->input->post('idcardno'),
-			'idcardnoPath' => $fileName,
+			'idcardnoPath' =>$fileName,
 			'titleName' => $this->input->post('gender'),
 			'firstName' => $this->input->post('firstName'),
 			'middleName' => '',
 			'lastName' => $this->input->post('lastName'),
-			'birthdate' => $this->packfunction->dtTosql($this->input->post('birthDate')),
+			'birthdate' => $this->input->post('birthdate_y').'-'.$this->input->post('birthdate_m').'-'.$this->input->post('birthdate_d').' 00:00:00',
 			'address' => $this->input->post('addDress'),
 			'district' => $this->input->post('district'),
 			'province' => $this->input->post('province'),
@@ -42,7 +45,7 @@ class Mdl_checkin extends CI_Model {
 			'postcode' => $this->input->post('zipcode'),
 			'mobile' => $this->input->post('mobile'),
 			'email' => $this->input->post('email'),
-			'bookedDate' => $this->packfunction->dtYMDnow(),
+			'bookedDate' => $this->packfunction->dtTosql($this->input->post('bookedDate')),
 			'checkInAppointDate' => $this->packfunction->dtTosql($this->input->post('checkinDate')),
 			'checkOutAppointDate' => $this->packfunction->dtTosql($this->input->post('checkOutDate')),
 			'is_breakfast' => $this->input->post('is_breakfast'),
@@ -50,23 +53,20 @@ class Mdl_checkin extends CI_Model {
 			'cashPledge' => '',
 			'cashPledgePath' => '',
 			'comment' => $this->input->post('comment'),
-			'status' => 'ON',
+			'status' => 'CHECKIN',
 			"createDT"		=>$this->packfunction->dtYMDnow(),
 			"createBY"		=>$this->UserName,
 			"updateDT"		=>$this->packfunction->dtYMDnow(),
 			"updateBY"		=>$this->UserName
 			);
 		$this->db->insert('ts_booked',$saveAdd);
-		$idCheckin= $this->db->insert_id();
-	// }
+		$idBooked= $this->db->insert_id();
 
-	// public function saveAddBookedRoom($idCheckin)
-	// {
 		$selectRoom = $this->input->post('selectRoom');
 		$room = explode('_',$selectRoom);
 		for ($i=0; $i < count($room) ; $i++) :
-			$saveCheckin[$i] = array(
-				'bookedID '     => $idCheckin,
+			$saveBookedRoom[$i] = array(
+				'bookedID '     => $idBooked,
 				'roomID '       => $room[$i],
 				'checkinDate '  => $this->packfunction->dtTosql($_POST['checkinDate']),
 				'checkoutDate ' => $this->packfunction->dtTosql($this->input->post('checkOutDate')),
@@ -77,29 +77,42 @@ class Mdl_checkin extends CI_Model {
 				"updateDT"		    => $this->packfunction->dtYMDnow(),
 				"updateBY"		    => $this->UserName
 				);
-		$this->db->insert('ts_booked_room',$saveCheckin[$i]);
-		$idCheckinRoom[$i] = $this->db->insert_id();
-		endfor;
-	// }
+		$this->db->insert('ts_booked_room',$saveBookedRoom[$i]);
+		$idBookedRoom[$i] = $this->db->insert_id();
 
-	// public function saveAddBookedRoomLog($idCheckinRoom)
-	// {
-		$selectRoom = $this->input->post('selectRoom');
-		$room = explode('_',$selectRoom);
-		for ($i=0; $i < count($room) ; $i++) :
-			$saveCheckinLog[$i] = array(
-				'bookedroomID' => $idCheckinRoom[$i],
+			// Insert ts_booked_room_log
+			$startDate = date_create($this->packfunction->dateTosql($_POST['checkinDate']));
+			$endDate  = date_create($this->packfunction->dateTosql($this->input->post('checkOutDate')));
+			$interval = date_diff($startDate, $endDate); 
+			$runDay = array();
+			while ($startDate <= $endDate) {
+				$year = $startDate->format("Y");
+				$month = $startDate->format("m");
+
+				if(!array_key_exists($year, $runDay))
+					$runDay[$year] = array();
+				if(!array_key_exists($month, $runDay[$year]))
+					$runDay[$year][$month] = 0; 
+					$runDay[$year][$month]++; 
+
+				$log = array(
+				'bookedroomID' => $idBookedRoom[$i],
 				'roomID'       => $room[$i],
-				'logDate'      => $this->packfunction->dtYMDnow(),
+				'logDate'      => $startDate->format('Y-m-d').' 12:00:00',
 				'comment'      => $this->input->post('comment'),
-				'status'       => 'BOOKED',
-				"createDT"		   => $this->packfunction->dtYMDnow(),
-				"createBY"		   => $this->UserName,
-				"updateDT"		   => $this->packfunction->dtYMDnow(),
-				"updateBY"		   => $this->UserName
+				'status'       => 'CHECKIN',
+				"createDT"	   => $this->packfunction->dtYMDnow(),
+				"createBY"	   => $this->UserName,
+				"updateDT"	   => $this->packfunction->dtYMDnow(),
+				"updateBY"	   => $this->UserName
 				);
-		$this->db->insert('ts_booked_room_log',$saveCheckinLog[$i]);
-		endfor;
+				$this->db->insert('ts_booked_room_log',$log);
+
+				$startDate->modify("+1 day");  
+			} 
+
+		endfor; // End ts_booked_room 
+
 	}
 
 	function base64_to_png( $base64_string, $output_file ) {

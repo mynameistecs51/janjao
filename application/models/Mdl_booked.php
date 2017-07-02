@@ -10,50 +10,51 @@ class Mdl_booked extends CI_Model {
 
 	}
 
-	public function getBookedAll()
+	public function getBookedAll($keyword='')
 	{
 		$sql = "
-		SELECT
-		tb.bookedID,
-		tb.bookedCode,
-		tb.idcardno,
-		tb.idcardnoPath,
-		tb.titleName,
-		tb.firstName,
-		tb.middleName,
-		tb.lastName,
-		tb.birthdate,
-		tb.address,
-		tb.district,
-		tb.province,
-		tb.country,
-		tb.postcode,
-		tb.mobile,
-		tb.email,
-		tb.bookedDate,
-		tb.checkInAppointDate,
-		tb.checkOutAppointDate,
-		tb.is_breakfast,
-		tb.bookedType,
-		tb.cashPledge,
-		tb.cashPledgePath,
-		tb.comment,
-		tb.status,
-		tb.createDT,
-		tb.createBY,
-		tb.updateDT,
-		tb.updateBY,
-		tbr.bookedroomID,
-		tbr.roomID,
-		tbr.checkinDate,
-		tbr.checkoutDate,
-		tbr.comment,
-		tbr.status
-		FROM ts_booked tb
-		INNER JOIN ts_booked_room tbr
-		ON tbr.bookedID = tb.bookedID
-		WHERE tbr.status = 'BOOKED'
-		";
+				SELECT
+					tb.bookedID,
+					tb.bookedCode,
+					tb.idcardno,
+					tb.idcardnoPath,
+					tb.titleName,
+					tb.firstName,
+					tb.middleName,
+					tb.lastName,
+					tb.birthdate,
+					tb.address,
+					tb.district,
+					tb.province,
+					tb.country,
+					tb.postcode,
+					tb.mobile,
+					tb.email,
+					tb.bookedDate,
+					tb.checkInAppointDate,
+					tb.checkOutAppointDate,
+					tb.is_breakfast,
+					tb.bookedType,
+					tb.cashPledge,
+					tb.cashPledgePath,
+					tb.comment,
+					tb.status,
+					tb.createDT,
+					tb.createBY,
+					tb.updateDT,
+					tb.updateBY,
+					tbr.bookedroomID,
+					tbr.roomID,
+					tbr.checkinDate,
+					tbr.checkoutDate,
+					tbr.comment,
+					tbr.status
+				FROM ts_booked tb
+				INNER JOIN ts_booked_room tbr
+				ON tbr.bookedID = tb.bookedID
+				WHERE tbr.status = 'BOOKED'
+				AND CONCAT(tb.bookedCode,tb.idcardno,tb.firstName,' ',tb.lastName,tbr.roomID) LIKE '%".$keyword."%'
+				";
 		$data = $this->db->query($sql)->result_array();
 		return $data;
 	}
@@ -101,7 +102,7 @@ class Mdl_booked extends CI_Model {
 			'cashPledge' => '',
 			'cashPledgePath' => '',
 			'comment' => $this->input->post('comment'),
-			'status' => 'ON',
+			'status' => 'BOOKED',
 			"createDT"		=>$this->packfunction->dtYMDnow(),
 			"createBY"		=>$this->UserName,
 			"updateDT"		=>$this->packfunction->dtYMDnow(),
@@ -127,44 +128,43 @@ class Mdl_booked extends CI_Model {
 				);
 		$this->db->insert('ts_booked_room',$saveBookedRoom[$i]);
 		$idBookedRoom[$i] = $this->db->insert_id();
-		endfor;
 
-		$startDate = date_create($this->packfunction->dtTosql($_POST['checkinDate']));
-		$endDate = date_create($this->packfunction->dtTosql($this->input->post('checkOutDate')));
-		$interval = date_diff($startDate, $endDate);
-		$a = array();
-		$runDay = array();
-		while ($startDate < $endDate) {
-			$year = $startDate->format("Y");
-			$month = $startDate->format("m");
+			// Insert ts_booked_room_log
+			$startDate = date_create($this->packfunction->dateTosql($_POST['checkinDate']));
+			$endDate  = date_create($this->packfunction->dateTosql($this->input->post('checkOutDate')));
+			$interval = date_diff($startDate, $endDate); 
+			$runDay = array();
+			while ($startDate <= $endDate) {
+				$year = $startDate->format("Y");
+				$month = $startDate->format("m");
 
-			if(!array_key_exists($year, $runDay))
-				$runDay[$year] = array();
-			if(!array_key_exists($month, $runDay[$year]))
-				$runDay[$year][$month] = 0;
+				if(!array_key_exists($year, $runDay))
+					$runDay[$year] = array();
+				if(!array_key_exists($month, $runDay[$year]))
+					$runDay[$year][$month] = 0; 
+					$runDay[$year][$month]++; 
 
-			$runDay[$year][$month]++;
-			$startDate->modify("+1 day");
+				$log = array(
+				'bookedroomID' => $idBookedRoom[$i],
+				'roomID'       => $room[$i],
+				'logDate'      => $startDate->format('Y-m-d').' 12:00:00',
+				'comment'      => $this->input->post('comment'),
+				'status'       => 'BOOKED',
+				"createDT"	   => $this->packfunction->dtYMDnow(),
+				"createBY"	   => $this->UserName,
+				"updateDT"	   => $this->packfunction->dtYMDnow(),
+				"updateBY"	   => $this->UserName
+				);
+				$this->db->insert('ts_booked_room_log',$log);
 
-			$selectRoom = $this->input->post('selectRoom');
-			$room = explode('_',$selectRoom);
-			for ($i=0; $i < count($room) ; $i++) :
-				$saveBookedRoomLog[$i] = array(
-					'bookedroomID' => $idBookedRoom[$i],
-					'roomID'       => $room[$i],
-					'logDate'      => $startDate->format('Y-m-d H:i:s'),
-					'comment'      => $this->input->post('comment'),
-					'status'       => 'BOOKED',
-					"createDT"		   => $this->packfunction->dtYMDnow(),
-					"createBY"		   => $this->UserName,
-					"updateDT"		   => $this->packfunction->dtYMDnow(),
-					"updateBY"		   => $this->UserName
-					);
-			$this->db->insert('ts_booked_room_log',$saveBookedRoomLog[$i]);
-			endfor;
-			// array_push($a, $startDate->format('Y-m-d H:i:s'));
+				$startDate->modify("+1 day"); 
 
-		}
+			}
+
+
+		endfor; // End ts_booked_room
+
+		
 
 	}
 
@@ -177,8 +177,8 @@ class Mdl_booked extends CI_Model {
 	}
 
 	function getRoom($floor='',$checkinDate='',$checkoutDate=''){
-		$df = $checkinDate[6].$checkinDate[7].$checkinDate[8].$checkinDate[9].'-'.$checkinDate[3].$checkinDate[4].'-'.$checkinDate[0].$checkinDate[1].' '.$checkinDate[11].$checkinDate[12].':'.$checkinDate[14].$checkinDate[15];
-		$dt = $checkoutDate[6].$checkoutDate[7].$checkoutDate[8].$checkoutDate[9].'-'.$checkoutDate[3].$checkoutDate[4].'-'.$checkoutDate[0].$checkoutDate[1].' '.$checkoutDate[11].$checkoutDate[12].':'.$checkoutDate[14].$checkoutDate[15];
+		$df = $checkinDate[6].$checkinDate[7].$checkinDate[8].$checkinDate[9].'-'.$checkinDate[3].$checkinDate[4].'-'.$checkinDate[0].$checkinDate[1]; //.' '.$checkinDate[11].$checkinDate[12].':'.$checkinDate[14].$checkinDate[15];
+		$dt = $checkoutDate[6].$checkoutDate[7].$checkoutDate[8].$checkoutDate[9].'-'.$checkoutDate[3].$checkoutDate[4].'-'.$checkoutDate[0].$checkoutDate[1]; //.' '.$checkoutDate[11].$checkoutDate[12].':'.$checkoutDate[14].$checkoutDate[15];
 		$sql = "
 		SELECT
 		r.roomID,
@@ -200,7 +200,7 @@ class Mdl_booked extends CI_Model {
 			    COUNT(lg.logroomdateID) AS total,
 			    lg.status
 			FROM ts_booked_room_log lg 
-			WHERE lg.logDate BETWEEN '".$df.":00' AND '".$dt.":00'
+			WHERE lg.logDate BETWEEN '".$df." 11:59:00' AND '".$dt." 13:00:00'
 			GROUP by lg.roomID
 		) AS log ON r.roomCODE=log.roomID
 		WHERE r.status<>'DISABLE'

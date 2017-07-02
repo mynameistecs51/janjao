@@ -315,7 +315,7 @@
 		mask:true,
 		format:'d/m/Y H:i',
 		lang:'th',
-	});
+	}); 
 
 	function checkIn() {
 		var selectRoom=[];
@@ -335,7 +335,7 @@
 		$('.btn_checkin').click(function(){
 			if(selectRoom.length > 0){
 				var room = selectRoom.join('_')
-				load_page('<?php echo base_url().$this->ctl."/CheckinFormAdd/"; ?>'+room,'.:: Data Checkin::.','<?php echo base_url()."Checkin/saveAdd/"; ?>');
+				load_page('<?php echo base_url().$this->ctl."/checkinformadd/"; ?>'+room,'.:: Data Checkin::.','<?php echo base_url()."checkin/saveAdd/"; ?>');
 			}else{
 				alert("กรุณาเลือกห้องพัก !!");
 			}
@@ -361,7 +361,7 @@
 		$('.btn_booking').click(function(){
 			if(selectRoom.length > 0){
 				var room = selectRoom.join('_')
-				load_page('<?php echo base_url().$this->ctl."/BookingFormAdd/"; ?>'+room,'.:: Data Booking ::.','<?php echo base_url()."Booked/saveAdd/"; ?>');
+				load_page('<?php echo base_url().$this->ctl."/bookingformadd/"; ?>'+room,'.:: Data Booking ::.','<?php echo base_url()."booked/saveAdd/"; ?>');
 			}else{
 				alert("กรุณาเลือกห้องพัก !!");
 			}

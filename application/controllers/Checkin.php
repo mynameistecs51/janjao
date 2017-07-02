@@ -109,6 +109,7 @@ class Checkin extends CI_Controller {
 	public function saveAdd()
 	{
 		$idCheckin = $this->Mdl_checkin->saveAdd();
+		redirect($this->ctl,'refresh');
 	}
 
 	public function bill()

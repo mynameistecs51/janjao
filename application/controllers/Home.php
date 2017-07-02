@@ -34,7 +34,7 @@ class Home extends CI_Controller {
 		$this->packfunction->packView($this->data,'Dashboard');
 	}
 
-	public function CheckinFormAdd($selectRoom)
+	public function checkinformadd($selectRoom)
 	{
 		$this->data['selectRoom'] = $selectRoom;
 		$this->data['getMonth'] = $this->packfunction->getMonth();
@@ -43,7 +43,7 @@ class Home extends CI_Controller {
 	}
 
 
-	public function BookingFormAdd($selectRoom)
+	public function bookingformadd($selectRoom)
 	{
 		$this->data['selectRoom'] = $selectRoom;
 		$this->data['getMonth'] = $this->packfunction->getMonth();

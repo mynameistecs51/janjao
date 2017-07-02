@@ -1,10 +1,11 @@
   <!-- <link href="<?php echo base_url()?>assets/css/bootstrap-select.min.css" rel="stylesheet"> -->
   <link href="<?php echo base_url()?>assets/css/jquery.datetimepicker.css" rel="stylesheet">
+  <input type="hidden" class="form-control" name="transaction" value="BOOKED">
   <div class="row form_input" style="text-align:left; margin-bottom:20px">
   	<div class="form-horizontal">
   		<div class="form-group">
-  			<label for="selectRoom" class="col-sm-3 control-label">ห้องที่เลือก</label>
-  			<div class="col-sm-10">
+  			<label for="selectRoom" class="col-sm-2 control-label">ห้องที่เลือก</label>
+  			<div class="col-sm-8">
   				<?php
   				$room =explode('_',$selectRoom);
 				echo '<input type="hidden" name="selectRoom" value="'.$selectRoom.'">';  //input hidden selectRoom
@@ -25,7 +26,7 @@
 	<div class="form-group">
 		<label for="idcardno" class="col-sm-2 control-label">เลขประจำประชาชน <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-8">
-			<input type="text" class="form-control" name="idcardno" id="idcardno" placeholder="เลขประจำประชาชน 13 หลัก" minlength="13">
+			<input type="text" class="form-control" name="idcardno" id="idcardno" placeholder="เลขประจำประชาชน/ Passport No" >
 		</div>
 	</div>
 	<div class="form-group">
@@ -242,7 +243,7 @@ $('#birthDate').datetimepicker({
 $('#bookedDate, #checkinDate, #checkOutDate').datetimepicker({
 	timepicker:true,
 	mask:true,
-	format:'d/m/Y H:i:s',
+	format:'d/m/Y H:i',
 	lang:'th',
 });
 // start checkinDate form  bookedDate
@@ -262,10 +263,13 @@ $('#checkinDate').on("change",function() {
 	});
 });
 
+$("#myModal0").on("hidden.bs.modal", function () {
+    // location.reload();
+});
 
 
-	// Grab elements, create settings, etc.
-	var video = document.getElementById('video');
+// Grab elements, create settings, etc.
+var video = document.getElementById('video');
 
 // Get access to the camera!
 if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {

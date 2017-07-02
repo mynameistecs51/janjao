@@ -23,17 +23,15 @@ class Booked extends CI_Controller {
 
 	public function index(){
 		$this->data['viewName']=$this->pagename;
-		$this->data['keyword']='';
-		$this->data['getlist']=$this->Mdl_user->getList($this->data['keyword']);
-		// $this->data['getBooked'] = $this->Mdl_booked->getBookedAll();
-		$this->data['getBooked'] = $this->showList();
+		$this->data['keyword']=''; 
+		$this->data['getBooked'] = $this->showList($this->data['keyword']);
 		$this->packfunction->packView($this->data,"booked/BookedList");
 	}
 
-	public function showList()
+	public function showList($keyword)
 	{
 		$data_array = array();
-		foreach ($this->Mdl_booked->getBookedAll() as $key => $rowBooked) {
+		foreach ($this->Mdl_booked->getBookedAll($keyword) as $key => $rowBooked) {
 			if(isset($data_array[$rowBooked['bookedID']]))
 			{
 				array_push($data_array[$rowBooked['bookedID']]['selectRoom'],
@@ -140,8 +138,8 @@ class Booked extends CI_Controller {
 	public function search(){
 		$this->data['viewName']=$this->pagename;
 		$this->data['keyword']=$this->input->post('keyword');
-		$this->data['getlist']=$this->Mdl_user->getList(trim($this->data['keyword']));
-		$this->packfunction->packView($this->data,"user/UserList");
+		$this->data['getBooked'] = $this->showList($this->data['keyword']);
+		$this->packfunction->packView($this->data,"booked/BookedList");
 	}
 
 	public function last($key=''){

@@ -33,6 +33,17 @@ class Packfunction {
 		}
 	}
 
+	public function dateTosql($datetime)
+	{
+		if(!empty($datetime)){
+			$dateChar = explode('/',$datetime);
+			$dateCharYear = explode(' ',$dateChar[2]);
+			return $dateCharYear[0].'-'.$dateChar[1].'-'.$dateChar[0].' 12:00:00';
+		}else{
+			return "";
+		}
+	}
+
 	public function dtYMDnow()
 	{
 		date_default_timezone_set('Asia/Bangkok');
