@@ -123,40 +123,7 @@
 	<div class="form-group">
 		<label for="addDress" class="col-sm-2 control-label">ที่อยู่</label>
 		<div class="col-sm-8">
-			<textarea name="address" id="address" class="form-control" placeholder="เลขที่ 9/999 หมู่ 9 ซอยกลางเมือง 9 ถนนกลางเมือง"><?php echo $checkinDtl['address'] ?></textarea>
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="zipcode" class="col-sm-2 control-label"></label>
-		<div class="col-sm-4">
-			<input type="text" name="zipcode" id="zipcode" value="<?php echo $checkinDtl['postcode'] ?>"  class="form-control" placeholder="รหัสไปรษณีย์">
-		</div>
-		<div class="col-sm-4">
-			<select class="form-control" name="province" id="province"> 
-				<?php 	if($checkinDtl['province']!=""){
-							echo '<option value="'.$checkinDtl['province'].'" selected>'.$checkinDtl['province'].'</option> ';
-						}
-				?>
-			</select>
-		</div>
-	</div>
-	<div class="form-group">  
-		<label for="amphur" class="col-sm-2 control-label"></label>
-		<div class="col-sm-4">
-			<select class="form-control" name="amphur" id="amphur">
-				<?php 	if($checkinDtl['amphur']!=""){
-							echo '<option value="'.$checkinDtl['amphur'].'" selected>'.$checkinDtl['amphur'].'</option> ';
-						} 
-				?>
-			</select>
-		</div> 
-		<div class="col-sm-4">
-			<select class="form-control selectpicker" data-live-search="true" name="district" id="district">
-				<?php 	if($checkinDtl['district']!=""){
-							echo '<option value="'.$checkinDtl['district'].'" selected>'.$checkinDtl['district'].'</option> ';
-						} 
-				?>
-			</select>
+			<textarea name="address" id="address" class="form-control" placeholder=""><?php echo $checkinDtl['address'] ?></textarea>
 		</div>
 	</div>
 	<div class="form-group">

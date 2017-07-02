@@ -122,30 +122,7 @@
 		<div class="col-sm-8">
 			<textarea name="address" id="address" class="form-control"></textarea>
 		</div>
-	</div>
-	<div class="form-group">
-		<label for="zipcode" class="col-sm-2 control-label"></label>
-		<div class="col-sm-4">
-			<input type="text" name="zipcode" id="zipcode" value=""  class="form-control" placeholder="รหัสไปรษณีย์">
-		</div>
-		<div class="col-sm-4">
-			<select class="form-control" name="province" id="province"> 
-			</select>
-		</div>
-	</div>
-	<div class="form-group">  
-		<label for="amphur" class="col-sm-2 control-label"></label>
-		<div class="col-sm-4">
-			<select class="form-control" name="amphur" id="amphur">
-
-			</select>
-		</div> 
-		<div class="col-sm-4">
-			<select class="form-control selectpicker" data-live-search="true" name="district" id="district">
-
-			</select>
-		</div>
-	</div>
+	</div> 
 	<div class="form-group">
 		<label for="mobile" class="col-sm-2 control-label">เบอร์มือถือ</label>
 		<div class="col-sm-8">
@@ -174,9 +151,7 @@
 		<label for="checkinDate" class="col-sm-2 control-label">วันที่ Checkin <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-3">
 			<input type="text" class="form-control" id="checkinDate" name="checkinDate" value="<?php echo $this->packfunction->dtcheckin(); ?>">
-		</div>
-	<!-- </div>
-	<div class="form-group"> -->
+		</div> 
 		<label for="checkOutDate" class="col-sm-2 control-label">วันที่ Checkout <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-3">
 			<input type="text" class="form-control" id="checkOutDate" name="checkOutDate" value="<?php echo $this->packfunction->dtcheckout(); ?>">

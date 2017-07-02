@@ -68,6 +68,8 @@ class Checkin extends CI_Controller {
 					'bookedDate' =>  $rowBooked['bookedDate'],
 					'checkInAppointDate' =>  $rowBooked['checkInAppointDate'],
 					'checkOutAppointDate' =>  $rowBooked['checkOutAppointDate'],
+					'checkinDate' =>  $rowBooked['checkinDate'],
+					'checkoutDate' =>  $rowBooked['checkoutDate'],
 					'is_breakfast' =>  $rowBooked['is_breakfast'],
 					'bookedType' =>  $rowBooked['bookedType'],
 					'cashPledge' =>  $rowBooked['cashPledge'],
@@ -132,10 +134,14 @@ class Checkin extends CI_Controller {
 	}
 
 	public function search(){
-		$this->data['viewName']=$this->pagename;
-		$this->data['keyword']=$this->input->post('keyword');
-		$this->data['getlist']=$this->Mdl_user->getList(trim($this->data['keyword']));
-		$this->packfunction->packView($this->data,"user/UserList");
+		if($_POST){
+			$this->data['viewName']=$this->pagename;
+			$this->data['keyword']=$this->input->post('keyword'); 
+			$this->data['getCheckin'] = $this->showList($this->data['keyword']);
+			$this->packfunction->packView($this->data,"checkin/CheckinList"); 
+		}else{
+			redirect('checkin/');
+		}
 	}
 
 	public function last($key=''){

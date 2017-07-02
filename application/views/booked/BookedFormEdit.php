@@ -117,30 +117,7 @@
 		<div class="col-sm-8">
 			<textarea name="address" id="address" class="form-control"></textarea>
 		</div>
-	</div>
-	<div class="form-group">
-		<label for="zipcode" class="col-sm-2 control-label"></label>
-		<div class="col-sm-4">
-			<input type="text" name="zipcode" id="zipcode" value=""  class="form-control" placeholder="รหัสไปรษณีย์">
-		</div>
-		<div class="col-sm-4">
-			<select class="form-control" name="province" id="province"> 
-			</select>
-		</div>
-	</div>
-	<div class="form-group">  
-		<label for="amphur" class="col-sm-2 control-label"></label>
-		<div class="col-sm-4">
-			<select class="form-control" name="amphur" id="amphur">
-
-			</select>
-		</div> 
-		<div class="col-sm-4">
-			<select class="form-control selectpicker" data-live-search="true" name="district" id="district">
-
-			</select>
-		</div>
-	</div>
+	</div> 
 	<div class="form-group">
 		<label for="mobile" class="col-sm-2 control-label">เบอร์มือถือ</label>
 		<div class="col-sm-8">

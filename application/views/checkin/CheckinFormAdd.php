@@ -125,29 +125,6 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="zipcode" class="col-sm-2 control-label"></label>
-		<div class="col-sm-4">
-			<input type="text" name="zipcode" id="zipcode" value=""  class="form-control" placeholder="รหัสไปรษณีย์">
-		</div>
-		<div class="col-sm-4">
-			<select class="form-control" name="province" id="province"> 
-			</select>
-		</div>
-	</div>
-	<div class="form-group">  
-		<label for="amphur" class="col-sm-2 control-label"></label>
-		<div class="col-sm-4">
-			<select class="form-control" name="amphur" id="amphur">
-
-			</select>
-		</div> 
-		<div class="col-sm-4">
-			<select class="form-control selectpicker" data-live-search="true" name="district" id="district">
-
-			</select>
-		</div>
-	</div>
-	<div class="form-group">
 		<label for="mobile" class="col-sm-2 control-label">เบอร์มือถือ</label>
 		<div class="col-sm-8">
 			<input type="tel" class="form-control" id="mobile" name="mobile" minlength="9" placeholder="082-2222222">
@@ -168,19 +145,17 @@
 	<div class="form-group">
 		<label for="bookedDate" class="col-sm-2 control-label">วันที่ จอง <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-8">
-			<input type="text" class="form-control" id="bookedDate" name="bookedDate" >
+			<input type="text" class="form-control" id="bookedDate" name="bookedDate" value="<?php echo $this->packfunction->dtDMYnow(); ?> ">
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="checkinDate" class="col-sm-2 control-label">วันที่ Checkin <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-3">
-			<input type="text" class="form-control" id="checkinDate" name="checkinDate">
-		</div>
-	<!-- </div>
-	<div class="form-group"> -->
+			<input type="text" class="form-control" id="checkinDate" name="checkinDate" value="<?php echo $this->packfunction->dtcheckin(); ?>">
+		</div> 
 		<label for="checkOutDate" class="col-sm-2 control-label">วันที่ Checkout <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-3">
-			<input type="text" class="form-control" id="checkOutDate" name="checkOutDate" >
+			<input type="text" class="form-control" id="checkOutDate" name="checkOutDate" value="<?php echo $this->packfunction->dtcheckout(); ?>">
 		</div>
 	</div>
 	<div class="form-group">
@@ -197,7 +172,7 @@
 		<label for="deposit" class="col-sm-2 control-label">เงินมัดจำ <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-8">
 				<div class="input-group">
-				<input type="text" class="form-control" id="cashPledge" name="cashPledge" placeholder="100 200 300 400 500">
+				<input type="text" class="form-control" id="cashPledge" name="cashPledge" placeholder="300">
 			<span class="input-group-addon">บาท</span>
 			</div> 
 		</div>
@@ -222,7 +197,7 @@
 			<video id="video" class="" width="260" height="195" autoplay></video> 
 			<canvas id="canvas"  name="idcardPicture"  class="bg-primary " width="260" height="195" ></canvas>
 			<input type="hidden" name="images" id="images" value=""> 
-			
+
 		</div>
 	</div>
 	<div class="form-group">
@@ -242,12 +217,7 @@
 	// });
 
 $.datetimepicker.setLocale('th'); // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
-$('#birthDate').datetimepicker({
-	timepicker:true,
-	mask:true,
-	format:'d/m/Y',
-	lang:'th',
-});
+ 
 $('#bookedDate, #checkinDate, #checkOutDate').datetimepicker({
 	timepicker:true,
 	mask:true,

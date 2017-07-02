@@ -50,8 +50,8 @@
     								}
     								?>
     							</td>
-    							<td><?php echo $rowCheckin['checkInAppointDate']; ?></td>
-    							<td><?php echo $rowCheckin['status']=='CHECKIN' ? $rowCheckin['checkOutAppointDate']:'' ; ?></td>
+    							<td><?php echo $rowCheckin['bookedDate']; ?></td>
+    							<td><?php echo $rowCheckin['status']=='CHECKIN' ? $rowCheckin['checkinDate']:'' ; ?></td>
     							<td><?php echo $rowCheckin['status']; ?></td>
     							<td >
                                 <?php if($rowCheckin['status']=='CHECKIN'){ ?>

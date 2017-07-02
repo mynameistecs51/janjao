@@ -39,11 +39,6 @@ class Mdl_checkin extends CI_Model {
 			'lastName' => $this->input->post('lastName'),
 			'birthdate' => $this->input->post('birthdate_y').'-'.$this->input->post('birthdate_m').'-'.$this->input->post('birthdate_d').' 00:00:00',
 			'address' => $this->input->post('address'),
-			'amphur'  => $this->input->post('amphur'),
-			'district' => $this->input->post('district'),
-			'province' => $this->input->post('province'),
-			'country' => '',
-			'postcode' => $this->input->post('zipcode'),
 			'mobile' => $this->input->post('mobile'),
 			'licenseplate' => $this->input->post('licenseplate'),
 			'email' => $this->input->post('email'),
@@ -138,12 +133,7 @@ class Mdl_checkin extends CI_Model {
 			'firstName' => $this->input->post('firstName'), 
 			'lastName' => $this->input->post('lastName'),
 			'birthdate' => $this->input->post('birthdate_y').'-'.$this->input->post('birthdate_m').'-'.$this->input->post('birthdate_d').' 00:00:00',
-			'address' => $this->input->post('address'), 
-			'district' => $this->input->post('district'),
-			'amphur'  => $this->input->post('amphur'),
-			'province' => $this->input->post('province'),
-			'country' => '',
-			'postcode' => $this->input->post('zipcode'),
+			'address' => $this->input->post('address'),
 			'mobile' => $this->input->post('mobile'),
 			'licenseplate' => $this->input->post('licenseplate'),
 			'email' => $this->input->post('email'),
@@ -270,7 +260,9 @@ class Mdl_checkin extends CI_Model {
 		FROM ts_booked tb
 		INNER JOIN ts_booked_room tbr
 		ON tbr.bookedID = tb.bookedID
-		WHERE tbr.status = 'CHECKIN' OR tbr.status = 'BOOKED'
+		WHERE tbr.status <> 'HIDDEN' 
+		AND tbr.status <> 'LATE'
+		AND tbr.status <> 'CANCLE' 
 		AND CONCAT(tb.bookedCode,tb.idcardno,tb.firstName,' ',tb.lastName,tbr.roomID) LIKE '%".$keyword."%'
 		";
 		$data = $this->db->query($sql)->result_array();
