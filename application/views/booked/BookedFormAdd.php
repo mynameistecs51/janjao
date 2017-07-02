@@ -5,22 +5,24 @@
   	<div class="form-horizontal">
   		<div class="form-group">
   			<label for="selectRoom" class="col-sm-2 control-label">ห้องที่เลือก</label>
-  			<div class="col-sm-8">
-  				<?php
-  				$room =explode('_',$selectRoom);
-				echo '<input type="hidden" name="selectRoom" value="'.$selectRoom.'">';  //input hidden selectRoom
+  			<div class="col-lg-8">
+	  			<div class="row">
+	  				<?php
+	  				$room =explode('_',$selectRoom);
+					echo '<input type="hidden" name="selectRoom" value="'.$selectRoom.'">';  //input hidden selectRoom
 
-				for ($i=0; $i < count($room); $i++) :
-					?>
-				<div class="col-sm-1 " style="margin:10px;">
-					<span class="button-checkbox ">
-						<button type="button" class="btn btn_room btn-danger btn-xs" data-color="danger" disabled >
-							<i class="fa fa-bed" aria-hidden="true"></i>
-							<h4><?php echo 'Room '.$room[$i]; ?></h4>
-						</button>
-					</span>
+					for ($i=0; $i < count($room); $i++) :
+						?>
+					<div class="col-lg-1 " style="margin-right:40px; margin-bottom:10px;">
+						<span class="button-checkbox ">
+							<button type="button" class="btn btn_room btn-danger btn-xs" data-color="danger" disabled >
+								<i class="fa fa-bed" aria-hidden="true"></i>
+								<h4><?php echo 'Room '.$room[$i]; ?></h4>
+							</button>
+						</span>
+					</div>
+				<?php endfor;	?>
 				</div>
-			<?php endfor;	?>
 		</div>
 	</div>
 	<div class="form-group">
@@ -116,9 +118,9 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="addDress" class="col-sm-2 control-label">ที่อยู่</label>
+		<label for="address" class="col-sm-2 control-label">ที่อยู่</label>
 		<div class="col-sm-8">
-			<textarea name="addDress" id="addDress" class="form-control"></textarea>
+			<textarea name="address" id="address" class="form-control"></textarea>
 		</div>
 	</div>
 	<div class="form-group">
@@ -165,19 +167,19 @@
 	<div class="form-group">
 		<label for="bookedDate" class="col-sm-2 control-label">วันที่ จอง <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-8">
-			<input type="text" class="form-control" id="bookedDate" name="bookedDate" >
+			<input type="text" class="form-control" id="bookedDate" name="bookedDate" value="<?php echo $this->packfunction->dtDMYnow(); ?> ">
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="checkinDate" class="col-sm-2 control-label">วันที่ Checkin <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-3">
-			<input type="text" class="form-control" id="checkinDate" name="checkinDate">
+			<input type="text" class="form-control" id="checkinDate" name="checkinDate" value="<?php echo $this->packfunction->dtcheckin(); ?>">
 		</div>
 	<!-- </div>
 	<div class="form-group"> -->
 		<label for="checkOutDate" class="col-sm-2 control-label">วันที่ Checkout <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-3">
-			<input type="text" class="form-control" id="checkOutDate" name="checkOutDate" >
+			<input type="text" class="form-control" id="checkOutDate" name="checkOutDate" value="<?php echo $this->packfunction->dtcheckout(); ?>">
 		</div>
 	</div>
 	<div class="form-group">
@@ -202,9 +204,9 @@
 	<div class="form-group">
 		<label for="is_breakfast" class="col-sm-2 control-label">อาหารเช้า</label>
 		<div class="col-sm-8">
-			<label><b class="btn btn-danger btn-md"> <input type="radio" name="is_breakfast" id="breakfast0" value="0" class="control-label" checked> ไม่รับอาหารเช้า</b></label>
+			<label><b class="btn btn-danger btn-md"> <input type="radio" name="is_breakfast" id="breakfast0" value="NO" class="control-label" checked> ไม่รับอาหารเช้า</b></label>
 			&nbsp;&nbsp;&nbsp;
-			<label><b class="btn btn-success btn-md"> <input type="radio" name="is_breakfast" id="breakfast1" value="1" class="control-label"> รับอาหารเช้า</b></label>
+			<label><b class="btn btn-success btn-md"> <input type="radio" name="is_breakfast" id="breakfast1" value="YES" class="control-label"> รับอาหารเช้า</b></label>
 		</div>
 	</div>
 	<div class="form-group">
@@ -214,13 +216,17 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="btnsnap"  id="snap" class="col-sm-2 control-label"><i class="fa fa-camera btn btn-primary " id="snap"> ถ่ายภาพ</i></label>
-		<div class="col-sm-10">
-
-			<video id="video" class="" width="260" height="195" autoplay></video>
-
+		<label for="btnsnap" class="col-sm-2 control-label"></label>
+		<div class="col-sm-10"> 
+			<video id="video" class="" width="260" height="195" autoplay></video> 
 			<canvas id="canvas"  name="idcardPicture"  class="bg-primary " width="260" height="195"  ></canvas>
 			<input type="hidden" name="images" id="images">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="btnsnap" class="col-sm-2 control-label"></label>
+		<div class="col-sm-3" align="center"> 
+			<i class="fa fa-camera btn btn-primary "  id="snap"> ถ่ายภาพ <i class="glyphicon glyphicon-menu-right"></i></i>
 		</div>
 	</div>
 </div>

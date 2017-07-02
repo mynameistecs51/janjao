@@ -38,19 +38,21 @@ class Mdl_checkin extends CI_Model {
 			'middleName' => '',
 			'lastName' => $this->input->post('lastName'),
 			'birthdate' => $this->input->post('birthdate_y').'-'.$this->input->post('birthdate_m').'-'.$this->input->post('birthdate_d').' 00:00:00',
-			'address' => $this->input->post('addDress'),
+			'address' => $this->input->post('address'),
+			'amphur'  => $this->input->post('amphur'),
 			'district' => $this->input->post('district'),
 			'province' => $this->input->post('province'),
 			'country' => '',
 			'postcode' => $this->input->post('zipcode'),
 			'mobile' => $this->input->post('mobile'),
+			'licenseplate' => $this->input->post('licenseplate'),
 			'email' => $this->input->post('email'),
 			'bookedDate' => $this->packfunction->dtTosql($this->input->post('bookedDate')),
 			'checkInAppointDate' => $this->packfunction->dtTosql($this->input->post('checkinDate')),
 			'checkOutAppointDate' => $this->packfunction->dtTosql($this->input->post('checkOutDate')),
 			'is_breakfast' => $this->input->post('is_breakfast'),
 			'bookedType' => $this->input->post('bookedType'),
-			'cashPledge' => '',
+			'cashPledge' => $this->input->post('cashPledge'),
 			'cashPledgePath' => '',
 			'comment' => $this->input->post('comment'),
 			'status' => 'CHECKIN',
@@ -108,11 +110,9 @@ class Mdl_checkin extends CI_Model {
 				);
 				$this->db->insert('ts_booked_room_log',$log);
 
-				$startDate->modify("+1 day");  
-			} 
-
-		endfor; // End ts_booked_room 
-
+				$startDate->modify("+1 day");
+			}  
+		endfor; // End ts_booked_room  
 	}
 
 	function base64_to_png( $base64_string, $output_file ) {
@@ -123,7 +123,7 @@ class Mdl_checkin extends CI_Model {
 		return( $output_file );
 	}
 
-	public function getCheckinAll()
+	public function getCheckinAll($keyword='')
 	{
 		$sql = "
 		SELECT
@@ -138,10 +138,12 @@ class Mdl_checkin extends CI_Model {
 		tb.birthdate,
 		tb.address,
 		tb.district,
+		tb.amphur,
 		tb.province,
 		tb.country,
 		tb.postcode,
 		tb.mobile,
+		tb.licenseplate,
 		tb.email,
 		tb.bookedDate,
 		tb.checkInAppointDate,
@@ -159,13 +161,12 @@ class Mdl_checkin extends CI_Model {
 		tbr.bookedroomID,
 		tbr.roomID,
 		tbr.checkinDate,
-		tbr.checkoutDate,
-		tbr.comment,
-		tbr.status
+		tbr.checkoutDate
 		FROM ts_booked tb
 		INNER JOIN ts_booked_room tbr
 		ON tbr.bookedID = tb.bookedID
-		WHERE tbr.status = 'CHECKIN'
+		WHERE tbr.status = 'CHECKIN' OR tbr.status = 'BOOKED'
+		AND CONCAT(tb.bookedCode,tb.idcardno,tb.firstName,' ',tb.lastName,tbr.roomID) LIKE '%".$keyword."%'
 		";
 		$data = $this->db->query($sql)->result_array();
 		return $data;
@@ -181,18 +182,24 @@ class Mdl_checkin extends CI_Model {
 					tb.titleName,
 					tb.firstName,
 					tb.middleName,
-					tb.lastName,
-					tb.birthdate,
+					tb.lastName, 
+					DATE_FORMAT(tb.birthdate,'%Y') AS birthdate_y,
+					DATE_FORMAT(tb.birthdate,'%m') AS birthdate_m,
+					DATE_FORMAT(tb.birthdate,'%d') AS birthdate_d,
 					tb.address,
 					tb.district,
+					tb.amphur,
 					tb.province,
 					tb.country,
 					tb.postcode,
 					tb.mobile,
-					tb.email,
-					tb.bookedDate,
+					tb.licenseplate,
+					tb.email, 
+					DATE_FORMAT(tb.bookedDate,'%d/%m/%Y %H:%i') AS bookedDate,
 					tb.checkInAppointDate,
 					tb.checkOutAppointDate,
+					DATE_FORMAT(br.checkinDate,'%d/%m/%Y %H:%i') AS checkinDate,
+					DATE_FORMAT(br.checkoutDate,'%d/%m/%Y %H:%i') AS checkOutDate,
 					tb.is_breakfast,
 					tb.bookedType,
 					tb.cashPledge,
@@ -204,7 +211,9 @@ class Mdl_checkin extends CI_Model {
 					tb.updateDT,
 					tb.updateBY
 				FROM ts_booked tb
-				WHERE MD5(tb.bookedID) = '".$key."' ";
+				LEFT JOIN ts_booked_room br ON  tb.bookedID=br.bookedID
+				WHERE MD5(tb.bookedID) = '".$key."' 
+				GROUP BY tb.bookedID ";
 		$query 	= $this->db->query($sql);
 		$rs 	= $query->result_array();
 		if (count($rs) > 0) {
@@ -212,6 +221,20 @@ class Mdl_checkin extends CI_Model {
 		}else{
 			return [];
 		}
+		
+	}
+
+	public function bookedRoom($bookedID){
+		$sql = 	"
+				SELECT 
+					rm.bookedroomID,
+				    rm.bookedID,
+				    rm.roomID
+				FROM ts_booked_room rm 
+				WHERE rm.bookedID = '".$bookedID."' ";
+		$query 	= $this->db->query($sql);
+		return $query->result_array();
+		 
 		
 	}
 }

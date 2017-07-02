@@ -54,7 +54,7 @@
     							<td><?php echo $rowbooked['checkOutAppointDate']; ?></td>
     							<td><?php echo $rowbooked['updateBY']; ?></td>
     							<td >
-    								<button class="btn btn-primary col-sm-3  btn-xs btn_edit" title="edit" style='margin-left:5px;'>
+    								<button class="btn btn-primary col-sm-3  btn-xs btn_edit" title="edit" id="<?php echo MD5($rowbooked['bookedID']); ?>"  style='margin-left:5px;'>
     									<i class="fa fa-edit fa-2x"></i>
     								</button>
     								<button class="btn btn-warning col-sm-3  btn-xs btn_cancel" title="cancel" style='margin-left:5px;'>
@@ -96,7 +96,8 @@
 
     		function bookedEdit() {
     			$('.btn_edit').click(function(){
-    				load_page('<?php echo base_url()."index.php/booked/BookedFormEdit/"; ?>','.:: Data Booking ::.','#');
+                    var id = $(this).attr('id');
+    				load_page('<?php echo base_url()?>booked/bookedformedit/'+id ,'.:: Data Booking ::.','#');
     			});
     		}
 
@@ -130,8 +131,8 @@
     			div+='<div class="modal-body">';
     			div+='</div>';
     			div+='<div class="modal-footer" style="text-align:center; background:#F6CECE;">';
-    			div+='<button type="submit" id="save" class="btn btn-modal"><span class="   glyphicon glyphicon-floppy-saved"> บันทึก</span></button>';
-    			div+='<button type="reset" class="btn btn-modal " data-dismiss="modal"><span class="glyphicon glyphicon-floppy-remove"> ยกเลิก</span></button>';
+    			div+='<button type="submit" id="save" class="btn btn-success"><span class="   glyphicon glyphicon-floppy-saved"> บันทึก</span></button>';
+    			div+='<button type="reset" class="btn btn-danger " data-dismiss="modal"><span class="glyphicon glyphicon-floppy-remove"> ยกเลิก</span></button>';
     			div+='</div>';
     			div+='</div><!-- /.modal-content -->';
     			div+='</div><!-- /.modal-dialog -->';

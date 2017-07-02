@@ -128,12 +128,12 @@ class Booked extends CI_Controller {
 
 	}
 
-	public function BookedFormEdit()
+	public function bookedformedit($key='')
 	{
-		$this->data['getMonth'] = $this->packfunction->getMonth();
-		$this->data['getYear'] = $this->packfunction->getYear();
+		$this->data['bookedDtl']=$this->Mdl_booked->booked($key);
+		$this->data['cbookedRoomDtl']=$this->Mdl_booked->bookedRoom($this->data['bookedDtl']['bookedID']);
 		$this->load->view('booked/BookedFormEdit',$this->data);
-	}
+	} 
 
 	public function search(){
 		$this->data['viewName']=$this->pagename;

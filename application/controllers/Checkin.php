@@ -108,6 +108,7 @@ class Checkin extends CI_Controller {
 	public function checkinformedit($key='')
 	{ 
 		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
+		$this->data['checkinRoomDtl']=$this->Mdl_checkin->bookedRoom($this->data['checkinDtl']['bookedID']);
 		$this->load->view('checkin/CheckinFormEdit',$this->data);
 	} 
 

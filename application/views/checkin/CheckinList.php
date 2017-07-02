@@ -30,7 +30,7 @@
     					<th style="text-align: center;width:  150px;">ROOM</th>
     					<th style="text-align: center;width:  100px;">BOOKED DATE</th>
     					<th style="text-align: center;width:  100px;">CHECKIN DATE</th>
-    					<th style="text-align: center;width:  80px;"> CREATE BY</th>
+    					<th style="text-align: center;width:  80px;"> STATUS</th>
     					<th style="text-align: center;width:  150px;">#</th>
     				</tr>
     			</thead>
@@ -43,26 +43,32 @@
     						<td><?php echo $rowCheckin['bookedCode'] ?></td>
     						<td><?php echo $rowCheckin['firstName']." ".$rowCheckin['lastName']; ?></td>
     						<td >
-    								<?php //echo $numRoom ;
+    								<?php $color = $rowCheckin['status']=='CHECKIN' ? 'danger':'warning';
     								for($i=0;$i < $numRoom; $i++)
-    								{
-    									echo "<button class='col-sm-5 btn-danger' style='margin-left:5px;'>",$rowCheckin['selectRoom'][$i]['roomID']."</button> ";
+    								{ 
+    									echo "<button class='col-sm-5 btn-".$color."' style='margin-left:5px;'>",$rowCheckin['selectRoom'][$i]['roomID']."</button> ";
     								}
     								?>
     							</td>
     							<td><?php echo $rowCheckin['checkInAppointDate']; ?></td>
-    							<td><?php echo $rowCheckin['checkOutAppointDate']; ?></td>
-    							<td><?php echo $rowCheckin['updateBY']; ?></td>
+    							<td><?php echo $rowCheckin['status']=='CHECKIN' ? $rowCheckin['checkOutAppointDate']:'' ; ?></td>
+    							<td><?php echo $rowCheckin['status']; ?></td>
     							<td >
+                                <?php if($rowCheckin['status']=='CHECKIN'){ ?>
     								<button class="btn btn-primary col-sm-3  btn-xs btn_edit" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="edit" style='margin-left:5px;'>
     									<i class="fa fa-edit fa-2x"></i>
     								</button>
-    								<button class="btn btn-warning col-sm-3  btn-xs btn_cancel" title="cancel" style='margin-left:5px;'>
-    									<i class="fa fa-close fa-2x"></i>
+    								<button class="btn btn-warning col-sm-3  btn-xs btn_cancel" title="Add Service" style='margin-left:5px;'>
+    									<i class="fa fa-plus-square fa-2x" title="Add Service"></i>
     								</button>
-    								<button class="btn btn-info col-sm-3  btn-xs btn_info" title="view" style='margin-left:5px;'>
-    									<i class="fa fa-list fa-2x"></i>
+    								<button class="btn btn-info col-sm-3  btn-xs btn_info" title="Print" style='margin-left:5px;'>
+    									<i class="fa fa-print fa-2x" title="Print"></i>
     								</button>
+                                <?php }else{ ?> 
+                                    <button class="btn btn-danger col-sm-3  btn-xs btn_checkin" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="edit" style='margin-left:5px;'>
+                                        <i class="fa fa-edit fa-2x"></i>
+                                    </button>
+                                <?php } ?>
     							</td>
     						</tr>
     					<?php endforeach; ?> 
@@ -128,8 +134,8 @@
     			div+='<div class="modal-body">';
     			div+='</div>';
     			div+='<div class="modal-footer" style="text-align:center; background:#F6CECE;">';
-    			div+='<button type="submit" id="save" class="btn btn-modal"><span class="   glyphicon glyphicon-floppy-saved"> บันทึก</span></button>';
-    			div+='<button type="reset" class="btn btn-modal " data-dismiss="modal"><span class="glyphicon glyphicon-floppy-remove"> ยกเลิก</span></button>';
+    			div+='<button type="submit" id="save" class="btn btn-success"><span class="   glyphicon glyphicon-floppy-saved"> บันทึก</span></button>';
+    			div+='<button type="reset" class="btn btn-danger " data-dismiss="modal"><span class="glyphicon glyphicon-floppy-remove"> ยกเลิก</span></button>';
     			div+='</div>';
     			div+='</div><!-- /.modal-content -->';
     			div+='</div><!-- /.modal-dialog -->';

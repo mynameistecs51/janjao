@@ -2,27 +2,24 @@
   <link href="<?php echo base_url()?>assets/css/jquery.datetimepicker.css" rel="stylesheet">
   <input type="hidden" class="form-control" name="transaction" value="BOOKED">
   <div class="row form_input" style="text-align:left; margin-bottom:20px">
-  	<div class="form-horizontal">
-  		<div class="form-group">
-  			<label for="selectRoom" class="col-sm-2 control-label">ห้องที่เลือก</label>
-  			<div class="col-sm-8">
-  				<?php
-  				$room =explode('_',$selectRoom);
-				echo '<input type="hidden" name="selectRoom" value="'.$selectRoom.'">';  //input hidden selectRoom
-
-				for ($i=0; $i < count($room); $i++) :
-					?>
-				<div class="col-sm-1 " style="margin:10px;">
-					<span class="button-checkbox ">
-						<button type="button" class="btn btn_room btn-danger btn-xs" data-color="danger" disabled >
-							<i class="fa fa-bed" aria-hidden="true"></i>
-							<h4><?php echo 'Room '.$room[$i]; ?></h4>
-						</button>
-					</span>
-				</div>
-			<?php endfor;	?>
-		</div>
-	</div>
+<div class="form-horizontal">
+	<div class="form-group">
+		<label for="selectRoom" class="col-lg-2 control-label">ห้องที่เลือก</label>
+		<div class="col-lg-10 ">
+			<div class="row">
+				<?php foreach ($cbookedRoomDtl as $crd) {  ?>
+					<div class="col-lg-1" style="margin-right:20px;">
+						<span class="button-checkbox ">
+							<button type="button" class="btn btn_room btn-danger btn-xs" data-color="danger" disabled >
+								<i class="fa fa-bed" aria-hidden="true"></i>
+								<h4><?php echo 'Room '.$crd['roomID']; ?></h4>
+							</button>
+						</span>
+					</div>
+				<?php  } ?>
+			</div>
+		</div> 
+	</div> 
 	<div class="form-group">
 		<label for="idcardno" class="col-sm-2 control-label">เลขประจำประชาชน <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-8">
@@ -118,7 +115,7 @@
 	<div class="form-group">
 		<label for="addDress" class="col-sm-2 control-label">ที่อยู่</label>
 		<div class="col-sm-8">
-			<textarea name="addDress" id="addDress" class="form-control"></textarea>
+			<textarea name="address" id="address" class="form-control"></textarea>
 		</div>
 	</div>
 	<div class="form-group">
@@ -214,13 +211,17 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="btnsnap"  id="snap" class="col-sm-2 control-label"><i class="fa fa-camera btn btn-primary " id="snap"> ถ่ายภาพ</i></label>
-		<div class="col-sm-10">
-
-			<video id="video" class="" width="260" height="195" autoplay></video>
-
-			<canvas id="canvas"  name="idcardPicture"  class="bg-primary " width="260" height="195"  ></canvas>
-			<input type="hidden" name="images" id="images">
+		<label for="btnsnap" class="col-sm-2 control-label"></label>
+		<div class="col-sm-10"> 
+			<video id="video" class="" width="260" height="195" autoplay></video> 
+			<canvas id="canvas"  name="idcardPicture"  class="bg-primary " width="260" height="195" ></canvas>
+			<input type="hidden" name="images" id="images" value=""> 
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="btnsnap" class="col-sm-2 control-label"></label>
+		<div class="col-sm-3" align="center"> 
+			<i class="fa fa-camera btn btn-primary "  id="snap"> ถ่ายภาพ <i class="glyphicon glyphicon-menu-right"></i></i>
 		</div>
 	</div>
 </div>

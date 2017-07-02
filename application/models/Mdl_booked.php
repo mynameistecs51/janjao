@@ -25,10 +25,12 @@ class Mdl_booked extends CI_Model {
 					tb.birthdate,
 					tb.address,
 					tb.district,
+					tb.amphur,
 					tb.province,
 					tb.country,
 					tb.postcode,
 					tb.mobile,
+					tb.licenseplate,
 					tb.email,
 					tb.bookedDate,
 					tb.checkInAppointDate,
@@ -87,12 +89,14 @@ class Mdl_booked extends CI_Model {
 			'middleName' => '',
 			'lastName' => $this->input->post('lastName'),
 			'birthdate' => $this->input->post('birthdate_y').'-'.$this->input->post('birthdate_m').'-'.$this->input->post('birthdate_d').' 00:00:00',
-			'address' => $this->input->post('addDress'),
+			'address' => $this->input->post('address'),
 			'district' => $this->input->post('district'),
+			'amphur'  => $this->input->post('amphur'),
 			'province' => $this->input->post('province'),
 			'country' => '',
 			'postcode' => $this->input->post('zipcode'),
 			'mobile' => $this->input->post('mobile'),
+			'licenseplate' => $this->input->post('licenseplate'),
 			'email' => $this->input->post('email'),
 			'bookedDate' => $this->packfunction->dtTosql($this->input->post('bookedDate')),
 			'checkInAppointDate' => $this->packfunction->dtTosql($this->input->post('checkinDate')),
@@ -209,6 +213,68 @@ class Mdl_booked extends CI_Model {
 		";
 		$data = $this->db->query($sql);
 		return $data->result_array();
+	}
+
+	public function booked($key){
+		$sql = 	"
+				SELECT
+					tb.bookedID,
+					tb.bookedCode,
+					tb.idcardno,
+					tb.idcardnoPath,
+					tb.titleName,
+					tb.firstName,
+					tb.middleName,
+					tb.lastName, 
+					DATE_FORMAT(tb.birthdate,'%Y') AS birthdate_y,
+					DATE_FORMAT(tb.birthdate,'%m') AS birthdate_m,
+					DATE_FORMAT(tb.birthdate,'%d') AS birthdate_d,
+					tb.address,
+					tb.district,
+					tb.amphur,
+					tb.province,
+					tb.country,
+					tb.postcode,
+					tb.mobile,
+					tb.licenseplate,
+					tb.email,
+					tb.bookedDate,
+					tb.checkInAppointDate,
+					tb.checkOutAppointDate,
+					tb.is_breakfast,
+					tb.bookedType,
+					tb.cashPledge,
+					tb.cashPledgePath,
+					tb.comment,
+					tb.status,
+					tb.createDT,
+					tb.createBY,
+					tb.updateDT,
+					tb.updateBY
+				FROM ts_booked tb
+				WHERE MD5(tb.bookedID) = '".$key."' ";
+		$query 	= $this->db->query($sql);
+		$rs 	= $query->result_array();
+		if (count($rs) > 0) {
+			return $rs[0];
+		}else{
+			return [];
+		}
+		
+	}
+
+	public function bookedRoom($bookedID){
+		$sql = 	"
+				SELECT 
+					rm.bookedroomID,
+				    rm.bookedID,
+				    rm.roomID
+				FROM ts_booked_room rm 
+				WHERE rm.bookedID = '".$bookedID."' ";
+		$query 	= $this->db->query($sql);
+		return $query->result_array();
+		 
+		
 	}
 
 }

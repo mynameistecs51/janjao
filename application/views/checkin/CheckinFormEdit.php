@@ -2,29 +2,26 @@
   <link href="<?php echo base_url()?>assets/css/jquery.datetimepicker.css" rel="stylesheet">
   <input type="hidden" class="form-control" name="transaction" value="CHECKIN">
   <div class="row form_input" style="text-align:left; margin-bottom:20px">
-  	<div class="form-horizontal">
-  		<div class="form-group">
-  			<label for="selectRoom" class="col-sm-2 control-label">ห้องที่เลือก</label>
-  			<div class="col-sm-8">
-  				<?php
-  		// 		$room =explode('_',$selectRoom);
-				// echo '<input type="hidden" name="selectRoom" value="'.$selectRoom.'">';  //input hidden selectRoom
-
-				// for ($i=0; $i < count($room); $i++) :
-					?>
-				<div class="col-sm-1 " style="margin:10px;">
+  <div class="form-horizontal">
+  	<div class="form-group">
+		<label for="selectRoom" class="col-lg-2 control-label">ห้องที่เลือก</label>
+		<div class="col-lg-10 ">
+			<div class="row">
+			<?php foreach ($checkinRoomDtl as $crd) {  ?>
+				<div class="col-lg-1" style="margin-right:20px;">
 					<span class="button-checkbox ">
 						<button type="button" class="btn btn_room btn-danger btn-xs" data-color="danger" disabled >
 							<i class="fa fa-bed" aria-hidden="true"></i>
-							<h4><?php //echo 'Room '.$room[$i]; ?></h4>
+							<h4><?php echo 'Room '.$crd['roomID']; ?></h4>
 						</button>
 					</span>
 				</div>
-			<?php //endfor;	?>
-		</div>
+			<?php  } ?>
+			</div>
+		</div> 
 	</div>  
 	<div class="form-group">
-		<label for="idcardno" class="col-sm-2 control-label">เลขประจำประชาชน <b style="color: #FF0000">*</b></label>
+		<label for="idcardno" class="col-lg-2 control-label">เลขประจำประชาชน <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-8">
 			<input type="text" class="form-control" name="idcardno" id="idcardno" placeholder="เลขประจำประชาชน/ Passport No" value="<?php echo $checkinDtl['idcardno'] ?>">
 		</div>
@@ -32,18 +29,18 @@
 	<div class="form-group">
 		<label for="gender" class="col-sm-2 control-label">เพศ</label>
 		<div class="col-sm-8" >
-			<label><b class="btn btn-success btn-md"><input type="radio" name="gender" id="gender" value="male" class="control-label" checked> ชาย</b></label>
+			<label><b class="btn btn-success btn-md"><input type="radio" name="gender" id="gender" value="MALE" class="control-label" <?php echo $checkinDtl['titleName']=='MALE' ? 'checked':''; ?> > ชาย</b></label>
 			&nbsp;&nbsp;&nbsp;
-			<label><b class="btn btn-warning btn-md"><input type="radio" name="gender" id="gender" value="Female" class="control-label">  หญิง</b></label>
+			<label><b class="btn btn-warning btn-md"><input type="radio" name="gender" id="gender" value="FEMALE" class="control-label" <?php echo $checkinDtl['titleName']=='FEMALE' ? 'checked':''; ?> >  หญิง</b></label>
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="gender" class="col-sm-2 control-label">ชื่อ-สกุล <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" id="firstName" name="firstName" placeholder="ชื่อ">
+			<input type="text" class="form-control" id="firstName" name="firstName" placeholder="ชื่อ" value="<?php echo $checkinDtl['firstName'] ?>">
 		</div>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" id="lastName" name="lastName" placeholder="นามสกุล">
+			<input type="text" class="form-control" id="lastName" name="lastName" placeholder="นามสกุล" value="<?php echo $checkinDtl['lastName'] ?>">
 		</div>
 	</div>
 	<div class="form-group">
@@ -52,53 +49,53 @@
 			<div class="row">
 				<div class="col-sm-2">
 					<select class="form-control" name="birthdate_d">
-						<option value="01">01</option>
-						<option value="02">02</option>
-						<option value="03">03</option>
-						<option value="04">04</option>
-						<option value="05">05</option>
-						<option value="06">06</option>
-						<option value="07">07</option>
-						<option value="08">08</option>
-						<option value="09">09</option>
-						<option value="10">10</option>
-						<option value="11">11</option>
-						<option value="12">12</option>
-						<option value="13">13</option>
-						<option value="14">14</option>
-						<option value="15">15</option>
-						<option value="16">16</option>
-						<option value="17">17</option>
-						<option value="18">18</option>
-						<option value="19">19</option>
-						<option value="20">20</option>
-						<option value="21">21</option>
-						<option value="22">22</option>
-						<option value="23">23</option>
-						<option value="24">24</option>
-						<option value="25">25</option>
-						<option value="26">26</option>
-						<option value="27">27</option>
-						<option value="28">28</option>
-						<option value="29">29</option>
-						<option value="30">30</option>
-						<option value="31">31</option>
+						<option value="01" <?php echo $checkinDtl['birthdate_d']=='01' ? 'selected':''; ?>>01</option>
+						<option value="02" <?php echo $checkinDtl['birthdate_d']=='02' ? 'selected':''; ?>>02</option>
+						<option value="03" <?php echo $checkinDtl['birthdate_d']=='03' ? 'selected':''; ?>>03</option>
+						<option value="04" <?php echo $checkinDtl['birthdate_d']=='04' ? 'selected':''; ?>>04</option>
+						<option value="05" <?php echo $checkinDtl['birthdate_d']=='05' ? 'selected':''; ?>>05</option>
+						<option value="06" <?php echo $checkinDtl['birthdate_d']=='06' ? 'selected':''; ?>>06</option>
+						<option value="07" <?php echo $checkinDtl['birthdate_d']=='07' ? 'selected':''; ?>>07</option>
+						<option value="08" <?php echo $checkinDtl['birthdate_d']=='08' ? 'selected':''; ?>>08</option>
+						<option value="09" <?php echo $checkinDtl['birthdate_d']=='09' ? 'selected':''; ?>>09</option>
+						<option value="10" <?php echo $checkinDtl['birthdate_d']=='10' ? 'selected':''; ?>>10</option>
+						<option value="11" <?php echo $checkinDtl['birthdate_d']=='11' ? 'selected':''; ?>>11</option>
+						<option value="12" <?php echo $checkinDtl['birthdate_d']=='12' ? 'selected':''; ?>>12</option>
+						<option value="13" <?php echo $checkinDtl['birthdate_d']=='13' ? 'selected':''; ?>>13</option>
+						<option value="14" <?php echo $checkinDtl['birthdate_d']=='14' ? 'selected':''; ?>>14</option>
+						<option value="15" <?php echo $checkinDtl['birthdate_d']=='15' ? 'selected':''; ?>>15</option>
+						<option value="16" <?php echo $checkinDtl['birthdate_d']=='16' ? 'selected':''; ?>>16</option>
+						<option value="17" <?php echo $checkinDtl['birthdate_d']=='17' ? 'selected':''; ?>>17</option>
+						<option value="18" <?php echo $checkinDtl['birthdate_d']=='18' ? 'selected':''; ?>>18</option>
+						<option value="19" <?php echo $checkinDtl['birthdate_d']=='19' ? 'selected':''; ?>>19</option>
+						<option value="20" <?php echo $checkinDtl['birthdate_d']=='20' ? 'selected':''; ?>>20</option>
+						<option value="21" <?php echo $checkinDtl['birthdate_d']=='21' ? 'selected':''; ?>>21</option>
+						<option value="22" <?php echo $checkinDtl['birthdate_d']=='22' ? 'selected':''; ?>>22</option>
+						<option value="23" <?php echo $checkinDtl['birthdate_d']=='23' ? 'selected':''; ?>>23</option>
+						<option value="24" <?php echo $checkinDtl['birthdate_d']=='24' ? 'selected':''; ?>>24</option>
+						<option value="25" <?php echo $checkinDtl['birthdate_d']=='25' ? 'selected':''; ?>>25</option>
+						<option value="26" <?php echo $checkinDtl['birthdate_d']=='26' ? 'selected':''; ?>>26</option>
+						<option value="27" <?php echo $checkinDtl['birthdate_d']=='27' ? 'selected':''; ?>>27</option>
+						<option value="28" <?php echo $checkinDtl['birthdate_d']=='28' ? 'selected':''; ?>>28</option>
+						<option value="29" <?php echo $checkinDtl['birthdate_d']=='29' ? 'selected':''; ?>>29</option>
+						<option value="30" <?php echo $checkinDtl['birthdate_d']=='30' ? 'selected':''; ?>>30</option>
+						<option value="31" <?php echo $checkinDtl['birthdate_d']=='31' ? 'selected':''; ?>>31</option>
 					</select>
 				</div>
 				<div class="col-sm-4">
 					<select class="form-control" name="birthdate_m">
-						<option value="01">มกราคม</option>
-						<option value="02">กุมภาพันธ์</option>
-						<option value="03">มีนาคม</option>
-						<option value="04">เมษายน</option>
-						<option value="05">พฤษภาคม</option>
-						<option value="06">มิถุนายน</option>
-						<option value="07">กรกฎาคม</option>
-						<option value="08">สิงหาคม</option>
-						<option value="09">กันยายน</option>
-						<option value="10">ตุลาคม</option>
-						<option value="11">พฤศจิกายน</option>
-						<option value="12">ธันวาคม</option> 
+						<option value="01" <?php echo $checkinDtl['birthdate_m']=='01' ? 'selected':''; ?>>มกราคม</option>
+						<option value="02" <?php echo $checkinDtl['birthdate_m']=='02' ? 'selected':''; ?>>กุมภาพันธ์</option>
+						<option value="03" <?php echo $checkinDtl['birthdate_m']=='03' ? 'selected':''; ?>>มีนาคม</option>
+						<option value="04" <?php echo $checkinDtl['birthdate_m']=='04' ? 'selected':''; ?>>เมษายน</option>
+						<option value="05" <?php echo $checkinDtl['birthdate_m']=='05' ? 'selected':''; ?>>พฤษภาคม</option>
+						<option value="06" <?php echo $checkinDtl['birthdate_m']=='06' ? 'selected':''; ?>>มิถุนายน</option>
+						<option value="07" <?php echo $checkinDtl['birthdate_m']=='07' ? 'selected':''; ?>>กรกฎาคม</option>
+						<option value="08" <?php echo $checkinDtl['birthdate_m']=='08' ? 'selected':''; ?>>สิงหาคม</option>
+						<option value="09" <?php echo $checkinDtl['birthdate_m']=='09' ? 'selected':''; ?>>กันยายน</option>
+						<option value="10" <?php echo $checkinDtl['birthdate_m']=='10' ? 'selected':''; ?>>ตุลาคม</option>
+						<option value="11" <?php echo $checkinDtl['birthdate_m']=='11' ? 'selected':''; ?>>พฤศจิกายน</option>
+						<option value="12" <?php echo $checkinDtl['birthdate_m']=='12' ? 'selected':''; ?>>ธันวาคม</option> 
 					</select>
 				</div>
 				<div class="col-sm-2">
@@ -106,7 +103,11 @@
 					<?php 
 						$y = $this->packfunction->yearnow()+543;
 						for ($i=0; $i < 80; $i++) { 
-							echo '<option value="'.$y.'">'.$y.'</option> ';
+							if($checkinDtl['birthdate_y']==$y){
+								echo '<option value="'.$y.'" selected>'.$y.'</option> ';
+							}else{
+								echo '<option value="'.$y.'">'.$y.'</option> ';
+							}
 							$y--;
 						}
 					 ?>
@@ -118,16 +119,20 @@
 	<div class="form-group">
 		<label for="addDress" class="col-sm-2 control-label">ที่อยู่</label>
 		<div class="col-sm-8">
-			<textarea name="addDress" id="addDress" class="form-control"></textarea>
+			<textarea name="address" id="address" class="form-control" placeholder="เลขที่ 9/999 หมู่ 9 ซอยกลางเมือง 9 ถนนกลางเมือง"><?php echo $checkinDtl['address'] ?></textarea>
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="zipcode" class="col-sm-2 control-label"></label>
 		<div class="col-sm-4">
-			<input type="text" name="zipcode" id="zipcode" value=""  class="form-control" placeholder="รหัสไปรษณีย์">
+			<input type="text" name="zipcode" id="zipcode" value="<?php echo $checkinDtl['postcode'] ?>"  class="form-control" placeholder="รหัสไปรษณีย์">
 		</div>
 		<div class="col-sm-4">
 			<select class="form-control" name="province" id="province"> 
+				<?php 	if($checkinDtl['province']!=""){
+							echo '<option value="'.$checkinDtl['province'].'" selected>'.$checkinDtl['province'].'</option> ';
+						}
+				?>
 			</select>
 		</div>
 	</div>
@@ -135,66 +140,72 @@
 		<label for="amphur" class="col-sm-2 control-label"></label>
 		<div class="col-sm-4">
 			<select class="form-control" name="amphur" id="amphur">
-
+				<?php 	if($checkinDtl['amphur']!=""){
+							echo '<option value="'.$checkinDtl['amphur'].'" selected>'.$checkinDtl['amphur'].'</option> ';
+						} 
+				?>
 			</select>
 		</div> 
 		<div class="col-sm-4">
 			<select class="form-control selectpicker" data-live-search="true" name="district" id="district">
-
+				<?php 	if($checkinDtl['district']!=""){
+							echo '<option value="'.$checkinDtl['district'].'" selected>'.$checkinDtl['district'].'</option> ';
+						} 
+				?>
 			</select>
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="mobile" class="col-sm-2 control-label">เบอร์มือถือ</label>
 		<div class="col-sm-8">
-			<input type="tel" class="form-control" id="mobile" name="mobile" minlength="9" placeholder="082-2222222">
+			<input type="text" class="form-control" id="mobile" name="mobile"  placeholder="082-2222222" value="<?php echo $checkinDtl['mobile'] ?>">
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="carNumber" class="col-sm-2 control-label">ทะเบียนรถ</label>
 		<div class="col-sm-8">
-			<input type="text" class="form-control" name="carNumber" id="carNumber" placeholder="1กก 1111">
+			<input type="text" class="form-control" name="licenseplate" id="licenseplate" placeholder="1กก 1111" value="<?php echo $checkinDtl['licenseplate'] ?>">
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="email" class="col-sm-2 control-label">อีเมลล์</label>
 		<div class="col-sm-8">
-			<input type="email" class="form-control" id="email" name="email" placeholder="name@domain.com">
+			<input type="email" class="form-control" id="email" name="email" placeholder="name@domain.com" value="<?php echo $checkinDtl['email'] ?>">
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="bookedDate" class="col-sm-2 control-label">วันที่ จอง <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-8">
-			<input type="text" class="form-control" id="bookedDate" name="bookedDate" >
+			<input type="text" class="form-control" id="bookedDate" name="bookedDate" value="<?php echo $checkinDtl['bookedDate'] ?>">
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="checkinDate" class="col-sm-2 control-label">วันที่ Checkin <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-3">
-			<input type="text" class="form-control" id="checkinDate" name="checkinDate">
+			<input type="text" class="form-control" id="checkinDate" name="checkinDate" value="<?php echo $checkinDtl['checkinDate'] ?>">
 		</div>
 	<!-- </div>
 	<div class="form-group"> -->
 		<label for="checkOutDate" class="col-sm-2 control-label">วันที่ Checkout <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-3">
-			<input type="text" class="form-control" id="checkOutDate" name="checkOutDate" >
+			<input type="text" class="form-control" id="checkOutDate" name="checkOutDate" value="<?php echo $checkinDtl['checkOutDate'] ?>">
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="bookedType" class="col-sm-2 control-label">เช่าแบบ <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-8">
-			<label><b class="btn btn-info btn-md"> <input type="radio" name="bookedType" id="SHORT" value="SHORT" class="control-label">  ชั่วคราว</b></label>
+			<label><b class="btn btn-info btn-md"> <input type="radio" name="bookedType" id="SHORT" value="SHORT" class="control-label" <?php echo $checkinDtl['bookedType']=='SHORT' ? 'checked':''; ?> >  ชั่วคราว</b></label>
 			&nbsp;&nbsp;&nbsp;
-			<label><b class="btn btn-warning btn-md"> <input type="radio" name="bookedType" id="DAY" value="DAY" class="control-label" checked>  รายวัน</b></label>
+			<label><b class="btn btn-warning btn-md"> <input type="radio" name="bookedType" id="DAY" value="DAY" class="control-label" <?php echo $checkinDtl['bookedType']=='DAY' ? 'checked':''; ?> >  รายวัน</b></label>
 			&nbsp;&nbsp;&nbsp;
-			<label><b class="btn btn-primary btn-md"> <input type="radio" name="bookedType" id="MONTH" value="MONTH" class="control-label">  รายเดือน</b></label>
+			<label><b class="btn btn-primary btn-md"> <input type="radio" name="bookedType" id="MONTH" value="MONTH" class="control-label" <?php echo $checkinDtl['bookedType']=='MONTH' ? 'checked':''; ?> >  รายเดือน</b></label>
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="deposit" class="col-sm-2 control-label">เงินมัดจำ <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-8">
 				<div class="input-group">
-				<input type="text" class="form-control" id="deposit" name="deposit" placeholder="100 200 300 400 500">
+				<input type="text" class="form-control" id="cashPledge" name="cashPledge" placeholder="300" value="<?php echo $checkinDtl['cashPledge'] ?>">
 			<span class="input-group-addon">บาท</span>
 			</div> 
 		</div>
@@ -202,25 +213,30 @@
 	<div class="form-group">
 		<label for="is_breakfast" class="col-sm-2 control-label">อาหารเช้า</label>
 		<div class="col-sm-8">
-			<label><b class="btn btn-danger btn-md"> <input type="radio" name="is_breakfast" id="breakfast0" value="0" class="control-label" checked> ไม่รับอาหารเช้า</b></label>
+			<label><b class="btn btn-danger btn-md"> <input type="radio" name="is_breakfast" id="breakfast0" value="NO" class="control-label" <?php echo $checkinDtl['is_breakfast']=='NO' ? 'checked':''; ?> > ไม่รับอาหารเช้า</b></label>
 			&nbsp;&nbsp;&nbsp;
-			<label><b class="btn btn-success btn-md"> <input type="radio" name="is_breakfast" id="breakfast1" value="1" class="control-label"> รับอาหารเช้า</b></label>
+			<label><b class="btn btn-success btn-md"> <input type="radio" name="is_breakfast" id="breakfast1" value="YES" class="control-label" <?php echo $checkinDtl['is_breakfast']=='YES' ? 'checked':''; ?> > รับอาหารเช้า</b></label>
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="deposit" class="col-sm-2 control-label">Comment</label>
 		<div class="col-sm-8">
-			<textarea name="comment" id="comment" class="form-control"></textarea>
+			<textarea name="comment" id="comment" class="form-control"><?php echo $checkinDtl['comment']; ?></textarea>
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="btnsnap"  id="snap" class="col-sm-2 control-label"><i class="fa fa-camera btn btn-primary " id="snap"> ถ่ายภาพ</i></label>
-		<div class="col-sm-10">
-
-			<video id="video" class="" width="260" height="195" autoplay></video>
-
-			<canvas id="canvas"  name="idcardPicture"  class="bg-primary " width="260" height="195"  ></canvas>
-			<input type="hidden" name="images" id="images">
+		<label for="btnsnap" class="col-sm-2 control-label"></label>
+		<div class="col-sm-10"> 
+			<video id="video" class="" width="260" height="195" autoplay></video> 
+			<canvas id="canvas" name="idcardPicture"  class="bg-primary " width="260" height="195" ></canvas>
+			<img src="<?php echo base_url()."assets/images/imgcard/".$checkinDtl['idcardnoPath']; ?>" width="260" height="195" style="margin-top: -190px;"></img>
+			<input type="hidden" name="images" id="images" value=""> 
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="btnsnap" class="col-sm-2 control-label"></label>
+		<div class="col-sm-3" align="center"> 
+			<i class="fa fa-camera btn btn-primary "  id="snap"> ถ่ายภาพ <i class="glyphicon glyphicon-menu-right"></i></i>
 		</div>
 	</div>
 </div>

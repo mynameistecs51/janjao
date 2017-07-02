@@ -4,15 +4,14 @@
   <div class="row form_input" style="text-align:left; margin-bottom:20px">
   	<div class="form-horizontal">
   		<div class="form-group">
-  			<label for="selectRoom" class="col-sm-2 control-label">ห้องที่เลือก</label>
-  			<div class="col-sm-8">
+  			<label for="selectRoom" class="col-lg-2 control-label">ห้องที่เลือก</label>
+  			<div class="col-lg-8">
+  			<div class="row">
   				<?php
   				$room =explode('_',$selectRoom);
-				echo '<input type="hidden" name="selectRoom" value="'.$selectRoom.'">';  //input hidden selectRoom
-
-				for ($i=0; $i < count($room); $i++) :
-					?>
-				<div class="col-sm-1 " style="margin:10px;">
+				echo '<input type="hidden" name="selectRoom" value="'.$selectRoom.'">';  //input hidden selectRoom 
+				for ($i=0; $i < count($room); $i++) : ?>
+				<div class="col-lg-1 " style="margin-right:40px; margin-bottom:10px;">
 					<span class="button-checkbox ">
 						<button type="button" class="btn btn_room btn-danger btn-xs" data-color="danger" disabled >
 							<i class="fa fa-bed" aria-hidden="true"></i>
@@ -20,7 +19,8 @@
 						</button>
 					</span>
 				</div>
-			<?php endfor;	?>
+				<?php endfor;	?>
+			</div>
 		</div>
 	</div> 
 	<div class="form-group">
@@ -51,7 +51,8 @@
 		<div class="col-sm-8"> 
 			<div class="row">
 				<div class="col-sm-2">
-					<select class="form-control" name="birthdate_d">
+					<select class="form-control" name="birthdate_d" required>
+						<option value="" selected>--วันที่--</option>
 						<option value="01">01</option>
 						<option value="02">02</option>
 						<option value="03">03</option>
@@ -86,7 +87,8 @@
 					</select>
 				</div>
 				<div class="col-sm-4">
-					<select class="form-control" name="birthdate_m">
+					<select class="form-control" name="birthdate_m" required>
+						<option value="" selected>--เดือน--</option>
 						<option value="01">มกราคม</option>
 						<option value="02">กุมภาพันธ์</option>
 						<option value="03">มีนาคม</option>
@@ -102,7 +104,8 @@
 					</select>
 				</div>
 				<div class="col-sm-2">
-					<select class="form-control" name="birthdate_y">
+					<select class="form-control" name="birthdate_y" required>
+					<option value="" selected>--พ.ศ.--</option>
 					<?php 
 						$y = $this->packfunction->yearnow()+543;
 						for ($i=0; $i < 80; $i++) { 
@@ -116,9 +119,9 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="addDress" class="col-sm-2 control-label">ที่อยู่</label>
+		<label for="address" class="col-sm-2 control-label">ที่อยู่</label>
 		<div class="col-sm-8">
-			<textarea name="addDress" id="addDress" class="form-control"></textarea>
+			<textarea name="address" id="address" class="form-control"></textarea>
 		</div>
 	</div>
 	<div class="form-group">
@@ -194,7 +197,7 @@
 		<label for="deposit" class="col-sm-2 control-label">เงินมัดจำ <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-8">
 				<div class="input-group">
-				<input type="text" class="form-control" id="deposit" name="deposit" placeholder="100 200 300 400 500">
+				<input type="text" class="form-control" id="cashPledge" name="cashPledge" placeholder="100 200 300 400 500">
 			<span class="input-group-addon">บาท</span>
 			</div> 
 		</div>
@@ -214,13 +217,17 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="btnsnap"  id="snap" class="col-sm-2 control-label"><i class="fa fa-camera btn btn-primary " id="snap"> ถ่ายภาพ</i></label>
-		<div class="col-sm-10">
-
-			<video id="video" class="" width="260" height="195" autoplay></video>
-
-			<canvas id="canvas"  name="idcardPicture"  class="bg-primary " width="260" height="195"  ></canvas>
-			<input type="hidden" name="images" id="images">
+		<label for="btnsnap" class="col-sm-2 control-label"></label>
+		<div class="col-sm-10"> 
+			<video id="video" class="" width="260" height="195" autoplay></video> 
+			<canvas id="canvas"  name="idcardPicture"  class="bg-primary " width="260" height="195" ></canvas>
+			<input type="hidden" name="images" id="images" value=""> 
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="btnsnap" class="col-sm-2 control-label"></label>
+		<div class="col-sm-3" align="center"> 
+			<i class="fa fa-camera btn btn-primary "  id="snap"> ถ่ายภาพ <i class="glyphicon glyphicon-menu-right"></i></i>
 		</div>
 	</div>
 </div>
