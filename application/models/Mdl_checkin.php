@@ -164,23 +164,28 @@ class Mdl_checkin extends CI_Model {
 		$this->db->update('ts_booked',$saveCheckin); 
 
 
-		$selectRoom = $this->input->post('selectRoom');
-		$room = explode('_',$selectRoom);
-		for ($i=0; $i < count($room) ; $i++) :
-			$saveBookedRoom[$i] = array(
-				'bookedID '     => $idBooked,
-				'roomID '       => $room[$i],
+ 
+		foreach ($this->input->post('bookedroomID') as $sr => $value) {
+
+			$saveCheckRoom[$sr] = array(
+				'bookedID '     => $bookedID,
+				'roomID '       => $this->input->post('roomID')[$sr],
 				'checkinDate '  => $this->packfunction->dtTosql($_POST['checkinDate']),
 				'checkoutDate ' => $this->packfunction->dtTosql($this->input->post('checkOutDate')),
 				'comment '      => $this->input->post('comment'),
 				'status '       => 'CHECKIN',
-				"createDT"		    => $this->packfunction->dtYMDnow(),
-				"createBY"		    => $this->UserName,
 				"updateDT"		    => $this->packfunction->dtYMDnow(),
 				"updateBY"		    => $this->UserName
 				);
-		$this->db->insert('ts_booked_room',$saveBookedRoom[$i]);
-		$idBookedRoom[$i] = $this->db->insert_id();
+			$bookedroomID[$sr] = $this->input->post('bookedroomID')[$sr];
+			$this->db->where('bookedroomID',$bookedroomID[$sr]); 
+			$this->db->update('ts_booked_room',$saveCheckRoom[$sr]);  
+
+
+			// เคลียร์ Log เดิม  
+			$this->db->where('bookedroomID',$bookedroomID[$sr]); 
+			$this->db->delete('ts_booked_room_log');
+
 
 			// Insert ts_booked_room_log
 			$startDate = date_create($this->packfunction->dateTosql($_POST['checkinDate']));
@@ -188,6 +193,7 @@ class Mdl_checkin extends CI_Model {
 			$interval = date_diff($startDate, $endDate); 
 			$runDay = array();
 			while ($startDate <= $endDate) {
+				/*
 				$year = $startDate->format("Y");
 				$month = $startDate->format("m");
 
@@ -196,23 +202,22 @@ class Mdl_checkin extends CI_Model {
 				if(!array_key_exists($month, $runDay[$year]))
 					$runDay[$year][$month] = 0; 
 					$runDay[$year][$month]++; 
-
+				*/
 				$log = array(
-				'bookedroomID' => $idBookedRoom[$i],
-				'roomID'       => $room[$i],
-				'logDate'      => $startDate->format('Y-m-d').' 12:00:00',
-				'comment'      => $this->input->post('comment'),
-				'status'       => 'CHECKIN',
-				"createDT"	   => $this->packfunction->dtYMDnow(),
-				"createBY"	   => $this->UserName,
-				"updateDT"	   => $this->packfunction->dtYMDnow(),
-				"updateBY"	   => $this->UserName
+					'bookedroomID' => $bookedroomID[$sr],
+					'roomID'       => $this->input->post('roomID')[$sr],
+					'logDate'      => $startDate->format('Y-m-d').' 12:00:00',
+					'comment'      => $this->input->post('comment'),
+					'status'       => 'CHECKIN',
+					"createDT"	   => $this->packfunction->dtYMDnow(),
+					"createBY"	   => $this->UserName,
+					"updateDT"	   => $this->packfunction->dtYMDnow(),
+					"updateBY"	   => $this->UserName
 				);
-				$this->db->insert('ts_booked_room_log',$log);
-
+				$this->db->insert('ts_booked_room_log',$log); 
 				$startDate->modify("+1 day");
 			}  
-		endfor; // End ts_booked_room  
+		} // End ts_booked_room  
 	}
 
 	function base64_to_png( $base64_string, $output_file ) {
@@ -244,8 +249,8 @@ class Mdl_checkin extends CI_Model {
 		tb.postcode,
 		tb.mobile,
 		tb.licenseplate,
-		tb.email,
-		tb.bookedDate,
+		tb.email, 
+		DATE_FORMAT(tb.bookedDate,'%d/%m/%Y %H:%i') AS bookedDate,
 		tb.checkInAppointDate,
 		tb.checkOutAppointDate,
 		tb.is_breakfast,
@@ -260,8 +265,8 @@ class Mdl_checkin extends CI_Model {
 		tb.updateBY,
 		tbr.bookedroomID,
 		tbr.roomID,
-		tbr.checkinDate,
-		tbr.checkoutDate
+		DATE_FORMAT(tbr.checkinDate,'%d/%m/%Y %H:%i') AS checkinDate,
+		DATE_FORMAT(tbr.checkoutDate,'%d/%m/%Y %H:%i') AS checkoutDate
 		FROM ts_booked tb
 		INNER JOIN ts_booked_room tbr
 		ON tbr.bookedID = tb.bookedID

@@ -108,7 +108,7 @@ class Checkin extends CI_Controller {
 	public function saveCheckin()
 	{
 		$idCheckin = $this->Mdl_checkin->saveCheckin();
-		redirect($this->ctl,'refresh');
+		// redirect($this->ctl,'refresh');
 	}
 
 	public function checkinformedit($key='')

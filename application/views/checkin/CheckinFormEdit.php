@@ -9,8 +9,7 @@
 		<label for="selectRoom" class="col-lg-2 control-label">ห้องที่เลือก</label>
 		<div class="col-lg-10 ">
 			<div class="row">
-			<?php $n = 0; $room =  "";
-				foreach ($checkinRoomDtl as $crd) {  ?>
+			<?php  foreach ($checkinRoomDtl as $crd) {  ?>
 				<div class="col-lg-1" style="margin-right:20px;">
 					<span class="button-checkbox ">
 						<button type="button" class="btn btn_room btn-danger btn-xs" data-color="danger" disabled >
@@ -19,17 +18,11 @@
 						</button>
 					</span>
 				</div>
-			<?php  
-					if($n > 0){
-						$room .= "_".$crd['roomID'];
-					}else{
-						$room .= $crd['roomID'];
-					}
-					$n++;
-				} ?>
+				<input type="hidden" name="bookedroomID[]" value="<?php echo $crd['bookedroomID']; ?>">
+				<input type="hidden" name="roomID[]" value="<?php echo $crd['roomID']; ?>">
+			<?php } ?>
 			</div>
-		</div> 
-		<input type="hidden" name="selectRoom" value="<?php $room; ?>">
+		</div>  
 	</div>  
 	<div class="form-group">
 		<label for="idcardno" class="col-lg-2 control-label">เลขประจำประชาชน <b style="color: #FF0000">*</b></label>
@@ -242,7 +235,7 @@
 			<canvas id="canvas" name="idcardPicture"  class="bg-primary " width="260" height="195" ></canvas>
 			<img src="<?php echo base_url()."assets/images/imgcard/".$checkinDtl['idcardnoPath']; ?>" width="260" height="195" style="margin-top: -190px;"></img>
 			<input type="hidden" name="images" id="images" value=""> 
-			<input type="hidden" name="images_old" id="images_old" value="<?php echo $checkinDtl['idcardnoPath']; ?> "> 
+			<input type="hidden" name="images_old" id="images_old" value="<?php echo $checkinDtl['idcardnoPath']; ?>"> 
 		</div>
 	</div>
 	<div class="form-group">
