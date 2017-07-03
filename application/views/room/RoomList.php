@@ -26,14 +26,14 @@
     		<div class="row text-center" style="margin-top: 10px;">
     			<div class="col-lg-12" align="left">
     				<table id="fairlist" class="table table-striped table-bordered" cellspacing="0" width="100%" >
-    					<thead>
+    					<thead style="font-size: 13px;">
     						<tr >
     							<th  style="text-align: center;width: 40px;">No.</th>
-    							<th style="text-align: center;width:  150px;">ROOM NUMBER</th>
-    							<th style="text-align: center;width:  80px;">ROOM TYPE</th>
+    							<th style="text-align: center;width:  90px;">ROOM NUMBER</th>
+    							<th style="text-align: center;width:  50px;">ROOM TYPE</th>
     							<th style="text-align: center;width:  70px;">ROOM FLOOR</th>
     							<th style="text-align: center;width:  80px;">COMMENT</th>
-    							<th style="text-align: center;width:  80px;">TRANSACTION</th>
+    							<th style="text-align: center;width:  50px;">TRANSACTION</th>
     							<th style="text-align: center;width:  80px;">STATUS</th>
     							<th style="text-align: center;width:  100px;">CREATE DATE</th>
     							<th style="text-align: center;width:  100px;">UPDATE DATE</th>
@@ -41,66 +41,57 @@
     							<th style="text-align: center;width:  150px;">#</th>
     						</tr>
     					</thead>
-    					<tbody >
-    						<tr>
-    							<td  style="text-align: center;width: 40px;" >1</td>
-    							<td style="text-align: left;width:  150px;">201</td>
-    							<td style="text-align: center;width:  80px;">STANDDARD Singgle room</td>
-    							<td style="text-align: center;width:  70px;">2</td>
-    							<td style="text-align: center;width:  80px;">CLEANNING</td>
-    							<td style="text-align: center;width:  80px;">OFF</td>
-    							<td style=";clear:both;text-align: justify;width: 190px;">
-    								EnabledEnabledEnabledE
-    							</td>
-    							<td style="text-align: center;width:  100px;">13/06/2017 13:00</td>
-    							<td style="text-align: center;width:  100px;">15/06/2017 12:00</td>
-    							<td style="text-align: center;width:  100px;">Administrator</td>
-    							<td style="text-align: center;width:  150px;">
-    								<button class="btn btn-warning col-sm-5 pull-left  btn_edit">แก้ไข</button>
-    								<button class="btn btn-danger col-sm-5 pull-right  btn_delete">ลบ</button>
-    							</td>
-    						</tr>
-    						<tr>
-    							<td  style="text-align: center;width: 40px;" >2</td>
-    							<td style="text-align: left;width:  150px;">
-    								<ul>
-    									<li>STANDDARD</li>
-    									<li> TWINS ROOM เตียงคู่</li>
-    								</ul>
-    							</td>
-    							<td style="text-align: center;width:  80px;">300</td>
-    							<td style="text-align: center;width:  70px;">400</td>
-    							<td style="text-align: center;width:  80px;">500</td>
-    							<td style="text-align: center;width:  80px;">Enabled</td>
-    							<td style=";text-align: justify;width: 190px; ">Enabled</td>
-    							<td style="text-align: center;width:  100px;">13/06/2017 13:00</td>
-    							<td style="text-align: center;width:  100px;">15/06/2017 12:00</td>
-    							<td style="text-align: center;width:  100px;">Administrator</td>
-    							<td style="text-align: center;width:  150px;">
-    								<button class="btn btn-warning col-sm-5 pull-left  btn_edit">แก้ไข</button>
-    								<button class="btn btn-danger col-sm-5 pull-right  btn_delete">ลบ</button>
-    							</td>
-    						</tr>
-    						<tr>
-    							<td  style="text-align: center;width: 40px;" >3</td>
-    							<td style="text-align: left;width:  150px;">
-    								<ul>
-    									<li>VIP</li>
-    								</ul>
-    							</td>
-    							<td style="text-align: center;width:  80px;">400</td>
-    							<td style="text-align: center;width:  70px;">500</td>
-    							<td style="text-align: center;width:  80px;">600</td>
-    							<td style="text-align: center;width:  80px;">Disabled</td>
-    							<td style=";text-align: justify;width: 190px; ">Disabled</td>
-    							<td style="text-align: center;width:  100px;">13/06/2017 13:00</td>
-    							<td style="text-align: center;width:  100px;">15/06/2017 12:00</td>
-    							<td style="text-align: center;width:  100px;">Administrator</td>
-    							<td style="text-align: center;width:  150px;">
-    								<button class="btn btn-warning col-sm-5 pull-left  btn_edit">แก้ไข</button>
-    								<button class="btn btn-danger col-sm-5 pull-right  btn_delete">ลบ</button>
-    							</td>
-    						</tr>
+    					<tbody>
+    						<?php $no= 1; ?>
+    						<?php foreach ($getRoomAll as $rowRoom): ?>
+    							<tr>
+    								<td><?php echo $no++; ?></td>
+    								<td>
+    									<button class="btn btn-primary"><?php echo "ROOM ".$rowRoom['roomCODE']; ?></button>
+    								</td>
+    								<td>
+    									<?php echo $rowRoom['roomtypeCode']."<br>".$bed = ($rowRoom['bed'] == "เตียงเดี่ยว")? "<li>เตียงเดี่ยว</li>" : "<li>เตียงคู่</li>"; ?>
+    								</td>
+    								<td><?php echo "FLOOR ".$rowRoom['floor']; ?></td>
+    								<td></td>
+    								<td>
+    									<?php
+    									if($rowRoom['transaction'] == 'EMPTY'){
+    										echo "<button class='btn btn-default col-sm-10'>".$rowRoom['transaction']."</button>";
+    									}else if( $rowRoom['transaction'] == 'BOOKED'){
+    										echo "<button class='btn btn-warning col-sm-10'>".$rowRoom['transaction']."</button>";
+    									}else if($rowRoom['transaction'] == "CHECKIN"){
+    										echo "<button class='btn btn-danger col-sm-10'>".$rowRoom['transaction']."</button>";
+    									}else if($rowRoom['transaction'] == "CLEANNING"){
+    										echo "<button class='btn btn-success col-sm-10'>".$rowRoom['transaction']."</button>";
+    									}
+    									?>
+    								</td>
+    								<td>
+    									<?php
+    									if($rowRoom['status'] == 'ON'){
+    										echo "<button class='btn btn-success col-sm-10 '>".$rowRoom['status']."</button>";
+    									}else if( $rowRoom['status'] == 'BOOKED'){
+    										echo "<button class='btn btn-danger col-sm-10 '>".$rowRoom['status']."</button>";
+    									}
+    									?>
+    								</td>
+    								<td><?php echo $rowRoom['createDT'] ?></td>
+    								<td><?php echo $rowRoom['updateDT'] ?></td>
+    								<td><?php echo $rowRoom['createBY'] ?></td>
+    								<td>
+    									<button class="btn btn-primary btn-xs btn_edit" id="<?php echo MD5($rowRoom['roomID']); ?>" title="edit" style='margin-left:5px;'>
+    										<i class="fa fa-edit fa-2x"></i>
+    									</button>
+    									<button class="btn btn-danger btn-xs btn_cancel" id="<?php echo $rowRoom['roomID']; ?>" title="Cancle" style='margin-left:5px;'>
+    										<i class="fa fa-trash-o fa-2x" title="Cancle"></i>
+    									</button>
+    									<button class="btn btn-info btn-xs btn_info " id="<?php echo $rowRoom['roomID']; ?>" title="Cancle" style='margin-left:5px;'>
+    										<i class="fa fa-info-circle fa-2x" title="Info"></i>
+    									</button>
+    								</td>
+    							</tr>
+    						<?php endforeach; ?>
     					</tbody>
     				</table>
     			</div>
@@ -126,7 +117,7 @@
 
     			function roomEdit() {
     				$('.btn_edit').click(function(){
-    					load_page('<?php echo base_url()."index.php/roomtype/RoomtypeEdit/"; ?>','.:: EDIT ROOM TYPE ::.','#');
+    					load_page('<?php echo base_url()."index.php/room/roomEdit/"; ?>'+$(this).attr('id'),'.:: EDIT ROOM TYPE ::.','#');
     				});
     			}
 

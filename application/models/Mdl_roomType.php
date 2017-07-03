@@ -30,7 +30,7 @@ class Mdl_roomType extends CI_Model {
 		updateDT,
 		updateBY
 		FROM tm_roomtype
-		ORDER BY roomtypeID DESC
+		ORDER BY roomtypeID ASC
 		";
 		$query = $this->db->query($sql)->result_array();
 		return $query;

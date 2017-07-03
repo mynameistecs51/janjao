@@ -9,6 +9,8 @@ class Room extends CI_Controller {
 		$this->ctl="Room";
 		$this->pagename="ROOM";
 		$this->load->model('Mdl_user');
+		$this->load->model('Mdl_room');
+		$this->load->model('Mdl_roomType');
 		$this->dtnow = $this->packfunction->dtYMDnow();
 		$this->ip_addr = $this->input->ip_address();
 		$this->userID = $this->session->userdata('userID'); // ID จากตาราง Session
@@ -16,7 +18,7 @@ class Room extends CI_Controller {
 		if($this->userID==""){
 			// ถ้าไม่มี session หรือ ไม่มีการ Login ให้กลับไป authen
 			redirect('authen/');
-	    }
+		}
 
 	}
 
@@ -24,12 +26,43 @@ class Room extends CI_Controller {
 		$this->data['viewName']=$this->pagename;
 		$this->data['keyword']='';
 		$this->data['getlist']=$this->Mdl_user->getList($this->data['keyword']);
+		$this->data['getRoomAll'] = $this->Mdl_room->getRoomAll();
 		$this->packfunction->packView($this->data,"room/RoomList");
 	}
 
 	public function RoomFormAdd()
 	{
 		$this->load->view('room/RoomFormAdd');
+	}
+
+	public function roomEdit($id = "")
+	{
+		$getRoom = $this->Mdl_room->getRoomID($id);
+		$this->data['getRoom']  = '';
+		foreach ($getRoom as $rowRoom) {
+			$this->data['getRoom']   = array(
+				'roomID'  => $rowRoom['roomID'],
+				'floor'  => $rowRoom['floor'],
+				'zone'  => $rowRoom['zone'],
+				'roomCODE'  => $rowRoom['roomCODE'],
+				'transaction'  => $rowRoom['transaction'],
+				'comment'  => $rowRoom['comment'],
+				'status'  => $rowRoom['status'],
+				'createDT'  => $rowRoom['createDT'],
+				'createBY'  => $rowRoom['createBY'],
+				'updateDT'  => $rowRoom['updateDT'],
+				'updateBy'  => $rowRoom['updateBy'],
+				'roomtypeID'  => $rowRoom['roomtypeID'],
+				'bed'  => $rowRoom['bed'],
+				'roomtypeCode'  => $rowRoom['roomtypeCode'],
+				'price_month'  => $rowRoom['price_month'],
+				'price_day'  => $rowRoom['price_day'],
+				'price_short'  => $rowRoom['price_short'],
+				'price_hour'  => $rowRoom['price_hour'],
+				);
+		}
+		$this->data['roomType'] = $this->Mdl_roomType->getRoomTypeAll();
+		$this->load->view('room/RoomFormEdit',$this->data);
 	}
 
 	public function search(){
@@ -85,7 +118,7 @@ class Room extends CI_Controller {
 				"createBY"		=>$this->UserName,
 				"updateDT"		=>$this->packfunction->dtYMDnow(),
 				"updateBY"		=>$this->UserName
-			);
+				);
 			$userID = $this->Mdl_user->addNewData($data,'tm_user');
 
 			// echo "<pre>";
@@ -126,7 +159,7 @@ class Room extends CI_Controller {
 				"createBY"		=>$this->UserName,
 				"updateDT"		=>$this->packfunction->dtYMDnow(),
 				"updateBY"		=>$this->UserName
-			);
+				);
 			$userID = $_POST['userID'];
 			$this->Mdl_user->updateData($data,'tm_user',$userID);
 			redirect('user/last/'.md5($userID));
