@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jun 30, 2017 at 03:53 PM
+-- Host: 127.0.0.1
+-- Generation Time: Jul 03, 2017 at 11:27 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -10192,7 +10190,7 @@ INSERT INTO `tm_menu` (`MenuID`, `MenuName`, `MenuType`, `MenuParent`, `MenuURL`
 (5, 'REPORT', 'dropdown', 0, '#', NULL, 1, 5, 'ON', '2017-03-16 14:43:16', NULL),
 (6, 'SETTING', 'dropdown', 0, '#', NULL, 1, 6, 'ON', '2017-03-16 13:58:23', NULL),
 (20, 'Room', 'none', 6, 'room', NULL, 2, 7, 'ON', '2017-03-16 13:54:43', NULL),
-(21, 'Room Type', 'none', 6, 'questionnaire', NULL, 2, 8, 'ON', '2017-03-16 14:33:53', NULL),
+(21, 'Room Type', 'none', 6, 'roomtype', NULL, 2, 8, 'ON', '2017-03-16 14:33:53', NULL),
 (22, 'Service', 'none', 6, 'service', NULL, 2, 9, 'ON', '2017-03-16 13:58:36', NULL),
 (23, 'Service Type', 'none', 6, 'servicetype', NULL, 2, 10, 'ON', '2017-03-16 14:02:16', NULL),
 (24, 'User Group', 'none', 6, 'usergroup', NULL, 2, 12, 'ON', '2017-03-16 14:03:47', NULL),
@@ -10316,9 +10314,9 @@ CREATE TABLE `tm_roomtype` (
 --
 
 INSERT INTO `tm_roomtype` (`roomtypeID`, `bed`, `roomtypeCode`, `price_month`, `price_day`, `price_short`, `price_hour`, `comment`, `status`, `createDT`, `createBY`, `updateDT`, `updateBY`) VALUES
-(1, 'SINGLE', 'STANDARD', '0.00', '0.00', '0.00', '0.00', NULL, 'ON', '0000-00-00 00:00:00', '', '2017-06-30 00:00:00', 'AO'),
-(2, 'MULTIPLE', 'VIP', '0.00', '0.00', '0.00', '0.00', NULL, 'ON', '0000-00-00 00:00:00', '', NULL, NULL),
-(99, '', 'STAIRCASE', '0.00', '0.00', '0.00', '0.00', NULL, 'ON', '0000-00-00 00:00:00', '', NULL, NULL);
+(1, 'MULTIPLE', 'STANDARD', '0.00', '0.00', '0.00', '0.00', '', 'ON', '2017-07-03 15:55:37', 'admin', '2017-07-03 15:55:37', 'admin'),
+(2, 'MULTIPLE', 'VIP', '0.00', '0.00', '0.00', '0.00', '', 'OFF', '2017-07-03 16:13:36', 'admin', '2017-07-03 16:13:36', 'admin'),
+(99, 'SINGLE', 'STAIRCASE', '6.00', '5.00', '3.00', '4.00', '', 'ON', '2017-07-03 15:55:18', 'admin', '2017-07-03 15:55:18', 'admin');
 
 -- --------------------------------------------------------
 
@@ -10408,7 +10406,9 @@ INSERT INTO `tsc_gensn` (`id_tsc_gen`, `sncode`, `day_number`, `last_number`, `r
 (0, 'AAA', '1706', 4, 'AAA1701', '2017-06-22 01:05:48'),
 (0, 'TF', '1706', 1, 'TF01', '2017-06-28 09:48:17'),
 (0, 'TF', '1706', 4, 'TF1706', '2017-06-28 09:50:58'),
-(0, 'TS', '1706', 3, 'TS1706', '2017-06-30 20:44:27');
+(0, 'TS', '1706', 8, 'TS1706', '2017-07-01 15:08:37'),
+(0, 'BK', '1707', 16, 'BK1707', '2017-07-02 21:07:43'),
+(0, 'CH', '1707', 1, 'CH1707', '2017-07-02 11:53:25');
 
 -- --------------------------------------------------------
 
@@ -10428,10 +10428,12 @@ CREATE TABLE `ts_booked` (
   `birthdate` datetime DEFAULT NULL,
   `address` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL,
   `district` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `amphur` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `province` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `country` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `postcode` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `mobile` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `licenseplate` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `bookedDate` datetime NOT NULL,
   `checkInAppointDate` datetime NOT NULL,
@@ -10441,7 +10443,7 @@ CREATE TABLE `ts_booked` (
   `cashPledge` double(10,2) DEFAULT NULL,
   `cashPledgePath` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `comment` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `status` enum('ON','OFF') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'ON',
+  `status` enum('BOOKED','CHECKIN','LATE','CANCLE','HIDDEN') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'BOOKED',
   `createDT` datetime NOT NULL,
   `createBY` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `updateDT` datetime DEFAULT NULL,
@@ -10452,8 +10454,9 @@ CREATE TABLE `ts_booked` (
 -- Dumping data for table `ts_booked`
 --
 
-INSERT INTO `ts_booked` (`bookedID`, `bookedCode`, `idcardno`, `idcardnoPath`, `titleName`, `firstName`, `middleName`, `lastName`, `birthdate`, `address`, `district`, `province`, `country`, `postcode`, `mobile`, `email`, `bookedDate`, `checkInAppointDate`, `checkOutAppointDate`, `is_breakfast`, `bookedType`, `cashPledge`, `cashPledgePath`, `comment`, `status`, `createDT`, `createBY`, `updateDT`, `updateBY`) VALUES
-(1, 'TS170600001', 2147483647, '11111111111111.png', 'male', 'chaiwat', '', 'หอมแสง', '1999-06-09 20:00:48', 'บ้าน ', '3736', '29', '', '41000', '1111111111', 't@gmail.com', '2017-06-21 22:00:13', '2017-06-28 22:00:17', '2017-06-30 23:00:20', '', 'DAY', 0.00, '', '', 'ON', '2017-06-30 20:40:56', 'admin', '2017-06-30 20:40:56', 'admin');
+INSERT INTO `ts_booked` (`bookedID`, `bookedCode`, `idcardno`, `idcardnoPath`, `titleName`, `firstName`, `middleName`, `lastName`, `birthdate`, `address`, `district`, `amphur`, `province`, `country`, `postcode`, `mobile`, `licenseplate`, `email`, `bookedDate`, `checkInAppointDate`, `checkOutAppointDate`, `is_breakfast`, `bookedType`, `cashPledge`, `cashPledgePath`, `comment`, `status`, `createDT`, `createBY`, `updateDT`, `updateBY`) VALUES
+(1, 'BK170700015', 2147483647, '2147483647.png', 'MALE', 'ff', '', 'kk', '2560-01-01 00:00:00', '', NULL, '', NULL, '', '', '', '', '', '2017-07-02 11:00:00', '2017-07-02 12:00:00', '2017-07-04 12:00:00', 'NO', 'DAY', 0.00, '', '', 'CHECKIN', '2017-07-02 11:02:56', 'admin', '2017-07-02 21:02:25', 'admin'),
+(2, 'CH170700001', 2147483647, '2222222222222.png', 'MALE', '22', '', '22', '2532-11-08 00:00:00', '2', 'ทรายทอง', 'ศรีบุญเรือง', 'หนองบัวลำภู', 'THAILAND', '39180', '082', '1กก 2345', 'mail@mail.com', '2017-07-02 12:00:00', '2017-07-02 12:00:00', '2017-07-05 11:53:00', 'NO', 'DAY', 0.00, '', '', 'CHECKIN', '2017-07-02 11:53:25', 'admin', '2017-07-02 11:53:25', 'admin');
 
 -- --------------------------------------------------------
 
@@ -10480,8 +10483,11 @@ CREATE TABLE `ts_booked_room` (
 --
 
 INSERT INTO `ts_booked_room` (`bookedroomID`, `bookedID`, `roomID`, `checkinDate`, `checkoutDate`, `comment`, `status`, `createDT`, `createBY`, `updateDT`, `updateBY`) VALUES
-(1, 1, 210, '2017-06-28 22:00:17', '2017-06-30 23:00:20', '', 'BOOKED', '2017-06-30 20:40:56', 'admin', '2017-06-30 20:40:56', 'admin'),
-(2, 1, 212, '2017-06-28 22:00:17', '2017-06-30 23:00:20', '', 'BOOKED', '2017-06-30 20:40:56', 'admin', '2017-06-30 20:40:56', 'admin');
+(1, 1, 202, '2017-07-02 12:00:00', '2017-07-04 12:00:00', '', 'CHECKIN', '2017-07-02 11:02:56', 'admin', '2017-07-02 21:02:25', 'admin'),
+(2, 1, 204, '2017-07-02 12:00:00', '2017-07-04 12:00:00', '', 'CHECKIN', '2017-07-02 11:02:56', 'admin', '2017-07-02 21:02:25', 'admin'),
+(3, 1, 206, '2017-07-02 12:00:00', '2017-07-04 12:00:00', '', 'CHECKIN', '2017-07-02 11:02:56', 'admin', '2017-07-02 21:02:25', 'admin'),
+(4, 2, 208, '2017-07-02 12:00:00', '2017-07-05 11:53:00', '', 'CHECKIN', '2017-07-02 11:53:25', 'admin', '2017-07-02 11:53:25', 'admin'),
+(5, 2, 210, '2017-07-02 12:00:00', '2017-07-05 11:53:00', '', 'CHECKIN', '2017-07-02 11:53:25', 'admin', '2017-07-02 11:53:25', 'admin');
 
 -- --------------------------------------------------------
 
@@ -10491,6 +10497,7 @@ INSERT INTO `ts_booked_room` (`bookedroomID`, `bookedID`, `roomID`, `checkinDate
 
 CREATE TABLE `ts_booked_room_log` (
   `logroomdateID` bigint(20) NOT NULL,
+  `bookedID` bigint(20) NOT NULL,
   `bookedroomID` bigint(20) NOT NULL,
   `roomID` int(10) NOT NULL,
   `logDate` datetime DEFAULT NULL,
@@ -10506,9 +10513,24 @@ CREATE TABLE `ts_booked_room_log` (
 -- Dumping data for table `ts_booked_room_log`
 --
 
-INSERT INTO `ts_booked_room_log` (`logroomdateID`, `bookedroomID`, `roomID`, `logDate`, `comment`, `status`, `createDT`, `createBY`, `updateDT`, `updateBY`) VALUES
-(1, 1, 210, '2017-06-30 20:40:56', '', 'BOOKED', '2017-06-30 20:40:56', 'admin', '2017-06-30 20:40:56', 'admin'),
-(2, 2, 212, '2017-06-30 20:40:56', '', 'BOOKED', '2017-06-30 20:40:56', 'admin', '2017-06-30 20:40:56', 'admin');
+INSERT INTO `ts_booked_room_log` (`logroomdateID`, `bookedID`, `bookedroomID`, `roomID`, `logDate`, `comment`, `status`, `createDT`, `createBY`, `updateDT`, `updateBY`) VALUES
+(10, 0, 4, 208, '2017-07-02 12:00:00', '', 'CHECKIN', '2017-07-02 11:53:25', 'admin', '2017-07-02 11:53:25', 'admin'),
+(11, 0, 4, 208, '2017-07-03 12:00:00', '', 'CHECKIN', '2017-07-02 11:53:25', 'admin', '2017-07-02 11:53:25', 'admin'),
+(12, 0, 4, 208, '2017-07-04 12:00:00', '', 'CHECKIN', '2017-07-02 11:53:25', 'admin', '2017-07-02 11:53:25', 'admin'),
+(13, 0, 4, 208, '2017-07-05 12:00:00', '', 'CHECKIN', '2017-07-02 11:53:25', 'admin', '2017-07-02 11:53:25', 'admin'),
+(14, 0, 5, 210, '2017-07-02 12:00:00', '', 'CHECKIN', '2017-07-02 11:53:25', 'admin', '2017-07-02 11:53:25', 'admin'),
+(15, 0, 5, 210, '2017-07-03 12:00:00', '', 'CHECKIN', '2017-07-02 11:53:25', 'admin', '2017-07-02 11:53:25', 'admin'),
+(16, 0, 5, 210, '2017-07-04 12:00:00', '', 'CHECKIN', '2017-07-02 11:53:25', 'admin', '2017-07-02 11:53:25', 'admin'),
+(17, 0, 5, 210, '2017-07-05 12:00:00', '', 'CHECKIN', '2017-07-02 11:53:25', 'admin', '2017-07-02 11:53:25', 'admin'),
+(27, 0, 1, 202, '2017-07-02 12:00:00', '', 'CHECKIN', '2017-07-02 21:02:25', 'admin', '2017-07-02 21:02:25', 'admin'),
+(28, 0, 1, 202, '2017-07-03 12:00:00', '', 'CHECKIN', '2017-07-02 21:02:25', 'admin', '2017-07-02 21:02:25', 'admin'),
+(29, 0, 1, 202, '2017-07-04 12:00:00', '', 'CHECKIN', '2017-07-02 21:02:25', 'admin', '2017-07-02 21:02:25', 'admin'),
+(30, 0, 2, 204, '2017-07-02 12:00:00', '', 'CHECKIN', '2017-07-02 21:02:25', 'admin', '2017-07-02 21:02:25', 'admin'),
+(31, 0, 2, 204, '2017-07-03 12:00:00', '', 'CHECKIN', '2017-07-02 21:02:25', 'admin', '2017-07-02 21:02:25', 'admin'),
+(32, 0, 2, 204, '2017-07-04 12:00:00', '', 'CHECKIN', '2017-07-02 21:02:25', 'admin', '2017-07-02 21:02:25', 'admin'),
+(33, 0, 3, 206, '2017-07-02 12:00:00', '', 'CHECKIN', '2017-07-02 21:02:25', 'admin', '2017-07-02 21:02:25', 'admin'),
+(34, 0, 3, 206, '2017-07-03 12:00:00', '', 'CHECKIN', '2017-07-02 21:02:25', 'admin', '2017-07-02 21:02:25', 'admin'),
+(35, 0, 3, 206, '2017-07-04 12:00:00', '', 'CHECKIN', '2017-07-02 21:02:25', 'admin', '2017-07-02 21:02:25', 'admin');
 
 -- --------------------------------------------------------
 
@@ -18514,7 +18536,7 @@ ALTER TABLE `tm_room`
 -- AUTO_INCREMENT for table `tm_roomtype`
 --
 ALTER TABLE `tm_roomtype`
-  MODIFY `roomtypeID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `roomtypeID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 --
 -- AUTO_INCREMENT for table `tm_user`
 --
@@ -18529,17 +18551,17 @@ ALTER TABLE `tm_usergroup`
 -- AUTO_INCREMENT for table `ts_booked`
 --
 ALTER TABLE `ts_booked`
-  MODIFY `bookedID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `bookedID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `ts_booked_room`
 --
 ALTER TABLE `ts_booked_room`
-  MODIFY `bookedroomID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `bookedroomID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `ts_booked_room_log`
 --
 ALTER TABLE `ts_booked_room_log`
-  MODIFY `logroomdateID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `logroomdateID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT for table `ts_cash_dtl`
 --
@@ -18559,8 +18581,7 @@ ALTER TABLE `ts_service`
 -- AUTO_INCREMENT for table `zipcode`
 --
 ALTER TABLE `zipcode`
-  MODIFY `ZIPCODE_ID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7456;COMMIT;
-
+  MODIFY `ZIPCODE_ID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7456;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

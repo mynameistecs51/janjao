@@ -14,7 +14,10 @@ class Mdl_roomType extends CI_Model {
 		$sql = "
 		SELECT
 		roomtypeID,
-		bed,
+		CASE bed
+		WHEN 'SINGLE' THEN 'เตียงดี่ยว'
+		WHEN 'MULTIPLE' THEN 'เตียงคู่'
+		END  bed,
 		roomtypeCode,
 		price_month,
 		price_day,
@@ -28,6 +31,33 @@ class Mdl_roomType extends CI_Model {
 		updateBY
 		FROM tm_roomtype
 		ORDER BY roomtypeID DESC
+		";
+		$query = $this->db->query($sql)->result_array();
+		return $query;
+	}
+
+	public function getRoomtypeID($id)
+	{
+		$sql = "
+		SELECT
+		roomtypeID,
+		CASE bed
+		WHEN 'SINGLE' THEN 'เตียงดี่ยว'
+		WHEN 'MULTIPLE' THEN 'เตียงคู่'
+		END  bed,
+		roomtypeCode,
+		price_month,
+		price_day,
+		price_short,
+		price_hour,
+		comment,
+		status,
+		createDT,
+		createBY,
+		updateDT,
+		updateBY
+		FROM tm_roomtype
+		WHERE MD5(roomtypeID) = '".$id."'
 		";
 		$query = $this->db->query($sql)->result_array();
 		return $query;
@@ -52,6 +82,34 @@ class Mdl_roomType extends CI_Model {
 			);
 		$this->db->insert('tm_roomtype', $data);
 		redirect('roomtype','refresh');
+	}
+
+	public function saveEdit()
+	{
+		$data =array(
+			'bed'          => $this->input->post('bed'),
+			'roomtypeCode' => $this->input->post('roomtypeCode'),
+			'price_short'  => $this->input->post('price_short'),
+			'price_hour'   => $this->input->post('price_hour'),
+			'price_day'    => $this->input->post('price_day'),
+			'price_month'  => $this->input->post('price_month'),
+			'status'			    => $this->input->post('status'),
+			'comment'		    => $this->input->post('comment'),
+			"createDT"		   => $this->packfunction->dtYMDnow(),
+			"createBY"		   => $this->UserName,
+			"updateDT"		   => $this->packfunction->dtYMDnow(),
+			"updateBY"		   => $this->UserName
+			);
+		$this->db->where('roomtypeID' , $this->input->post('roomtypeID'));
+		$this->db->update('tm_roomtype',$data);
+	}
+
+	public function deleteRoomtype()
+	{
+		$id = $this->getRoomtypeID($this->input->post('roomtypeID'));
+
+		$this->db->where('roomtypeID',$id[0]['roomtypeID']);
+		$data = $this->db->delete('tm_roomtype');
 	}
 
 }

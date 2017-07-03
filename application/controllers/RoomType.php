@@ -33,14 +33,45 @@ class RoomType extends CI_Controller {
 		$this->load->view('roomtype/RoomtypeAdd');
 	}
 
-	public function RoomtypeEdit()
-	{
-		$this->load->view('roomtype/RoomtypeEdit');
-	}
-
 	public function saveAdd()
 	{
 		$this->Mdl_roomType->saveAdd();
+	}
+
+	public function RoomtypeEdit($id)
+	{
+		$getRoomtypeID = $this->Mdl_roomType->getRoomtypeID($id);
+		$this->data['getRoomtype'] = '';
+		foreach ($getRoomtypeID as $key => $rowRoomType) {
+			$this->data['getRoomtype'] = array(
+				'roomtypeID' => $rowRoomType['roomtypeID'],
+				'bed' => $rowRoomType['bed'],
+				'roomtypeCode' => $rowRoomType['roomtypeCode'],
+				'price_month' => $rowRoomType['price_month'],
+				'price_day' => $rowRoomType['price_day'],
+				'price_short' => $rowRoomType['price_short'],
+				'price_hour' => $rowRoomType['price_hour'],
+				'comment' => $rowRoomType['comment'],
+				'status' => $rowRoomType['status'],
+				'createDT' => $rowRoomType['createDT'],
+				'createBY' => $rowRoomType['createBY'],
+				'updateDT' => $rowRoomType['updateDT'],
+				'updateB' => $rowRoomType['updateBY'],
+				);
+		}
+		$this->load->view('roomtype/RoomtypeEdit',$this->data);
+	}
+
+	public function saveEdit()
+	{
+		$this->Mdl_roomType->saveEdit();
+		redirect($this->ctl,'refresh');
+	}
+
+	public function deleteRoomtype()
+	{
+		$data = $this->Mdl_roomType->deleteRoomtype();
+		redirect($this->ctl,'refresh');
 	}
 
 }
