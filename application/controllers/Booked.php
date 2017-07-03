@@ -102,7 +102,16 @@ class Booked extends CI_Controller {
 	public function saveUpdate()
 	{
 		$this->Mdl_booked->saveUpdate();
-		//redirect($this->ctl,'refresh');
+		redirect($this->ctl,'refresh');
+	} 
+	
+	public function saveCancle(){ 
+		if($_POST){
+			$this->Mdl_booked->saveCancle($_POST['key']);
+			echo json_encode(['status'=>'success']);
+		}else{
+			redirect('authen/','refresh');
+		}
 	}
 
 	public function count()

@@ -250,6 +250,34 @@ class Mdl_booked extends CI_Model {
 		} // End ts_booked_room  
 	}
 
+	public function saveCancle($key='')
+	{  
+		// ยกเลิกใบจอง 
+		$saveCheckin= array( 
+			'comment' => 'CANCLE BY '.$this->UserName,
+			'status'  => 'CANCLE', 
+			"updateDT"=>$this->packfunction->dtYMDnow(),
+			"updateBY"=>$this->UserName
+		); 
+		$this->db->where('bookedID',$key);
+		$this->db->update('ts_booked',$saveCheckin);
+
+		// ยกเลิกห้องที่จอง 
+		$saveCheckRoom = array(
+			'comment' => 'CANCLE BY '.$this->UserName,
+			'status'  => 'CANCLE', 
+			"updateDT"		    => $this->packfunction->dtYMDnow(),
+			"updateBY"		    => $this->UserName
+			); 
+		$this->db->where('bookedID',$key); 
+		$this->db->update('ts_booked_room',$saveCheckRoom);  
+
+ 
+		$this->db->where('bookedID',$key);
+		$this->db->delete('ts_booked_room_log'); 
+	}
+	
+
 	function base64_to_png( $base64_string, $output_file ) {  //create picture
 		fopen($base64_string,'w');
 		$ifp = fopen( $output_file, "r+" );

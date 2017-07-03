@@ -37,7 +37,7 @@
                     <?php if(count($getBooked)>0) { ?>
     				<?php foreach ($getBooked as $key => $rowbooked) :?>
     					<?php $numRoom = count($rowbooked['selectRoom']); ?>
-    					<tr>
+    					<tr id="row<?php echo $rowbooked['bookedID']; ?>">
     						<td><?php echo $i++; ?></td>
     						<td><?php echo $rowbooked['bookedCode'] ?></td>
     						<td><?php echo $rowbooked['firstName']." ".$rowbooked['lastName']; ?></td>
@@ -74,28 +74,31 @@
     	<div class="div_modal"> <!-- show modal Bill --> </div> 
     	<script type="text/javascript">
     		$(function() { 
-        	    bookedEdit();
-        	    bookedCancel();
-	        });
-
-    		function bookedCancel() {
-    			$('.btn_cancel').click(function(){
-    				var cfm = confirm("ยกเลิกการเช่าห้องพัก");
-    				if(cfm == true){
-    					$(this).remove();
-    				}else{
-    					return false;
-    				}
-    			});
-    		}
-
-    		function bookedEdit() {
-    			$('.btn_edit').click(function(){
+                $('.btn_edit').click(function(){
                     var id = $(this).attr('id');
-    				load_page('<?php echo base_url()?>booked/bookedformedit/'+id ,'.:: Data Booking ::.','<?php echo base_url()."booked/saveUpdate/"; ?>');
-    			});
-    		}
-
+                    load_page('<?php echo base_url()."checkin/checkinformedit/"; ?>'+id+'','.:: Data Checkin ::.','<?php echo base_url()."checkin/saveUpdate/"; ?>');
+                }); 
+                $('.btn_cancel').click(function(){
+                    var cfm = confirm("ยืนยันยกเลิกการเช่าห้องพัก คุณไม่สามารถย้อนกลับมาใช้ข้อมูลได้ !");
+                    if(cfm == true){
+                        var id = $(this).attr('id');
+                        $.ajax({
+                            url: '<?php echo base_url()."booked/saveCancle/";?>',
+                            data:{key:id},
+                            type: 'POST',
+                            dataType: 'json',
+                            success:function(res){
+                                 $('tbody tr#row'+id).remove();
+                            },
+                            error:function(res){
+                                alert("พบข้อผิดพลาด !"); 
+                            }
+                        }); 
+                    }else{
+                        return false;
+                    }
+                });
+            });  
 
     		function load_page(loadUrl,texttitle,urlsend){
     			var screenname= texttitle;
