@@ -18,27 +18,27 @@
     		</div>
     	</div>
     	<div class="row text-center" style="margin-top: 10px;">
-    		<div class="col-lg-12" align="left">
-    		<!-- <?php echo "<pre>"; ?>
-    		<?php print_r($getBooked); ?> -->
+    		<div class="col-lg-12" align="left"> 
     		<table id="fairlist" class="table table-striped table-bordered" cellspacing="0" width="100%" >
     			<thead>
     				<tr >
     					<th  style="text-align: center;width: 40px;">No.</th>
-    					<th style="text-align: center;width:  150px;">BOOKED NUMBER</th>
-    					<th style="text-align: center;width:  150px;">NAME </th>
-    					<th style="text-align: center;width:  150px;">ROOM</th>
-    					<th style="text-align: center;width:  100px;">BOOKED DATE</th>
-    					<th style="text-align: center;width:  100px;">CHECKIN DATE</th>
-    					<th style="text-align: center;width:  80px;"> STATUS</th>
-    					<th style="text-align: center;width:  150px;">#</th>
+    					<th style="text-align: center;width:  120px;">BOOKED No.</th>
+    					<th style="text-align: center;">NAME </th>
+    					<th style="text-align: center;width:  250px;">ROOM</th>
+    					<th style="text-align: center;width:  140px;">BOOKED DATE</th>
+    					<th style="text-align: center;width:  140px;">CHECKIN DATE</th>
+                        <th style="text-align: center;width:  140px;">CHECKOUT DATE</th>
+    					<th style="text-align: center;width:  90px;"> STATUS</th>
+    					<th style="text-align: center;width:  190px;">#</th>
     				</tr>
     			</thead>
     			<tbody>
     				<?php $i=1; ?>
+                    <?php if(count($getCheckin)>0) { ?>
     				<?php foreach ($getCheckin as $key => $rowCheckin) :?>
     					<?php $numRoom = count($rowCheckin['selectRoom']); ?>
-    					<tr>
+    					<tr id="row<?php echo $rowCheckin['bookedID']; ?>">
     						<td><?php echo $i++; ?></td>
     						<td><?php echo $rowCheckin['bookedCode'] ?></td>
     						<td><?php echo $rowCheckin['firstName']." ".$rowCheckin['lastName']; ?></td>
@@ -46,32 +46,44 @@
     								<?php $color = $rowCheckin['status']=='CHECKIN' ? 'danger':'warning';
     								for($i=0;$i < $numRoom; $i++)
     								{ 
-    									echo "<button class='col-sm-5 btn-".$color."' style='margin-left:5px;'>",$rowCheckin['selectRoom'][$i]['roomID']."</button> ";
+    									echo "<button class='col-lg-3 btn-".$color."' style='margin-left:5px;'>",$rowCheckin['selectRoom'][$i]['roomID']."</button> ";
     								}
     								?>
     							</td>
     							<td><?php echo $rowCheckin['bookedDate']; ?></td>
     							<td><?php echo $rowCheckin['status']=='CHECKIN' ? $rowCheckin['checkinDate']:'' ; ?></td>
+                                <td><?php echo $rowCheckin['status']=='CHECKIN' ? $rowCheckin['checkoutDate']:'' ; ?></td>
     							<td><?php echo $rowCheckin['status']; ?></td>
     							<td >
                                 <?php if($rowCheckin['status']=='CHECKIN'){ ?>
-    								<button class="btn btn-primary col-sm-3  btn-xs btn_edit" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="edit" style='margin-left:5px;'>
+    								<button class="btn btn-primary btn-xs btn_edit" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="edit" style='margin-left:5px;'>
     									<i class="fa fa-edit fa-2x"></i>
     								</button>
-    								<button class="btn btn-warning col-sm-3  btn-xs btn_cancel" title="Add Service" style='margin-left:5px;'>
-    									<i class="fa fa-plus-square fa-2x" title="Add Service"></i>
+    								<button class="btn btn-warning btn-xs btn_addservice" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="Add Service" style='margin-left:5px;'>
+    									<i class="fa fa-cutlery fa-2x" title="Add Service"></i>
     								</button>
-    								<button class="btn btn-info col-sm-3  btn-xs btn_info" title="Print" style='margin-left:5px;'>
+    								<button class="btn btn-info btn-xs btn_info" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="Print" style='margin-left:5px;'>
     									<i class="fa fa-print fa-2x" title="Print"></i>
     								</button>
+                                    <button class="btn btn-danger btn-xs btn_cancel" id="<?php echo $rowCheckin['bookedID']; ?>" title="Add Service" style='margin-left:5px;'>
+                                        <i class="fa fa-trash-o fa-2x" title="Cancle"></i>
+                                    </button>
                                 <?php }else{ ?> 
-                                    <button class="btn btn-danger col-sm-3  btn-xs btn_checkin" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="edit" style='margin-left:5px;'>
+                                    <button class="btn btn-danger btn-xs btn_checkin" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="edit" style='margin-left:5px;'>
                                         <i class="fa fa-edit fa-2x"></i>
+                                    </button>
+                                    <button class="btn btn-danger btn-xs btn_cancel" id="<?php echo $rowCheckin['bookedID']; ?>" title="Add Service" style='margin-left:5px;'>
+                                        <i class="fa fa-trash-o fa-2x" title="Cancle"></i>
                                     </button>
                                 <?php } ?>
     							</td>
     						</tr>
     					<?php endforeach; ?> 
+                        <?php }else{ ?>
+                            <tr>
+                                <td colspan="9">No Booked And Checkin Data !</td>
+                            </tr>
+                        <?php } ?>
     				</tbody>
     			</table>
     		</div>
@@ -80,35 +92,36 @@
     	<!-- /.row --> 
     	<!--  END Fair List -->
     	<script type="text/javascript">
-    		$(function() {
-	    // $('#fairlist').DataTable();
-	    bookedEdit();
-	    bookedCancel();
-	  } );
-
-		function bookedCancel() {
-			$('.btn_cancel').click(function(){
-				var cfm = confirm("ยกเลิกการเช่าห้องพัก");
-				if(cfm == true){
-					$(this).remove();
-				}else{
-					return false;
-				}
-			});
-		}
-
-		function bookedEdit() {
-			$('.btn_edit').click(function(){
-                var id = $(this).attr('id');
-				load_page('<?php echo base_url()."checkin/checkinformedit/"; ?>'+id+'','.:: Data Checkin ::.','#');
-			});
-            $('.btn_checkin').click(function(){
-                var id = $(this).attr('id');
-                load_page('<?php echo base_url()."checkin/checkinformcheckin/"; ?>'+id+'','.:: Data Checkin ::.','<?php echo base_url()."checkin/saveCheckin/"; ?>');
-            });
-            
-		}
-
+    		$(function() { 
+        	    $('.btn_edit').click(function(){
+                    var id = $(this).attr('id');
+                    load_page('<?php echo base_url()."checkin/checkinformedit/"; ?>'+id+'','.:: Data Checkin ::.','<?php echo base_url()."checkin/saveUpdate/"; ?>');
+                });
+                $('.btn_checkin').click(function(){
+                    var id = $(this).attr('id');
+                    load_page('<?php echo base_url()."checkin/checkinformcheckin/"; ?>'+id+'','.:: Data Checkin ::.','<?php echo base_url()."checkin/saveCheckin/"; ?>');
+                });
+                $('.btn_cancel').click(function(){
+                    var cfm = confirm("ยืนยันยกเลิกการเช่าห้องพัก คุณไม่สามารถย้อนกลับมาใช้ข้อมูลได้ !");
+                    if(cfm == true){
+                        var id = $(this).attr('id');   
+                        $.ajax({
+                            url: '<?php echo base_url().$this->ctl."/saveCancle/";?>',
+                            data:{key:id},
+                            type: 'POST',
+                            dataType: 'json',
+                            success:function(res){
+                                 $('tbody tr#row'+id).remove();
+                            },
+                            error:function(res){
+                                alert("พบข้อผิดพลาด !"); 
+                            }
+                        }); 
+                    }else{
+                        return false;
+                    }
+                });
+        	});
 
     		function load_page(loadUrl,texttitle,urlsend){
     			var screenname= texttitle;

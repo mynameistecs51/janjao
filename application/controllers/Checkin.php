@@ -104,13 +104,27 @@ class Checkin extends CI_Controller {
 	public function saveAdd()
 	{
 		$idCheckin = $this->Mdl_checkin->saveAdd();
-		redirect($this->ctl,'refresh');
+		redirect('checkin/','refresh');
 	}
 
 	public function saveCheckin()
 	{
 		$idCheckin = $this->Mdl_checkin->saveCheckin();
-		// redirect($this->ctl,'refresh');
+		redirect('checkin/','refresh');
+	}
+
+	public function saveUpdate(){
+		$this->Mdl_checkin->saveCheckin();
+		redirect('checkin/','refresh');
+	}
+
+	public function saveCancle(){ 
+		if($_POST){
+			$this->Mdl_checkin->saveCancle($_POST['key']);
+			echo json_encode(['status'=>'success']);
+		}else{
+			redirect('authen/','refresh');
+		}
 	}
 
 	public function checkinformedit($key='')
@@ -126,10 +140,10 @@ class Checkin extends CI_Controller {
 		$this->load->view('checkin/CheckinFormEdit',$this->data);
 	}
 
-	public function bill()
-	{
-		$this->data['getMonth'] = $this->packfunction->getMonth();
-		$this->data['getYear'] = $this->packfunction->getYear();
+	public function bill($key='')
+	{ 
+		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
+		$this->data['checkinRoomDtl']=$this->Mdl_checkin->bookedRoom($this->data['checkinDtl']['bookedID']);
 		$this->load->view('checkin/Bill',$this->data);
 	}
 
@@ -143,94 +157,10 @@ class Checkin extends CI_Controller {
 			redirect('checkin/');
 		}
 	}
-
-	public function last($key=''){
-		$this->data['viewName']=$this->pagename;
-		$this->data['keyword']='';
-		$this->data['getlist']=$this->Mdl_user->getLast($key);
-		$this->packfunction->packView($this->data,"user/UserList");
-	} 
+ 
 
 	
 
-	public function saveData()
-	{
-		if($_POST)
-		{
-			$data = array(
-				"username"	=>$_POST['username'],
-				"useremail"	=>$_POST['useremail'],
-				"userIdcard"=>$_POST['userIdcard'],
-				"userTitle"	=>$_POST['userTitle'],
-				"userFname"	=>$_POST['userFname'],
-				"userMname"	=>$_POST['userMname'],
-				"userLname"	=>$_POST['userLname'],
-				"countryID"	=>$_POST['countryID'],
-				"address"		=>$_POST['address'],
-				"city"			=>$_POST['city'],
-				"state"			=>$_POST['state'],
-				"postcode"		=>$_POST['postcode'],
-				"mobile"		=>$_POST['mobile'],
-				"usergroupID"	=>$_POST['usergroupID'],
-				"status"		=>'ON',
-				"createDT"		=>$this->packfunction->dtYMDnow(),
-				"createBY"		=>$this->UserName,
-				"updateDT"		=>$this->packfunction->dtYMDnow(),
-				"updateBY"		=>$this->UserName
-				);
-			$userID = $this->Mdl_user->addNewData($data,'tm_user');
-
-			// echo "<pre>";
-			// print_r($data);
-			// print_r($_FILES);
-
-			redirect('user/last/'.md5($userID));
-		}else{
-			redirect('authen/');
-		}
-	}
-
-	public function saveUpdate()
-	{
-		if($_POST)
-		{
-			$data = array(
-				"username"	=>$_POST['username'],
-				"useremail"	=>$_POST['useremail'],
-				"userIdcard"=>$_POST['userIdcard'],
-				"userTitle"	=>$_POST['userTitle'],
-				"userFname"	=>$_POST['userFname'],
-				"userMname"	=>$_POST['userMname'],
-				"userLname"	=>$_POST['userLname'],
-				"countryID"	=>$_POST['countryID'],
-				"companyName"	=>$_POST['companyName'],
-				"position"		=>$_POST['position'],
-				"address"		=>$_POST['address'],
-				"city"			=>$_POST['city'],
-				"state"			=>$_POST['state'],
-				"postcode"		=>$_POST['postcode'],
-				"telephone"		=>$_POST['telephone'],
-				"mobile"		=>$_POST['mobile'],
-				"usergroupID"	=>$_POST['usergroupID'],
-				"tradeID"		=>$_POST['tradeID'],
-				"status"		=>'ON',
-				"createDT"		=>$this->packfunction->dtYMDnow(),
-				"createBY"		=>$this->UserName,
-				"updateDT"		=>$this->packfunction->dtYMDnow(),
-				"updateBY"		=>$this->UserName
-				);
-			$userID = $_POST['userID'];
-			$this->Mdl_user->updateData($data,'tm_user',$userID);
-			redirect('user/last/'.md5($userID));
-		}else{
-			redirect('authen/');
-		}
-	}
-
-	public function checkdata()
-	{
-		$result = $this->Mdl_user->chk_data($_POST['txt'],$_POST['field'],$_POST['id']);
-		echo json_encode($result);
-	}
+	  
 
 }?>

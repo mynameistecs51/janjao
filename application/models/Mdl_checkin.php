@@ -93,6 +93,7 @@ class Mdl_checkin extends CI_Model {
 					$runDay[$year][$month]++; 
 
 				$log = array(
+				'bookedID '     => $idBooked,
 				'bookedroomID' => $idBookedRoom[$i],
 				'roomID'       => $room[$i],
 				'logDate'      => $startDate->format('Y-m-d').' 12:00:00',
@@ -182,18 +183,9 @@ class Mdl_checkin extends CI_Model {
 			$endDate  = date_create($this->packfunction->dateTosql($this->input->post('checkOutDate')));
 			$interval = date_diff($startDate, $endDate); 
 			$runDay = array();
-			while ($startDate <= $endDate) {
-				/*
-				$year = $startDate->format("Y");
-				$month = $startDate->format("m");
-
-				if(!array_key_exists($year, $runDay))
-					$runDay[$year] = array();
-				if(!array_key_exists($month, $runDay[$year]))
-					$runDay[$year][$month] = 0; 
-					$runDay[$year][$month]++; 
-				*/
+			while ($startDate <= $endDate) { 
 				$log = array(
+					'bookedID '    => $bookedID,
 					'bookedroomID' => $bookedroomID[$sr],
 					'roomID'       => $this->input->post('roomID')[$sr],
 					'logDate'      => $startDate->format('Y-m-d').' 12:00:00',
@@ -208,6 +200,33 @@ class Mdl_checkin extends CI_Model {
 				$startDate->modify("+1 day");
 			}  
 		} // End ts_booked_room  
+	}
+
+	public function saveCancle($key='')
+	{  
+		// ยกเลิกใบจอง 
+		$saveCheckin= array( 
+			'comment' => 'CANCLE BY '.$this->UserName,
+			'status'  => 'CANCLE', 
+			"updateDT"=>$this->packfunction->dtYMDnow(),
+			"updateBY"=>$this->UserName
+		); 
+		$this->db->where('bookedID',$key);
+		$this->db->update('ts_booked',$saveCheckin);
+
+		// ยกเลิกห้องที่จอง 
+		$saveCheckRoom = array(
+			'comment' => 'CANCLE BY '.$this->UserName,
+			'status'  => 'CANCLE', 
+			"updateDT"		    => $this->packfunction->dtYMDnow(),
+			"updateBY"		    => $this->UserName
+			); 
+		$this->db->where('bookedID',$key); 
+		$this->db->update('ts_booked_room',$saveCheckRoom);  
+
+ 
+		$this->db->where('bookedID',$key);
+		$this->db->delete('ts_booked_room_log'); 
 	}
 
 	function base64_to_png( $base64_string, $output_file ) {
@@ -260,10 +279,11 @@ class Mdl_checkin extends CI_Model {
 		FROM ts_booked tb
 		INNER JOIN ts_booked_room tbr
 		ON tbr.bookedID = tb.bookedID
-		WHERE tbr.status <> 'HIDDEN' 
-		AND tbr.status <> 'LATE'
-		AND tbr.status <> 'CANCLE' 
+		WHERE tb.status <> 'HIDDEN' 
+		AND tb.status <> 'LATE'
+		AND tb.status <> 'CANCLE' 
 		AND CONCAT(tb.bookedCode,tb.idcardno,tb.firstName,' ',tb.lastName,tbr.roomID) LIKE '%".$keyword."%'
+		ORDER BY tb.bookedID DESC
 		";
 		$data = $this->db->query($sql)->result_array();
 		return $data;

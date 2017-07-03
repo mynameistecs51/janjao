@@ -19,23 +19,22 @@
     	</div>
     	<div class="row text-center" style="margin-top: 10px;">
     		<div class="col-lg-12" align="left">
-    		<!-- <?php echo "<pre>"; ?>
-    		<?php print_r($getBooked); ?> -->
     		<table id="fairlist" class="table table-striped table-bordered" cellspacing="0" width="100%" >
     			<thead>
-    				<tr >
-    					<th  style="text-align: center;width: 40px;">No.</th>
+    				<tr>
+    					<th style="text-align: center;width: 40px;">No.</th>
     					<th style="text-align: center;width:  150px;">BOOKED NUMBER</th>
     					<th style="text-align: center;width:  150px;">NAME </th>
     					<th style="text-align: center;width:  150px;">ROOM</th>
     					<th style="text-align: center;width:  100px;">BOOKED DATE</th>
     					<th style="text-align: center;width:  100px;">CHECKIN DATE</th>
     					<th style="text-align: center;width:  80px;"> CREATE BY</th>
-    					<th style="text-align: center;width:  150px;">#</th>
+    					<th style="text-align: center;width:  60px;">#</th>
     				</tr>
     			</thead>
     			<tbody>
     				<?php $i=1; ?>
+                    <?php if(count($getBooked)>0) { ?>
     				<?php foreach ($getBooked as $key => $rowbooked) :?>
     					<?php $numRoom = count($rowbooked['selectRoom']); ?>
     					<tr>
@@ -43,45 +42,41 @@
     						<td><?php echo $rowbooked['bookedCode'] ?></td>
     						<td><?php echo $rowbooked['firstName']." ".$rowbooked['lastName']; ?></td>
     						<td style="text-align: center;">
-    								<?php //echo $numRoom ;
-    								for($i=0;$i < $numRoom; $i++)
-    								{
-    									echo "<button class='col-sm-3 btn-warning' style='text-align:center;margin-left:5px;'>",$rowbooked['selectRoom'][$i]['roomID']."</button> ";
-    								}
-    								?>
-    							</td>
-    							<td><?php echo $rowbooked['checkInAppointDate']; ?></td>
-    							<td><?php echo $rowbooked['checkOutAppointDate']; ?></td>
-    							<td><?php echo $rowbooked['updateBY']; ?></td>
-    							<td >
-    								<button class="btn btn-primary col-sm-3  btn-xs btn_edit" title="edit" id="<?php echo MD5($rowbooked['bookedID']); ?>"  style='margin-left:5px;'>
-    									<i class="fa fa-edit fa-2x"></i>
-    								</button>
-    								<button class="btn btn-warning col-sm-3  btn-xs btn_cancel" title="cancel" style='margin-left:5px;'>
-    									<i class="fa fa-close fa-2x"></i>
-    								</button>
-    								<button class="btn btn-info col-sm-3  btn-xs btn_info" title="view" style='margin-left:5px;'>
-    									<i class="fa fa-list fa-2x"></i>
-    								</button>
-    							</td>
-    						</tr>
+								<?php //echo $numRoom ;
+								for($i=0;$i < $numRoom; $i++)
+								{
+									echo "<button class='col-sm-3 btn-warning' style='text-align:center;margin-left:5px;'>",$rowbooked['selectRoom'][$i]['roomID']."</button> ";
+								}
+								?>
+							</td>
+							<td><?php echo $rowbooked['bookedDate']; ?></td>
+							<td><?php echo $rowbooked['checkInAppointDate']; ?></td>
+							<td><?php echo $rowbooked['updateBY']; ?></td>
+							<td > 
+                                <button class="btn btn-primary btn-xs btn_edit" id="<?php echo MD5($rowbooked['bookedID']); ?>" title="edit" style='margin-left:5px;'>
+                                    <i class="fa fa-edit fa-2x"></i>
+                                </button>  
+                                <button class="btn btn-danger btn-xs btn_cancel" id="<?php echo $rowbooked['bookedID']; ?>" title="Cancle" style='margin-left:5px;'>
+                                    <i class="fa fa-trash-o fa-2x" title="Cancle"></i>
+                                </button>
+							</td>
+						</tr>
     					<?php endforeach; ?> 
+                    <?php }else{ ?>
+                        <tr>
+                            <td colspan="8">No Booked Data !</td>
+                        </tr>
+                    <?php } ?>
     				</tbody>
     			</table>
     		</div>
     	</div>
-    	<div class="div_modal"> <!-- show modal Bill --> </div>
-    	<!-- /.row -->
-    	<!-- <script type="text/javascript"  src="<?php echo base_url()?>assets/datatable/js/jquery-1.12.4.js" ></script> -->
-    	<!-- <script type="text/javascript"  src="<?php echo base_url()?>assets/datatable/js/dataTables.bootstrap.min.js" ></script> -->
-    	<!-- <script type="text/javascript"  src="<?php echo base_url()?>assets/datatable/js/jquery.dataTables.min.js" ></script> -->
-    	<!--  END Fair List -->
+    	<div class="div_modal"> <!-- show modal Bill --> </div> 
     	<script type="text/javascript">
-    		$(function() {
-	    // $('#fairlist').DataTable();
-	    bookedEdit();
-	    bookedCancel();
-	  } );
+    		$(function() { 
+        	    bookedEdit();
+        	    bookedCancel();
+	        });
 
     		function bookedCancel() {
     			$('.btn_cancel').click(function(){
@@ -97,7 +92,7 @@
     		function bookedEdit() {
     			$('.btn_edit').click(function(){
                     var id = $(this).attr('id');
-    				load_page('<?php echo base_url()?>booked/bookedformedit/'+id ,'.:: Data Booking ::.','#');
+    				load_page('<?php echo base_url()?>booked/bookedformedit/'+id ,'.:: Data Booking ::.','<?php echo base_url()."booked/saveUpdate/"; ?>');
     			});
     		}
 

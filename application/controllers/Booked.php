@@ -96,8 +96,13 @@ class Booked extends CI_Controller {
 
 	public function saveAdd()
 	{
-		$idBooked = $this->Mdl_booked->saveAdd();
+		$this->Mdl_booked->saveAdd();
 		redirect($this->ctl,'refresh');
+	}
+	public function saveUpdate()
+	{
+		$this->Mdl_booked->saveUpdate();
+		//redirect($this->ctl,'refresh');
 	}
 
 	public function count()

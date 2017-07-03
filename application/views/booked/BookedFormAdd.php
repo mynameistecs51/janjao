@@ -28,24 +28,24 @@
 	<div class="form-group">
 		<label for="idcardno" class="col-sm-2 control-label">เลขประจำประชาชน <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-8">
-			<input type="text" class="form-control" name="idcardno" id="idcardno" placeholder="เลขประจำประชาชน/ Passport No" >
+			<input type="text" class="form-control" name="idcardno" id="idcardno" placeholder="เลขประจำประชาชน/ Passport No" required>
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="gender" class="col-sm-2 control-label">เพศ</label>
 		<div class="col-sm-8" >
-			<label><b class="btn btn-success btn-md"><input type="radio" name="gender" id="gender" value="male" class="control-label" checked> ชาย</b></label>
+			<label><b class="btn btn-success btn-md"><input type="radio" name="gender" id="gender" value="MALE" class="control-label" checked> ชาย</b></label>
 			&nbsp;&nbsp;&nbsp;
-			<label><b class="btn btn-warning btn-md"><input type="radio" name="gender" id="gender" value="Female" class="control-label">  หญิง</b></label>
+			<label><b class="btn btn-warning btn-md"><input type="radio" name="gender" id="gender" value="FEMALE" class="control-label">  หญิง</b></label>
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="gender" class="col-sm-2 control-label">ชื่อ-สกุล <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" id="firstName" name="firstName" placeholder="ชื่อ">
+			<input type="text" class="form-control" id="firstName" name="firstName" placeholder="ชื่อ" required>
 		</div>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" id="lastName" name="lastName" placeholder="นามสกุล">
+			<input type="text" class="form-control" id="lastName" name="lastName" placeholder="นามสกุล" required>
 		</div>
 	</div>
 	<div class="form-group">
@@ -132,7 +132,7 @@
 	<div class="form-group">
 		<label for="carNumber" class="col-sm-2 control-label">ทะเบียนรถ</label>
 		<div class="col-sm-8">
-			<input type="text" class="form-control" name="carNumber" id="carNumber" placeholder="1กก 1111">
+			<input type="text" class="form-control" name="licenseplate" id="licenseplate" placeholder="1กก 1111">
 		</div>
 	</div>
 	<div class="form-group">
@@ -143,18 +143,18 @@
 	</div>
 	<div class="form-group">
 		<label for="bookedDate" class="col-sm-2 control-label">วันที่ จอง <b style="color: #FF0000">*</b></label>
-		<div class="col-sm-8">
-			<input type="text" class="form-control" id="bookedDate" name="bookedDate" value="<?php echo $this->packfunction->dtDMYnow(); ?> ">
+		<div class="col-sm-8"> 
+			<input type="text" class="form-control" id="bookedDate" name="bookedDate" value="<?php echo $this->packfunction->dtDMYnow(); ?>" required>
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="checkinDate" class="col-sm-2 control-label">วันที่ Checkin <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-3">
-			<input type="text" class="form-control" id="checkinDate" name="checkinDate" value="<?php echo $this->packfunction->dtcheckin(); ?>">
+			<input type="text" class="form-control" id="checkinDate" name="checkinDate" value="<?php echo $this->packfunction->dtcheckin(); ?>" required>
 		</div> 
 		<label for="checkOutDate" class="col-sm-2 control-label">วันที่ Checkout <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-3">
-			<input type="text" class="form-control" id="checkOutDate" name="checkOutDate" value="<?php echo $this->packfunction->dtcheckout(); ?>">
+			<input type="text" class="form-control" id="checkOutDate" name="checkOutDate" value="<?php echo $this->packfunction->dtcheckout(); ?>" required>
 		</div>
 	</div>
 	<div class="form-group">
@@ -171,7 +171,7 @@
 		<label for="deposit" class="col-sm-2 control-label">เงินมัดจำ <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-8">
 				<div class="input-group">
-				<input type="text" class="form-control" id="deposit" name="deposit" placeholder="100 200 300 400 500">
+				<input type="text" class="form-control" id="deposit" name="deposit" placeholder="300">
 			<span class="input-group-addon">บาท</span>
 			</div> 
 		</div>
