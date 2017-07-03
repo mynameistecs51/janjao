@@ -276,7 +276,7 @@ class Mdl_booked extends CI_Model {
 		$this->db->where('bookedID',$key);
 		$this->db->delete('ts_booked_room_log'); 
 	}
-	
+
 
 	function base64_to_png( $base64_string, $output_file ) {  //create picture
 		fopen($base64_string,'w');
@@ -310,11 +310,12 @@ class Mdl_booked extends CI_Model {
 			    COUNT(lg.logroomdateID) AS total,
 			    lg.status
 			FROM ts_booked_room_log lg 
-			WHERE lg.logDate BETWEEN '".$df.":00' AND '".$dt.":00'
+			WHERE lg.logDate BETWEEN '".$df.":00' AND '".$dt.":00' 
 			GROUP by lg.roomID
 		) AS log ON r.roomCODE=log.roomID
 		WHERE r.status<>'DISABLE'
 		AND r.floor = '".$floor."'
+		GROUP BY r.roomID
 		ORDER BY r.roomID ASC 
 		";
 		$data = $this->db->query($sql);
@@ -385,6 +386,3 @@ class Mdl_booked extends CI_Model {
 	}
 
 }
-
-/* End of file Mdl_booked.php */
-/* Location: ./application/models/Mdl_booked.php */

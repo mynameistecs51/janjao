@@ -29,8 +29,8 @@
     					<th style="text-align: center;width:  140px;">BOOKED DATE</th>
     					<th style="text-align: center;width:  140px;">CHECKIN DATE</th>
                         <th style="text-align: center;width:  140px;">CHECKOUT DATE</th>
-    					<th style="text-align: center;width:  90px;"> STATUS</th>
-    					<th style="text-align: center;width:  190px;">#</th>
+    					<th style="text-align: center;width:  80px;"> STATUS</th>
+    					<th style="text-align: center;width:  230px;">#</th>
     				</tr>
     			</thead>
     			<tbody>
@@ -62,10 +62,13 @@
     								<button class="btn btn-warning btn-xs btn_addservice" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="Add Service" style='margin-left:5px;'>
     									<i class="fa fa-cutlery fa-2x" title="Add Service"></i>
     								</button>
-    								<button class="btn btn-info btn-xs btn_info" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="Print" style='margin-left:5px;'>
+                                    <button class="btn btn-success btn-xs btn_checkout" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="Checkout" style='margin-left:5px;'>
+                                        <i class="fa fa-sign-out fa-2x" title="Checkout"></i>
+                                    </button>
+    								<button class="btn btn-info btn-xs btn_print" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="Print" style='margin-left:5px;'>
     									<i class="fa fa-print fa-2x" title="Print"></i>
     								</button>
-                                    <button class="btn btn-danger btn-xs btn_cancel" id="<?php echo $rowCheckin['bookedID']; ?>" title="Add Service" style='margin-left:5px;'>
+                                    <button class="btn btn-danger btn-xs btn_cancel" id="<?php echo $rowCheckin['bookedID']; ?>" title="Cancle" style='margin-left:5px;'>
                                         <i class="fa fa-trash-o fa-2x" title="Cancle"></i>
                                     </button>
                                 <?php }else{ ?> 
