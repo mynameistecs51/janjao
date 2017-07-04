@@ -208,112 +208,106 @@
 </div>
 <!-- <script src="<?php echo base_url()?>assets/js/bootstrap-select.min.js"></script> -->
 <script src="<?php echo base_url()?>assets/js/jquery.datetimepicker.full.min.js"></script>
-<script type="text/javascript">
+<script type="text/javascript"> 
 
-	getProvince(); // เปิดใช้งาน function getProvince
-	// $('.selectpicker').selectpicker({
-	// });
-
-$.datetimepicker.setLocale('th'); // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
-$('#birthDate').datetimepicker({
-	timepicker:true,
-	mask:true,
-	format:'d/m/Y',
-	lang:'th',
-});
-$('#bookedDate, #checkinDate, #checkOutDate').datetimepicker({
-	timepicker:true,
-	mask:true,
-	format:'d/m/Y H:i',
-	lang:'th',
-});
-// start checkinDate form  bookedDate
-$('#bookedDate').on('change',function(){
-	var startDate = $('#bookedDate').val();
-	var expoldeY= startDate.split(' ');
-	$( "#checkinDate" ).datetimepicker({
-		minDate: expoldeY[0].split('-')[2]+'-'+expoldeY[0].split('-')[1]+'-'+expoldeY[0].split('-')[0],
+	$.datetimepicker.setLocale('th'); // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+	$('#birthDate').datetimepicker({
+		timepicker:true,
+		mask:true,
+		format:'d/m/Y',
+		lang:'th',
 	});
-});
-
-$('#checkinDate').on("change",function() {
-	var startDate = $('#checkinDate').val();
-	var expoldeY= startDate.split(' ');
-	$( "#checkOutDate" ).datetimepicker({
-		minDate: expoldeY[0].split('-')[2]+'-'+expoldeY[0].split('-')[1]+'-'+expoldeY[0].split('-')[0],
+	$('#bookedDate, #checkinDate, #checkOutDate').datetimepicker({
+		timepicker:true,
+		mask:true,
+		format:'d/m/Y H:i',
+		lang:'th',
 	});
-});
-
-$("#myModal0").on("hidden.bs.modal", function () {
-    // location.reload();
-});
-
-
-// Grab elements, create settings, etc.
-var video = document.getElementById('video');
-
-// Get access to the camera!
-if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-    // Not adding `{ audio: true }` since we only want video now
-    navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
-    	video.src = window.URL.createObjectURL(stream);
-    	video.play();
-    });
-  }
-
-  // Elements for taking the snapshot
-  var canvas = document.getElementById('canvas');
-
-  var context = canvas.getContext('2d');
-  var video = document.getElementById('video');
-
-  var filesup = document.getElementById('images');
-// Trigger photo take
-document.getElementById("snap").addEventListener("click", function() {
-
-	var data = context.drawImage(video, 0, 0, 300, 200);
-
-	var imageData = canvas.toDataURL('image/png');
-
-	filesup.setAttribute('value',imageData);
-
-});
-
-function dataURLtoFile(dataurl, filename) {
-	var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-	bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-	while(n--){
-		u8arr[n] = bstr.charCodeAt(n);
-	}
-	return new File([u8arr], filename, {type:mime});
-}
-
-function getProvince(){
-	$("input[name=zipcode]").change(function(){
-		$.ajax({
-			url: '<?php echo base_url().$this->ctl."/getProvince/";?>',
-			data:"zipcode="+$("input[name=zipcode]").val(),
-			type: 'POST',
-			dataType: 'json',
-			success:function(res){
-				var district="<option >---เลือกตำบล---</option>";
-				$.each(res, function( index, value ) {
-					province = "<option value="+value['PROVINCE_ID']+"> "+value['PROVINCE_NAME']+"</option>";
-					amphur = "<option value="+value['AMPHUR_ID']+"> "+value['AMPHUR_NAME']+"</option>";
-					district += "<option value="+value['DISTRICT_ID']+"> "+value['DISTRICT_NAME']+"</option>";
-				});
-				$('#province').html(province);
-				$('#amphur').html(amphur);
-				$('#district').html(district);
-			},
-			error:function(res){
-				alert("รหัสไปรษณีย์ไม่ถูกต้อง");
-				$('input[name=zipcode]').val('').focus();
-				$('#province').html('');
-				$('#amphur').html('');
-				$('#district').html('');
-			}
+	// start checkinDate form  bookedDate
+	$('#bookedDate').on('change',function(){
+		var startDate = $('#bookedDate').val();
+		var expoldeY= startDate.split(' ');
+		$( "#checkinDate" ).datetimepicker({
+			minDate: expoldeY[0].split('-')[2]+'-'+expoldeY[0].split('-')[1]+'-'+expoldeY[0].split('-')[0],
 		});
 	});
-}
+
+	$('#checkinDate').on("change",function() {
+		var startDate = $('#checkinDate').val();
+		var expoldeY= startDate.split(' ');
+		$( "#checkOutDate" ).datetimepicker({
+			minDate: expoldeY[0].split('-')[2]+'-'+expoldeY[0].split('-')[1]+'-'+expoldeY[0].split('-')[0],
+		});
+	});
+
+	$("#myModal0").on("hidden.bs.modal", function () {
+	    // location.reload();
+	});
+
+
+	// Grab elements, create settings, etc.
+	var video = document.getElementById('video');
+
+	// Get access to the camera!
+	if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+	    // Not adding `{ audio: true }` since we only want video now
+	    navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+	    	video.src = window.URL.createObjectURL(stream);
+	    	video.play();
+	    });
+	}
+
+	// Elements for taking the snapshot
+	var canvas = document.getElementById('canvas');
+
+	var context = canvas.getContext('2d');  
+	var filesup = document.getElementById('images');
+	// Trigger photo take
+	document.getElementById("snap").addEventListener("click", function() {
+
+		var data = context.drawImage(video, 0, 0, 300, 200);
+
+		var imageData = canvas.toDataURL('image/png');
+
+		filesup.setAttribute('value',imageData);
+
+	});
+
+	function dataURLtoFile(dataurl, filename) {
+		var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+		bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+		while(n--){
+			u8arr[n] = bstr.charCodeAt(n);
+		}
+		return new File([u8arr], filename, {type:mime});
+	}
+
+// function getProvince(){
+// 	$("input[name=zipcode]").change(function(){
+// 		$.ajax({
+// 			url: '<?php echo base_url().$this->ctl."/getProvince/";?>',
+// 			data:"zipcode="+$("input[name=zipcode]").val(),
+// 			type: 'POST',
+// 			dataType: 'json',
+// 			success:function(res){
+// 				var district="<option >---เลือกตำบล---</option>";
+// 				$.each(res, function( index, value ) {
+// 					province = "<option value="+value['PROVINCE_ID']+"> "+value['PROVINCE_NAME']+"</option>";
+// 					amphur = "<option value="+value['AMPHUR_ID']+"> "+value['AMPHUR_NAME']+"</option>";
+// 					district += "<option value="+value['DISTRICT_ID']+"> "+value['DISTRICT_NAME']+"</option>";
+// 				});
+// 				$('#province').html(province);
+// 				$('#amphur').html(amphur);
+// 				$('#district').html(district);
+// 			},
+// 			error:function(res){
+// 				alert("รหัสไปรษณีย์ไม่ถูกต้อง");
+// 				$('input[name=zipcode]').val('').focus();
+// 				$('#province').html('');
+// 				$('#amphur').html('');
+// 				$('#district').html('');
+// 			}
+// 		});
+// 	});
+// }
 </script>

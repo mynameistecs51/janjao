@@ -210,12 +210,7 @@
 </div>
 <!-- <script src="<?php echo base_url()?>assets/js/bootstrap-select.min.js"></script> -->
 <script src="<?php echo base_url()?>assets/js/jquery.datetimepicker.full.min.js"></script>
-<script type="text/javascript">
-
-	getProvince(); // เปิดใช้งาน function getProvince
-	// $('.selectpicker').selectpicker({
-	// });
-
+<script type="text/javascript"> 
 $.datetimepicker.setLocale('th'); // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
  
 $('#bookedDate, #checkinDate, #checkOutDate').datetimepicker({
@@ -284,33 +279,5 @@ function dataURLtoFile(dataurl, filename) {
 	}
 	return new File([u8arr], filename, {type:mime});
 }
-
-function getProvince(){
-	$("input[name=zipcode]").change(function(){
-		$.ajax({
-			url: '<?php echo base_url().$this->ctl."/getProvince/";?>',
-			data:"zipcode="+$("input[name=zipcode]").val(),
-			type: 'POST',
-			dataType: 'json',
-			success:function(res){
-				var district="<option >---เลือกตำบล---</option>";
-				$.each(res, function( index, value ) {
-					province = "<option value="+value['PROVINCE_ID']+"> "+value['PROVINCE_NAME']+"</option>";
-					amphur = "<option value="+value['AMPHUR_ID']+"> "+value['AMPHUR_NAME']+"</option>";
-					district += "<option value="+value['DISTRICT_ID']+"> "+value['DISTRICT_NAME']+"</option>";
-				});
-				$('#province').html(province);
-				$('#amphur').html(amphur);
-				$('#district').html(district);
-			},
-			error:function(res){
-				alert("รหัสไปรษณีย์ไม่ถูกต้อง");
-				$('input[name=zipcode]').val('').focus();
-				$('#province').html('');
-				$('#amphur').html('');
-				$('#district').html('');
-			}
-		});
-	});
-}
+ 
 </script>

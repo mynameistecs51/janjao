@@ -303,7 +303,7 @@ class Mdl_booked extends CI_Model {
 		IFNULL(log.total,0) AS total
 		FROM tm_room r
 		LEFT JOIN tm_roomtype rt ON r.roomtypeID=rt.roomtypeID
-		LEFT JOIN ts_booked_room br ON r.roomCODE=br.roomID
+		LEFT JOIN ts_booked_room br ON r.roomCODE=br.roomID AND br.status <> 'CANCLE'
 		LEFT JOIN (
 			SELECT 
 				lg.roomID,
