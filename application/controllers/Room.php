@@ -32,7 +32,14 @@ class Room extends CI_Controller {
 
 	public function RoomFormAdd()
 	{
-		$this->load->view('room/RoomFormAdd');
+		$this->data['roomType'] = $this->Mdl_roomType->getRoomTypeAll();
+		$this->load->view('room/RoomFormAdd',$this->data);
+	}
+
+	public function saveAdd()
+	{
+		$this->Mdl_room->saveAdd();
+		redirect($this->ctl,'refresh');
 	}
 
 	public function roomEdit($id = "")
@@ -63,6 +70,41 @@ class Room extends CI_Controller {
 		}
 		$this->data['roomType'] = $this->Mdl_roomType->getRoomTypeAll();
 		$this->load->view('room/RoomFormEdit',$this->data);
+	}
+
+	public function roomView($id = "")
+	{
+		$getRoom = $this->Mdl_room->getRoomID($id);
+		$this->data['getRoom']  = '';
+		foreach ($getRoom as $rowRoom) {
+			$this->data['getRoom']   = array(
+				'roomID'  => $rowRoom['roomID'],
+				'floor'  => $rowRoom['floor'],
+				'zone'  => $rowRoom['zone'],
+				'roomCODE'  => $rowRoom['roomCODE'],
+				'transaction'  => $rowRoom['transaction'],
+				'comment'  => $rowRoom['comment'],
+				'status'  => $rowRoom['status'],
+				'createDT'  => $rowRoom['createDT'],
+				'createBY'  => $rowRoom['createBY'],
+				'updateDT'  => $rowRoom['updateDT'],
+				'updateBy'  => $rowRoom['updateBy'],
+				'roomtypeID'  => $rowRoom['roomtypeID'],
+				'bed'  => $rowRoom['bed'],
+				'roomtypeCode'  => $rowRoom['roomtypeCode'],
+				'price_month'  => $rowRoom['price_month'],
+				'price_day'  => $rowRoom['price_day'],
+				'price_short'  => $rowRoom['price_short'],
+				'price_hour'  => $rowRoom['price_hour'],
+				);
+		}
+		$this->data['roomType'] = $this->Mdl_roomType->getRoomTypeAll();
+		$this->load->view('room/RoomFormInfo',$this->data);
+	}
+	public function saveEdit()
+	{
+		$this->Mdl_room->saveEdit();
+		// redirect($this->ctl,'refresh');
 	}
 
 	public function search(){

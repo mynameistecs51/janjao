@@ -9,7 +9,7 @@
   			<div class="row">
   				<?php
   				$room =explode('_',$selectRoom);
-				echo '<input type="hidden" name="selectRoom" value="'.$selectRoom.'">';  //input hidden selectRoom 
+				echo '<input type="hidden" name="selectRoom" value="'.$selectRoom.'">';  //input hidden selectRoom
 				for ($i=0; $i < count($room); $i++) : ?>
 				<div class="col-lg-1 " style="margin-right:40px; margin-bottom:10px;">
 					<span class="button-checkbox ">
@@ -22,7 +22,7 @@
 				<?php endfor;	?>
 			</div>
 		</div>
-	</div> 
+	</div>
 	<div class="form-group">
 		<label for="idcardno" class="col-sm-2 control-label">เลขประจำประชาชน <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-8">
@@ -48,7 +48,7 @@
 	</div>
 	<div class="form-group">
 		<label for="birthDate" class="col-sm-2 control-label">วัน เดือน ปี เกิด</label>
-		<div class="col-sm-8"> 
+		<div class="col-sm-8">
 			<div class="row">
 				<div class="col-sm-2">
 					<select class="form-control" name="birthdate_d" required>
@@ -100,15 +100,15 @@
 						<option value="09">กันยายน</option>
 						<option value="10">ตุลาคม</option>
 						<option value="11">พฤศจิกายน</option>
-						<option value="12">ธันวาคม</option> 
+						<option value="12">ธันวาคม</option>
 					</select>
 				</div>
 				<div class="col-sm-2">
 					<select class="form-control" name="birthdate_y" required>
 					<option value="" selected>--พ.ศ.--</option>
-					<?php 
+					<?php
 						$y = $this->packfunction->yearnow()+543;
-						for ($i=0; $i < 80; $i++) { 
+						for ($i=0; $i < 80; $i++) {
 							echo '<option value="'.$y.'">'.$y.'</option> ';
 							$y--;
 						}
@@ -152,7 +152,7 @@
 		<label for="checkinDate" class="col-sm-2 control-label">วันที่ Checkin <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-3">
 			<input type="text" class="form-control" id="checkinDate" name="checkinDate" value="<?php echo $this->packfunction->dtcheckin(); ?>">
-		</div> 
+		</div>
 		<label for="checkOutDate" class="col-sm-2 control-label">วันที่ Checkout <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-3">
 			<input type="text" class="form-control" id="checkOutDate" name="checkOutDate" value="<?php echo $this->packfunction->dtcheckout(); ?>">
@@ -174,7 +174,7 @@
 				<div class="input-group">
 				<input type="text" class="form-control" id="cashPledge" name="cashPledge" placeholder="300">
 			<span class="input-group-addon">บาท</span>
-			</div> 
+			</div>
 		</div>
 	</div>
 	<div class="form-group">
@@ -193,16 +193,16 @@
 	</div>
 	<div class="form-group">
 		<label for="btnsnap" class="col-sm-2 control-label"></label>
-		<div class="col-sm-10"> 
-			<video id="video" class="" width="260" height="195" autoplay></video> 
+		<div class="col-sm-10">
+			<video id="video" class="" width="260" height="195" autoplay></video>
 			<canvas id="canvas"  name="idcardPicture"  class="bg-primary " width="260" height="195" ></canvas>
-			<input type="hidden" name="images" id="images" value=""> 
+			<input type="hidden" name="images" id="images" value="">
 
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="btnsnap" class="col-sm-2 control-label"></label>
-		<div class="col-sm-3" align="center"> 
+		<div class="col-sm-3" align="center">
 			<i class="fa fa-camera btn btn-primary "  id="snap"> ถ่ายภาพ <i class="glyphicon glyphicon-menu-right"></i></i>
 		</div>
 	</div>
@@ -212,7 +212,7 @@
 <script src="<?php echo base_url()?>assets/js/jquery.datetimepicker.full.min.js"></script>
 <script type="text/javascript"> 
 $.datetimepicker.setLocale('th'); // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
- 
+
 $('#bookedDate, #checkinDate, #checkOutDate').datetimepicker({
 	timepicker:true,
 	mask:true,

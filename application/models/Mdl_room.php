@@ -30,8 +30,8 @@ class Mdl_room extends CI_Model {
 		tm_rt.price_month,
 		tm_rt.price_day,
 		tm_rt.price_short,
-		tm_rt.price_hour,
-		tm_rt.status
+		tm_rt.price_hour
+		#tm_rt.status
 		FROM tm_room tm_r
 		INNER JOIN tm_roomtype tm_rt
 		ON tm_r.roomtypeID = tm_rt.roomtypeID
@@ -62,8 +62,8 @@ class Mdl_room extends CI_Model {
 		tm_rt.price_month,
 		tm_rt.price_day,
 		tm_rt.price_short,
-		tm_rt.price_hour,
-		tm_rt.status
+		tm_rt.price_hour
+		# tm_rt.status
 		FROM tm_room tm_r
 		INNER JOIN tm_roomtype tm_rt
 		ON tm_r.roomtypeID = tm_rt.roomtypeID
@@ -73,7 +73,44 @@ class Mdl_room extends CI_Model {
 		return $query;
 	}
 
+	public function saveAdd()
+	{
+		$data = array(
+			'roomtypeID' => $this->input->post('roomtype'),
+			'floor' =>  $this->input->post('floor'),
+			'zone' =>  $this->input->post('zone'),
+			'roomCODE' =>  $this->input->post('roomCODE'),
+			'transaction' =>  'EMPTY',
+			'comment' =>  $this->input->post('comment'),
+			'status' =>  $this->input->post('status'),
+			"createDT"		=>$this->packfunction->dtYMDnow(),
+			"createBY"		=>$this->UserName,
+			"updateDT"		=>$this->packfunction->dtYMDnow(),
+			"updateBY"		=>$this->UserName
+			);
+		$this->db->insert('tm_room',$data);
+	}
+
+	public function saveEdit()
+	{
+		$data = array(
+			'roomtypeID' => $this->input->post('roomtype'),
+			'floor' =>  $this->input->post('floor'),
+			'zone' =>  $this->input->post('zone'),
+			'roomCODE' =>  $this->input->post('roomCODE'),
+			'transaction' =>  $this->input->post('transaction'),
+			'comment' =>  $this->input->post('comment'),
+			'status' =>  $this->input->post('status'),
+			"createDT"		=>$this->packfunction->dtYMDnow(),
+			"createBY"		=>$this->UserName,
+			"updateDT"		=>$this->packfunction->dtYMDnow(),
+			"updateBY"		=>$this->UserName
+			);
+		$this->db->where('roomID',$this->input->post('roomID'));
+		$this->db->update('tm_room',$data);
+	}
 }
+
 
 /* End of file Mdl_room.php */
 /* Location: ./application/models/Mdl_room.php */
