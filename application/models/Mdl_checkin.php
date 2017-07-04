@@ -229,8 +229,11 @@ class Mdl_checkin extends CI_Model {
 		$this->db->delete('ts_booked_room_log'); 
 	}
 
-	public function saveService(){ 
-		if($_POST){
+	public function saveService(){
+		if($_POST){  
+			$this->db->where('bookedID',$_POST['bookedID']); 
+			$this->db->delete('ts_service');  
+			
 			foreach ($_POST['serviceName'] as $sv => $value) {
 				$data[$sv] = array(
 					'bookedID' 	  => $_POST['bookedID'],
@@ -238,13 +241,15 @@ class Mdl_checkin extends CI_Model {
 					'price' 	  => $_POST['price'][$sv],
 					'amount'      => $_POST['amount'][$sv],
 					'unit'		  => $_POST['unit'][$sv],
-					'comment' 	  => 'CANCLE BY '.$this->UserName,
-					'status'  	  => 'CANCLE',
+					'comment' 	  => '',
+					'status'  	  => 'ORDER',
+					"createDT"	  => $this->packfunction->dtYMDnow(),
+					"createBY"	  => $this->UserName,
 					"updateDT"	  => $this->packfunction->dtYMDnow(),
 					"updateBY"	  => $this->UserName
 				);  
-				$this->db->insert('ts_service',$data[$sv]);  
-			}
+				$this->db->insert('ts_service',$data[$sv]);
+			} 
 		}
 	}
 
@@ -369,10 +374,26 @@ class Mdl_checkin extends CI_Model {
 				FROM ts_booked_room rm 
 				WHERE rm.bookedID = '".$bookedID."' ";
 		$query 	= $this->db->query($sql);
-		return $query->result_array();
-		 
-		
+		return $query->result_array(); 
 	}
+
+	public function serviceList($key=''){
+		$sql = 	"
+				SELECT 
+					s.serviceID,
+					s.bookedID,
+					s.serviceName,
+					s.price,
+					s.unit,
+					s.amount
+				FROM ts_service s
+				WHERE MD5(s.bookedID) = '".$key."' 
+				AND s.status<>'CANCLE' 
+				AND s.status<>'HIDDEN' ";
+		$query 	= $this->db->query($sql);
+		return $query->result_array(); 
+	}
+	
 }
 
 

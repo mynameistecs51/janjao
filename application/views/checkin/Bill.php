@@ -18,9 +18,9 @@
 			<button class="btn btn-primary btn_print"><span class="fa fa-print"> ปริ๊น</span></button>
 		</p>
 	</div>
-	<div class="container "  id="example" >
+	<div class="container "  id="example">
 
-		<div class="col-sm-3">	</div>
+		<div class="col-sm-3"></div>
 		<div class="col-sm-6">
 
 			<table width="100%" border='1'>

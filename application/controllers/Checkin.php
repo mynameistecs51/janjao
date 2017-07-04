@@ -130,7 +130,18 @@ class Checkin extends CI_Controller {
 	public function saveService()
 	{ 
 		$this->Mdl_checkin->saveService();
-		redirect('checkin/','refresh');
+		if(isset($_POST['isprint'])==true){
+			echo "<script>window.open('".base_url()."checkin/billprint/','_new');</script>";
+			redirect('checkin/','refresh');
+		}else{
+			redirect('checkin/','refresh');
+		} 
+		
+	}
+
+	public function  billprint(){
+		echo "<script>window.print();</script>";
+		echo "Print Page";
 	}
 
 	public function checkinformedit($key='')
@@ -148,7 +159,7 @@ class Checkin extends CI_Controller {
 
 	public function checkinformService($key=''){
 		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
-		$this->data['checkinRoomDtl']=$this->Mdl_checkin->bookedRoom($this->data['checkinDtl']['bookedID']);
+		$this->data['serviceDtl']=$this->Mdl_checkin->serviceList($key); 
 		$this->load->view('checkin/CheckinAddservice',$this->data);
 	}
 
