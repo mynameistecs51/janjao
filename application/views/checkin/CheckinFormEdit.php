@@ -200,7 +200,9 @@
 		<div class="col-sm-10"> 
 			<video id="video" class="" width="260" height="195" autoplay></video> 
 			<canvas id="canvas" name="idcardPicture"  class="bg-primary " width="260" height="195" ></canvas>
+			<?php if($checkinDtl['idcardnoPath']!=""){ ?>
 			<img src="<?php echo base_url()."assets/images/imgcard/".$checkinDtl['idcardnoPath']; ?>" width="260" height="195" style="margin-top: -190px;"></img>
+			<?php } ?>
 			<input type="hidden" name="images" id="images" value=""> 
 			<input type="hidden" name="images_old" id="images_old" value="<?php echo $checkinDtl['idcardnoPath']; ?>"> 
 		</div>

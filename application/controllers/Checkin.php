@@ -109,7 +109,7 @@ class Checkin extends CI_Controller {
 
 	public function saveCheckin()
 	{
-		$idCheckin = $this->Mdl_checkin->saveCheckin();
+		$this->Mdl_checkin->saveCheckin();
 		redirect('checkin/','refresh');
 	}
 
@@ -125,6 +125,12 @@ class Checkin extends CI_Controller {
 		}else{
 			redirect('authen/','refresh');
 		}
+	}
+
+	public function saveService()
+	{ 
+		$this->Mdl_checkin->saveService();
+		redirect('checkin/','refresh');
 	}
 
 	public function checkinformedit($key='')

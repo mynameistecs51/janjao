@@ -319,8 +319,7 @@
 
 	function checkIn() {
 		var selectRoom=[];
-		$('.check_room').on('change',function(){
-
+		$('.check_room').on('change',function(){ 
 			if( this.checked){
 				selectRoom.push($(this).val());
 			}else {

@@ -229,6 +229,25 @@ class Mdl_checkin extends CI_Model {
 		$this->db->delete('ts_booked_room_log'); 
 	}
 
+	public function saveService(){ 
+		if($_POST){
+			foreach ($_POST['serviceName'] as $sv => $value) {
+				$data[$sv] = array(
+					'bookedID' 	  => $_POST['bookedID'],
+					'serviceName' => $_POST['serviceName'][$sv],
+					'price' 	  => $_POST['price'][$sv],
+					'amount'      => $_POST['amount'][$sv],
+					'unit'		  => $_POST['unit'][$sv],
+					'comment' 	  => 'CANCLE BY '.$this->UserName,
+					'status'  	  => 'CANCLE',
+					"updateDT"	  => $this->packfunction->dtYMDnow(),
+					"updateBY"	  => $this->UserName
+				);  
+				$this->db->insert('ts_service',$data[$sv]);  
+			}
+		}
+	}
+
 	function base64_to_png( $base64_string, $output_file ) {
 		fopen($base64_string,'w');
 		$ifp = fopen( $output_file, "r+" );

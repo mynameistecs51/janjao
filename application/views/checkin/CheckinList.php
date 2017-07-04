@@ -106,7 +106,7 @@
             });
             $('.btn_addservice').click(function(){
                 var id = $(this).attr('id');
-                load_page('<?php echo base_url()."checkin/checkinformService/"; ?>'+id+'','.:: Data Checkin ::.','<?php echo base_url()."checkin/saveService/"; ?>');
+                load_page_sv('<?php echo base_url()."checkin/checkinformService/"; ?>'+id+'','.:: Data Service ::.','<?php echo base_url()."checkin/saveService/"; ?>');
             });
             $('.btn_cancel').click(function(){
                 var cfm = confirm("ยืนยันยกเลิกการเช่าห้องพัก คุณไม่สามารถย้อนกลับมาใช้ข้อมูลได้ !");
@@ -144,6 +144,20 @@
 			setInterval(function(){$('#ajaxLoaderModal').remove()},5100);
 		}
 
+        function load_page_sv(loadUrl,texttitle,urlsend){
+            var screenname= texttitle;
+            var url = loadUrl;
+            var n=0;
+            $('.div_modal').html('');
+            modal_form_service(n,screenname,urlsend);
+            $('#myModal'+n+' .modal-body').html('<img id="ajaxLoaderModal" src="<?php echo base_url(); ?>assets/images/loader.gif"/>');
+            var modal = $('#myModal'+n), modalBody = $('#myModal'+n+' .modal-body');
+            modal.on('show.bs.modal', function () {
+                modalBody.load(url);
+            }).modal({backdrop: 'static',keyboard: true});
+            setInterval(function(){$('#ajaxLoaderModal').remove()},5100);
+        }
+
 		function modal_form(n,screenname,url)
 		{
 			var div='';
@@ -168,6 +182,31 @@
 			div+='</form>';
 			$('.div_modal').html(div);
 		}
+
+        function modal_form_service(n,screenname,url)
+        {
+            var div='';
+            div+='<form action="'+url+'"  role="form" data-toggle="validator" id="form" method="post" enctype="multipart/form-data" onSubmit="JavaScript:return confirmvalid();">';
+            div+='<!-- Modal -->';
+            div+='<div class="modal modal-wide fade" id="myModal'+n+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">';
+            div+='<div class="modal-dialog" style="width:90%;">';
+            div+='<div class="modal-content">';
+            div+='<div class="modal-header bg-primary" style="color:#FFFFFF;">';
+            div+='<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
+            div+='<h4 class="modal-title">'+screenname+'</h4>';
+            div+='</div>';
+            div+='<div class="modal-body">';
+            div+='</div>';
+            div+='<div class="modal-footer" style="text-align:center; background:#F6CECE;">'; 
+            div+='<button type="submit" id="save" class="btn btn-success"><span class="glyphicon glyphicon-floppy-saved"> บันทึก</span></button>'; 
+            div+='<button type="reset" class="btn btn-danger " data-dismiss="modal"><span class="glyphicon glyphicon-floppy-remove"> ยกเลิก</span></button>';
+            div+='</div>';
+            div+='</div><!-- /.modal-content -->';
+            div+='</div><!-- /.modal-dialog -->';
+            div+='</div><!-- /.modal -->';
+            div+='</form>';
+            $('.div_modal').html(div);
+        }
 	</script>
 
 
