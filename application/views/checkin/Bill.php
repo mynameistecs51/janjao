@@ -11,24 +11,16 @@
 		font-size: 16px;
 	}
 </style>
-<div class="row">
-	<div class="col-sm-12">
-		<div class="col-sm-5 clearfix"><br></div>
-		<p class="text-center col-sm-7">
-			<button class="btn btn-primary btn_print"><span class="fa fa-print"> ปริ๊น</span></button>
-		</p>
-	</div>
-	<div class="container "  id="example">
-
+<div class="row"> 
+	<div class="container"  id="example"> 
 		<div class="col-sm-3"></div>
-		<div class="col-sm-6">
-
-			<table width="100%" border='1'>
+		<div class="col-sm-6"> 
+			<table width="100%" border='0' align="left" cellpadding="0" cellspacing="0" >
 				<caption >
 					<table width="100%" >
-						<tr>
+						<tr > 
 							<td class="col-sm-4" style="width: 30%;"></td>
-							<td class="col-sm-4" align="center"> <b>ใบเสร็จรับเงิน </b></td>
+							<td class="col-sm-4" align="center" > <b>ใบเสร็จรับเงิน </b></td>
 							<td class="col-sm-4" style="width: 30%;"></td>
 						</tr>
 						<tr>
@@ -43,7 +35,7 @@
 								<label > ต้นฉบับ</label>
 								<br>
 								<label style="width: 40%;padding-left: 0px;text-align: left;">เลขที่ </label>
-								<label style="padding-right: 0%;text-align: right;"> 123456789</label>
+								<label style="padding-right: 0%;text-align: right;">1234</label>
 								<br>
 								<label style="width: 40%;padding-left: 0px;text-align: left;">วันที่ </label>
 								<label style="padding-right: 0%;text-align: right;"><?php echo date('d-m-y'); ?></label>
@@ -54,36 +46,36 @@
 						</tr>
 						<tr>
 							<td colspan="3"><hr>
-								<span><b>ชื่อลูกค้า</b>   ไชยวัฒน์ ไชยวัฒน์</span>
+								<span><b>ชื่อลูกค้า : </b>   <?php echo $checkinDtl['firstName'].' '.$checkinDtl['lastName']; ?></span>
 								<br>
-								<span><b>ที่อยู่</b> 	ราชภัฏอุดรธานี</span>
+								<span><b>ที่อยู่ : </b> <?php echo $checkinDtl['address']; ?></span>
 							</td>
 						</tr>
 					</table>
 				</caption>
 				<thead>
-					<tr   style="background:#E6E6E6">
-						<th>ที่</th>
-						<th>รายการ</th>
-						<th width="80">จำนวน</th>
-						<th width="80">หน่วยละ</th>
-						<th width="80">จำนวนเงิน</th>
+					<tr style="background:#E6E6E6;" align="left">
+						<th style="border-bottom:1px solid black">ที่</th>
+						<th style="border-bottom:1px solid black" >รายการ</th>
+						<th style="border-bottom:1px solid black" width="80" align="right">จำนวน</th>
+						<th style="border-bottom:1px solid black" width="80" align="right">หน่วยละ</th>
+						<th style="border-bottom:1px solid black" width="80" align="right">จำนวนเงิน</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td>1</td>
-						<td>ห้อง 202  ห้องเตียงคู่</td>
-						<td>1</td>
-						<td>500 Bath.</td>
-						<td>500 Bath.</td>
+						<td style="border-bottom:1px solid black" >1</td>
+						<td style="border-bottom:1px solid black" >ห้อง 202  ห้องเตียงคู่</td>
+						<td style="border-bottom:1px solid black" align="right">1</td>
+						<td style="border-bottom:1px solid black" align="right">500.00</td>
+						<td style="border-bottom:1px solid black" align="right">500.00</td>
 					</tr>
 					<tr>
 						<td>2</td>
 						<td>ห้อง 203 ห้องเตียงเดี่ยว</td>
-						<td>1</td>
-						<td>500 Bath.</td>
-						<td>500 Bath.</td>
+						<td align="right">1</td>
+						<td align="right">500.00</td>
+						<td align="right">500.00</td>
 					</tr>
 				</tbody>
 				<tfoot >
@@ -106,13 +98,10 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript">
-	$('.btn_print').click(function(){
-
+<script type="text/javascript"> 
 		var data = document.getElementById('example');
 		newWin = window.open("");
 		newWin.document.write(data.outerHTML);
-		newWin.print();
-		newWin.close();
-	});
+		//newWin.print();
+		newWin.close(); 
 </script>

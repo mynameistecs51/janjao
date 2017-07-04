@@ -131,17 +131,24 @@ class Checkin extends CI_Controller {
 	{ 
 		$this->Mdl_checkin->saveService();
 		if(isset($_POST['isprint'])==true){
-			echo "<script>window.open('".base_url()."checkin/billprint/','_new');</script>";
+			echo "<script>window.open('".base_url()."checkin/billprint/".md5(trim($_POST['bookedID']))."','_new');</script>";
 			redirect('checkin/','refresh');
 		}else{
 			redirect('checkin/','refresh');
-		} 
-		
+		}
 	}
 
-	public function  billprint(){
-		echo "<script>window.print();</script>";
-		echo "Print Page";
+	public function  billprint($key=''){
+		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
+		if(count($this->data['checkinDtl'])>0){
+			$this->data['billCode']=$this->Mdl_checkin->getBillCode();
+			$this->data['getMonth'] = $this->packfunction->getMonth();
+			$this->data['getYear'] = $this->packfunction->getYear(); 
+			$this->data['serviceDtl']=$this->Mdl_checkin->serviceList($key); 
+			$this->load->view('checkin/BillService',$this->data);
+		}else{
+			 redirect('authen/','refresh');
+		}
 	}
 
 	public function checkinformedit($key='')
@@ -161,17 +168,8 @@ class Checkin extends CI_Controller {
 		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
 		$this->data['serviceDtl']=$this->Mdl_checkin->serviceList($key); 
 		$this->load->view('checkin/CheckinAddservice',$this->data);
-	}
-
-	
-
-	public function bill($key='')
-	{ 
-		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
-		$this->data['checkinRoomDtl']=$this->Mdl_checkin->bookedRoom($this->data['checkinDtl']['bookedID']);
-		$this->load->view('checkin/Bill',$this->data);
-	}
-
+	} 
+	 
 	public function search(){
 		if($_POST){
 			$this->data['viewName']=$this->pagename;

@@ -1,6 +1,6 @@
   <!-- <link href="<?php echo base_url()?>assets/css/bootstrap-select.min.css" rel="stylesheet"> -->
   <link href="<?php echo base_url()?>assets/css/jquery.datetimepicker.css" rel="stylesheet"> 
-  <input type="hidden" name="bookedID" id="bookedID" value="<?php echo $checkinDtl['bookedID']; ?> "> 
+  <input type="hidden" name="bookedID" id="bookedID" value="<?php echo $checkinDtl['bookedID']; ?>"> 
 
   <div class="row form_input" style="text-align:left; margin-bottom:20px">
   <div class="form-horizontal">
