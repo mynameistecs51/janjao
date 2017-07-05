@@ -71,7 +71,7 @@ $html = '
 	<thead style="background:#BDBDBD;font-size: 12px; ">
 		<tr>
 			<th style="text-align: center;width: 40px;">No.</th>
-			<th style="text-align: center;width:  150px;">BOOKED NUMBER</th>
+			<th style="text-align: center;width:  100px;">BOOKED NUMBER</th>
 			<th style="text-align: center;width:  150px;">NAME </th>
 			<th style="text-align: center;width:  100px;">ROOM</th>
 			<th style="text-align: center;width:  100px;">BOOKED DATE</th>
@@ -80,30 +80,30 @@ $html = '
 		</tr>
 	</thead>
 	<tbody>	';
-		// $i=1;
-		// if(count($getBooked)>0) {
-		// 	foreach ($getBooked as $key => $rowbooked) :
-		// 		$numRoom = count($rowbooked['selectRoom']);
-		// 	$html .='	<tr id="row'.$rowbooked['bookedID'].'>';
-		// 	$html .='<td>'.$i++.'</td>';
-		// 	$html .='<td>'.$rowbooked['bookedCode'].'</td>';
-		// 	$html .='<td>'.$rowbooked['firstName']." ".$rowbooked['lastName']." ( ".$rowbooked['mobile']." )".'</td>';
-		// 	$html .='<td style="text-align: center;">';
-		// 	for($i=0;$i < $numRoom; $i++)
-		// 	{
-		// 		echo "<button class='col-sm-3 btn-warning' style='text-align:center;margin-left:5px;'>".$rowbooked['selectRoom'][$i]['roomID']."</button> ";
-		// 	}
-		// 	$html .='</td>';
-		// 	$html .='<td>'.$rowbooked['bookedDate'].'</td>';
-		// 	$html .='<td>'.$rowbooked['checkInAppointDate'].'</td>';
-		// 	$html .='<td>'.$rowbooked['updateBY'].'</td>';
-		// 	$html .='</tr>';
-		// 	endforeach;
-		// }else{
-		// 	$html .='<tr>';
-		// 	$html .='<td colspan="8">No Booked Data !</td>';
-		// 	$html .='</tr>';
-		// }
+		$i=1;
+		if(count($getBooked)>0) {
+			foreach ($getBooked as $key => $rowbooked) :
+				$numRoom = count($rowbooked['selectRoom']);
+			$html .='	<tr id="row">';
+			$html .='<td style="text-align: center;width: 40px;">'.$i++.'</td>';
+			$html .='<td style="text-align: center;width:  100px;">'.$rowbooked['bookedCode'].'</td>';
+			$html .='<td style="text-align: center;width:  150px;">'.$rowbooked['firstName']." ".$rowbooked['lastName']." ( ".$rowbooked['mobile']." )".'</td>';
+			$html .='<td style="text-align: center;width:  100px;">';
+			for($j=0;$j < $numRoom; $j++)
+			{
+				$html .= 'Room '.$rowbooked['selectRoom'][$j]['roomID'];
+			}
+			$html .='</td>';
+			$html .='<td style="text-align: center;width:  100px;">'.$rowbooked['bookedDate'].'</td>';
+			$html .='<td style="text-align: center;width:  100px;">'.$rowbooked['checkInAppointDate'].'</td>';
+			$html .='<td style="text-align: center;width:  80px;">'.$rowbooked['updateBY'].'</td>';
+			$html .='</tr>';
+			endforeach;
+		}else{
+			$html .='<tr>';
+			$html .='<td colspan="8">No Booked Data !</td>';
+			$html .='</tr>';
+		}
 		$html .='
 	</tbody>
 </table>

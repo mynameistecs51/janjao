@@ -33,7 +33,7 @@ class Mdl_booked extends CI_Model {
 					tb.licenseplate,
 					tb.email,
 					DATE_FORMAT(tb.bookedDate,'%d/%m/%Y %H:%i') AS bookedDate,
-					DATE_FORMAT(tb.checkInAppointDate,'%d/%m/%Y %H:%i') AS checkInAppointDate, 
+					DATE_FORMAT(tb.checkInAppointDate,'%d/%m/%Y %H:%i') AS checkInAppointDate,
 					tb.checkOutAppointDate,
 					tb.is_breakfast,
 					tb.bookedType,
@@ -62,7 +62,7 @@ class Mdl_booked extends CI_Model {
 	public function saveAdd()
 	{
 		date_default_timezone_set('Asia/Bangkok');
-		$now = new DateTime(null, new DateTimeZone('Asia/Bangkok')); 
+		$now = new DateTime(null, new DateTimeZone('Asia/Bangkok'));
 
 		$bookedCode =  $this->db->query("SELECT fn_gen_sn('BK', 'BK".$now->format('ym')."') AS CODE")->result_array();
 		$fileName = '';
@@ -129,7 +129,7 @@ class Mdl_booked extends CI_Model {
 			// Insert ts_booked_room_log
 			$startDate = date_create($this->packfunction->dateTosql($_POST['checkinDate']));
 			$endDate  = date_create($this->packfunction->dateTosql($this->input->post('checkOutDate')));
-			$interval = date_diff($startDate, $endDate); 
+			$interval = date_diff($startDate, $endDate);
 			$runDay = array();
 			while ($startDate <= $endDate) {
 				$year = $startDate->format("Y");
@@ -138,7 +138,7 @@ class Mdl_booked extends CI_Model {
 				if(!array_key_exists($year, $runDay))
 					$runDay[$year] = array();
 				if(!array_key_exists($month, $runDay[$year]))
-					$runDay[$year][$month] = 0; 
+					$runDay[$year][$month] = 0;
 					$runDay[$year][$month]++;
 				$log = array(
 					'bookedID '    => $idBooked,
@@ -152,15 +152,15 @@ class Mdl_booked extends CI_Model {
 					"updateDT"	   => $this->packfunction->dtYMDnow(),
 					"updateBY"	   => $this->UserName
 				);
-				$this->db->insert('ts_booked_room_log',$log); 
-				$startDate->modify("+1 day");  
-			} 
-		endfor; // End ts_booked_room 
+				$this->db->insert('ts_booked_room_log',$log);
+				$startDate->modify("+1 day");
+			}
+		endfor; // End ts_booked_room
 
 	}
 
 	public function saveUpdate()
-	{ 
+	{
 
 		$fileName = '';
 		if( !empty($this->input->post('images'))){
@@ -175,11 +175,11 @@ class Mdl_booked extends CI_Model {
 			$fileName ="";
 		}
 
-		$saveCheckin= array( 
-			'idcardno' => $this->input->post('idcardno'), 
+		$saveCheckin= array(
+			'idcardno' => $this->input->post('idcardno'),
 			'idcardnoPath' =>$fileName!="" ? $fileName : $this->input->post('idcardnoPath_old'),
 			'titleName' => $this->input->post('gender'),
-			'firstName' => $this->input->post('firstName'), 
+			'firstName' => $this->input->post('firstName'),
 			'lastName' => $this->input->post('lastName'),
 			'birthdate' => $this->input->post('birthdate_y').'-'.$this->input->post('birthdate_m').'-'.$this->input->post('birthdate_d').' 00:00:00',
 			'address' => $this->input->post('address'),
@@ -194,16 +194,16 @@ class Mdl_booked extends CI_Model {
 			'cashPledge' => $this->input->post('cashPledge'),
 			'cashPledgePath' => '',
 			'comment' => $this->input->post('comment'),
-			'status' => 'BOOKED', 
+			'status' => 'BOOKED',
 			"updateDT"		=>$this->packfunction->dtYMDnow(),
 			"updateBY"		=>$this->UserName
 		);
-		$bookedID = $this->input->post('bookedID'); 
+		$bookedID = $this->input->post('bookedID');
 		$this->db->where('bookedID',$bookedID);
-		$this->db->update('ts_booked',$saveCheckin); 
+		$this->db->update('ts_booked',$saveCheckin);
 
 
- 
+
 		foreach ($this->input->post('bookedroomID') as $sr => $value) {
 
 			$saveCheckRoom[$sr] = array(
@@ -217,21 +217,21 @@ class Mdl_booked extends CI_Model {
 				"updateBY"		    => $this->UserName
 				);
 			$bookedroomID[$sr] = $this->input->post('bookedroomID')[$sr];
-			$this->db->where('bookedroomID',$bookedroomID[$sr]); 
-			$this->db->update('ts_booked_room',$saveCheckRoom[$sr]);  
+			$this->db->where('bookedroomID',$bookedroomID[$sr]);
+			$this->db->update('ts_booked_room',$saveCheckRoom[$sr]);
 
 
-			// เคลียร์ Log เดิม  
-			$this->db->where('bookedroomID',$bookedroomID[$sr]); 
+			// เคลียร์ Log เดิม
+			$this->db->where('bookedroomID',$bookedroomID[$sr]);
 			$this->db->delete('ts_booked_room_log');
 
 
 			// Insert ts_booked_room_log
 			$startDate = date_create($this->packfunction->dateTosql($_POST['checkinDate']));
 			$endDate  = date_create($this->packfunction->dateTosql($this->input->post('checkOutDate')));
-			$interval = date_diff($startDate, $endDate); 
+			$interval = date_diff($startDate, $endDate);
 			$runDay = array();
-			while ($startDate <= $endDate) { 
+			while ($startDate <= $endDate) {
 				$log = array(
 					'bookedID '    => $bookedID,
 					'bookedroomID' => $bookedroomID[$sr],
@@ -244,37 +244,37 @@ class Mdl_booked extends CI_Model {
 					"updateDT"	   => $this->packfunction->dtYMDnow(),
 					"updateBY"	   => $this->UserName
 				);
-				$this->db->insert('ts_booked_room_log',$log); 
+				$this->db->insert('ts_booked_room_log',$log);
 				$startDate->modify("+1 day");
-			}  
-		} // End ts_booked_room  
+			}
+		} // End ts_booked_room
 	}
 
 	public function saveCancle($key='')
-	{  
-		// ยกเลิกใบจอง 
-		$saveCheckin= array( 
+	{
+		// ยกเลิกใบจอง
+		$saveCheckin= array(
 			'comment' => 'CANCLE BY '.$this->UserName,
-			'status'  => 'CANCLE', 
+			'status'  => 'CANCLE',
 			"updateDT"=>$this->packfunction->dtYMDnow(),
 			"updateBY"=>$this->UserName
-		); 
+		);
 		$this->db->where('bookedID',$key);
 		$this->db->update('ts_booked',$saveCheckin);
 
-		// ยกเลิกห้องที่จอง 
+		// ยกเลิกห้องที่จอง
 		$saveCheckRoom = array(
 			'comment' => 'CANCLE BY '.$this->UserName,
-			'status'  => 'CANCLE', 
+			'status'  => 'CANCLE',
 			"updateDT"		    => $this->packfunction->dtYMDnow(),
 			"updateBY"		    => $this->UserName
-			); 
-		$this->db->where('bookedID',$key); 
-		$this->db->update('ts_booked_room',$saveCheckRoom);  
-
- 
+			);
 		$this->db->where('bookedID',$key);
-		$this->db->delete('ts_booked_room_log'); 
+		$this->db->update('ts_booked_room',$saveCheckRoom);
+
+
+		$this->db->where('bookedID',$key);
+		$this->db->delete('ts_booked_room_log');
 	}
 
 
@@ -295,8 +295,8 @@ class Mdl_booked extends CI_Model {
 		r.roomtypeID,
 		rt.roomtypeCode,
 		rt.bed,
-		r.roomCODE, 
-		IFNULL(log.status,'EMPTY') AS transaction, 
+		r.roomCODE,
+		IFNULL(log.status,'EMPTY') AS transaction,
 		r.floor,
 		IFNULL(DATE_FORMAT(br.checkinDate,'%d/%m/%Y'),'') AS checkinDate,
 		IFNULL(DATE_FORMAT(br.checkoutDate,'%d/%m/%Y'),'') AS checkoutDate,
@@ -305,18 +305,18 @@ class Mdl_booked extends CI_Model {
 		LEFT JOIN tm_roomtype rt ON r.roomtypeID=rt.roomtypeID
 		LEFT JOIN ts_booked_room br ON r.roomCODE=br.roomID AND br.status <> 'CANCLE'
 		LEFT JOIN (
-			SELECT 
+			SELECT
 				lg.roomID,
 			    COUNT(lg.logroomdateID) AS total,
 			    lg.status
-			FROM ts_booked_room_log lg 
-			WHERE lg.logDate BETWEEN '".$df.":00' AND '".$dt.":00' 
+			FROM ts_booked_room_log lg
+			WHERE lg.logDate BETWEEN '".$df.":00' AND '".$dt.":00'
 			GROUP by lg.roomID
 		) AS log ON r.roomCODE=log.roomID
 		WHERE r.status<>'DISABLE'
 		AND r.floor = '".$floor."'
 		GROUP BY r.roomID
-		ORDER BY r.roomID ASC 
+		ORDER BY r.roomID ASC
 		";
 		$data = $this->db->query($sql);
 		return $data->result_array();
@@ -332,7 +332,7 @@ class Mdl_booked extends CI_Model {
 					tb.titleName,
 					tb.firstName,
 					tb.middleName,
-					tb.lastName, 
+					tb.lastName,
 					DATE_FORMAT(tb.birthdate,'%Y') AS birthdate_y,
 					DATE_FORMAT(tb.birthdate,'%m') AS birthdate_m,
 					DATE_FORMAT(tb.birthdate,'%d') AS birthdate_d,
@@ -345,7 +345,7 @@ class Mdl_booked extends CI_Model {
 					tb.mobile,
 					tb.licenseplate,
 					tb.email,
-					DATE_FORMAT(tb.bookedDate,'%d/%m/%Y %H:%i') AS bookedDate, 
+					DATE_FORMAT(tb.bookedDate,'%d/%m/%Y %H:%i') AS bookedDate,
 					DATE_FORMAT(br.checkinDate,'%d/%m/%Y %H:%i') AS checkinDate,
 					DATE_FORMAT(br.checkoutDate,'%d/%m/%Y %H:%i') AS checkOutDate,
 					tb.is_breakfast,
@@ -368,21 +368,21 @@ class Mdl_booked extends CI_Model {
 		}else{
 			return [];
 		}
-		
+
 	}
 
 	public function bookedRoom($bookedID){
 		$sql = 	"
-				SELECT 
+				SELECT
 					rm.bookedroomID,
 				    rm.bookedID,
 				    rm.roomID
-				FROM ts_booked_room rm 
+				FROM ts_booked_room rm
 				WHERE rm.bookedID = '".$bookedID."' ";
 		$query 	= $this->db->query($sql);
 		return $query->result_array();
-		 
-		
+
+
 	}
 
 }

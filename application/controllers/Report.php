@@ -24,7 +24,16 @@ class Report extends CI_Controller {
 		$this->data['viewName']=$this->pagename;
 		$this->data['keyword']='';
 		$this->data['getBooked'] = $this->showList($this->data['keyword']);
-		$this->packfunction->packView($this->data,"report/ReportBooked");
+		$this->packfunction->packView($this->data,"report/ReportBookedDAY");
+	}
+
+	public function bookedMonth()
+	{
+		$this->data['viewName']=$this->pagename;
+		$this->data['keyword']='';
+		$this->data['getBooked'] = $this->showList($this->data['keyword']);
+		$this->data['getMonth'] = $this->packfunction->getMonth();
+		$this->packfunction->packView($this->data,"report/ReportBookedMonth");
 	}
 
 	public function showList($keyword='')
@@ -95,10 +104,15 @@ class Report extends CI_Controller {
 		return $data_array;
 	}
 
-	public function createPDF()
+	public function search($key='')
+	{
+
+	}
+
+	public function PDF()
 	{
 		$this->data['getBooked'] = $this->showList();
-		$this->load->view('report/ReportPDF',$this->data);
+		$this->load->view('report/ReportBookedPDF',$this->data);
 	}
 }
 
