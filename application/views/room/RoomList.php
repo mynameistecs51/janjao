@@ -27,7 +27,7 @@
     	<div class="row text-center" style="margin-top: 10px;">
     		<div class="col-lg-12" align="left">
     			<table id="fairlist" class="table table-striped table-bordered" cellspacing="0" width="100%" >
-    				<thead style="font-size: 13px;">
+    				<thead style="background:#BDBDBD;font-size: 12px; ">
     					<tr >
     						<th  style="text-align: center;width: 40px;">No.</th>
     						<th style="text-align: center;width:  90px;">ROOM NUMBER</th>

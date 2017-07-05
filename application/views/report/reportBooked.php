@@ -8,8 +8,12 @@
     <div class="col-lg-12">
     	<!-- Page Features -->
     	<div class="row text-center">
-    		<div class="col-lg-12" align="right">
-    			<div class="sh-right">
+    		<div class="col-lg-7" align="left">
+    		<!-- <button type="button" class="btn btn-primary"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> export PDF</button> -->
+    		<?php echo anchor(base_url().'report/createPDF/', '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>  export PDF', 'class="btn btn-primary"'); ?>
+    		</div>
+    		<div class="col-lg-5" align="left">
+    			<div class="sh-left">
     				<form name="formSearch" id="formSearch" class="form-inline" method="POST" action="<?php echo base_url()?>report/search/">
     					<button  type="submit" class="btn btn-primary" style="float: right;">Search</button>
     					Start Date :
@@ -23,7 +27,7 @@
     	<div class="row text-center" style="margin-top: 10px;">
     		<div class="col-lg-12" align="left">
     			<table id="fairlist" class="table table-striped table-bordered" cellspacing="0" width="100%" >
-    				<thead>
+    				<thead style="background:#BDBDBD;font-size: 12px; ">
     					<tr>
     						<th style="text-align: center;width: 40px;">No.</th>
     						<th style="text-align: center;width:  150px;">BOOKED NUMBER</th>
@@ -32,7 +36,7 @@
     						<th style="text-align: center;width:  100px;">BOOKED DATE</th>
     						<th style="text-align: center;width:  100px;">CHECKIN DATE</th>
     						<th style="text-align: center;width:  80px;"> CREATE BY</th>
-    						<th style="text-align: center;width:  60px;">#</th>
+    						<!-- <th style="text-align: center;width:  60px;">จำนวนเงิน</th> -->
     					</tr>
     				</thead>
     				<tbody>
@@ -55,14 +59,14 @@
 							<td><?php echo $rowbooked['bookedDate']; ?></td>
 							<td><?php echo $rowbooked['checkInAppointDate']; ?></td>
 							<td><?php echo $rowbooked['updateBY']; ?></td>
-							<td >
+							<!-- <td >
 								<button class="btn btn-primary btn-xs btn_edit" id="<?php echo MD5($rowbooked['bookedID']); ?>" title="edit" style='margin-left:5px;'>
 									<i class="fa fa-edit fa-2x"></i>
 								</button>
 								<button class="btn btn-danger btn-xs btn_cancel" id="<?php echo $rowbooked['bookedID']; ?>" title="Cancle" style='margin-left:5px;'>
 									<i class="fa fa-trash-o fa-2x" title="Cancle"></i>
 								</button>
-							</td>
+							</td> -->
 						</tr>
 					<?php endforeach; ?>
 					<?php }else{ ?>
@@ -79,7 +83,13 @@
 	<script type="text/javascript">
 		$(function() {
 			$.datetimepicker.setLocale('th');
-			$('#startDate, #endDate').datetimepicker({
+			$('#startDate').datetimepicker({
+				timepicker:true,
+				mask:true,
+				format:'d/m/Y',
+				lang:'th',
+			});
+			$('#endDate').datetimepicker({
 				timepicker:true,
 				mask:true,
 				format:'d/m/Y',

@@ -24,7 +24,7 @@ class Report extends CI_Controller {
 		$this->data['viewName']=$this->pagename;
 		$this->data['keyword']='';
 		$this->data['getBooked'] = $this->showList($this->data['keyword']);
-		$this->packfunction->packView($this->data,"report/reportBooked");
+		$this->packfunction->packView($this->data,"report/ReportBooked");
 	}
 
 	public function showList($keyword='')
@@ -95,7 +95,12 @@ class Report extends CI_Controller {
 		return $data_array;
 	}
 
+	public function createPDF()
+	{
+		$this->data['getBooked'] = $this->showList();
+		$this->load->view('report/ReportPDF',$this->data);
+	}
 }
 
 /* End of file Report.php */
-/* Location: ./application/controllers/Report.php */
+			/* Location: ./application/controllers/Report.php */

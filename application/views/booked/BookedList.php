@@ -52,16 +52,16 @@
 							<td><?php echo $rowbooked['bookedDate']; ?></td>
 							<td><?php echo $rowbooked['checkInAppointDate']; ?></td>
 							<td><?php echo $rowbooked['updateBY']; ?></td>
-							<td > 
+							<td >
                                 <button class="btn btn-primary btn-xs btn_edit" id="<?php echo MD5($rowbooked['bookedID']); ?>" title="edit" style='margin-left:5px;'>
                                     <i class="fa fa-edit fa-2x"></i>
-                                </button>  
+                                </button>
                                 <button class="btn btn-danger btn-xs btn_cancel" id="<?php echo $rowbooked['bookedID']; ?>" title="Cancle" style='margin-left:5px;'>
                                     <i class="fa fa-trash-o fa-2x" title="Cancle"></i>
                                 </button>
 							</td>
 						</tr>
-    					<?php endforeach; ?> 
+    					<?php endforeach; ?>
                     <?php }else{ ?>
                         <tr>
                             <td colspan="8">No Booked Data !</td>
@@ -71,13 +71,13 @@
     			</table>
     		</div>
     	</div>
-    	<div class="div_modal"> <!-- show modal Bill --> </div> 
+    	<div class="div_modal"> <!-- show modal Bill --> </div>
     	<script type="text/javascript">
-    		$(function() { 
+    		$(function() {
                 $('.btn_edit').click(function(){
                     var id = $(this).attr('id');
-                    load_page('<?php echo base_url()."checkin/checkinformedit/"; ?>'+id+'','.:: Data Checkin ::.','<?php echo base_url()."checkin/saveUpdate/"; ?>');
-                }); 
+                    load_page('<?php echo base_url()."checkin/checkinformedit/"; ?>'+id+'','.:: Data BOOKED ::.','<?php echo base_url()."checkin/saveUpdate/"; ?>');
+                });
                 $('.btn_cancel').click(function(){
                     var cfm = confirm("ยืนยันยกเลิกการเช่าห้องพัก คุณไม่สามารถย้อนกลับมาใช้ข้อมูลได้ !");
                     if(cfm == true){
@@ -91,14 +91,14 @@
                                  $('tbody tr#row'+id).remove();
                             },
                             error:function(res){
-                                alert("พบข้อผิดพลาด !"); 
+                                alert("พบข้อผิดพลาด !");
                             }
-                        }); 
+                        });
                     }else{
                         return false;
                     }
                 });
-            });  
+            });
 
     		function load_page(loadUrl,texttitle,urlsend){
     			var screenname= texttitle;

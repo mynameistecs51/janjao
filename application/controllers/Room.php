@@ -104,7 +104,7 @@ class Room extends CI_Controller {
 	public function saveEdit()
 	{
 		$this->Mdl_room->saveEdit();
-		// redirect($this->ctl,'refresh');
+		redirect($this->ctl,'refresh');
 	}
 
 	public function search(){
