@@ -108,6 +108,10 @@
                 var id = $(this).attr('id');
                 load_page_sv('<?php echo base_url()."checkin/checkinformService/"; ?>'+id+'','.:: Data Service ::.','<?php echo base_url()."checkin/saveService/"; ?>');
             });
+            $('.btn_checkout').click(function(){
+                var id = $(this).attr('id');
+                load_page_sv('<?php echo base_url()."checkin/checkoutform/"; ?>'+id+'','.:: Data Service ::.','<?php echo base_url()."checkin/saveCheckout/"; ?>');
+            });
             $('.btn_cancel').click(function(){
                 var cfm = confirm("ยืนยันยกเลิกการเช่าห้องพัก คุณไม่สามารถย้อนกลับมาใช้ข้อมูลได้ !");
                 if(cfm == true){

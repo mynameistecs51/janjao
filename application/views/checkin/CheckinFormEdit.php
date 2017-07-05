@@ -6,12 +6,6 @@
   <div class="row form_input" style="text-align:left; margin-bottom:20px">
   	<div class="form-horizontal">
   		<div class="form-group">
-  			<label for="selectRoom" class="col-lg-2 control-label">เข้าพัก</label>
-  			<div class="col-sm-3">
-  				<button type="button" class="btn btn-danger btn_checkin"> CHECKIN</button>
-  			</div>
-  		</div>
-  		<div class="form-group">
   			<label for="selectRoom" class="col-lg-2 control-label">ห้องที่เลือก</label>
   			<div class="col-lg-10 ">
   				<div class="row">
@@ -33,7 +27,7 @@
   		<div class="form-group">
   			<label for="idcardno" class="col-lg-2 control-label">เลขประจำประชาชน <b style="color: #FF0000">*</b></label>
   			<div class="col-sm-8">
-  				<input type="text" class="form-control" name="idcardno" id="idcardno" placeholder="เลขประจำประชาชน/ Passport No" value="<?php echo $checkinDtl['idcardno'] ?>">
+  				<input type="text" class="form-control" name="idcardno" id="idcardno" placeholder="เลขประจำประชาชน/ Passport No" value="<?php echo $checkinDtl['idcardno'] ?>" >
   			</div>
   		</div>
   		<div class="form-group">

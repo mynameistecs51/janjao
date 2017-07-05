@@ -253,11 +253,37 @@ class Mdl_checkin extends CI_Model {
 		}
 	}
 
+	public function saveCheckout(){
+		if($_POST){  
+			$this->db->where('bookedID',$_POST['bookedID']); 
+			$this->db->delete('ts_service');  
+
+			foreach ($_POST['serviceName'] as $sv => $value) {
+				$data[$sv] = array(
+					'bookedID' 	  => $_POST['bookedID'],
+					'serviceName' => $_POST['serviceName'][$sv],
+					'price' 	  => $_POST['price'][$sv],
+					'amount'      => $_POST['amount'][$sv],
+					'unit'		  => $_POST['unit'][$sv],
+					'type'		  => 'DESTROY',
+					'comment' 	  => '',
+					'status'  	  => 'ORDER',
+					"createDT"	  => $this->packfunction->dtYMDnow(),
+					"createBY"	  => $this->UserName,
+					"updateDT"	  => $this->packfunction->dtYMDnow(),
+					"updateBY"	  => $this->UserName
+				);  
+				$this->db->insert('ts_service',$data[$sv]);
+			} 
+		}
+	}
+
+
 	public function getBillCode(){
 		date_default_timezone_set('Asia/Bangkok');
 		$now = new DateTime(null, new DateTimeZone('Asia/Bangkok'));
 		$billcode =  $this->db->query("SELECT fn_gen_sn('BLS', 'BLS".$now->format('ym')."') AS CODE")->result_array();
-		
+
 		return $billcode[0]['CODE'];
 	}
 
