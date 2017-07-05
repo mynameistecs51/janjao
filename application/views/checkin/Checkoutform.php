@@ -359,7 +359,7 @@
 		});
 	}
 
-	$('#vat, #discount, #pay').on("click",function() {
+	$('#vat, #discount, #pay').on("change",function() {
 		sumtotal();
 	});
 
