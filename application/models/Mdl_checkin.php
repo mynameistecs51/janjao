@@ -253,11 +253,62 @@ class Mdl_checkin extends CI_Model {
 		}
 	}
 
+	public function saveCheckout(){
+		if($_POST){  
+			$key = $_POST['bookedID'];
+			$this->db->where('bookedID',$_POST['bookedID']); 
+			$this->db->delete('ts_service');   
+			foreach ($_POST['serviceName'] as $sv => $value) {
+				$data[$sv] = array(
+					'bookedID' 	  => $_POST['bookedID'],
+					'serviceName' => $_POST['serviceName'][$sv],
+					'price' 	  => $_POST['price'][$sv],
+					'amount'      => $_POST['amount'][$sv],
+					'unit'		  => $_POST['unit'][$sv],
+					'type'		  => 'DESTROY',
+					'comment' 	  => '',
+					'status'  	  => 'ORDER',
+					"createDT"	  => $this->packfunction->dtYMDnow(),
+					"createBY"	  => $this->UserName,
+					"updateDT"	  => $this->packfunction->dtYMDnow(),
+					"updateBY"	  => $this->UserName
+				);  
+				$this->db->insert('ts_service',$data[$sv]);
+			} 
+		}
+
+		// ยกเลิกใบจอง 
+		$saveCheckin= array( 
+			'comment' => 'CHECKOUT BY '.$this->UserName,
+			'status'  => 'CHECKOUT', 
+			"updateDT"=>$this->packfunction->dtYMDnow(),
+			"updateBY"=>$this->UserName
+		); 
+		$this->db->where('bookedID',$key);
+		$this->db->update('ts_booked',$saveCheckin);
+
+		// ยกเลิกห้องที่จอง 
+		$saveCheckRoom = array(
+			'comment' => 'CHECKOUT BY '.$this->UserName,
+			'status'  => 'CHECKOUT', 
+			"updateDT"		    => $this->packfunction->dtYMDnow(),
+			"updateBY"		    => $this->UserName
+			); 
+		$this->db->where('bookedID',$key); 
+		$this->db->update('ts_booked_room',$saveCheckRoom);  
+
+ 
+		$this->db->where('bookedID',$key);
+		$this->db->delete('ts_booked_room_log'); 
+
+	}
+
+
 	public function getBillCode(){
 		date_default_timezone_set('Asia/Bangkok');
 		$now = new DateTime(null, new DateTimeZone('Asia/Bangkok'));
 		$billcode =  $this->db->query("SELECT fn_gen_sn('BLS', 'BLS".$now->format('ym')."') AS CODE")->result_array();
-		
+
 		return $billcode[0]['CODE'];
 	}
 
@@ -313,7 +364,8 @@ class Mdl_checkin extends CI_Model {
 		ON tbr.bookedID = tb.bookedID
 		WHERE tb.status <> 'HIDDEN' 
 		AND tb.status <> 'LATE'
-		AND tb.status <> 'CANCLE' 
+		AND tb.status <> 'CANCLE'
+		AND tb.status <> 'CHECKOUT' 
 		AND CONCAT(tb.bookedCode,tb.idcardno,tb.firstName,' ',tb.lastName,tbr.roomID) LIKE '%".$keyword."%'
 		ORDER BY tb.bookedID DESC
 		";
@@ -385,7 +437,7 @@ class Mdl_checkin extends CI_Model {
 		return $query->result_array(); 
 	}
 
-	public function serviceList($key=''){
+	public function serviceList($key='',$type=''){
 		$sql = 	"
 				SELECT 
 					s.serviceID,
@@ -393,9 +445,11 @@ class Mdl_checkin extends CI_Model {
 					s.serviceName,
 					s.price,
 					s.unit,
-					s.amount
+					s.amount,
+					s.type
 				FROM ts_service s
 				WHERE MD5(s.bookedID) = '".$key."' 
+				AND s.type = '".$type."'
 				AND s.status<>'CANCLE' 
 				AND s.status<>'HIDDEN' ";
 		$query 	= $this->db->query($sql);

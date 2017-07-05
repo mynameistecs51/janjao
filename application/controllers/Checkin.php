@@ -138,13 +138,39 @@ class Checkin extends CI_Controller {
 		}
 	}
 
+	public function saveCheckout()
+	{
+		// echo "<pre>";
+		// print_r($_POST);
+		$this->Mdl_checkin->saveCheckout();
+		if(isset($_POST['isprint'])==true){
+			echo "<script>window.open('".base_url()."checkin/billCheckout/".md5(trim($_POST['bookedID']))."','_new');</script>";
+			redirect('checkin/','refresh');
+		}else{
+			redirect('checkin/','refresh');
+		}
+	}
+
 	public function  billprint($key=''){
 		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
 		if(count($this->data['checkinDtl'])>0){
 			$this->data['billCode']=$this->Mdl_checkin->getBillCode();
 			$this->data['getMonth'] = $this->packfunction->getMonth();
 			$this->data['getYear'] = $this->packfunction->getYear(); 
-			$this->data['serviceDtl']=$this->Mdl_checkin->serviceList($key); 
+			$this->data['serviceDtl']=$this->Mdl_checkin->serviceList($key,'SERVICE'); 
+			$this->load->view('checkin/BillService',$this->data);
+		}else{
+			 redirect('authen/','refresh');
+		}
+	}
+
+	public function  billCheckout($key=''){
+		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
+		if(count($this->data['checkinDtl'])>0){
+			$this->data['billCode']=$this->Mdl_checkin->getBillCode();
+			$this->data['getMonth'] = $this->packfunction->getMonth();
+			$this->data['getYear'] = $this->packfunction->getYear(); 
+			$this->data['serviceDtl']=$this->Mdl_checkin->serviceList($key,'DESTROY'); 
 			$this->load->view('checkin/BillService',$this->data);
 		}else{
 			 redirect('authen/','refresh');
@@ -166,9 +192,18 @@ class Checkin extends CI_Controller {
 
 	public function checkinformService($key=''){
 		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
-		$this->data['serviceDtl']=$this->Mdl_checkin->serviceList($key); 
+		$this->data['serviceDtl']=$this->Mdl_checkin->serviceList($key,'SERVICE'); 
 		$this->load->view('checkin/CheckinAddservice',$this->data);
 	} 
+
+	public function checkoutform($key=''){
+		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
+		$this->data['serviceDtl']=$this->Mdl_checkin->serviceList($key,'DESTROY'); 
+		$this->data['checkinRoomDtl']=$this->Mdl_checkin->bookedRoom($this->data['checkinDtl']['bookedID']);
+		$this->load->view('checkin/Checkoutform',$this->data);
+	} 
+
+	
 	 
 	public function search(){
 		if($_POST){
