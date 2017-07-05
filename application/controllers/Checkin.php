@@ -128,7 +128,7 @@ class Checkin extends CI_Controller {
 	}
 
 	public function saveService()
-	{ 
+	{
 		$this->Mdl_checkin->saveService();
 		if(isset($_POST['isprint'])==true){
 			echo "<script>window.open('".base_url()."checkin/billprint/".md5(trim($_POST['bookedID']))."','_new');</script>";

@@ -38,7 +38,7 @@
 						<td><input type="text" name="price[]" class="form-control price" id="price<?php echo $n; ?>" placeholder="0.00"  value="<?php echo $rs['price']; ?>" required></td>
 						<td><input type="text" name="unit[]" class="form-control unit" id="unit<?php echo $n; ?>" placeholder="ผืน"  value="<?php echo $rs['unit']; ?>" required></td>
 						<td><input type="text" name="amount[]" class="form-control amount" id="amount<?php echo $n; ?>" placeholder="0"  value="<?php echo $rs['amount']; ?>" required></td>
-						<td><input type="text" name="total[]" class="form-control total" id="total<?php echo $n; ?>"  placeholder="0.00" value="<?php echo number_format($rs['price']*$rs['amount'],2); ?>" required></td>
+						<td><input type="text" name="total[]" class="form-control total" id="total<?php echo $n; ?>"  placeholder="0.00" value="<?php echo number_format($rs['price']*$rs['amount'],2); ?>" required readonly></td>
 						<td><span class="btn btn-danger btn-xs delrow" id="delrow<?php echo $n; ?>" ><i class="fa fa-trash-o fa-2x"></i></span></td>
 					</tr>
 				<?php 
@@ -54,7 +54,7 @@
 						<td><input type="text" name="price[]" class="form-control price" id="price1" placeholder="0.00"  value="" required></td>
 						<td><input type="text" name="unit[]" class="form-control unit" id="unit1" placeholder="ผืน"  value="" required></td>
 						<td><input type="text" name="amount[]" class="form-control amount" id="amount1" placeholder="0"  value="" required></td>
-						<td><input type="text" name="total[]" class="form-control total" id="total1"  placeholder="0.00" value="" required></td>
+						<td><input type="text" name="total[]" class="form-control total" id="total1"  placeholder="0.00" value="" required readonly></td>
 						<td><span class="btn btn-danger btn-xs " id="delrow1" ><i class="fa fa-trash-o fa-2x"></i></span></td>
 					</tr>
 				<?php } ?>
@@ -115,7 +115,7 @@
 			html += '<td><input type="text" name="price[]" class="form-control price" id="price'+n+'" placeholder="0.00"  value="" required></td>';
 			html += '<td><input type="text" name="unit[]" class="form-control unit" id="unit'+n+'" placeholder="ผืน"  value="" required></td>';
 			html += '<td><input type="text" name="amount[]" class="form-control amount" id="amount'+n+'" placeholder="0"  value="" required></td>';
-			html += '<td><input type="text" name="total[]" class="form-control total" id="total'+n+'"  placeholder="0.00" value="" required></td>';
+			html += '<td><input type="text" name="total[]" class="form-control total" id="total'+n+'"  placeholder="0.00" value="" required readonly></td>';
 			html += '<td><span class="btn btn-danger btn-xs " id="delrow'+n+'" ><i class="fa fa-trash-o fa-2x"></i></span></td>';
 			html += '</tr>';
 			$('#servicelist tbody').append(html);
@@ -135,7 +135,9 @@
 
 	function chnrowval(n){
 		$('#price'+n+', #amount'+n).on("change",function() { 
-			var sum = parseInt($('#price'+n).val())*parseInt($('#amount'+n).val());
+			var price = $('#price'+n).val()!="" ? $('#price'+n).val():0;
+			var amount = $('#amount'+n).val()!="" ? $('#amount'+n).val():0;
+			var sum = parseInt(price)*parseInt(amount);
 			$('#total'+n).val(sum.toFixed(2));
 			sumtotal();
 		});
@@ -147,9 +149,13 @@
 		var totalsum = 0;
 		$('#servicelist tbody tr').each(function(i,n){
 			var id = $(n).attr('id'); 
-			totalprice += parseInt($('#price'+id).val());
-			totalamount += parseInt($('#amount'+id).val());
-			totalsum += parseInt($('#total'+id).val());
+			var price = $('#price'+id).val()!="" ? $('#price'+id).val():0;
+			var amount = $('#amount'+id).val()!="" ? $('#amount'+id).val():0;
+			var total = $('#total'+id).val()!="" ? $('#total'+id).val():0;
+
+			totalprice += parseInt(price);
+			totalamount += parseInt(amount);
+			totalsum += parseInt(total);
 		}); 
 		$('#totalprice').html(totalprice.toFixed(2));
 		$('#totalamount').html(totalamount);
