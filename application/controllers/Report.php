@@ -104,9 +104,33 @@ class Report extends CI_Controller {
 		return $data_array;
 	}
 
-	public function search($key='')
+	public function search()
 	{
-
+		$keywordDay = $this->input->post('keywordDay');
+		$keywordMonth = $this->input->post('startMonth');
+		if(!empty($keywordDay )){
+			if($_POST){
+				$this->data['viewName']=$this->pagename;
+				$this->data['keyword']= $keywordDay;
+				$this->data['getBooked'] = $this->showList($this->data['keyword']);
+				$this->packfunction->packView($this->data,"report/ReportBookedDAY");
+			}else{
+				redirect('report/booked','refresh');
+			}
+		}else if(!empty($keywordMonth)){
+			if($_POST){
+				$this->data['viewName']=$this->pagename;
+				$this->data['keyword']= '/'.$keywordMonth.'/'.$this->input->post('startYear') ;
+				$this->data['getMonth'] = $this->packfunction->getMonth();
+				$this->data['getBooked'] = $this->showList($this->data['keyword']);
+				$this->packfunction->packView($this->data,"report/ReportBookedMonth");
+				// echo $keywordMonth.'/'.$this->input->post('startYear');
+			}else{
+				redirect('report/bookedmonth/','refresh');
+			}
+		}else{
+			redirect('report/booked','refresh');
+		}
 	}
 
 	public function PDF()

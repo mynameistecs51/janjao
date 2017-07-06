@@ -53,7 +53,7 @@ class Mdl_booked extends CI_Model {
 				INNER JOIN ts_booked_room tbr
 				ON tbr.bookedID = tb.bookedID
 				WHERE tbr.status = 'BOOKED'
-				AND CONCAT(tb.bookedCode,tb.idcardno,tb.firstName,' ',tb.lastName,tbr.roomID) LIKE '%".$keyword."%'
+				AND CONCAT(tb.bookedCode,tb.idcardno,tb.firstName,' ',tb.lastName,tbr.roomID,DATE_FORMAT(tb.bookedDate,'%d/%m/%Y')) LIKE '%".$keyword."%'
 				";
 		$data = $this->db->query($sql)->result_array();
 		return $data;

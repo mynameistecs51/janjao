@@ -67,6 +67,7 @@ $now = new DateTime(null, new DateTimeZone('Asia/Bangkok'));
 // --------------------------------//
 
 $html = '
+<caption> <h3><b>รายงานยอดการจอง </b></h3></caption>
 <table id="fairlist" class="table table-striped table-bordered" cellspacing="0" width="100%" border="1" >
 	<thead style="background:#BDBDBD;font-size: 12px; ">
 		<tr>
@@ -88,7 +89,7 @@ $html = '
 			$html .='<td style="text-align: center;width: 40px;">'.$i++.'</td>';
 			$html .='<td style="text-align: center;width:  100px;">'.$rowbooked['bookedCode'].'</td>';
 			$html .='<td style="text-align: center;width:  150px;">'.$rowbooked['firstName']." ".$rowbooked['lastName']." ( ".$rowbooked['mobile']." )".'</td>';
-			$html .='<td style="text-align: center;width:  100px;">';
+			$html .='<td style="text-align: center;width:  80px;">';
 			for($j=0;$j < $numRoom; $j++)
 			{
 				$html .= 'Room '.$rowbooked['selectRoom'][$j]['roomID'];
@@ -101,7 +102,7 @@ $html = '
 			endforeach;
 		}else{
 			$html .='<tr>';
-			$html .='<td colspan="8">No Booked Data !</td>';
+			$html .='<td colspan="7">No Booked Data !</td>';
 			$html .='</tr>';
 		}
 		$html .='
