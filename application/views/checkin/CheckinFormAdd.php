@@ -6,9 +6,9 @@
   		<div class="form-group">
   			<label for="selectRoom" class="col-lg-2 control-label">ห้องที่เลือก</label>
   			<div class="col-lg-8">
-  			<div class="row">
-  				<?php
-  				$room =explode('_',$selectRoom);
+  				<div class="row">
+  					<?php
+  					$room =explode('_',$selectRoom);
 				echo '<input type="hidden" name="selectRoom" value="'.$selectRoom.'">';  //input hidden selectRoom
 				for ($i=0; $i < count($room); $i++) : ?>
 				<div class="col-lg-1 " style="margin-right:40px; margin-bottom:10px;">
@@ -19,192 +19,273 @@
 						</button>
 					</span>
 				</div>
-				<?php endfor;	?>
+			<?php endfor;	?>
+		</div>
+	</div>
+</div>
+<div class="form-group">
+	<label for="idcardno" class="col-sm-2 control-label">เลขประจำประชาชน <b style="color: #FF0000">*</b></label>
+	<div class="col-sm-8">
+		<input type="text" class="form-control" name="idcardno" id="idcardno" placeholder="เลขประจำประชาชน/ Passport No" >
+	</div>
+</div>
+<div class="form-group">
+	<label for="gender" class="col-sm-2 control-label">เพศ</label>
+	<div class="col-sm-8" >
+		<label><b class="btn btn-success btn-md"><input type="radio" name="gender" id="gender" value="MALE" class="control-label" checked> ชาย</b></label>
+		&nbsp;&nbsp;&nbsp;
+		<label><b class="btn btn-warning btn-md"><input type="radio" name="gender" id="gender" value="FEMALE" class="control-label">  หญิง</b></label>
+	</div>
+</div>
+<div class="form-group">
+	<label for="gender" class="col-sm-2 control-label">ชื่อ-สกุล <b style="color: #FF0000">*</b></label>
+	<div class="col-sm-4">
+		<input type="text" class="form-control" id="firstName" name="firstName" placeholder="ชื่อ">
+	</div>
+	<div class="col-sm-4">
+		<input type="text" class="form-control" id="lastName" name="lastName" placeholder="นามสกุล">
+	</div>
+</div>
+<div class="form-group">
+	<label for="birthDate" class="col-sm-2 control-label">วัน เดือน ปี เกิด</label>
+	<div class="col-sm-8">
+		<div class="row">
+			<div class="col-sm-2">
+				<select class="form-control" name="birthdate_d" required>
+					<option value="" selected>--วันที่--</option>
+					<option value="01">01</option>
+					<option value="02">02</option>
+					<option value="03">03</option>
+					<option value="04">04</option>
+					<option value="05">05</option>
+					<option value="06">06</option>
+					<option value="07">07</option>
+					<option value="08">08</option>
+					<option value="09">09</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+					<option value="21">21</option>
+					<option value="22">22</option>
+					<option value="23">23</option>
+					<option value="24">24</option>
+					<option value="25">25</option>
+					<option value="26">26</option>
+					<option value="27">27</option>
+					<option value="28">28</option>
+					<option value="29">29</option>
+					<option value="30">30</option>
+					<option value="31">31</option>
+				</select>
 			</div>
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="idcardno" class="col-sm-2 control-label">เลขประจำประชาชน <b style="color: #FF0000">*</b></label>
-		<div class="col-sm-8">
-			<input type="text" class="form-control" name="idcardno" id="idcardno" placeholder="เลขประจำประชาชน/ Passport No" >
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="gender" class="col-sm-2 control-label">เพศ</label>
-		<div class="col-sm-8" >
-			<label><b class="btn btn-success btn-md"><input type="radio" name="gender" id="gender" value="MALE" class="control-label" checked> ชาย</b></label>
-			&nbsp;&nbsp;&nbsp;
-			<label><b class="btn btn-warning btn-md"><input type="radio" name="gender" id="gender" value="FEMALE" class="control-label">  หญิง</b></label>
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="gender" class="col-sm-2 control-label">ชื่อ-สกุล <b style="color: #FF0000">*</b></label>
-		<div class="col-sm-4">
-			<input type="text" class="form-control" id="firstName" name="firstName" placeholder="ชื่อ">
-		</div>
-		<div class="col-sm-4">
-			<input type="text" class="form-control" id="lastName" name="lastName" placeholder="นามสกุล">
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="birthDate" class="col-sm-2 control-label">วัน เดือน ปี เกิด</label>
-		<div class="col-sm-8">
-			<div class="row">
-				<div class="col-sm-2">
-					<select class="form-control" name="birthdate_d" required>
-						<option value="" selected>--วันที่--</option>
-						<option value="01">01</option>
-						<option value="02">02</option>
-						<option value="03">03</option>
-						<option value="04">04</option>
-						<option value="05">05</option>
-						<option value="06">06</option>
-						<option value="07">07</option>
-						<option value="08">08</option>
-						<option value="09">09</option>
-						<option value="10">10</option>
-						<option value="11">11</option>
-						<option value="12">12</option>
-						<option value="13">13</option>
-						<option value="14">14</option>
-						<option value="15">15</option>
-						<option value="16">16</option>
-						<option value="17">17</option>
-						<option value="18">18</option>
-						<option value="19">19</option>
-						<option value="20">20</option>
-						<option value="21">21</option>
-						<option value="22">22</option>
-						<option value="23">23</option>
-						<option value="24">24</option>
-						<option value="25">25</option>
-						<option value="26">26</option>
-						<option value="27">27</option>
-						<option value="28">28</option>
-						<option value="29">29</option>
-						<option value="30">30</option>
-						<option value="31">31</option>
-					</select>
-				</div>
-				<div class="col-sm-4">
-					<select class="form-control" name="birthdate_m" required>
-						<option value="" selected>--เดือน--</option>
-						<option value="01">มกราคม</option>
-						<option value="02">กุมภาพันธ์</option>
-						<option value="03">มีนาคม</option>
-						<option value="04">เมษายน</option>
-						<option value="05">พฤษภาคม</option>
-						<option value="06">มิถุนายน</option>
-						<option value="07">กรกฎาคม</option>
-						<option value="08">สิงหาคม</option>
-						<option value="09">กันยายน</option>
-						<option value="10">ตุลาคม</option>
-						<option value="11">พฤศจิกายน</option>
-						<option value="12">ธันวาคม</option>
-					</select>
-				</div>
-				<div class="col-sm-2">
-					<select class="form-control" name="birthdate_y" required>
+			<div class="col-sm-4">
+				<select class="form-control" name="birthdate_m" required>
+					<option value="" selected>--เดือน--</option>
+					<option value="01">มกราคม</option>
+					<option value="02">กุมภาพันธ์</option>
+					<option value="03">มีนาคม</option>
+					<option value="04">เมษายน</option>
+					<option value="05">พฤษภาคม</option>
+					<option value="06">มิถุนายน</option>
+					<option value="07">กรกฎาคม</option>
+					<option value="08">สิงหาคม</option>
+					<option value="09">กันยายน</option>
+					<option value="10">ตุลาคม</option>
+					<option value="11">พฤศจิกายน</option>
+					<option value="12">ธันวาคม</option>
+				</select>
+			</div>
+			<div class="col-sm-2">
+				<select class="form-control" name="birthdate_y" required>
 					<option value="" selected>--พ.ศ.--</option>
 					<?php
-						$y = $this->packfunction->yearnow()+543;
-						for ($i=0; $i < 80; $i++) {
-							echo '<option value="'.$y.'">'.$y.'</option> ';
-							$y--;
-						}
-					 ?>
-					</select>
-				</div>
+					$y = $this->packfunction->yearnow()+543;
+					for ($i=0; $i < 80; $i++) {
+						echo '<option value="'.$y.'">'.$y.'</option> ';
+						$y--;
+					}
+					?>
+				</select>
 			</div>
 		</div>
 	</div>
-	<div class="form-group">
-		<label for="address" class="col-sm-2 control-label">ที่อยู่</label>
-		<div class="col-sm-8">
-			<textarea name="address" id="address" class="form-control"></textarea>
-		</div>
+</div>
+<div class="form-group">
+	<label for="address" class="col-sm-2 control-label">ที่อยู่</label>
+	<div class="col-sm-8">
+		<textarea name="address" id="address" class="form-control"></textarea>
 	</div>
-	<div class="form-group">
-		<label for="mobile" class="col-sm-2 control-label">เบอร์มือถือ</label>
-		<div class="col-sm-8">
-			<input type="tel" class="form-control" id="mobile" name="mobile" minlength="9" placeholder="082-2222222">
-		</div>
+</div>
+<div class="form-group">
+	<label for="mobile" class="col-sm-2 control-label">เบอร์มือถือ</label>
+	<div class="col-sm-8">
+		<input type="tel" class="form-control" id="mobile" name="mobile" minlength="9" placeholder="082-2222222">
 	</div>
-	<div class="form-group">
-		<label for="licenseplate" class="col-sm-2 control-label">ทะเบียนรถ</label>
-		<div class="col-sm-8">
-			<input type="text" class="form-control" name="licenseplate" id="licenseplate" placeholder="1กก 1111">
-		</div>
+</div>
+<div class="form-group">
+	<label for="licenseplate" class="col-sm-2 control-label">ทะเบียนรถ</label>
+	<div class="col-sm-8">
+		<input type="text" class="form-control" name="licenseplate" id="licenseplate" placeholder="1กก 1111">
 	</div>
-	<div class="form-group">
-		<label for="email" class="col-sm-2 control-label">อีเมลล์</label>
-		<div class="col-sm-8">
-			<input type="email" class="form-control" id="email" name="email" placeholder="name@domain.com">
-		</div>
+</div>
+<div class="form-group">
+	<label for="email" class="col-sm-2 control-label">อีเมลล์</label>
+	<div class="col-sm-8">
+		<input type="email" class="form-control" id="email" name="email" placeholder="name@domain.com">
 	</div>
-	<div class="form-group">
-		<label for="bookedDate" class="col-sm-2 control-label">วันที่ จอง <b style="color: #FF0000">*</b></label>
-		<div class="col-sm-8">
-			<input type="text" class="form-control" id="bookedDate" name="bookedDate" value="<?php echo $this->packfunction->dtDMYnow(); ?> ">
-		</div>
+</div>
+<div class="form-group">
+	<label for="bookedDate" class="col-sm-2 control-label">วันที่ จอง <b style="color: #FF0000">*</b></label>
+	<div class="col-sm-8">
+		<input type="text" class="form-control" id="bookedDate" name="bookedDate" value="<?php echo $this->packfunction->dtDMYnow(); ?> ">
 	</div>
-	<div class="form-group">
-		<label for="checkinDate" class="col-sm-2 control-label">วันที่ Checkin <b style="color: #FF0000">*</b></label>
-		<div class="col-sm-3">
-			<input type="text" class="form-control" id="checkinDate" name="checkinDate" value="<?php echo $din; ?>" readonly>
-		</div>
-		<label for="checkOutDate" class="col-sm-2 control-label">วันที่ Checkout <b style="color: #FF0000">*</b></label>
-		<div class="col-sm-3">
-			<input type="text" class="form-control" id="checkOutDate" name="checkOutDate" value="<?php echo $dout; ?>" readonly>
-		</div>
+</div>
+<div class="form-group">
+	<label for="checkinDate" class="col-sm-2 control-label">วันที่ Checkin <b style="color: #FF0000">*</b></label>
+	<div class="col-sm-3">
+		<input type="text" class="form-control" id="checkinDate" name="checkinDate" value="<?php echo $din; ?>" readonly>
 	</div>
-	<div class="form-group">
-		<label for="bookedType" class="col-sm-2 control-label">เช่าแบบ <b style="color: #FF0000">*</b></label>
-		<div class="col-sm-8">
-			<label><b class="btn btn-info btn-md"> <input type="radio" name="bookedType" id="SHORT" value="SHORT" class="control-label">  ชั่วคราว</b></label>
-			&nbsp;&nbsp;&nbsp;
-			<label><b class="btn btn-warning btn-md"> <input type="radio" name="bookedType" id="DAY" value="DAY" class="control-label" checked>  รายวัน</b></label>
-			&nbsp;&nbsp;&nbsp;
-			<label><b class="btn btn-primary btn-md"> <input type="radio" name="bookedType" id="MONTH" value="MONTH" class="control-label">  รายเดือน</b></label>
-		</div>
+	<label for="checkOutDate" class="col-sm-2 control-label">วันที่ Checkout <b style="color: #FF0000">*</b></label>
+	<div class="col-sm-3">
+		<input type="text" class="form-control" id="checkOutDate" name="checkOutDate" value="<?php echo $dout; ?>" readonly>
 	</div>
-	<div class="form-group">
-		<label for="deposit" class="col-sm-2 control-label">เงินมัดจำ <b style="color: #FF0000">*</b></label>
-		<div class="col-sm-8">
-				<div class="input-group">
-				<input type="text" class="form-control" id="cashPledge" name="cashPledge" placeholder="300">
+</div>
+<div class="form-group">
+	<label for="bookedType" class="col-sm-2 control-label">เช่าแบบ <b style="color: #FF0000">*</b></label>
+	<div class="col-sm-8">
+		<label><b class="btn btn-info btn-md"> <input type="radio" name="bookedType" id="SHORT" value="SHORT" class="control-label">  ชั่วคราว</b></label>
+		&nbsp;&nbsp;&nbsp;
+		<label><b class="btn btn-warning btn-md"> <input type="radio" name="bookedType" id="DAY" value="DAY" class="control-label" checked>  รายวัน</b></label>
+		&nbsp;&nbsp;&nbsp;
+		<label><b class="btn btn-primary btn-md"> <input type="radio" name="bookedType" id="MONTH" value="MONTH" class="control-label">  รายเดือน</b></label>
+	</div>
+</div>
+<div class="form-group">
+	<label for="deposit" class="col-sm-2 control-label">เงินมัดจำ <b style="color: #FF0000">*</b></label>
+	<div class="col-sm-8">
+		<div class="input-group">
+			<input type="text" class="form-control" id="cashPledge" name="cashPledge" placeholder="300">
 			<span class="input-group-addon">บาท</span>
-			</div>
 		</div>
 	</div>
-	<div class="form-group">
-		<label for="is_breakfast" class="col-sm-2 control-label">อาหารเช้า</label>
-		<div class="col-sm-8">
-			<label><b class="btn btn-danger btn-md"> <input type="radio" name="is_breakfast" id="breakfast0" value="0" class="control-label" checked> ไม่รับอาหารเช้า</b></label>
-			&nbsp;&nbsp;&nbsp;
-			<label><b class="btn btn-success btn-md"> <input type="radio" name="is_breakfast" id="breakfast1" value="1" class="control-label"> รับอาหารเช้า</b></label>
-		</div>
+</div>
+<div class="form-group">
+	<label for="is_breakfast" class="col-sm-2 control-label">อาหารเช้า</label>
+	<div class="col-sm-8">
+		<label><b class="btn btn-danger btn-md"> <input type="radio" name="is_breakfast" id="breakfast0" value="0" class="control-label" checked> ไม่รับอาหารเช้า</b></label>
+		&nbsp;&nbsp;&nbsp;
+		<label><b class="btn btn-success btn-md"> <input type="radio" name="is_breakfast" id="breakfast1" value="1" class="control-label"> รับอาหารเช้า</b></label>
 	</div>
-	<div class="form-group">
-		<label for="deposit" class="col-sm-2 control-label">Comment</label>
-		<div class="col-sm-8">
-			<textarea name="comment" id="comment" class="form-control"></textarea>
-		</div>
+</div>
+<div class="form-group">
+	<label for="deposit" class="col-sm-2 control-label">Comment</label>
+	<div class="col-sm-8">
+		<textarea name="comment" id="comment" class="form-control"></textarea>
 	</div>
-	<div class="form-group">
-		<label for="btnsnap" class="col-sm-2 control-label"></label>
-		<div class="col-sm-10">
-			<video id="video" class="" width="260" height="195" autoplay></video>
-			<canvas id="canvas"  name="idcardPicture"  class="bg-primary " width="260" height="195" ></canvas>
-			<input type="hidden" name="images" id="images" value="">
+</div>
+<div class="form-group">
+	<label for="btnsnap" class="col-sm-2 control-label"></label>
+	<div class="col-sm-10">
+		<video id="video" class="" width="260" height="195" autoplay></video>
+		<canvas id="canvas"  name="idcardPicture"  class="bg-primary " width="260" height="195" ></canvas>
+		<input type="hidden" name="images" id="images" value="">
 
-		</div>
 	</div>
-	<div class="form-group">
-		<label for="btnsnap" class="col-sm-2 control-label"></label>
-		<div class="col-sm-3" align="center">
-			<i class="fa fa-camera btn btn-primary "  id="snap"> ถ่ายภาพ <i class="glyphicon glyphicon-menu-right"></i></i>
-		</div>
+</div>
+<div class="form-group">
+	<label for="btnsnap" class="col-sm-2 control-label"></label>
+	<div class="col-sm-3" align="center">
+		<i class="fa fa-camera btn btn-primary "  id="snap"> ถ่ายภาพ <i class="glyphicon glyphicon-menu-right"></i></i>
+	</div>
+</div>
+</div>
+</div>
+
+<!-- sum price total -->
+<div class="form-group">
+	<label for="idcardno" class="col-lg-2 control-label">รายการที่ชำระเพิ่ม <b style="color: #FF0000">*</b></label>
+	<div class="col-lg-8">
+		<table id="servicelist" class="table table-striped table-bordered" cellspacing="0" width="100%" >
+			<thead>
+				<tr>
+					<th style="text-align: center;width: 40px;">No.</th>
+					<th style="text-align: center;">NAME </th>
+					<th style="text-align: center;width:  80px;">PRICE</th>
+					<th style="text-align: center;width:  80px;">UNIT</th>
+					<th style="text-align: center;width:  80px;">AMOUNT</th>
+					<th style="text-align: center;width:  120px;">TOTAL</th>
+					<th style="text-align: center;width:  50px;">#</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+				$totalprice = 0.00; $totalamount = 0.00; $totalsum = 0.00;
+				$n = 1;
+				if(count($serviceDtl)>0){ ?>
+				<?php foreach ($serviceDtl as $rs) {  ?>
+				<tr id="<?php echo $n; ?>">
+					<td><?php echo $n; ?></td>
+					<td><input type="text" name="serviceName[]" class="form-control servicename" id="servicename<?php echo $n; ?>" placeholder="ผ้าห่ม" value="<?php echo $rs['serviceName']; ?>" required></td>
+					<td><input type="text" name="price[]" class="form-control price" id="price<?php echo $n; ?>" placeholder="0.00"  value="<?php echo $rs['price']; ?>" required></td>
+					<td><input type="text" name="unit[]" class="form-control unit" id="unit<?php echo $n; ?>" placeholder="ผืน"  value="<?php echo $rs['unit']; ?>" required></td>
+					<td><input type="text" name="amount[]" class="form-control amount" id="amount<?php echo $n; ?>" placeholder="0"  value="<?php echo $rs['amount']; ?>" required></td>
+					<td><input type="text" name="total[]" class="form-control total" id="total<?php echo $n; ?>"  placeholder="0.00" value="<?php echo number_format($rs['price']*$rs['amount'],2); ?>" required readonly></td>
+					<td><span class="btn btn-danger btn-xs delrow" id="delrow<?php echo $n; ?>" ><i class="fa fa-trash-o fa-2x"></i></span></td>
+				</tr>
+				<?php
+				$totalprice += $rs['price'];
+				$totalamount += $rs['amount'];
+				$totalsum += ($rs['price']*$rs['amount']);
+				?>
+				<?php $n++; } ?>
+				<?php } ?>
+			</tbody>
+			<tfoot>
+				<tr align="right">
+					<td colspan="2" > Total :</td>
+					<td><span id="totalprice"><?php echo number_format($totalprice,2); ?></span></td>
+					<td></td>
+					<td><span id="totalamount"><?php echo number_format($totalamount); ?></span></td>
+					<td><span id="totalsum"><?php echo number_format($totalsum,2); ?></span></td>
+					<td></td>
+				</tr>
+			</tfoot>
+		</table>
+		<span class="btn btn-primary btn-sm " id="addrows"> <i class="glyphicon glyphicon-plus-sign"></i> เพิ่มรายการ </span>
+	</div>
+</div>
+</div>
+<div class="form-group" align="right">
+	<label for="idcardno" class="col-lg-2 control-label"></label>
+	<div class="col-lg-8">
+		<div class="col-lg-6">ภาษีมูลค่าเพิ่ม</div><div class="col-lg-5"><input type="text" name="vat" id="vat" class="form-control" value="7" style="text-align: right;height: 28px;"></div><div class="col-lg-1">%</div>
+		<div class="col-lg-12" style="height: 5px;"></div>
+		<div class="col-lg-6">ยอดสุทธิ</div><div class="col-lg-5"><input type="text" name="lastamount" id="lastamount"  class="form-control" value="<?php echo number_format($totalsum,2); ?>" style="text-align: right;height: 28px;" readonly></div><div class="col-lg-1">บาท</div>
+		<div class="col-lg-12" style="height: 5px;"></div>
+		<div class="col-lg-6">ส่วนลด</div><div class="col-lg-5"><input type="text" name="discount" id="discount" class="form-control" value="0.00" style="text-align: right;height: 28px;"></div><div class="col-lg-1">บาท</div>
+		<div class="col-lg-12" style="height: 5px;"></div>
+		<div class="col-lg-6">เงินมัดจำ</div><div class="col-lg-5"><input type="text" name="deposit" id="deposit"  class="form-control" value="<?php //echo $checkinDtl['cashPledge']; ?>200.00" style="text-align: right;height: 28px;" readonly></div><div class="col-lg-1">บาท</div>
+		<div class="col-lg-12" style="height: 5px;"></div>
+		<div class="col-lg-6">รับเงิน</div><div class="col-lg-5"><input type="text" name="pay" id="pay" class="form-control" value="0.00" style="text-align: right;height: 28px;"></div><div class="col-lg-1">บาท</div>
+		<div class="col-lg-12" style="height: 5px;"></div>
+		<div class="col-lg-6">เงินทอน</div><div class="col-lg-5"><input type="text" name="change" id="change" class="form-control" value="0.00" style="text-align: right;height: 28px;" readonly></div><div class="col-lg-1">บาท</div>
+	</div>
+	<label for="idcardno" class="col-lg-2 control-label"></label>
+</div>
+
+
+
+<div class="form-group" align="center">
+	<div class="col-lg-12"><br><br><br>
+		<label><span id="saveandprint" class="btn btn-secondary">  <input type="checkbox" name="isprint" value="YES" checked> <i class="glyphicon glyphicon-print"></i> พิมพ์ใบเสร็จรับเงิน</span></label>
 	</div>
 </div>
 </div>
@@ -238,7 +319,7 @@ $('#bookedDate').datetimepicker({
 
 $("#myModal0").on("hidden.bs.modal", function () {
     // location.reload();
-});
+  });
 
 
 // Grab elements, create settings, etc.

@@ -83,16 +83,16 @@ class Home extends CI_Controller {
 	}
 
 	public function search(){
-		if($_POST){ 
+		if($_POST){
 			$this->data['dtcheckin']=$_POST['dtcheckin']!='' ? $_POST['dtcheckin']:$this->packfunction->dtcheckin();
 			$this->data['dtcheckout']=$_POST['dtcheckout']!='' ? $_POST['dtcheckout']:$this->packfunction->dtcheckout();
 			// $this->data['roomType']=$_POST['roomType'];
-			// $this->data['roomstatus']=$_POST['roomstatus']; 
+			// $this->data['roomstatus']=$_POST['roomstatus'];
 			$this->data['viewName'] =$this->pagename;
 			$this->data['getfloor2']=$this->Mdl_booked->getRoom(2,$this->data['dtcheckin'],$this->data['dtcheckout']);
 			$this->data['getfloor3']=$this->Mdl_booked->getRoom(3,$this->data['dtcheckin'],$this->data['dtcheckout']);
 			$this->data['getfloor4']=$this->Mdl_booked->getRoom(4,$this->data['dtcheckin'],$this->data['dtcheckout']);
-			$this->data['topPageName']='<b style="color:#D70F0F;font-size:18px;">Room Status</b>'; 
+			$this->data['topPageName']='<b style="color:#D70F0F;font-size:18px;">Room Status</b>';
 			$this->packfunction->packView($this->data,'Dashboard');
 		}else{
 			redirect('home/');

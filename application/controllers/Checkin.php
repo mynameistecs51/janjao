@@ -7,7 +7,7 @@ class Checkin extends CI_Controller {
 	{
 		parent::__construct();
 		$this->ctl="Checkin";
-		$this->pagename="CHECKIN"; 
+		$this->pagename="CHECKIN";
 		$this->load->model('Mdl_checkin');
 		$this->dtnow = $this->packfunction->dtYMDnow();
 		$this->ip_addr = $this->input->ip_address();
@@ -22,7 +22,7 @@ class Checkin extends CI_Controller {
 
 	public function index(){
 		$this->data['viewName']=$this->pagename;
-		$this->data['keyword']=''; 
+		$this->data['keyword']='';
 		$this->data['getCheckin'] = $this->showList($this->data['keyword']);
 		$this->packfunction->packView($this->data,"checkin/CheckinList");
 	}
@@ -118,7 +118,7 @@ class Checkin extends CI_Controller {
 		redirect('checkin/','refresh');
 	}
 
-	public function saveCancle(){ 
+	public function saveCancle(){
 		if($_POST){
 			$this->Mdl_checkin->saveCancle($_POST['key']);
 			echo json_encode(['status'=>'success']);
@@ -156,11 +156,11 @@ class Checkin extends CI_Controller {
 		if(count($this->data['checkinDtl'])>0){
 			$this->data['billCode']=$this->Mdl_checkin->getBillCode();
 			$this->data['getMonth'] = $this->packfunction->getMonth();
-			$this->data['getYear'] = $this->packfunction->getYear(); 
-			$this->data['serviceDtl']=$this->Mdl_checkin->serviceList($key,'SERVICE'); 
+			$this->data['getYear'] = $this->packfunction->getYear();
+			$this->data['serviceDtl']=$this->Mdl_checkin->serviceList($key,'SERVICE');
 			$this->load->view('checkin/BillService',$this->data);
 		}else{
-			 redirect('authen/','refresh');
+			redirect('authen/','refresh');
 		}
 	}
 
@@ -169,20 +169,20 @@ class Checkin extends CI_Controller {
 		if(count($this->data['checkinDtl'])>0){
 			$this->data['billCode']=$this->Mdl_checkin->getBillCode();
 			$this->data['getMonth'] = $this->packfunction->getMonth();
-			$this->data['getYear'] = $this->packfunction->getYear(); 
-			$this->data['serviceDtl']=$this->Mdl_checkin->serviceList($key,'DESTROY'); 
+			$this->data['getYear'] = $this->packfunction->getYear();
+			$this->data['serviceDtl']=$this->Mdl_checkin->serviceList($key,'DESTROY');
 			$this->load->view('checkin/BillService',$this->data);
 		}else{
-			 redirect('authen/','refresh');
+			redirect('authen/','refresh');
 		}
 	}
 
 	public function checkinformedit($key='')
-	{ 
+	{
 		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
 		$this->data['checkinRoomDtl']=$this->Mdl_checkin->bookedRoom($this->data['checkinDtl']['bookedID']);
 		$this->load->view('checkin/CheckinFormEdit',$this->data);
-	} 
+	}
 
 	public function checkinformcheckin($key=''){
 		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
@@ -192,33 +192,33 @@ class Checkin extends CI_Controller {
 
 	public function checkinformService($key=''){
 		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
-		$this->data['serviceDtl']=$this->Mdl_checkin->serviceList($key,'SERVICE'); 
+		$this->data['serviceDtl']=$this->Mdl_checkin->serviceList($key,'SERVICE');
 		$this->load->view('checkin/CheckinAddservice',$this->data);
-	} 
+	}
 
 	public function checkoutform($key=''){
 		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
-		$this->data['serviceDtl']=$this->Mdl_checkin->serviceList($key,'DESTROY'); 
+		$this->data['serviceDtl']=$this->Mdl_checkin->serviceList($key,'DESTROY');
 		$this->data['checkinRoomDtl']=$this->Mdl_checkin->bookedRoom($this->data['checkinDtl']['bookedID']);
 		$this->load->view('checkin/Checkoutform',$this->data);
-	} 
+	}
 
-	
-	 
+
+
 	public function search(){
 		if($_POST){
 			$this->data['viewName']=$this->pagename;
-			$this->data['keyword']=$this->input->post('keyword'); 
+			$this->data['keyword']=$this->input->post('keyword');
 			$this->data['getCheckin'] = $this->showList($this->data['keyword']);
-			$this->packfunction->packView($this->data,"checkin/CheckinList"); 
+			$this->packfunction->packView($this->data,"checkin/CheckinList");
 		}else{
 			redirect('checkin/');
 		}
 	}
- 
 
-	
 
-	  
+
+
+
 
 }?>
