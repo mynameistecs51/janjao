@@ -360,14 +360,13 @@ class Mdl_checkin extends CI_Model {
 		DATE_FORMAT(tbr.checkinDate,'%d/%m/%Y %H:%i') AS checkinDate,
 		DATE_FORMAT(tbr.checkoutDate,'%d/%m/%Y %H:%i') AS checkoutDate
 		FROM ts_booked tb
-		INNER JOIN ts_booked_room tbr
-		ON tbr.bookedID = tb.bookedID
+		INNER JOIN ts_booked_room tbr ON tb.bookedID = tbr.bookedID
 		WHERE tb.status <> 'HIDDEN' 
 		AND tb.status <> 'LATE'
 		AND tb.status <> 'CANCLE'
 		AND tb.status <> 'CHECKOUT' 
 		AND CONCAT(tb.bookedCode,tb.idcardno,tb.firstName,' ',tb.lastName,tbr.roomID) LIKE '%".$keyword."%'
-		ORDER BY tb.bookedID DESC
+		ORDER BY tb.bookedID DESC 
 		";
 		$data = $this->db->query($sql)->result_array();
 		return $data;
