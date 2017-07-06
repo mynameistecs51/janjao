@@ -218,7 +218,6 @@
 <!-- <script src="<?php echo base_url() ?>assets/js/bootstrap-select.min.js"></script> -->
 <script src="<?php echo base_url() ?>assets/js/jquery.datetimepicker.full.min.js"></script>
 <script type="text/javascript">
-	checkin();
 	// update status booked --> checkin
 
 $.datetimepicker.setLocale('th'); // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
@@ -292,12 +291,6 @@ function dataURLtoFile(dataurl, filename) {
 		u8arr[n] = bstr.charCodeAt(n);
 	}
 	return new File([u8arr], filename, {type:mime});
-}
-
-function checkin() {
-	$('.btn_checkin').click(function(){
-		alert('<?php echo $checkinDtl['bookedID']; ?>');
-	});
 }
 
 </script>
