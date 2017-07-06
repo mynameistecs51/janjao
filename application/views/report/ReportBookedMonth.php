@@ -1,9 +1,9 @@
     <link href="<?php echo base_url()?>assets/css/jquery.datetimepicker.css" rel="stylesheet">
     <!-- Page Name -->
-    <div class="col-lg-2">
+    <div class="col-lg-3">
     	<i style="font-size: 18px;">REPORT BOOKED <u><span class="text-primary">MONTH</span></u></i>
     </div>
-    <div class="col-lg-10 text-right" >
+    <div class="col-lg-9 text-right" >
     	<?php echo anchor(base_url().'report/booked/', '<i class="fa fa-list" aria-hidden="true"></i> รายวัน', 'class="btn btn-success"'); ?>
     	<?php echo anchor(base_url().'report/bookedmonth/', '<i class="fa fa-list" aria-hidden="true"></i> รายเดือน', 'class="btn btn-danger"'); ?>
     </div>
@@ -12,22 +12,22 @@
     <div class="col-lg-12">
     	<!-- Page Features -->
     	<div class="row text-center">
-    		<div class="col-lg-7" align="left">
+    		<div class="col-lg-6" align="left">
     			<!-- <button type="button" class="btn btn-primary"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> export PDF</button> -->
     			<?php echo anchor(base_url().'report/PDF/', '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>  export PDF', 'class="btn btn-primary" target ="_blank"'); ?>
     		</div>
-    		<div class="col-lg-5" align="right">
+    		<div class="col-lg-6" align="right">
     			<div class="sh-left">
     				<form name="formSearch" id="formSearch" class="form-inline" method="POST" action="<?php echo base_url()?>report/search/">
     					Select Month :
-    					<select name="startMonth" class="form-control">
+    					<select name="startMonth" class="form-control"  style="width: 138px;margin-right: 10px;">
     						<?php foreach ($getMonth as $keyMonth => $valueMonth) :?>
     							<?php $selectedM = ($keyMonth == date('m'))?'selected':'' ?>
     							<option value="<?php echo $keyMonth; ?>" <?php echo $selectedM; ?>><?php echo $valueMonth; ?></option>
     						<?php endforeach; ?>
     					</select>
     					Select Year :
-    					<select name="startYear" class="form-control">
+    					<select name="startYear" class="form-control"  style="width: 138px;margin-right: 10px;">
     						<?php for($i=(-2);$i <= (+2);$i++): ?>
     							<?php $selectedY = (date('Y')+$i == date('Y'))?'selected':'' ?>
     							<option value="<?php echo date('Y')+$i; ?>" <?php echo $selectedY; ?>><?php echo (date('Y')+$i)+543; ?></option>

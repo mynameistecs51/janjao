@@ -131,9 +131,9 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="carNumber" class="col-sm-2 control-label">ทะเบียนรถ</label>
+		<label for="licenseplate" class="col-sm-2 control-label">ทะเบียนรถ</label>
 		<div class="col-sm-8">
-			<input type="text" class="form-control" name="carNumber" id="carNumber" placeholder="1กก 1111">
+			<input type="text" class="form-control" name="licenseplate" id="licenseplate" placeholder="1กก 1111">
 		</div>
 	</div>
 	<div class="form-group">
@@ -210,7 +210,7 @@
 </div>
 <!-- <script src="<?php echo base_url()?>assets/js/bootstrap-select.min.js"></script> -->
 <script src="<?php echo base_url()?>assets/js/jquery.datetimepicker.full.min.js"></script>
-<script type="text/javascript"> 
+<script type="text/javascript">
 $.datetimepicker.setLocale('th'); // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
 
 $('#bookedDate, #checkinDate, #checkOutDate').datetimepicker({
@@ -279,5 +279,5 @@ function dataURLtoFile(dataurl, filename) {
 	}
 	return new File([u8arr], filename, {type:mime});
 }
- 
+
 </script>
