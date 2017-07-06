@@ -151,11 +151,11 @@
 	<div class="form-group">
 		<label for="checkinDate" class="col-sm-2 control-label">วันที่ Checkin <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-3">
-			<input type="text" class="form-control" id="checkinDate" name="checkinDate" value="<?php echo $this->packfunction->dtcheckin(); ?>">
+			<input type="text" class="form-control" id="checkinDate" name="checkinDate" value="<?php echo $din; ?>" readonly>
 		</div>
 		<label for="checkOutDate" class="col-sm-2 control-label">วันที่ Checkout <b style="color: #FF0000">*</b></label>
 		<div class="col-sm-3">
-			<input type="text" class="form-control" id="checkOutDate" name="checkOutDate" value="<?php echo $this->packfunction->dtcheckout(); ?>">
+			<input type="text" class="form-control" id="checkOutDate" name="checkOutDate" value="<?php echo $dout; ?>" readonly>
 		</div>
 	</div>
 	<div class="form-group">
@@ -213,28 +213,28 @@
 <script type="text/javascript">
 $.datetimepicker.setLocale('th'); // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
 
-$('#bookedDate, #checkinDate, #checkOutDate').datetimepicker({
+$('#bookedDate').datetimepicker({
 	timepicker:true,
 	mask:true,
 	format:'d/m/Y H:i',
 	lang:'th',
 });
 // start checkinDate form  bookedDate
-$('#bookedDate').on('change',function(){
-	var startDate = $('#bookedDate').val();
-	var expoldeY= startDate.split(' ');
-	$( "#checkinDate" ).datetimepicker({
-		minDate: expoldeY[0].split('-')[2]+'-'+expoldeY[0].split('-')[1]+'-'+expoldeY[0].split('-')[0],
-	});
-});
+// $('#bookedDate').on('change',function(){
+// 	var startDate = $('#bookedDate').val();
+// 	var expoldeY= startDate.split(' ');
+// 	$( "#checkinDate" ).datetimepicker({
+// 		minDate: expoldeY[0].split('-')[2]+'-'+expoldeY[0].split('-')[1]+'-'+expoldeY[0].split('-')[0],
+// 	});
+// });
 
-$('#checkinDate').on("change",function() {
-	var startDate = $('#checkinDate').val();
-	var expoldeY= startDate.split(' ');
-	$( "#checkOutDate" ).datetimepicker({
-		minDate: expoldeY[0].split('-')[2]+'-'+expoldeY[0].split('-')[1]+'-'+expoldeY[0].split('-')[0],
-	});
-});
+// $('#checkinDate').on("change",function() {
+// 	var startDate = $('#checkinDate').val();
+// 	var expoldeY= startDate.split(' ');
+// 	$( "#checkOutDate" ).datetimepicker({
+// 		minDate: expoldeY[0].split('-')[2]+'-'+expoldeY[0].split('-')[1]+'-'+expoldeY[0].split('-')[0],
+// 	});
+// });
 
 $("#myModal0").on("hidden.bs.modal", function () {
     // location.reload();

@@ -332,9 +332,14 @@
 			}
 		});
 		$('.btn_checkin').click(function(){
+			var dtcheckin = $('#dtcheckin').val();
+			var dtcheckout = $('#dtcheckout').val();  
+			var din =  dtcheckin[0]+dtcheckin[1]+'_'+dtcheckin[3]+dtcheckin[4]+'_'+dtcheckin[6]+dtcheckin[7]+dtcheckin[8]+dtcheckin[9]+'T'+dtcheckin[11]+dtcheckin[12]+dtcheckin[13]+dtcheckin[14]+dtcheckin[15];
+			var dout = dtcheckout[0]+dtcheckout[1]+'_'+dtcheckout[3]+dtcheckout[4]+'_'+dtcheckout[6]+dtcheckout[7]+dtcheckout[8]+dtcheckout[9]+'T'+dtcheckout[11]+dtcheckout[12]+dtcheckout[13]+dtcheckout[14]+dtcheckout[15];
+			
 			if(selectRoom.length > 0){
 				var room = selectRoom.join('_')
-				load_page('<?php echo base_url().$this->ctl."/checkinformadd/"; ?>'+room,'.:: Data Checkin::.','<?php echo base_url()."checkin/saveAdd/"; ?>');
+				load_page('<?php echo base_url().$this->ctl."/checkinformadd/"; ?>'+room+'/'+din+'/'+dout+'/','.:: Data Checkin::.','<?php echo base_url()."checkin/saveAdd/"; ?>',''+dtcheckin+'',''+dtcheckout+'');
 			}else{
 				alert("กรุณาเลือกห้องพัก !!");
 			}
@@ -358,21 +363,26 @@
 		});
 
 		$('.btn_booking').click(function(){
+			var dtcheckin = $('#dtcheckin').val();
+			var dtcheckout = $('#dtcheckout').val();  
+			var din =  dtcheckin[0]+dtcheckin[1]+'_'+dtcheckin[3]+dtcheckin[4]+'_'+dtcheckin[6]+dtcheckin[7]+dtcheckin[8]+dtcheckin[9]+'T'+dtcheckin[11]+dtcheckin[12]+dtcheckin[13]+dtcheckin[14]+dtcheckin[15];
+			var dout = dtcheckout[0]+dtcheckout[1]+'_'+dtcheckout[3]+dtcheckout[4]+'_'+dtcheckout[6]+dtcheckout[7]+dtcheckout[8]+dtcheckout[9]+'T'+dtcheckout[11]+dtcheckout[12]+dtcheckout[13]+dtcheckout[14]+dtcheckout[15];
+			
 			if(selectRoom.length > 0){
 				var room = selectRoom.join('_')
-				load_page('<?php echo base_url().$this->ctl."/bookingformadd/"; ?>'+room,'.:: Data Booking ::.','<?php echo base_url()."booked/saveAdd/"; ?>');
+				load_page('<?php echo base_url().$this->ctl."/bookingformadd/"; ?>'+room+'/'+din+'/'+dout+'/','.:: Data Booking ::.','<?php echo base_url()."booked/saveAdd/"; ?>',''+dtcheckin+'',''+dtcheckout+'');
 			}else{
 				alert("กรุณาเลือกห้องพัก !!");
 			}
 		});
 	}
 
-	function load_page(loadUrl,texttitle,urlsend){
+	function load_page(loadUrl,texttitle,urlsend,dtcheckin,dtcheckout){
 		var screenname= texttitle;
 		var url = loadUrl;
 		var n=0;
 		$('.div_modal').html('');
-		modal_form(n,screenname,urlsend);
+		modal_form(n,screenname,urlsend,dtcheckin,dtcheckout);
 		$('#myModal'+n+' .modal-body').html('<img id="ajaxLoaderModal" src="<?php echo base_url(); ?>assets/images/loader.gif"/>');
 		var modal = $('#myModal'+n), modalBody = $('#myModal'+n+' .modal-body');
 		modal.on('show.bs.modal', function () {
@@ -381,7 +391,7 @@
 		// setInterval(function(){$('#ajaxLoaderModal').remove()},5100);
 	}
 
-	function modal_form(n,screenname,url)
+	function modal_form(n,screenname,url,dtcheckin,dtcheckout)
 	{
 		var div='';
 		div+='<form action="'+url+'"  role="form" data-toggle="validator" id="form" method="post" enctype="multipart/form-data">';
@@ -404,6 +414,7 @@
 		div+='</div><!-- /.modal -->';
 		div+='</form>';
 		$('.div_modal').html(div);
+		
 	}
 
 

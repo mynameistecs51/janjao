@@ -34,20 +34,28 @@ class Home extends CI_Controller {
 		$this->packfunction->packView($this->data,'Dashboard');
 	}
 
-	public function checkinformadd($selectRoom)
+	public function checkinformadd($selectRoom,$din,$dout)
 	{
 		$this->data['selectRoom'] = $selectRoom;
 		$this->data['getMonth'] = $this->packfunction->getMonth();
 		$this->data['getYear'] = $this->packfunction->getYear();
+		$din  = str_replace("_","/",$din);
+		$dout = str_replace("_","/",$dout);
+		$this->data['din'] = str_replace("T"," ",$din);
+		$this->data['dout'] = str_replace("T"," ",$dout);
 		$this->load->view('checkin/CheckinFormAdd',$this->data);
 	}
 
 
-	public function bookingformadd($selectRoom)
+	public function bookingformadd($selectRoom,$din,$dout)
 	{
 		$this->data['selectRoom'] = $selectRoom;
 		$this->data['getMonth'] = $this->packfunction->getMonth();
 		$this->data['getYear'] = $this->packfunction->getYear();
+		$din  = str_replace("_","/",$din);
+		$dout = str_replace("_","/",$dout);
+		$this->data['din'] = str_replace("T"," ",$din);
+		$this->data['dout'] = str_replace("T"," ",$dout);
 		$this->load->view('booked/BookedFormAdd',$this->data);
 	}
 
