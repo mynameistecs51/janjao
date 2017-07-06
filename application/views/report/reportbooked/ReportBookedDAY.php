@@ -4,8 +4,8 @@
     	<i style="font-size: 18px;">REPORT BOOKED <u><span class="text-primary">DAY</span></u></i>
     </div>
     <div class="col-lg-10 text-right" >
-    	<?php echo anchor(base_url().'report/booked/', '<i class="fa fa-list" aria-hidden="true"></i> รายวัน', 'class="btn btn-success"'); ?>
-    	<?php echo anchor(base_url().'report/bookedmonth/', '<i class="fa fa-list" aria-hidden="true"></i> รายเดือน', 'class="btn btn-danger"'); ?>
+    	<?php echo anchor(base_url().'report_booked/bookedday/', '<i class="fa fa-list" aria-hidden="true"></i> รายวัน', 'class="btn btn-success"'); ?>
+    	<?php echo anchor(base_url().'report_booked/bookedmonth/', '<i class="fa fa-list" aria-hidden="true"></i> รายเดือน', 'class="btn btn-danger"'); ?>
     </div>
     <hr style="margin-top: 30px;">
     <!-- Page Content -->
@@ -13,13 +13,13 @@
     	<!-- Page Features -->
     	<div class="row text-center">
     		<div class="col-lg-7" align="left">
-    			<?php echo anchor(base_url().'report/PDF/', '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>  export PDF', 'class="btn btn-primary" target ="_blank"'); ?>
+    			<?php echo anchor(base_url().'report_booked/PDF/'.$date = str_replace('/','_',$keyword), '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>  export PDF', 'class="btn btn-primary" target ="_blank"'); ?>
     		</div>
     		<div class="col-lg-5" align="right">
     			<div class="sh-left">
-    				<form name="formSearch" id="formSearch" class="form-inline" method="POST" action="<?php echo base_url()?>report/search/">
+    				<form name="formSearch" id="formSearch" class="form-inline" method="POST" action="<?php echo base_url()?>report_booked/search/">
     					Booked Date :
-    					<input type="text" class="form-control"  id="startDate" style="margin-right: 10px;" name="keywordDay" value="<?php echo date('d').'/'.date('m').'/'.date('Y'); ?>">
+    					<input type="text" class="form-control"  id="startDate" style="margin-right: 10px;" name="keywordDay" value="">
     					<button  type="submit" class="btn btn-primary" style="float: right;">Search</button>
     				</form>
     			</div>
@@ -51,9 +51,9 @@
     							<td><?php echo $rowbooked['firstName']." ".$rowbooked['lastName']." ( ".$rowbooked['mobile']." )"; ?></td>
     							<td style="text-align: center;">
 								<?php //echo $numRoom ;
-								for($i=0;$i < $numRoom; $i++)
+								for($j=0;$j < $numRoom; $j++)
 								{
-									echo "<button class='col-sm-3 btn-warning' style='text-align:center;margin-left:5px;'>",$rowbooked['selectRoom'][$i]['roomID']."</button> ";
+									echo "<button class='col-sm-3 btn-warning' style='text-align:center;margin-left:5px;'>",$rowbooked['selectRoom'][$j]['roomID']."</button> ";
 								}
 								?>
 							</td>

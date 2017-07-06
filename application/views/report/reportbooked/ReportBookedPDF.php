@@ -6,10 +6,10 @@ $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8',
 // set document information
 
 $pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('รายชื่อ นักศึกษา');
-$pdf->SetTitle('รายชื่อ นักศึกษา');
-$pdf->SetSubject('รายชื่อ นักศึกษา');
-$pdf->SetKeywords('รายชื่อ นักศึกษา');
+$pdf->SetAuthor('ReportBooked');
+$pdf->SetTitle('ReportBooked');
+$pdf->SetSubject('ReportBooked');
+$pdf->SetKeywords('ReportBooked');
 
 /*
 // set default header data
@@ -67,7 +67,7 @@ $now = new DateTime(null, new DateTimeZone('Asia/Bangkok'));
 // --------------------------------//
 
 $html = '
-<caption> <h3><b>รายงานยอดการจอง </b></h3></caption>
+<caption> <h3><b>รายงานยอดการจอง '.$keyword.'</b></h3></caption>
 <table id="fairlist" class="table table-striped table-bordered" cellspacing="0" width="100%" border="1" >
 	<thead style="background:#BDBDBD;font-size: 12px; ">
 		<tr>

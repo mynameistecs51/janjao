@@ -1,14 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Booked extends CI_Controller {
+class Report_booked extends CI_Controller {
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->ctl="Booked";
-		$this->pagename="BOOKED";
-		$this->load->model('Mdl_booked');
+		$this->ctl="Report_booked";
+		$this->pagename="REPORT BOOKED";
+		$this->load->model("Mdl_booked");
 		$this->dtnow = $this->packfunction->dtYMDnow();
 		$this->ip_addr = $this->input->ip_address();
 		$this->userID = $this->session->userdata('userID'); // ID จากตาราง Session
@@ -17,17 +17,26 @@ class Booked extends CI_Controller {
 			// ถ้าไม่มี session หรือ ไม่มีการ Login ให้กลับไป authen
 			redirect('authen/');
 		}
-
 	}
 
-	public function index(){
+	public function bookedday()
+	{
 		$this->data['viewName']=$this->pagename;
 		$this->data['keyword']='';
 		$this->data['getBooked'] = $this->showList($this->data['keyword']);
-		$this->packfunction->packView($this->data,"booked/BookedList");
+		$this->packfunction->packView($this->data,"report/reportbooked/ReportBookedDAY");
 	}
 
-	public function showList($keyword)
+	public function bookedMonth()
+	{
+		$this->data['viewName']=$this->pagename;
+		$this->data['keyword']='';
+		$this->data['getBooked'] = $this->showList($this->data['keyword']);
+		$this->data['getMonth'] = $this->packfunction->getMonth();
+		$this->packfunction->packView($this->data,"report/reportbooked/ReportBookedMonth");
+	}
+
+	public function showList($keyword='')
 	{
 		$data_array = array();
 		foreach ($this->Mdl_booked->getBookedAll($keyword) as $key => $rowBooked) {
@@ -67,6 +76,8 @@ class Booked extends CI_Controller {
 					'bookedDate' =>  $rowBooked['bookedDate'],
 					'checkInAppointDate' =>  $rowBooked['checkInAppointDate'],
 					'checkOutAppointDate' =>  $rowBooked['checkOutAppointDate'],
+					'checkinDate' =>  $rowBooked['checkinDate'],
+					'checkoutDate' =>  $rowBooked['checkoutDate'],
 					'is_breakfast' =>  $rowBooked['is_breakfast'],
 					'bookedType' =>  $rowBooked['bookedType'],
 					'cashPledge' =>  $rowBooked['cashPledge'],
@@ -91,81 +102,43 @@ class Booked extends CI_Controller {
 			}
 		}
 		return $data_array;
-
 	}
 
-	public function saveAdd()
+	public function search()
 	{
-		$this->Mdl_booked->saveAdd();
-		redirect($this->ctl,'refresh');
-	}
-	public function saveUpdate()
-	{
-		$this->Mdl_booked->saveUpdate();
-		redirect($this->ctl,'refresh');
-	}
-
-	public function saveCancle(){
-		if($_POST){
-			$this->Mdl_booked->saveCancle($_POST['key']);
-			echo json_encode(['status'=>'success']);
+		$keywordDay = $this->input->post('keywordDay');
+		$keywordMonth = $this->input->post('startMonth');
+		if(!empty($keywordDay )){
+			if($_POST){
+				$this->data['viewName']=$this->pagename;
+				$this->data['keyword']= $keywordDay;
+				$this->data['getBooked'] = $this->showList($this->data['keyword']);
+				$this->packfunction->packView($this->data,"report/reportbooked/ReportBookedDAY");
+			}else{
+				redirect('report/reportbooked/booked','refresh');
+			}
+		}else if(!empty($keywordMonth)){
+			if($_POST){
+				$this->data['viewName']=$this->pagename;
+				$this->data['keyword']= '/'.$keywordMonth.'/'.$this->input->post('startYear') ;
+				$this->data['getMonth'] = $this->packfunction->getMonth();
+				$this->data['getBooked'] = $this->showList($this->data['keyword']);
+				$this->packfunction->packView($this->data,"report/reportbooked/ReportBookedMonth");
+			}else{
+				redirect('report/reportbooked/bookedmonth/','refresh');
+			}
 		}else{
-			redirect('authen/','refresh');
+			redirect('report/reportbooked/booked','refresh');
 		}
 	}
 
-	public function count()
+	public function PDF($keyword="")
 	{
-		echo "<pre>";
-		$startDate = date_create(date('Y-m-d H:i:s'));
-		$endDate = date_create('2017-07-20 03:30:30');
-		$interval = date_diff($startDate, $endDate);
-		$a = array();
-		$runDay = array();
-		while ($startDate < $endDate) {
-			$year = $startDate->format("Y");
-			$month = $startDate->format("m");
-
-			if(!array_key_exists($year, $runDay))
-				$runDay[$year] = array();
-			if(!array_key_exists($month, $runDay[$year]))
-				$runDay[$year][$month] = 0;
-
-			$runDay[$year][$month]++;
-			$startDate->modify("+1 day");
-			array_push($a, $startDate->format('Y-m-d H:i:s'));
-
-		}
-		print_r($a);
-
-
+		$this->data['keyword'] = ($keyword == '__________')?'':str_replace('_','/',$keyword);
+		$this->data['getBooked'] = $this->showList($this->data['keyword'] );
+		$this->load->view('report/reportbooked/ReportBookedPDF',$this->data);
 	}
+}
 
-	public function bookedformedit($key='')
-	{
-		$this->data['bookedDtl']=$this->Mdl_booked->booked($key);
-		$this->data['cbookedRoomDtl']=$this->Mdl_booked->bookedRoom($this->data['bookedDtl']['bookedID']);
-		$this->load->view('booked/BookedFormEdit',$this->data);
-	}
-
-	public function search(){
-		$this->data['viewName']=$this->pagename;
-		$this->data['keyword']=$this->input->post('keyword');
-		$this->data['getBooked'] = $this->showList($this->data['keyword']);
-		$this->packfunction->packView($this->data,"booked/BookedList");
-	}
-
-	public function last($key=''){
-		$this->data['viewName']=$this->pagename;
-		$this->data['keyword']='';
-		//$this->data['getlist']=$this->Mdl_user->getLast($key);
-		$this->packfunction->packView($this->data,"user/UserList");
-	}
-
-	public function checkdata()
-	{
-		$result = $this->Mdl_user->chk_data($_POST['txt'],$_POST['field'],$_POST['id']);
-		echo json_encode($result);
-	}
-
-}?>
+/* End of file Report.php */
+			/* Location: ./application/controllers/Report.php */

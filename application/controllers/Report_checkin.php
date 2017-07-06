@@ -1,14 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Report extends CI_Controller {
+class Report_checkin extends CI_Controller {
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->ctl="Report";
-		$this->pagename="REPORT";
-		$this->load->model("Mdl_booked");
+		$this->ctl="Report_checkin";
+		$this->pagename="REPORT CHECKIN";
+		$this->load->model('Mdl_checkin');
 		$this->dtnow = $this->packfunction->dtYMDnow();
 		$this->ip_addr = $this->input->ip_address();
 		$this->userID = $this->session->userdata('userID'); // ID จากตาราง Session
@@ -17,29 +17,22 @@ class Report extends CI_Controller {
 			// ถ้าไม่มี session หรือ ไม่มีการ Login ให้กลับไป authen
 			redirect('authen/');
 		}
+
 	}
 
-	public function booked()
+	public function checkInDay()
 	{
 		$this->data['viewName']=$this->pagename;
 		$this->data['keyword']='';
-		$this->data['getBooked'] = $this->showList($this->data['keyword']);
-		$this->packfunction->packView($this->data,"report/ReportBookedDAY");
+		$this->data['getCheckin'] = $this->showList($this->data['keyword']);
+		$this->packfunction->packView($this->data,"report/reportcheckin/ReportCheckinDay.php");
 	}
 
-	public function bookedMonth()
-	{
-		$this->data['viewName']=$this->pagename;
-		$this->data['keyword']='';
-		$this->data['getBooked'] = $this->showList($this->data['keyword']);
-		$this->data['getMonth'] = $this->packfunction->getMonth();
-		$this->packfunction->packView($this->data,"report/ReportBookedMonth");
-	}
 
 	public function showList($keyword='')
 	{
 		$data_array = array();
-		foreach ($this->Mdl_booked->getBookedAll($keyword) as $key => $rowBooked) {
+		foreach ($this->Mdl_checkin->getCheckinAll($keyword) as $key => $rowBooked) {
 			if(isset($data_array[$rowBooked['bookedID']]))
 			{
 				array_push($data_array[$rowBooked['bookedID']]['selectRoom'],
@@ -104,41 +97,7 @@ class Report extends CI_Controller {
 		return $data_array;
 	}
 
-	public function search()
-	{
-		$keywordDay = $this->input->post('keywordDay');
-		$keywordMonth = $this->input->post('startMonth');
-		if(!empty($keywordDay )){
-			if($_POST){
-				$this->data['viewName']=$this->pagename;
-				$this->data['keyword']= $keywordDay;
-				$this->data['getBooked'] = $this->showList($this->data['keyword']);
-				$this->packfunction->packView($this->data,"report/ReportBookedDAY");
-			}else{
-				redirect('report/booked','refresh');
-			}
-		}else if(!empty($keywordMonth)){
-			if($_POST){
-				$this->data['viewName']=$this->pagename;
-				$this->data['keyword']= '/'.$keywordMonth.'/'.$this->input->post('startYear') ;
-				$this->data['getMonth'] = $this->packfunction->getMonth();
-				$this->data['getBooked'] = $this->showList($this->data['keyword']);
-				$this->packfunction->packView($this->data,"report/ReportBookedMonth");
-				// echo $keywordMonth.'/'.$this->input->post('startYear');
-			}else{
-				redirect('report/bookedmonth/','refresh');
-			}
-		}else{
-			redirect('report/booked','refresh');
-		}
-	}
-
-	public function PDF()
-	{
-		$this->data['getBooked'] = $this->showList();
-		$this->load->view('report/ReportBookedPDF',$this->data);
-	}
 }
 
-/* End of file Report.php */
-			/* Location: ./application/controllers/Report.php */
+/* End of file Report_checkin.php */
+/* Location: ./application/controllers/Report_checkin.php */

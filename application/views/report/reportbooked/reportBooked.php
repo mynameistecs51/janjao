@@ -1,40 +1,25 @@
     <link href="<?php echo base_url()?>assets/css/jquery.datetimepicker.css" rel="stylesheet">
     <!-- Page Name -->
-    <div class="col-lg-3">
-    	<i style="font-size: 18px;">REPORT BOOKED <u><span class="text-primary">MONTH</span></u></i>
+    <div class="col-lg-12">
+    	<i style="font-size: 18px;">REPORT BOOKED</i>
     </div>
-    <div class="col-lg-9 text-right" >
-    	<?php echo anchor(base_url().'report/booked/', '<i class="fa fa-list" aria-hidden="true"></i> รายวัน', 'class="btn btn-success"'); ?>
-    	<?php echo anchor(base_url().'report/bookedmonth/', '<i class="fa fa-list" aria-hidden="true"></i> รายเดือน', 'class="btn btn-danger"'); ?>
-    </div>
-    <hr style="margin-top: 30px;color:red;">
+    <hr style="margin-top: 30px;">
     <!-- Page Content -->
     <div class="col-lg-12">
     	<!-- Page Features -->
     	<div class="row text-center">
-    		<div class="col-lg-6" align="left">
-    			<!-- <button type="button" class="btn btn-primary"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> export PDF</button> -->
-    			<?php echo anchor(base_url().'report/PDF/', '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>  export PDF', 'class="btn btn-primary" target ="_blank"'); ?>
+    		<div class="col-lg-7" align="left">
+    		<!-- <button type="button" class="btn btn-primary"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> export PDF</button> -->
+    		<?php echo anchor(base_url().'report_booked/createPDF/', '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>  export PDF', 'class="btn btn-primary"'); ?>
     		</div>
-    		<div class="col-lg-6" align="right">
+    		<div class="col-lg-5" align="left">
     			<div class="sh-left">
-    				<form name="formSearch" id="formSearch" class="form-inline" method="POST" action="<?php echo base_url()?>report/search/">
-    					Select Month :
-    					<select name="startMonth" class="form-control"  style="width: 138px;margin-right: 10px;">
-    						<?php foreach ($getMonth as $keyMonth => $valueMonth) :?>
-    							<?php $selectedM = ($keyMonth == date('m'))?'selected':'' ?>
-    							<option value="<?php echo $keyMonth; ?>" <?php echo $selectedM; ?>><?php echo $valueMonth; ?></option>
-    						<?php endforeach; ?>
-    					</select>
-    					Select Year :
-    					<select name="startYear" class="form-control"  style="width: 138px;margin-right: 10px;">
-    						<?php for($i=(-2);$i <= (+2);$i++): ?>
-    							<?php $selectedY = (date('Y')+$i == date('Y'))?'selected':'' ?>
-    							<option value="<?php echo date('Y')+$i; ?>" <?php echo $selectedY; ?>><?php echo (date('Y')+$i)+543; ?></option>
-    						<?php endfor; ?>
-    					</select>
-    					&nbsp;
+    				<form name="formSearch" id="formSearch" class="form-inline" method="POST" action="<?php echo base_url()?>report_booked/search/">
     					<button  type="submit" class="btn btn-primary" style="float: right;">Search</button>
+    					Start Date :
+    					<input type="text" class="form-control"  id="startDate" style="width: 138px;margin-right: 10px;" placeholder="Check In" name="startDate" value="">
+    					End Date :
+    					<input type="text" class="form-control"  id="endDate" style="width: 138px;margin-right: 10px;" placeholder="Check Out" name="endDate" value="">
     				</form>
     			</div>
     		</div>
@@ -65,9 +50,9 @@
     							<td><?php echo $rowbooked['firstName']." ".$rowbooked['lastName']." ( ".$rowbooked['mobile']." )"; ?></td>
     							<td style="text-align: center;">
 								<?php //echo $numRoom ;
-								for($i=0;$i < $numRoom; $i++)
+								for($j=0;$j < $numRoom; $j++)
 								{
-									echo "<button class='col-sm-3 btn-warning' style='text-align:center;margin-left:5px;'>",$rowbooked['selectRoom'][$i]['roomID']."</button> ";
+									echo "<button class='col-sm-3 btn-warning' style='text-align:center;margin-left:5px;'>",$rowbooked['selectRoom'][$j]['roomID']."</button> ";
 								}
 								?>
 							</td>
