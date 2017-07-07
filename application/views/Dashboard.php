@@ -67,7 +67,7 @@
 										'.$bed.'
 										<h4>'.$f2['roomCODE'].'</h4>'.$f2['roomtypeCode'].'
 									</button>
-									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'" value="'.$f2['roomCODE'].'" />
+									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'" data-price="'.$f2['roomPrice'].'" value="'.$f2['roomCODE'].'" />
 								</span>
 							</div> ';
 			}else if($f2['transaction']=='BOOKED' && $f2['roomtypeCode']!='STAIRCASE'){
@@ -78,7 +78,7 @@
 								'.$bed.'
 								<h4>'.$f2['roomCODE'].'</h4><i >IN:'.$f2['checkinDate'].'</i>
 								</button>
-								<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'" value="'.$f2['roomCODE'].'" checked disabled readonly/>
+								<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'" data-price="'.$f2['roomPrice'].'" value="'.$f2['roomCODE'].'" checked disabled readonly/>
 							</span>
 						</div>';
 
@@ -90,7 +90,7 @@
 								'.$bed.'
 								<h4>'.$f2['roomCODE'].'</h4><i >out:'.$f2['checkoutDate'].'</i>
 								</button>
-								<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'" value="'.$f2['roomCODE'].'" checked disabled readonly/>
+								<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'" data-price="'.$f2['roomPrice'].'" value="'.$f2['roomCODE'].'" checked disabled readonly/>
 							</span>
 						</div>';
 
@@ -102,7 +102,7 @@
 										'.$bed.'
 										<h4>'.$f2['roomCODE'].' </h4>'.$f2['roomtypeCode'].'
 									</button>
-									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'" value="'.$f2['roomCODE'].'" />
+									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'" data-price="'.$f2['roomPrice'].'" value="'.$f2['roomCODE'].'" />
 								</span>
 							</div> ';
 
@@ -114,7 +114,7 @@
 										'.$bed.'
 										<h4>'.$f2['roomCODE'].' </h4>'.$f2['roomtypeCode'].'
 									</button>
-									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'" value="'.$f2['roomCODE'].'" checked disabled readonly />
+									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'"  data-price="'.$f2['roomPrice'].'" value="'.$f2['roomCODE'].'" checked disabled readonly />
 								</span>
 							</div> '; 
 			}else if($f2['roomtypeCode']=='STAIRCASE'){
@@ -151,7 +151,7 @@
 										'.$bed.'
 										<h4>'.$f3['roomCODE'].'</h4>'.$f3['roomtypeCode'].'
 									</button>
-									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'" value="'.$f3['roomCODE'].'" />
+									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'"  data-price="'.$f3['roomPrice'].'" value="'.$f3['roomCODE'].'" />
 								</span>
 							</div> ';
 			}else if($f3['transaction']=='BOOKED' && $f3['roomtypeCode']!='STAIRCASE'){
@@ -162,7 +162,7 @@
 								'.$bed.'
 								<h4>'.$f3['roomCODE'].'</h4><i>in:'.$f3['checkinDate'].'</i>
 								</button>
-								<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'" value="'.$f3['roomCODE'].'" checked disabled readonly/>
+								<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'"  data-price="'.$f3['roomPrice'].'" value="'.$f3['roomCODE'].'" checked disabled readonly/>
 							</span>
 						</div>';
 
@@ -174,7 +174,7 @@
 								'.$bed.'
 								<h4>'.$f3['roomCODE'].'</h4><i >out:'.$f3['checkoutDate'].'</i>
 								</button>
-								<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'" value="'.$f3['roomCODE'].'" checked disabled readonly/>
+								<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'"  data-price="'.$f3['roomPrice'].'" value="'.$f3['roomCODE'].'" checked disabled readonly/>
 							</span>
 						</div>';
 
@@ -186,7 +186,7 @@
 										'.$bed.'
 										<h4>'.$f3['roomCODE'].' </h4>'.$f3['roomtypeCode'].'
 									</button>
-									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'" value="'.$f3['roomCODE'].'" />
+									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'"  data-price="'.$f3['roomPrice'].'"  value="'.$f3['roomCODE'].'" />
 								</span>
 							</div> ';
 
@@ -198,7 +198,7 @@
 										'.$bed.'
 										<h4>'.$f3['roomCODE'].' </h4>'.$f3['roomtypeCode'].'
 									</button>
-									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'" value="'.$f3['roomCODE'].'" checked disabled readonly />
+									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'" data-price="'.$f3['roomPrice'].'"  value="'.$f3['roomCODE'].'" checked disabled readonly />
 								</span>
 							</div> '; 
 			}else if($f3['roomtypeCode']=='STAIRCASE'){
@@ -236,7 +236,7 @@
 										'.$bed.'
 										<h4>'.$f4['roomCODE'].'</h4>'.$f4['roomtypeCode'].'
 									</button>
-									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" value="'.$f4['roomCODE'].'" />
+									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" data-price="'.$f4['roomPrice'].'" value="'.$f4['roomCODE'].'" />
 								</span>
 							</div> ';
 			}else if($f4['transaction']=='BOOKED' && $f4['roomtypeCode']!='STAIRCASE'){
@@ -247,7 +247,7 @@
 								'.$bed.'
 								<h4>'.$f4['roomCODE'].'</h4><i >in:'.$f4['checkinDate'].'</i>
 								</button>
-								<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" value="'.$f4['roomCODE'].'" checked disabled readonly/>
+								<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" data-price="'.$f4['roomPrice'].'"  value="'.$f4['roomCODE'].'" checked disabled readonly/>
 							</span>
 						</div>';
 
@@ -259,7 +259,7 @@
 								'.$bed.'
 								<h4>'.$f4['roomCODE'].'</h4><i >out:'.$f4['checkoutDate'].'</i>
 								</button>
-								<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" value="'.$f4['roomCODE'].'" checked disabled readonly/>
+								<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" data-price="'.$f4['roomPrice'].'"  value="'.$f4['roomCODE'].'" checked disabled readonly/>
 							</span>
 						</div>';
 
@@ -271,7 +271,7 @@
 										'.$bed.'
 										<h4>'.$f4['roomCODE'].' </h4>'.$f4['roomtypeCode'].'
 									</button>
-									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" value="'.$f4['roomCODE'].'" />
+									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" data-price="'.$f4['roomPrice'].'"  value="'.$f4['roomCODE'].'" />
 								</span>
 							</div> ';
 
@@ -283,7 +283,7 @@
 										'.$bed.'
 										<h4>'.$f4['roomCODE'].' </h4>'.$f4['roomtypeCode'].'
 									</button>
-									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" value="'.$f4['roomCODE'].'" checked disabled readonly />
+									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" data-price="'.$f4['roomPrice'].'"  value="'.$f4['roomCODE'].'" checked disabled readonly />
 								</span>
 							</div> '; 
 			}else if($f4['roomtypeCode']=='STAIRCASE'){
@@ -349,7 +349,6 @@
 	function booking() {
 		var selectRoom=[];
 		$('.check_room').on('change',function(){
-
 			if( this.checked){
 				selectRoom.push($(this).val());
 			}else {

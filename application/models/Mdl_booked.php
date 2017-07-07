@@ -294,6 +294,7 @@ class Mdl_booked extends CI_Model {
 		r.roomID,
 		r.roomtypeID,
 		rt.roomtypeCode,
+		rt.price_day AS roomPrice,
 		rt.bed,
 		r.roomCODE,
 		IFNULL(log.status,'EMPTY') AS transaction,
