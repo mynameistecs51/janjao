@@ -190,9 +190,9 @@
 		</div>
 		<?php if ($checkinDtl['idcardnoPath'] != "") {?>
 		<div class="form-group">
-			<label for="btnsnap" class="col-sm-2 control-label"></label>
-			<div class="col-sm-10">
-				<img src="<?php echo base_url() . "assets/images/imgcard/" . $checkinDtl['idcardnoPath']; ?>" width="260" height="195" style="margin-top: -190px;"></img>
+			<label for="imgbadge" class="col-sm-2 control-label">บัตร</label>
+			<div class="col-sm-8">
+				<img src="<?php echo base_url() . "assets/images/imgcard/" . $checkinDtl['idcardnoPath']; ?>"  id="imgbadge" width="260" height="195" style="margin-top:0px;"></img>
 			</div>
 		</div> 
 		<?php }?> 
