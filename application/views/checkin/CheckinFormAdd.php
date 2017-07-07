@@ -206,10 +206,11 @@
 		<i class="fa fa-camera btn btn-primary "  id="snap"> ถ่ายภาพ <i class="glyphicon glyphicon-menu-right"></i></i>
 	</div>
 </div>
-</div>
-</div>
+<!-- </div> -->
+<!-- </div> -->
+<hr>
+<!-- add service price total -->
 
-<!-- sum price total -->
 <div class="form-group">
 	<label for="idcardno" class="col-lg-2 control-label">รายการที่ชำระเพิ่ม <b style="color: #FF0000">*</b></label>
 	<div class="col-lg-8">
@@ -279,15 +280,15 @@
 		<div class="col-lg-6">เงินทอน</div><div class="col-lg-5"><input type="text" name="change" id="change" class="form-control" value="0.00" style="text-align: right;height: 28px;" readonly></div><div class="col-lg-1">บาท</div>
 	</div>
 	<label for="idcardno" class="col-lg-2 control-label"></label>
-</div>
+	<!-- </div> -->
 
 
 
-<div class="form-group" align="center">
-	<div class="col-lg-12"><br><br><br>
-		<label><span id="saveandprint" class="btn btn-secondary">  <input type="checkbox" name="isprint" value="YES" checked> <i class="glyphicon glyphicon-print"></i> พิมพ์ใบเสร็จรับเงิน</span></label>
+	<div class="form-group" align="center">
+		<div class="col-lg-12"><br><br><br>
+			<label><span id="saveandprint" class="btn btn-secondary">  <input type="checkbox" name="isprint" value="YES" checked> <i class="glyphicon glyphicon-print"></i> พิมพ์ใบเสร็จรับเงิน</span></label>
+		</div>
 	</div>
-</div>
 </div>
 <!-- <script src="<?php echo base_url()?>assets/js/bootstrap-select.min.js"></script> -->
 <script src="<?php echo base_url()?>assets/js/jquery.datetimepicker.full.min.js"></script>
@@ -361,4 +362,113 @@ function dataURLtoFile(dataurl, filename) {
 	return new File([u8arr], filename, {type:mime});
 }
 
+$(function() {
+	$('#servicelist tbody tr').each(function(i,n){
+		var val = $(n).attr('id');
+		removerow(val);
+		chnrowval(val);
+	});
+
+		$.datetimepicker.setLocale('th'); // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+		$('#checkOutDate').datetimepicker({
+			timepicker:true,
+			mask:true,
+			format:'d/m/Y H:i',
+			lang:'th',
+		});
+	});
+
+
+
+function confirmvalid(){
+	if($('#servicelist tbody tr').length==0){
+		alert('กรุณาเลือก เพิ่มรายการ !');
+		return false;
+	}else{
+		return true;
+	}
+
+}
+
+$('#addrows').on("click",function() {
+	var max = 0;
+	$('#servicelist tbody tr').each(function(i,n){
+		var val = $(n).attr('id');
+		var id = parseInt(val);
+		if(id > max){ max = id; }
+	});
+	var n = max+1;
+
+	var html = '';
+	html += '<tr id="'+n+'">';
+	html += '<td>'+n+'</td>';
+	html += '<td><input type="text" name="serviceName[]" class="form-control servicename" id="servicename'+n+'" placeholder="ผ้าห่ม" value="" required></td>';
+	html += '<td><input type="text" name="price[]" class="form-control price" id="price'+n+'" placeholder="0.00"  value="" required></td>';
+	html += '<td><input type="text" name="unit[]" class="form-control unit" id="unit'+n+'" placeholder="ผืน"  value="" required></td>';
+	html += '<td><input type="text" name="amount[]" class="form-control amount" id="amount'+n+'" placeholder="0"  value="" required></td>';
+	html += '<td><input type="text" name="total[]" class="form-control total" id="total'+n+'"  placeholder="0.00" value="" required readonly></td>';
+	html += '<td><span class="btn btn-danger btn-xs " id="delrow'+n+'" ><i class="fa fa-trash-o fa-2x"></i></span></td>';
+	html += '</tr>';
+	$('#servicelist tbody').append(html);
+	removerow(n);
+	chnrowval(n);
+
+});
+
+function removerow(n){
+	$('#delrow'+n).on("click",function() {
+		if(confirm("ยืนยันการลบรายการ !")==true){
+			$('#servicelist tbody tr#'+n).remove();
+			sumtotal();
+		}
+	});
+}
+
+function chnrowval(n){
+	$('#price'+n+', #amount'+n).on("change",function() {
+		var price = $('#price'+n).val()!="" ? $('#price'+n).val():0;
+		var amount = $('#amount'+n).val()!="" ? $('#amount'+n).val():0;
+		var sum = parseInt(price)*parseInt(amount);
+		$('#total'+n).val(sum.toFixed(2));
+		sumtotal();
+	});
+}
+
+$('#vat, #discount, #pay').on("keyup",function() {
+	sumtotal();
+});
+
+function sumtotal(){
+	var totalprice = 0;
+	var totalamount = 0;
+	var totalsum = 0;
+	$('#servicelist tbody tr').each(function(i,n){
+		var id = $(n).attr('id');
+		var price = $('#price'+id).val()!="" ? $('#price'+id).val():0;
+		var amount = $('#amount'+id).val()!="" ? $('#amount'+id).val():0;
+		var total = $('#total'+id).val()!="" ? $('#total'+id).val():0;
+		totalprice += parseInt(price);
+		totalamount += parseInt(amount);
+		totalsum += parseInt(total);
+	});
+	$('#totalprice').html(totalprice.toFixed(2));
+	$('#totalamount').html(totalamount);
+	$('#totalsum').html(totalsum.toFixed(2));
+	var vat = $('#vat').val()!="" ? $('#vat').val():0;
+	var pay = $('#pay').val()!="" ? $('#pay').val():0;
+	var discount = $('#discount').val()!="" ? $('#discount').val():0;
+	var deposit = $('#deposit').val()!="" ? $('#deposit').val():0;
+
+	var last =0
+	if(vat > 0){
+		last = totalsum+((totalsum/100)*vat);
+		$('#lastamount').val(last.toFixed(2));
+	}else{
+		$('#lastamount').val(totalsum.toFixed(2));
+	}
+
+	var dis = (parseInt(discount)+parseInt(deposit)+parseInt(pay))-last;
+	$('#change').val(dis.toFixed(2));
+
+}
 </script>

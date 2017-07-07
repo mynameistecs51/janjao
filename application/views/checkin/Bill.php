@@ -11,14 +11,14 @@
 		font-size: 16px;
 	}
 </style>
-<div class="row"> 
-	<div class="container"  id="example"> 
+<div class="row">
+	<div class="container"  id="example">
 		<div class="col-sm-3"></div>
-		<div class="col-sm-6"> 
+		<div class="col-sm-6">
 			<table width="100%" border='0' align="left" cellpadding="0" cellspacing="0" >
 				<caption >
 					<table width="100%" >
-						<tr > 
+						<tr >
 							<td class="col-sm-4" style="width: 30%;"></td>
 							<td class="col-sm-4" align="center" > <b>ใบเสร็จรับเงิน </b></td>
 							<td class="col-sm-4" style="width: 30%;"></td>
@@ -63,45 +63,54 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td style="border-bottom:1px solid black" >1</td>
-						<td style="border-bottom:1px solid black" >ห้อง 202  ห้องเตียงคู่</td>
-						<td style="border-bottom:1px solid black" align="right">1</td>
-						<td style="border-bottom:1px solid black" align="right">500.00</td>
-						<td style="border-bottom:1px solid black" align="right">500.00</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>ห้อง 203 ห้องเตียงเดี่ยว</td>
-						<td align="right">1</td>
-						<td align="right">500.00</td>
-						<td align="right">500.00</td>
-					</tr>
+					<?php $j= 1; ?>
+					<?php foreach ($getDetail as $key => $rowDetail) :?>
+						<?php $numRoom = count($rowDetail['selectRoom']); ?>
+						<?php	for($i=0;$i < $numRoom; $i++):?>
+							<tr>
+								<td style="border-bottom:1px solid black" ><?php echo $j++; ?></td>
+								<td style="border-bottom:1px solid black" >
+									ห้อง
+									<?php
+									echo $rowDetail['selectRoom'][$i]['roomID'];
+									echo $bed = ($rowDetail['selectRoom'][$i]['bed'] == "SINGLE")? "<li>เตียงเดี่ยว</li>" : "<li>เตียงคู่</li>";
+									?>
+								</td>
+								<td style="border-bottom:1px solid black" align="right"><?php echo $dateDtl->days; ?> วัน</td>
+								<td style="border-bottom:1px solid black" align="right">
+									<?php echo $price =($rowDetail['bookedType'] == 'DAY')?$rowDetail['selectRoom'][$i]['price_day']:'';?>
+
+								</td>
+								<td style="border-bottom:1px solid black" align="right">
+									<?php
+									echo $dateDtl->days * $price;
+									?>
+								</td>
+							</tr>
+						<?php endfor; ?>
+					<?php endforeach; ?>
 				</tbody>
 				<tfoot >
-					<tr >
+					<tr style="background:#E6E6E6;" >
 						<td colspan="4" align="center">รวม</td>
-						<td >100 บาท		</td>
+						<td align="right"><?php echo (($dateDtl->days * $price) * $numRoom ); ?>	</td>
+					</tr>
+					<tr>
+						<td colspan="5" align="right" style="width: 100%;text-align: right; height: 200px;">
+							ลงชื่อ....................................ผู้รับเงิน <br>
+							วันที่  <?php echo date('j').' เดือน '.$getMonth[date('m')].' พ.ศ. '.$getYear[date('Y')];?>
+						</td>
 					</tr>
 				</tfoot>
 			</table>
 		</div>
-		<div class="col-sm-12" style="width: 100%;text-align: right; height: 200px;">
 
-		</div>
-		<div class="col-sm-12">
-			<div class="col-sm-9 clearfix " style="text-align: right;" >
-				ลงชื่อ....................................ผู้รับเงิน <br>
-				วันที่  <?php echo date('j').' เดือน '.$getMonth[date('m')].' พ.ศ. '.$getYear[date('Y')];?>
-			</div>
-			<!-- <div class="col-sm-6 clearfix">asdf</div> -->
-		</div>
 	</div>
 </div>
-<script type="text/javascript"> 
-		var data = document.getElementById('example');
-		newWin = window.open("");
-		newWin.document.write(data.outerHTML);
-		//newWin.print();
-		newWin.close(); 
+<script type="text/javascript">
+	var data = document.getElementById('example');
+	newWin = window.open("");
+	newWin.document.write(data.outerHTML);
+	newWin.print();
+	newWin.close();
 </script>

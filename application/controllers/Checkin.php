@@ -103,8 +103,110 @@ class Checkin extends CI_Controller {
 
 	public function saveAdd()
 	{
-		$idCheckin = $this->Mdl_checkin->saveAdd();
-		redirect('checkin/','refresh');
+		$id = $this->Mdl_checkin->saveAdd();
+		if(isset($_POST['isprint'])==true){
+			echo "<script>window.open('".base_url()."checkin/billprintcheckin/".md5($id)."','_new');</script>";
+			redirect('checkin/','refresh');
+		}else{
+			redirect('checkin/','refresh');
+		}
+	}
+
+	public function  billprintcheckin($key=''){
+		$key =MD5('1');
+		$countDay = $this->Mdl_checkin->booked($key);
+		$this->data['dateDtl'] = date_diff(date_create($countDay['checkInAppointDate']),date_create($countDay['checkOutAppointDate'])->modify("+1 hour"));
+		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
+		// if(count($this->data['checkinDtl'])>0){
+		$this->data['billCode']=$this->Mdl_checkin->getBillCode();
+		$this->data['getMonth'] = $this->packfunction->getMonth();
+		$this->data['getDetail'] = $this->showListBill($key);
+		$this->data['getYear'] = $this->packfunction->getYear();
+		$this->data['serviceDtl']=$this->Mdl_checkin->serviceList($key,'ROOM');
+		$this->load->view('checkin/Bill',$this->data);
+		// }else{
+			// redirect('authen/','refresh');
+		// }
+	}
+
+	public function showListBill($bookedID='')
+	{
+		$data_array = array();
+		foreach ($this->Mdl_checkin->getBillCheckin($bookedID) as $key => $rowBooked) {
+			if(isset($data_array[$rowBooked['bookedID']]))
+			{
+				array_push($data_array[$rowBooked['bookedID']]['selectRoom'],
+					array(
+						'bookedroomID' => $rowBooked['bookedroomID'],
+							'roomID' => $rowBooked['roomID'],
+							'checkinDate' => $rowBooked['checkinDate'],
+							'checkoutDate' => $rowBooked['checkoutDate'],
+							'comment' => $rowBooked['comment'],
+							'status' => $rowBooked['status'],
+							'bed' => $rowBooked['bed'],
+							'roomtypeCode' => $rowBooked['roomtypeCode'],
+							'price_month' => $rowBooked['price_month'],
+							'price_hour' => $rowBooked['price_hour'],
+							'price_short' => $rowBooked['price_short'],
+							'price_day' => $rowBooked['price_day'],
+						)
+					);
+				continue;
+			}
+			if(!isset($data_array[$rowBooked['bookedID']]))
+			{
+				$data_array[$rowBooked['bookedID']] =  array(
+					'bookedID' =>  $rowBooked['bookedID'],
+					'bookedCode' =>  $rowBooked['bookedCode'],
+					'idcardno' =>  $rowBooked['idcardno'],
+					'idcardnoPath' =>  $rowBooked['idcardnoPath'],
+					'titleName' =>  $rowBooked['titleName'],
+					'firstName' =>  $rowBooked['firstName'],
+					'middleName' =>  $rowBooked['middleName'],
+					'lastName' =>  $rowBooked['lastName'],
+					'birthdate' =>  $rowBooked['birthdate'],
+					'address' =>  $rowBooked['address'],
+					'district' =>  $rowBooked['district'],
+					'province' =>  $rowBooked['province'],
+					'country' =>  $rowBooked['country'],
+					'postcode' =>  $rowBooked['postcode'],
+					'mobile' =>  $rowBooked['mobile'],
+					'email' =>  $rowBooked['email'],
+					'bookedDate' =>  $rowBooked['bookedDate'],
+					'checkInAppointDate' =>  $rowBooked['checkInAppointDate'],
+					'checkOutAppointDate' =>  $rowBooked['checkOutAppointDate'],
+					'checkinDate' =>  $rowBooked['checkinDate'],
+					'checkoutDate' =>  $rowBooked['checkoutDate'],
+					'is_breakfast' =>  $rowBooked['is_breakfast'],
+					'bookedType' =>  $rowBooked['bookedType'],
+					'cashPledge' =>  $rowBooked['cashPledge'],
+					'cashPledgePath' =>  $rowBooked['cashPledgePath'],
+					'comment' =>  $rowBooked['comment'],
+					'status' =>  $rowBooked['status'],
+					'createDT' =>  $rowBooked['createDT'],
+					'createBY' =>  $rowBooked['createBY'],
+					'updateDT' =>  $rowBooked['updateDT'],
+					'updateBY' =>  $rowBooked['updateBY'],
+					'selectRoom' => array(
+						array(
+							'bookedroomID' => $rowBooked['bookedroomID'],
+							'roomID' => $rowBooked['roomID'],
+							'checkinDate' => $rowBooked['checkinDate'],
+							'checkoutDate' => $rowBooked['checkoutDate'],
+							'comment' => $rowBooked['comment'],
+							'status' => $rowBooked['status'],
+							'bed' => $rowBooked['bed'],
+							'roomtypeCode' => $rowBooked['roomtypeCode'],
+							'price_month' => $rowBooked['price_month'],
+							'price_hour' => $rowBooked['price_hour'],
+							'price_short' => $rowBooked['price_short'],
+							'price_day' => $rowBooked['price_day'],
+							)
+						)
+					);
+			}
+		}
+		return $data_array;
 	}
 
 	public function saveCheckin()

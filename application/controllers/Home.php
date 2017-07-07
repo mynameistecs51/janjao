@@ -10,6 +10,7 @@ class Home extends CI_Controller {
 		$this->pagename="HOME";
 		$this->load->model('Mdl_getprovince');
 		$this->load->model('Mdl_booked');
+		$this->load->model('Mdl_checkin');
 		$this->userID = $this->session->userdata('userID');
 		$this->UserName = $this->session->userdata('UserName');
 		$this->UserGroupID = $this->session->userdata('usergroupID');
@@ -43,6 +44,7 @@ class Home extends CI_Controller {
 		$dout = str_replace("_","/",$dout);
 		$this->data['din'] = str_replace("T"," ",$din);
 		$this->data['dout'] = str_replace("T"," ",$dout);
+		$this->data['serviceDtl']=$this->Mdl_checkin->serviceList('','SERVICE');
 		$this->load->view('checkin/CheckinFormAdd',$this->data);
 	}
 
