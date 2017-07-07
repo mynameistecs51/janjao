@@ -386,7 +386,8 @@
 
 		var last =0
 		if(vat > 0){
-			last = totalsum+((totalsum/100)*vat); 
+      var to = totalsum > 0 ? totalsum:1;
+			last = totalsum+((to/100)*vat); 
 			$('#lastamount').val(last.toFixed(2));
 		}else{
 			$('#lastamount').val(totalsum.toFixed(2));
