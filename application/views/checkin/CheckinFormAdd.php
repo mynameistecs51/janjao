@@ -151,11 +151,11 @@
 <div class="form-group">
 	<label for="checkinDate" class="col-sm-2 control-label">วันที่ Checkin <b style="color: #FF0000">*</b></label>
 	<div class="col-sm-3">
-		<input type="text" class="form-control" id="checkinDate" name="checkinDate" value="<?php echo $din; ?>" readonly>
+		<input type="text" class="form-control" id="checkinDate" name="checkinDate" value="<?php echo $din; ?>" readonly disabled>
 	</div>
 	<label for="checkOutDate" class="col-sm-2 control-label">วันที่ Checkout <b style="color: #FF0000">*</b></label>
 	<div class="col-sm-3">
-		<input type="text" class="form-control" id="checkOutDate" name="checkOutDate" value="<?php echo $dout; ?>" readonly>
+		<input type="text" class="form-control" id="checkOutDate" name="checkOutDate" value="<?php echo $dout; ?>" readonly disabled>
 	</div>
 </div>
 <div class="form-group">
@@ -210,66 +210,12 @@
 <!-- </div> -->
 <hr>
 <!-- add service price total -->
-
-<div class="form-group">
-	<label for="idcardno" class="col-lg-2 control-label">รายการที่ชำระเพิ่ม <b style="color: #FF0000">*</b></label>
-	<div class="col-lg-8">
-		<table id="servicelist" class="table table-striped table-bordered" cellspacing="0" width="100%" >
-			<thead>
-				<tr>
-					<th style="text-align: center;width: 40px;">No.</th>
-					<th style="text-align: center;">NAME </th>
-					<th style="text-align: center;width:  80px;">PRICE</th>
-					<th style="text-align: center;width:  80px;">UNIT</th>
-					<th style="text-align: center;width:  80px;">AMOUNT</th>
-					<th style="text-align: center;width:  120px;">TOTAL</th>
-					<th style="text-align: center;width:  50px;">#</th>
-				</tr>
-			</thead>
-			<tbody>
-				<?php
-				$totalprice = 0.00; $totalamount = 0.00; $totalsum = 0.00;
-				$n = 1;
-				if(count($serviceDtl)>0){ ?>
-				<?php foreach ($serviceDtl as $rs) {  ?>
-				<tr id="<?php echo $n; ?>">
-					<td><?php echo $n; ?></td>
-					<td><input type="text" name="serviceName[]" class="form-control servicename" id="servicename<?php echo $n; ?>" placeholder="ผ้าห่ม" value="<?php echo $rs['serviceName']; ?>" required></td>
-					<td><input type="text" name="price[]" class="form-control price" id="price<?php echo $n; ?>" placeholder="0.00"  value="<?php echo $rs['price']; ?>" required></td>
-					<td><input type="text" name="unit[]" class="form-control unit" id="unit<?php echo $n; ?>" placeholder="ผืน"  value="<?php echo $rs['unit']; ?>" required></td>
-					<td><input type="text" name="amount[]" class="form-control amount" id="amount<?php echo $n; ?>" placeholder="0"  value="<?php echo $rs['amount']; ?>" required></td>
-					<td><input type="text" name="total[]" class="form-control total" id="total<?php echo $n; ?>"  placeholder="0.00" value="<?php echo number_format($rs['price']*$rs['amount'],2); ?>" required readonly></td>
-					<td><span class="btn btn-danger btn-xs delrow" id="delrow<?php echo $n; ?>" ><i class="fa fa-trash-o fa-2x"></i></span></td>
-				</tr>
-				<?php
-				$totalprice += $rs['price'];
-				$totalamount += $rs['amount'];
-				$totalsum += ($rs['price']*$rs['amount']);
-				?>
-				<?php $n++; } ?>
-				<?php } ?>
-			</tbody>
-			<tfoot>
-				<tr align="right">
-					<td colspan="2" > Total :</td>
-					<td><span id="totalprice"><?php echo number_format($totalprice,2); ?></span></td>
-					<td></td>
-					<td><span id="totalamount"><?php echo number_format($totalamount); ?></span></td>
-					<td><span id="totalsum"><?php echo number_format($totalsum,2); ?></span></td>
-					<td></td>
-				</tr>
-			</tfoot>
-		</table>
-		<span class="btn btn-primary btn-sm " id="addrows"> <i class="glyphicon glyphicon-plus-sign"></i> เพิ่มรายการ </span>
-	</div>
-</div>
-</div>
 <div class="form-group" align="right">
 	<label for="idcardno" class="col-lg-2 control-label"></label>
 	<div class="col-lg-8">
 		<div class="col-lg-6">ภาษีมูลค่าเพิ่ม</div><div class="col-lg-5"><input type="text" name="vat" id="vat" class="form-control" value="7" style="text-align: right;height: 28px;"></div><div class="col-lg-1">%</div>
 		<div class="col-lg-12" style="height: 5px;"></div>
-		<div class="col-lg-6">ยอดสุทธิ</div><div class="col-lg-5"><input type="text" name="lastamount" id="lastamount"  class="form-control" value="<?php echo number_format($totalsum,2); ?>" style="text-align: right;height: 28px;" readonly></div><div class="col-lg-1">บาท</div>
+		<div class="col-lg-6">ยอดสุทธิ</div><div class="col-lg-5"><input type="text" name="lastamount" id="lastamount"  class="form-control" value="" style="text-align: right;height: 28px;" readonly></div><div class="col-lg-1">บาท</div>
 		<div class="col-lg-12" style="height: 5px;"></div>
 		<div class="col-lg-6">ส่วนลด</div><div class="col-lg-5"><input type="text" name="discount" id="discount" class="form-control" value="0.00" style="text-align: right;height: 28px;"></div><div class="col-lg-1">บาท</div>
 		<div class="col-lg-12" style="height: 5px;"></div>
@@ -293,30 +239,15 @@
 <!-- <script src="<?php echo base_url()?>assets/js/bootstrap-select.min.js"></script> -->
 <script src="<?php echo base_url()?>assets/js/jquery.datetimepicker.full.min.js"></script>
 <script type="text/javascript">
-$.datetimepicker.setLocale('th'); // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+// $.datetimepicker.setLocale('th'); // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
 
-$('#bookedDate').datetimepicker({
-	timepicker:true,
-	mask:true,
-	format:'d/m/Y H:i',
-	lang:'th',
-});
-// start checkinDate form  bookedDate
-// $('#bookedDate').on('change',function(){
-// 	var startDate = $('#bookedDate').val();
-// 	var expoldeY= startDate.split(' ');
-// 	$( "#checkinDate" ).datetimepicker({
-// 		minDate: expoldeY[0].split('-')[2]+'-'+expoldeY[0].split('-')[1]+'-'+expoldeY[0].split('-')[0],
-// 	});
+// $('#bookedDate').datetimepicker({
+// 	timepicker:true,
+// 	mask:true,
+// 	format:'d/m/Y H:i',
+// 	lang:'th',
 // });
 
-// $('#checkinDate').on("change",function() {
-// 	var startDate = $('#checkinDate').val();
-// 	var expoldeY= startDate.split(' ');
-// 	$( "#checkOutDate" ).datetimepicker({
-// 		minDate: expoldeY[0].split('-')[2]+'-'+expoldeY[0].split('-')[1]+'-'+expoldeY[0].split('-')[0],
-// 	});
-// });
 
 $("#myModal0").on("hidden.bs.modal", function () {
     // location.reload();
@@ -363,112 +294,110 @@ function dataURLtoFile(dataurl, filename) {
 }
 
 $(function() {
-	$('#servicelist tbody tr').each(function(i,n){
-		var val = $(n).attr('id');
-		removerow(val);
-		chnrowval(val);
+var diff ;
+	$.datetimepicker.setLocale('th'); // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+	$('#bookedDate').datetimepicker({
+		timepicker:true,
+		mask:true,
+		format:'d/m/Y H:i',
+		lang:'th',
+	});
+	$('#checkinDate').datetimepicker({
+		timepicker:true,
+		mask:true,
+		format:'d/m/Y H:i',
+		lang:'th',
 	});
 
-		$.datetimepicker.setLocale('th'); // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
-		$('#checkOutDate').datetimepicker({
-			timepicker:true,
-			mask:true,
-			format:'d/m/Y H:i',
-			lang:'th',
+	$('#checkOutDate').datetimepicker({
+		timepicker:true,
+		mask:true,
+		format:'d/m/Y H:i',
+		lang:'th',
+	});
+
+	// start checkinDate form  bookedDate
+	$('#bookedDate').on('change',function(){
+		var startDate = $('#bookedDate').val();
+		var expoldeY= startDate.split(' ');
+		$( "#checkinDate" ).datetimepicker({
+			minDate: expoldeY[0].split('/')[2]+'-'+expoldeY[0].split('/')[1]+'-'+expoldeY[0].split('/')[0],
 		});
 	});
 
-
-
-function confirmvalid(){
-	if($('#servicelist tbody tr').length==0){
-		alert('กรุณาเลือก เพิ่มรายการ !');
-		return false;
-	}else{
-		return true;
-	}
-
-}
-
-$('#addrows').on("click",function() {
-	var max = 0;
-	$('#servicelist tbody tr').each(function(i,n){
-		var val = $(n).attr('id');
-		var id = parseInt(val);
-		if(id > max){ max = id; }
+	$('#checkinDate').on("change",function() {
+		var startDate = $('#checkinDate').val();
+		var expoldeY= startDate.split(' ');
+		$( "#checkOutDate" ).datetimepicker({
+			minDate: expoldeY[0].split('/')[2]+'-'+expoldeY[0].split('/')[1]+'-'+expoldeY[0].split('/')[0],
+		});
 	});
-	var n = max+1;
 
-	var html = '';
-	html += '<tr id="'+n+'">';
-	html += '<td>'+n+'</td>';
-	html += '<td><input type="text" name="serviceName[]" class="form-control servicename" id="servicename'+n+'" placeholder="ผ้าห่ม" value="" required></td>';
-	html += '<td><input type="text" name="price[]" class="form-control price" id="price'+n+'" placeholder="0.00"  value="" required></td>';
-	html += '<td><input type="text" name="unit[]" class="form-control unit" id="unit'+n+'" placeholder="ผืน"  value="" required></td>';
-	html += '<td><input type="text" name="amount[]" class="form-control amount" id="amount'+n+'" placeholder="0"  value="" required></td>';
-	html += '<td><input type="text" name="total[]" class="form-control total" id="total'+n+'"  placeholder="0.00" value="" required readonly></td>';
-	html += '<td><span class="btn btn-danger btn-xs " id="delrow'+n+'" ><i class="fa fa-trash-o fa-2x"></i></span></td>';
-	html += '</tr>';
-	$('#servicelist tbody').append(html);
-	removerow(n);
-	chnrowval(n);
-
+	$('#checkOutDate').on("change",function() {
+		var startDate = $('#bookedDate').val();
+		var expoldeY= startDate.split(' ');
+		$( "#checkinDate" ).datetimepicker({
+			minDate: expoldeY[0].split('/')[2]+'-'+expoldeY[0].split('/')[1]+'-'+expoldeY[0].split('/')[0],
+		});
+	});
+	calculateDay();
 });
 
-function removerow(n){
-	$('#delrow'+n).on("click",function() {
-		if(confirm("ยืนยันการลบรายการ !")==true){
-			$('#servicelist tbody tr#'+n).remove();
-			sumtotal();
-		}
-	});
-}
+function calculateDay() {
+	var startDate = $('#checkinDate').val();
+	var dateStart= startDate.split(' ');
+	var d1 = new Date(dateStart[0].split('/')[2]+'-'+dateStart[0].split('/')[1]+'-'+dateStart[0].split('/')[0]);
 
-function chnrowval(n){
-	$('#price'+n+', #amount'+n).on("change",function() {
-		var price = $('#price'+n).val()!="" ? $('#price'+n).val():0;
-		var amount = $('#amount'+n).val()!="" ? $('#amount'+n).val():0;
-		var sum = parseInt(price)*parseInt(amount);
-		$('#total'+n).val(sum.toFixed(2));
-		sumtotal();
-	});
-}
+	var endDate = $('#checkOutDate').val();
+	var dateEnd= endDate.split(' ');
+	var d2 = new Date(dateEnd[0].split('/')[2]+'-'+dateEnd[0].split('/')[1]+'-'+dateEnd[0].split('/')[0]);
 
-$('#vat, #discount, #pay').on("keyup",function() {
-	sumtotal();
-});
+	 diff = 1;
+	if (d1 && d2) {
+        diff = diff + Math.floor(( (d2.getTime()) - (d1.getTime()) ) / 86400000); // ms per day
+      }
+      // $('.calculated').val(diff);
+      sumtotal();
+    }
 
-function sumtotal(){
-	var totalprice = 0;
-	var totalamount = 0;
-	var totalsum = 0;
-	$('#servicelist tbody tr').each(function(i,n){
-		var id = $(n).attr('id');
-		var price = $('#price'+id).val()!="" ? $('#price'+id).val():0;
-		var amount = $('#amount'+id).val()!="" ? $('#amount'+id).val():0;
-		var total = $('#total'+id).val()!="" ? $('#total'+id).val():0;
-		totalprice += parseInt(price);
-		totalamount += parseInt(amount);
-		totalsum += parseInt(total);
-	});
-	$('#totalprice').html(totalprice.toFixed(2));
-	$('#totalamount').html(totalamount);
-	$('#totalsum').html(totalsum.toFixed(2));
-	var vat = $('#vat').val()!="" ? $('#vat').val():0;
-	var pay = $('#pay').val()!="" ? $('#pay').val():0;
-	var discount = $('#discount').val()!="" ? $('#discount').val():0;
-	var deposit = $('#deposit').val()!="" ? $('#deposit').val():0;
+    function chnrowval(n){
+    	$('#price'+n+', #amount'+n).on("change",function() {
+    		var price = $('#price'+n).val()!="" ? $('#price'+n).val():0;
+    		var amount = $('#amount'+n).val()!="" ? $('#amount'+n).val():0;
+    		var sum = parseInt(price)*parseInt(amount);
+    		$('#total'+n).val(sum.toFixed(2));
+    		sumtotal();
+    	});
+    }
 
-	var last =0
-	if(vat > 0){
-		last = totalsum+((totalsum/100)*vat);
-		$('#lastamount').val(last.toFixed(2));
-	}else{
-		$('#lastamount').val(totalsum.toFixed(2));
-	}
+    $('#vat, #discount, #pay').on("keyup",function() {
+    	sumtotal();
+    });
 
-	var dis = (parseInt(discount)+parseInt(deposit)+parseInt(pay))-last;
-	$('#change').val(dis.toFixed(2));
+    function sumtotal(){
+    	var totalprice = 0;
+    	var totalamount = 0;
+    	var totalsum = diff;
+    	// var totalsum = 0;
 
-}
-</script>
+    	$('#totalprice').html(totalprice.toFixed(2));
+    	$('#totalamount').html(totalamount);
+    	$('#totalsum').html(totalsum.toFixed(2));
+    	var vat = $('#vat').val()!="" ? $('#vat').val():0;
+    	var pay = $('#pay').val()!="" ? $('#pay').val():0;
+    	var discount = $('#discount').val()!="" ? $('#discount').val():0;
+    	var deposit = $('#deposit').val()!="" ? $('#deposit').val():0;
+
+    	var last =0
+    	if(vat > 0){
+    		last = totalsum+((totalsum/100)*vat);
+    		$('#lastamount').val(last.toFixed(2));
+    	}else{
+    		$('#lastamount').val(totalsum.toFixed(2));
+    	}
+
+    	var dis = (parseInt(discount)+parseInt(deposit)+parseInt(pay))-last;
+    	$('#change').val(dis.toFixed(2));
+
+    }
+  </script>
