@@ -45,7 +45,7 @@ class User extends CI_Controller {
 		$this->data['viewName']=$this->pagename;
 		$this->data['usergroup']=$this->Mdl_user->getUserGroup();
 		$this->data['countryList']=$this->mdl_packFunction->getCountryList(); 
-		$this->packfunction->packView($this->data,"user/UserCreate"); 
+		$this->load->view("user/UserCreate",$this->data); 
 	} 
 
 	public function edit($key=''){ 
@@ -53,7 +53,7 @@ class User extends CI_Controller {
 		$this->data['userDtl']=$this->Mdl_user->getDetail($key);
 		$this->data['usergroup']=$this->Mdl_user->getUserGroup();
 		$this->data['countryList']=$this->mdl_packFunction->getCountryList(); 
-		$this->packfunction->packView($this->data,"user/UserEdit"); 
+		$this->load->view("user/UserEdit",$this->data);   
 	} 
 
 	public function saveData()
@@ -61,18 +61,14 @@ class User extends CI_Controller {
 		if($_POST)
 		{ 
 			$data = array( 
-				"username"	=>$_POST['username'], 
+				"username"	=>$_POST['username'],
+				"password"	=>MD5(TRIM($_POST['password'])), 
 				"useremail"	=>$_POST['useremail'],
 				"userIdcard"=>$_POST['userIdcard'],
 				"userTitle"	=>$_POST['userTitle'],
 				"userFname"	=>$_POST['userFname'],
-				"userMname"	=>$_POST['userMname'],
 				"userLname"	=>$_POST['userLname'],
-				"countryID"	=>$_POST['countryID'],  
 				"address"		=>$_POST['address'],
-				"city"			=>$_POST['city'],
-				"state"			=>$_POST['state'],
-				"postcode"		=>$_POST['postcode'], 
 				"mobile"		=>$_POST['mobile'],
 				"usergroupID"	=>$_POST['usergroupID'], 
 				"status"		=>'ON',
@@ -82,10 +78,6 @@ class User extends CI_Controller {
 				"updateBY"		=>$this->UserName
 			);
 			$userID = $this->Mdl_user->addNewData($data,'tm_user');
-
-			// echo "<pre>"; 
-			// print_r($data); 
-			// print_r($_FILES);
 
 			redirect('user/last/'.md5($userID));
 		}else{

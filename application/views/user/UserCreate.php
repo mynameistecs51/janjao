@@ -1,199 +1,114 @@
-<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
-<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/bootstrap-select.min.css">
-<style type="text/css">
-    select { border-radius:4px; }
-</style> 
-<div class="col-lg-12" >
-    <i style="font-size: 18px;"> USER CREATE </i> 
-</div>
-<hr style="margin-top: 30px;">
-<div class="container"> 
-	<form name="formCreatefair"  id="formCreatefair" class="form-horizontal" method="POST" action="<?php echo base_url()?>user/saveData" enctype="multipart/form-data" onSubmit="JavaScript:return confirmvalid();"> 
-    <input  type="hidden" name="userID" id="userID" value="" >
-        <div class="row text-center" style="margin-top: 10px;"> 
-            <div class="col-lg-12" align="left"> 
-                <div class="row">   
-                    <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="control-label col-sm-2">UserName<span style="color:#FF0004;">*</span> :</label>
-                            <div class="col-sm-8">
-                                <input  type="text" class="form-control" name="username" id="username" autocomplete="off" value="" >
-                            </div> 
-                            <div class="col-sm-2" id="error_username"></div> 
-                        </div> 
-                    </div> 
-                	<div class="col-md-12">
-                        <div class="form-group">
-                          <label class="control-label col-sm-2">Email<span style="color:#FF0004;">*</span> :</label>
-                            <div class="col-sm-8">
-                                <input  type="email" class="form-control" name="useremail" id="useremail" autocomplete="off" value="" >
-                            </div> 
-                            <div class="col-sm-2" id="error_useremail"></div>
-                        </div> 
-                    </div> 
-                    <div class="col-lg-12"> 
-                        <div class="form-group">
-                            <label for="select" class="control-label col-xs-2">Title <span style="color:#FF0004;">*</span></label>
-                            <div class="col-xs-8" id="coluserTitle">
-                                <select id="userTitle" class="form-control selectpicker" name="userTitle" title="Please Selected" >
-                                    <option value="" >--Selected--</option>
-                                    <option value="MR" >MR.</option>
-                                    <option value="MS" >MS.</option>
-                                    <option value="MRS">MRS.</option>
-                                </select>
-                            </div> 
-                            <div class="col-xs-2" id="error_title"></div>
-                        </div>
-                    </div>  
-                    <div class="col-lg-12"> 
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" >Name<span style="color:#FF0004;">*</span> :</label>
-                            <div class="col-sm-3">
-                                <input  id="userFname" type="text" class="form-control"  name="userFname" placeholder="First Name"  value="" >
-                            </div>
-                            <div class="col-sm-2"> 
-                                <input  id="userMname" type="text"  class="form-control"  name="userMname" placeholder="Middle Name" value="" >
-                            </div>
-                            <div class="col-sm-3">
-                                <input  id="userLname" type="text" class="form-control"  name="userLname"  placeholder="Last Name" value="" >
-                            </div>
-                            <div class="col-sm-2" id="errorName"></div>
-                        </div>
-                    </div> 
-                    <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="control-label col-sm-2">ID Card No :</label>
-                            <div class="col-sm-8">
-                                <input  type="text" class="form-control" name="userIdcard" id="userIdcard" autocomplete="off" placeholder="ID Card / Passport No" value="" >
-                            </div>
-                            <div class="col-sm-2" id="error_userIdcard"></div>
-                        </div>
-                    </div> 
-                    <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="control-label col-sm-2">Country <span style="color:#FF0004;">*</span> :</label>
-                            <div class="col-sm-8"> 
-                                <select id="countryID" class="form-control selectpicker" name="countryID" data-live-search="true" style="height: 60px;">
-                                    <option value="212" data-tokens="THAILAND" selected>THAILAND</option>   
-                                    <?php
-                                        foreach ($countryList as $ctrs) {
-                                            echo '<option value="'.$ctrs["countryID"].'" data-tokens="'.$ctrs["countryName"].'">'.$ctrs["countryName"].'</option> ';
-                                        }
-                                    ?> 
-                                </select>
-                            </div>
-                            <div class="col-sm-2" id="error_countryID"></div>
-                        </div> 
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="control-label col-sm-2">Company Name<span style="color:#FF0004;">*</span> :</label>
-                            <div class="col-sm-8">
-                                <input  type="text" class="form-control" name="companyName" id="companyName" autocomplete="off" value="" >
-                            </div> 
-                            <div class="col-sm-2" id="error_companyName"></div> 
-                        </div> 
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="control-label col-sm-2">Position<span style="color:#FF0004;">*</span> :</label>
-                            <div class="col-sm-8">
-                                <input  type="text" class="form-control" name="position" id="position" autocomplete="off" value="" >
-                            </div> 
-                            <div class="col-sm-2" id="error_position"></div>
-                        </div> 
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="control-label col-sm-2">Address :</label>
-                            <div class="col-sm-8">
-                                <textarea type="text" class="form-control" row="3" name="address" id="address" autocomplete="off" ></textarea>
-                            </div> 
-                            <div class="col-sm-2" id="error_address"></div>
-                        </div> 
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="control-label col-sm-2">City :</label>
-                            <div class="col-sm-8">
-                                <input  type="text" class="form-control" name="city" id="city" autocomplete="off" value="" >
-                            </div> 
-                            <div class="col-sm-2" id="error_city"></div>
-                        </div> 
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="control-label col-sm-2">State :</label>
-                            <div class="col-sm-8">
-                                <input  type="text" class="form-control" name="state" id="state" autocomplete="off" value="" >
-                            </div> 
-                            <div class="col-sm-2" id="error_state"></div>
-                        </div> 
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="control-label col-sm-2">Postcode :</label>
-                            <div class="col-sm-8">
-                                <input  type="text" class="form-control" name="postcode" id="postcode" autocomplete="off" value="" >
-                            </div> 
-                            <div class="col-sm-2" id="error_postcode"></div>
-                        </div> 
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="control-label col-sm-2">Telephone :</label>
-                            <div class="col-sm-8">
-                                <input  type="text" class="form-control" name="telephone" id="telephone" autocomplete="off" value="" >
-                            </div> 
-                            <div class="col-sm-2" id="error_telephone"></div>
-                        </div> 
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="control-label col-sm-2">Mobile<span style="color:#FF0004;">*</span> :</label>
-                            <div class="col-sm-8">
-                                <input  type="text" class="form-control" name="mobile" id="mobile" autocomplete="off" value="" >
-                            </div> 
-                            <div class="col-sm-2" id="error_mobile"></div>
-                        </div> 
-                    </div> 
-                    <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="control-label col-sm-2">User Group<span style="color:#FF0004;">*</span> :</label>
-                            <div class="col-sm-8"> 
-                                <select id="usergroupID" class="form-control selectpicker" name="usergroupID"  style="height: 60px;">
-                                    <option value="">--select--</option>
-                                    <?php
-                                        foreach ($usergroup as $usg) {
-                                            echo '<option value="'.$usg["usergroupID"].'" >'.$usg["usergroupName"].'</option> ';
-                                        }
-                                    ?> 
-                                </select>
-                            </div> 
-                            <div class="col-sm-2" id="error_usergroupID"></div>
-                        </div> 
-                    </div> 
-                    <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="control-label col-sm-2"></label>
-                            <div class="col-sm-8"> 
-                                <button type="submit" class="btn btn-primary btn-md"> SAVE </button>
-                                <a href="<?php echo base_url()?>user" class="btn btn-danger btn-md" style="margin-left:10px;">BACK</a> 
-                            </div>
-                        </div>
-                    </div>   
-                </div>
-             </div>
+<input  type="hidden" name="userID" id="userID" value="" > 
+<div class="row form_input" style="text-align:left; margin-bottom:20px">
+    <div class="form-horizontal">
+        <div class="form-group">
+          <label class="control-label col-sm-2">UserName<span style="color:#FF0004;">*</span> :</label>
+            <div class="col-sm-8">
+                <input  type="text" class="form-control" name="username" id="username" autocomplete="off" value="" >
+            </div> 
+            <div class="col-sm-2" id="error_username"></div> 
+        </div>  
+        <div class="form-group">
+            <label class="control-label col-xs-2" for="password">PassWord<span style="color:#FF0004;">*</span></label>
+            <div class="col-xs-4">
+                <input  id="password" type="password" class="form-control"  name="password" placeholder="input Password"  value="" title="Please input PassWord" >
+            </div>
+            <div class="col-xs-4">
+                <input  id="confirmpassword" type="password" class="form-control"  name="confirmpassword" placeholder="input Confirm Password"   value="" >
+            </div>
+            <div class="col-xs-2" id="errorConfirmPass" style="font-size: 25px;">
+                <i style="color:#FE9A2E;" class="glyphicon glyphicon-exclamation-sign"></i>
+            </div> 
         </div> 
-    </form>
-<script type="text/javascript" src="<?php echo base_url()?>assets/libs/ajax/jquery.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url()?>assets/fileupload/js/bootstrap-filestyle.js"></script> 
-<link rel="stylesheet" href="<?php echo base_url()?>assets/libs/ui/jquery-ui.css">
-<script src="<?php echo base_url()?>assets/libs/ui/jquery-ui.js"></script>
+        <div class="form-group">
+          <label class="control-label col-sm-2">Email<span style="color:#FF0004;">*</span> :</label>
+            <div class="col-sm-8">
+                <input  type="email" class="form-control" name="useremail" id="useremail" autocomplete="off" value="" >
+            </div> 
+            <div class="col-sm-2" id="error_useremail"></div>
+        </div>  
+        <div class="form-group">
+            <label for="select" class="control-label col-xs-2">Title <span style="color:#FF0004;">*</span></label>
+            <div class="col-xs-8" id="coluserTitle">
+                <select id="userTitle" class="form-control" name="userTitle" title="Please Selected" >
+                    <option value="" >--Selected--</option>
+                    <option value="MR" >MR.</option>
+                    <option value="MS" >MS.</option>
+                    <option value="MRS">MRS.</option>
+                </select>
+            </div> 
+            <div class="col-xs-2" id="error_title"></div>
+        </div> 
+        <div class="form-group">
+            <label class="control-label col-sm-2" >Name<span style="color:#FF0004;">*</span> :</label>
+            <div class="col-sm-4">
+                <input  id="userFname" type="text" class="form-control"  name="userFname" placeholder="First Name"  value="" >
+            </div>
+            <div class="col-sm-4">
+                <input  id="userLname" type="text" class="form-control"  name="userLname"  placeholder="Last Name" value="" >
+            </div>
+            <div class="col-sm-2" id="errorName"></div>
+        </div> 
+        <div class="form-group">
+          <label class="control-label col-sm-2">ID Card No :</label>
+            <div class="col-sm-8">
+                <input  type="text" class="form-control" name="userIdcard" id="userIdcard" autocomplete="off" placeholder="ID Card / Passport No" value="" >
+            </div>
+            <div class="col-sm-2" id="error_userIdcard"></div>
+        </div> 
+        <div class="form-group">
+          <label class="control-label col-sm-2">Position<span style="color:#FF0004;">*</span> :</label>
+            <div class="col-sm-8">
+                <input  type="text" class="form-control" name="position" id="position" autocomplete="off" value="" >
+            </div> 
+            <div class="col-sm-2" id="error_position"></div>
+        </div>  
+        <div class="form-group">
+          <label class="control-label col-sm-2">Address :</label>
+            <div class="col-sm-8">
+                <textarea type="text" class="form-control" row="3" name="address" id="address" autocomplete="off" ></textarea>
+            </div> 
+            <div class="col-sm-2" id="error_address"></div>
+        </div>  
+        <div class="form-group">
+          <label class="control-label col-sm-2">Mobile<span style="color:#FF0004;">*</span> :</label>
+            <div class="col-sm-8">
+                <input  type="text" class="form-control" name="mobile" id="mobile" autocomplete="off" value="" >
+            </div> 
+            <div class="col-sm-2" id="error_mobile"></div>
+        </div>  
+        <div class="form-group">
+          <label class="control-label col-sm-2">User Group<span style="color:#FF0004;">*</span> :</label>
+            <div class="col-sm-8"> 
+                <select id="usergroupID" class="form-control" name="usergroupID" >
+                    <option value="">--select--</option>
+                    <?php
+                        foreach ($usergroup as $usg) {
+                            echo '<option value="'.$usg["usergroupID"].'" >'.$usg["usergroupName"].'</option> ';
+                        }
+                    ?> 
+                </select>
+            </div> 
+            <div class="col-sm-2" id="error_usergroupID"></div>
+        </div>   
+    </div>
+</div>
+<script type="text/javascript">  
 
-<script type="text/javascript">
-	 
-	 
+    $('#password,#confirmpassword').on('change',function(){ 
+        if($('#password').val().trim() !='' && $('#confirmpassword').val().trim() != ''){
+            if($('#password').val()==$('#confirmpassword').val()){
+                $('#errorConfirmPass').html('<i style="color:#318407;font-size:28px;" class="glyphicon glyphicon-ok-sign"></i>');
+            }else{
+                $('#errorConfirmPass').html('<i style="color:#d43f3a;" class="glyphicon glyphicon-remove-sign"></i><b style="color:#ff0000;font-size:13px;"> Confirm Incorrect !</b>');
+                $('#confirmpassword').val("");
+            }
+        }else{
+            $('#errorConfirmPass').html('<i style="color:#d43f3a;" class="glyphicon glyphicon-remove-sign"></i><b style="color:#ff0000;font-size:13px;"> Confirm Incorrect !</b>');
+                $('#confirmpassword').val("");
+        }
+    }); 
+     
     $('#username').on('change',function(){
         var val = $(this).val(); 
         var userID = $('#userID').val(); 
@@ -210,7 +125,7 @@
                     $('#username').val(""); 
                     return false;
                   }else{
-                    $('#error_username').html('<i style="color:#318407;font-size:28px;" class="glyphicon glyphicon-ok-sign"></i>');
+                    
                   }
                 },
                 error: function()
@@ -276,28 +191,48 @@
         }   
         return isEnglish; 
     }  
-</script>
-
-<script src="<?php echo base_url()?>assets/js/bootstrap-select.min.js" type="text/javascript"></script> 
+</script> 
 <!--  END Fair List --> 
 
 <script type="text/javascript">  
 function confirmvalid()
 { 
-    if($('#fair_name_en').val()==''){
-        alert("Please input Fair name (Eng)");
-        $('#fair_name_en').focus();
+    if($('#username').val()==''){
+        alert("Please input UserName ");
+        $('#username').focus();
+        return false; 
+    }else if($('#password').val()==''){
+        alert("Please input password ");
+        $('#password').focus();
         return false;
-
-    }else if($('#fair_name_th').val()==''){
-        alert("Please input Fair name (Th)");
-        $('#fair_name_th').focus();
+    }else if($('#confirmpassword').val()==''){
+        alert("Please input Confirm password ");
+        $('#confirmpassword').focus();
         return false; 
 
-    }else if($('#faircode').val()==''){ 
-        alert("Please input Fair CODE");
-        $('#faircode').focus();
+    }else if($('#useremail').val()==''){
+        alert("Please input Email");
+        $('#useremail').focus();
         return false; 
+
+    }else if($('#userTitle').val()==''){ 
+        alert("Please Select Title");
+        $('#userTitle').focus();
+        return false; 
+
+    }else if($('#userFname').val()==''){
+        alert("Please input First Name");
+        $('#userFname').focus();
+        return false; 
+
+    }else if($('#userLname').val()==''){
+        alert("Please input Last Name");
+        $('#userLname').focus();
+        return false; 
+    }else if($('#position').val()==''){
+        alert("Please Input Position ");
+        $('#position').focus();
+        return false;
 
     }else{ 
 

@@ -299,7 +299,7 @@
 </div> 
 
 <div class="col-lg-12">
-	<hr style="margin-top: 40xp;margin-left: -15px; margin-right: -15px;">
+	<hr style="margin-top: 40px;margin-left: -15px; margin-right: -15px;">
 </div>
 <div class="div_modal"> <!-- show modal checkinform --> </div>
 <script src="<?php echo base_url()?>assets/js/jquery.datetimepicker.full.min.js"></script>

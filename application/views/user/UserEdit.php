@@ -49,13 +49,10 @@
                     <div class="col-lg-12"> 
                         <div class="form-group">
                             <label class="control-label col-sm-2" >Name<span style="color:#FF0004;">*</span> :</label>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <input  id="userFname" type="text" class="form-control"  name="userFname" placeholder="First Name"  value="<?php echo $userDtl['userFname']; ?>" >
-                            </div>
-                            <div class="col-sm-2"> 
-                                <input  id="userMname" type="text"  class="form-control"  name="userMname" placeholder="Middle Name" value="<?php echo $userDtl['userMname']; ?>" >
-                            </div>
-                            <div class="col-sm-3">
+                            </div> 
+                            <div class="col-sm-4">
                                 <input  id="userLname" type="text" class="form-control"  name="userLname"  placeholder="Last Name" value="<?php echo $userDtl['userLname']; ?>" >
                             </div>
                             <div class="col-sm-2" id="errorName"></div>
@@ -95,7 +92,14 @@
                         <div class="form-group">
                           <label class="control-label col-sm-2">Company Name<span style="color:#FF0004;">*</span> :</label>
                             <div class="col-sm-8">
-                                <input  type="text" class="form-control" name="companyName" id="companyName" autocomplete="off" value="<?php echo $userDtl['companyName'] ?>" >
+                                <select id="companyID" class="form-control selectpicker" name="companyID"  > 
+                                    <?php
+                                        foreach ($companyList as $cpn) {
+                                            $chk = $userDtl['companyID']==$cpn["companyID"] ? 'selected':'';
+                                            echo '<option value="'.$cpn["companyID"].'" '.$chk.'>'.$cpn["companyName"].'</option> ';
+                                        }
+                                    ?> 
+                                </select>
                             </div> 
                             <div class="col-sm-2" id="error_companyName"></div> 
                         </div> 
@@ -117,43 +121,7 @@
                             </div> 
                             <div class="col-sm-2" id="error_address"></div>
                         </div> 
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="control-label col-sm-2">City :</label>
-                            <div class="col-sm-8">
-                                <input  type="text" class="form-control" name="city" id="city" autocomplete="off" value="<?php echo $userDtl['city'] ?>" >
-                            </div> 
-                            <div class="col-sm-2" id="error_city"></div>
-                        </div> 
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="control-label col-sm-2">State :</label>
-                            <div class="col-sm-8">
-                                <input  type="text" class="form-control" name="state" id="state" autocomplete="off" value="<?php echo $userDtl['state'] ?>" >
-                            </div> 
-                            <div class="col-sm-2" id="error_state"></div>
-                        </div> 
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="control-label col-sm-2">Postcode :</label>
-                            <div class="col-sm-8">
-                                <input  type="text" class="form-control" name="postcode" id="postcode" autocomplete="off" value="<?php echo $userDtl['postcode'] ?>" >
-                            </div> 
-                            <div class="col-sm-2" id="error_postcode"></div>
-                        </div> 
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="control-label col-sm-2">Telephone :</label>
-                            <div class="col-sm-8">
-                                <input  type="text" class="form-control" name="telephone" id="telephone" autocomplete="off" value="<?php echo $userDtl['telephone'] ?>" >
-                            </div> 
-                            <div class="col-sm-2" id="error_telephone"></div>
-                        </div> 
-                    </div>
+                    </div> 
                     <div class="col-md-12">
                         <div class="form-group">
                           <label class="control-label col-sm-2">Mobile<span style="color:#FF0004;">*</span> :</label>
@@ -225,6 +193,10 @@
              </div>
         </div> 
     </form>
+</div>
+<div class="col-lg-12">
+    <hr style="margin-top: 40px;margin-left: -15px; margin-right: -15px;">
+</div>
 <script type="text/javascript" src="<?php echo base_url()?>assets/libs/ajax/jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url()?>assets/fileupload/js/bootstrap-filestyle.js"></script> 
 <link rel="stylesheet" href="<?php echo base_url()?>assets/libs/ui/jquery-ui.css">
@@ -334,25 +306,58 @@
 <script type="text/javascript">  
 function confirmvalid()
 { 
-    if($('#fair_name_en').val()==''){
-        alert("Please input Fair name (Eng)");
-        $('#fair_name_en').focus();
+    if($('#username').val()==''){
+        alert("Please input UserName ");
+        $('#username').focus();
+        return false; 
+    }else if($('#password').val()==''){
+        alert("Please input password ");
+        $('#password').focus();
+        return false;
+    }else if($('#confirmpassword').val()==''){
+        alert("Please input Confirm password ");
+        $('#confirmpassword').focus();
+        return false; 
+
+    }else if($('#useremail').val()==''){
+        alert("Please input Email");
+        $('#useremail').focus();
+        return false; 
+
+    }else if($('#userTitle').val()==''){ 
+        alert("Please Select Title");
+        $('#userTitle').focus();
+        return false; 
+
+    }else if($('#userFname').val()==''){
+        alert("Please input First Name");
+        $('#userFname').focus();
+        return false; 
+
+    }else if($('#userLname').val()==''){
+        alert("Please input Last Name");
+        $('#userLname').focus();
+        return false; 
+
+    }else if($('#countryID').val()==''){
+        alert("Please Select Country ");
+        $('#countryID').focus();
         return false;
 
-    }else if($('#fair_name_th').val()==''){
-        alert("Please input Fair name (Th)");
-        $('#fair_name_th').focus();
-        return false; 
+    }else if($('#companyName').val()==''){
+        alert("Please Input Company Name ");
+        $('#companyName').focus();
+        return false;
 
-    }else if($('#faircode').val()==''){ 
-        alert("Please input Fair CODE");
-        $('#faircode').focus();
-        return false; 
+    }else if($('#position').val()==''){
+        alert("Please Input Position ");
+        $('#position').focus();
+        return false;
 
     }else{ 
 
         return true;
-    } 
+    }
     
 }
 
