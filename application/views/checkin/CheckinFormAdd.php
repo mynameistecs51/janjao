@@ -3,22 +3,23 @@
   <input type="hidden" class="form-control" name="transaction" value="CHECKIN">
   <div class="row form_input" style="text-align:left; margin-bottom:20px">
   	<div class="form-horizontal">
-  		<div class="form-group">
-  			<label for="selectRoom" class="col-lg-2 control-label">ห้องที่เลือก</label>
-  			<div class="col-lg-8">
-  				<div class="row">
-  					<?php
-  					foreach ($selectRoom as $key => $room) :?>
-  					<input type="hidden" name="selectRoom" value="<?php echo $room[0]['roomcode']; ?>">  <!-- //input hidden selectRoom -->
-  					<button type="button" class="btn roomSelect btn-danger btn-xs" data-color="danger" data-room="<?php echo $room[0]['roomcode'] ?>" data-priceshort="<?php echo $room[0]['price_short']; ?>" data-priceday="<?php echo $room[0]['price_day']; ?>" data-pricemonth="<?php echo $room[0]['price_month']; ?>"  disabled >
-  						<i class="fa fa-bed" aria-hidden="true"></i>
-  						<h4><?php echo 'Room '.$room[0]['roomcode']; ?></h4>
-  					</button>
-  				<?php endforeach; ?>
-  			</div>
-  		</div>
-  	</div>
-
+    	<div class="form-group">
+    			<label for="selectRoom" class="col-lg-2 control-label">ห้องที่เลือก</label>
+    			<div class="col-lg-8">
+    				<div class="row">
+      				<div class="col-lg-12">
+      					<?php
+      					foreach ($selectRoom as $key => $room) :?> 
+      					<input type="hidden" name="selectRoom" value="<?php echo $room[0]['roomcode']; ?>">  <!-- //input hidden selectRoom -->
+      					<button type="button" class="btn roomSelect btn-danger btn-xs" data-color="danger" data-room="<?php echo $room[0]['roomcode'] ?>" data-priceshort="<?php echo $room[0]['price_short']; ?>" data-priceday="<?php echo $room[0]['price_day']; ?>" data-pricemonth="<?php echo $room[0]['price_month']; ?>"  disabled >
+      						<i class="fa fa-bed" aria-hidden="true"></i>
+      						<h4><?php echo 'Room '.$room[0]['roomcode']; ?></h4>
+      					</button>
+      				  <?php endforeach; ?>
+      			  </div>
+    		    </div>
+    	    </div>
+      </div>
   	<div class="form-group">
   		<label for="idcardno" class="col-sm-2 control-label">เลขประจำประชาชน <b style="color: #FF0000">*</b></label>
   		<div class="col-sm-8">
@@ -155,20 +156,20 @@
   		</div>
   	</div>
   	<div class="form-group">
-  		<label for="bookedType" class="col-sm-2 control-label">เช่าแบบ <b style="color: #FF0000">*</b></label>
+  		<label for="bookedType" class="col-sm-2 control-label">เช่าแบบ <b style="color: #FF0000">*</b></label> 
   		<div class="col-sm-8">
-  			<label><b class="btn btn-info btn-md"> <input type="radio" name="bookedType" id="SHORT" value="SHORT" class="control-label">  ชั่วคราว</b></label>
+  			<label><b class="btn btn-info btn-md"> <input type="radio" name="bookedType" id="SHORT" value="SHORT" class="control-label bookedType">  ชั่วคราว</b></label>
   			&nbsp;&nbsp;&nbsp;
-  			<label><b class="btn btn-warning btn-md"> <input type="radio" name="bookedType" id="DAY" value="DAY" class="control-label" checked>  รายวัน</b></label>
+  			<label><b class="btn btn-warning btn-md"> <input type="radio" name="bookedType" id="DAY" value="DAY" class="control-label bookedType" checked>  รายวัน</b></label>
   			&nbsp;&nbsp;&nbsp;
-  			<label><b class="btn btn-primary btn-md"> <input type="radio" name="bookedType" id="MONTH" value="MONTH" class="control-label">  รายเดือน</b></label>
+  			<label><b class="btn btn-primary btn-md"> <input type="radio" name="bookedType" id="MONTH" value="MONTH" class="control-label bookedType">  รายเดือน</b></label>
   		</div>
   	</div>
   	<div class="form-group">
   		<label for="deposit" class="col-sm-2 control-label">เงินมัดจำ <b style="color: #FF0000">*</b></label>
   		<div class="col-sm-8">
   			<div class="input-group">
-  				<input type="text" class="form-control" id="cashPledge" name="cashPledge" placeholder="300">
+  				<input type="text" class="form-control" id="cashPledge" name="cashPledge" placeholder="300" value="">
   				<span class="input-group-addon">บาท</span>
   			</div>
   		</div>
@@ -211,11 +212,11 @@
   		<div class="col-lg-8">
   			<div class="col-lg-6">ภาษีมูลค่าเพิ่ม</div><div class="col-lg-5"><input type="text" name="vat" id="vat" class="form-control" value="7" style="text-align: right;height: 28px;"></div><div class="col-lg-1">%</div>
   			<div class="col-lg-12" style="height: 5px;"></div>
-  			<div class="col-lg-6">ยอดสุทธิ</div><div class="col-lg-5"><input type="text" name="lastamount" id="lastamount"  class="form-control" value="" style="text-align: right;height: 28px;" readonly></div><div class="col-lg-1">บาท</div>
+  			<div class="col-lg-6">ยอดสุทธิ</div><div class="col-lg-5"><input type="text" name="lastamount" id="lastamount"  class="form-control" value="0.00" style="text-align: right;height: 28px;" readonly></div><div class="col-lg-1">บาท</div>
   			<div class="col-lg-12" style="height: 5px;"></div>
   			<div class="col-lg-6">ส่วนลด</div><div class="col-lg-5"><input type="text" name="discount" id="discount" class="form-control" value="0.00" style="text-align: right;height: 28px;"></div><div class="col-lg-1">บาท</div>
   			<div class="col-lg-12" style="height: 5px;"></div>
-  			<div class="col-lg-6">เงินมัดจำ</div><div class="col-lg-5"><input type="text" name="deposit" id="deposit"  class="form-control" value="<?php //echo $checkinDtl['cashPledge']; ?>200.00" style="text-align: right;height: 28px;" readonly></div><div class="col-lg-1">บาท</div>
+  			<div class="col-lg-6">เงินมัดจำ</div><div class="col-lg-5"><input type="text" name="deposit" id="deposit"  class="form-control" value="0.00" style="text-align: right;height: 28px;" readonly></div><div class="col-lg-1">บาท</div>
   			<div class="col-lg-12" style="height: 5px;"></div>
   			<div class="col-lg-6">รับเงิน</div><div class="col-lg-5"><input type="text" name="pay" id="pay" class="form-control" value="0.00" style="text-align: right;height: 28px;"></div><div class="col-lg-1">บาท</div>
   			<div class="col-lg-12" style="height: 5px;"></div>
@@ -366,66 +367,67 @@ function calculateDay() {
     	});
     }
 
-    $('#vat, #discount, #pay').on("keyup",function() {
+    $('#vat, #discount, #cashPledge, #pay').on("keyup",function() {
     	sumtotal();
     });
 
-    function sumtotal(sum1){
-      var totalsum = 0;
-      var priceshort =0;
-      var priceday = 0;
-      var pricemonth =0;
-      var totalprice = 0;
-      var totalamount = 0;
-      var totalsum = 0  ;
+    $('#cashPledge').on("keyup",function() {
+        var val = $(this).val();
+        $('#cashPledge').val(val);
+        sumtotal();
+    });
 
-      $.each($('.roomSelect'),function(){
-        priceshort += $(this).data('priceshort');
-        priceday += $(this).data('priceday');
-        pricemonth += $(this).data('pricemonth');
+    
+
+    function sumtotal(){
+      var totalsum    = 0;
+      var priceshort  = 0;
+      var priceday    = 0;
+      var pricemonth  = 0;
+      var totalprice  = 0;
+      var totalamount = 0;
+      var totalsum    = 0;
+
+      $('.roomSelect').each(function(i,n){
+        priceshort += parseInt($(n).data('priceshort'));
+        priceday   += parseInt($(n).data('priceday'));
+        pricemonth += parseInt($(n).data('pricemonth'));
       });
 
-      // totalsum = priceday;
-      $('input[name="bookedType"]').change(function(){
-        totalsum = 0;
-        switch($(this).val()) {
-          case "SHORT":
-          sum = priceshort * diff;
-          break;
-          case "DAY":
-          sum = priceday * diff;
-          break;
-          case "MONTH":
-          sum = pricemonth * diff;
-          break;
-          default:
-          sum = priceday * diff;
-        }
-        totalsum = sum;
+      if($('.bookedType:checked').val()=='SHORT'){
+        totalsum = priceshort;
+      }else if($('.bookedType:checked').val()=='DAY'){
+        totalsum = priceday;
+      }else if($('.bookedType:checked').val()=='MONTH'){
+        totalsum = pricemonth;
+      }
+ 
+      //  alert('priceshort='+priceshort+' priceday='+priceday+' pricemonth='+pricemonth);
 
+      var vat = $('#vat').val()!="" ? parseInt($('#vat').val()):0;
+      var pay = $('#pay').val()!="" ? parseInt($('#pay').val()):0;
+      var discount = $('#discount').val()!="" ? parseInt($('#discount').val()):0; // ส่วนลด
+      var cashPledge = $('#cashPledge').val()!="" ? parseInt($('#cashPledge').val()):0;  // เงินมัดจำ
+      var last=0;
 
-        $('#totalprice').html(totalprice.toFixed(2));
-        $('#totalamount').html(totalamount);
-        var vat = $('#vat').val()!="" ? $('#vat').val():0;
-        var pay = $('#pay').val()!="" ? $('#pay').val():0;
-        var discount = $('#discount').val()!="" ? $('#discount').val():0;
-        var deposit = $('#deposit').val()!="" ? $('#deposit').val():0;
+      if(vat > 0){
+        var to = totalsum > 0 ? totalsum:1;
+        last = cashPledge+totalsum+((to/100)*vat); // เงินมัดจำ + ยอดรวมค่าห้อง  + Vat 
+        $('#lastamount').val(parseInt(last).toFixed(2));
 
-        var last =0
-        if(vat > 0){
-          var to = totalsum > 0 ? totalsum:1;
-          last = totalsum+((to/100)*vat);
-          $('#lastamount').val(parseInt(last).toFixed(2));
-          console.log(last);
-        }else{
-          $('#lastamount').val(totalsum.toFixed(2));
-        }
+      }else{
+        $('#lastamount').val(totalsum.toFixed(2));
+      }
 
-        var dis = (parseInt(discount)+parseInt(deposit)+parseInt(pay))-last;
-        $('#change').val(dis.toFixed(2));
+      var dis = (parseInt(discount)+parseInt(pay))-last;
 
-      }).change();
-
+      $('#change').val(dis.toFixed(2));
+  
     }
 
   </script>
+
+
+
+
+

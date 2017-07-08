@@ -42,7 +42,7 @@
 	<span class="btn btn-warning btm-sm btn_booking"><i class="state-icon glyphicon glyphicon-check"></i> BOOKING</span>
 	<span class="btn btn-danger btm-sm btn_checkin"><i class="state-icon glyphicon glyphicon-check"></i> CHECKIN</span>
 </div>
-
+<?php if($viewshow=='show'){ ?>
 <div class="col-lg-12">
 	<h3 >FLOOR 2 </h3>
 </div>
@@ -297,7 +297,11 @@
 
 	</div>
 </div>
-
+<?php }else{ ?>
+<div class="col-lg-12" align="center">
+	<h3 > กรุณาค้นหาห้องพัก</h3>
+</div>
+<?php } ?>
 <div class="col-lg-12">
 	<hr style="margin-top: 40px;margin-left: -15px; margin-right: -15px;">
 </div>
