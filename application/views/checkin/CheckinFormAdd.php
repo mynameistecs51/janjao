@@ -148,11 +148,12 @@
   	<div class="form-group">
   		<label for="checkinDate" class="col-sm-2 control-label">วันที่ Checkin <b style="color: #FF0000">*</b></label>
   		<div class="col-sm-3">
-  			<input type="text" class="form-control" id="checkinDate" name="checkinDate" value="<?php echo $din; ?>" readonly disabled>
+  			<input type="text" class="form-control" id="checkinDate" name="checkinDate" value="<?php echo $din; ?>" readonly >
   		</div>
   		<label for="checkOutDate" class="col-sm-2 control-label">วันที่ Checkout <b style="color: #FF0000">*</b></label>
   		<div class="col-sm-3">
-  			<input type="text" class="form-control" id="checkOutDate" name="checkOutDate" value="<?php echo $dout; ?>" readonly disabled>
+  			<input type="text" class="form-control" id="checkOutDate" name="checkOutDate" value="<?php echo $dout; ?>" readonly >
+        <input type="hidden" class="form-control" id="checkOutDate_old" value="<?php echo $dout; ?>" readonly >
   		</div>
   	</div>
   	<div class="form-group">
@@ -377,6 +378,9 @@ $(function() {
         var out = calendarAddMonth(year+'-'+month+'-'+day,1); 
         $('#checkOutDate').val(out+ ' 12:00');
 
+      }else{
+        var old = $('#checkOutDate_old').val();
+        $('#checkOutDate').val(old); 
       }
 
     	sumtotal(); 
@@ -422,6 +426,8 @@ $(function() {
     		pricemonth = pricemonth + parseInt($(n).data('pricemonth'));
     	});
 
+
+
       var diff = calculateDay(); // หาจำนวนวัน 
     	// เช่าแบบ * จำนวนวัน
     	if($('.bookedType:checked').val()=='SHORT'){
@@ -430,8 +436,7 @@ $(function() {
     		totalsum = priceday * diff;
     	}else if($('.bookedType:checked').val()=='MONTH'){
     		totalsum = pricemonth;
-    	}
-
+    	} 
       //  alert('priceshort='+priceshort+' priceday='+priceday+' pricemonth='+pricemonth);
 
       var vat = $('#vat').val()!="" ? parseInt($('#vat').val()):0;
