@@ -330,7 +330,7 @@
 					});
 				});
 			}
-			console.log(selectRoom);
+			// console.log(selectRoom);
 		});
 		$('.btn_checkin').click(function(){
 			var dtcheckin = $('#dtcheckin').val();

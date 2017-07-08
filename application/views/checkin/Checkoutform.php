@@ -1,8 +1,8 @@
-<link href="<?php echo base_url()?>assets/css/jquery.datetimepicker.css" rel="stylesheet"> 
-<input type="hidden" name="bookedID" id="bookedID" value="<?php echo $checkinDtl['bookedID']; ?>"> 
+<link href="<?php echo base_url()?>assets/css/jquery.datetimepicker.css" rel="stylesheet">
+<input type="hidden" name="bookedID" id="bookedID" value="<?php echo $checkinDtl['bookedID']; ?>">
 
 <div class="row form_input" style="text-align:left; margin-bottom:20px">
-	<div class="form-horizontal">  
+	<div class="form-horizontal">
   		<div class="form-group">
   			<label for="selectRoom" class="col-lg-2 control-label">ห้องที่เลือก</label>
   			<div class="col-lg-10 ">
@@ -154,7 +154,7 @@
   				<input type="text" class="form-control" id="checkinDate" name="checkinDate" value="<?php echo $checkinDtl['checkinDate'] ?>" readonly>
   			</div>
 	 	</div>
-	
+
 		<div class="form-group">
 			<label for="bookedType" class="col-sm-2 control-label">เช่าแบบ <b style="color: #FF0000">*</b></label>
 			<div class="col-sm-8">
@@ -194,17 +194,17 @@
 			<div class="col-sm-8">
 				<img src="<?php echo base_url() . "assets/images/imgcard/" . $checkinDtl['idcardnoPath']; ?>"  id="imgbadge" width="260" height="195" style="margin-top:0px;"></img>
 			</div>
-		</div> 
-		<?php }?> 
+		</div>
+		<?php }?>
 		<div class="form-group">
 			<hr>
 		</div>
-		<div class="form-group"> 
+		<div class="form-group">
 			<label for="checkOutDate" class="col-sm-2 control-label">วันที่ Checkout <b style="color: #FF0000">*</b></label>
 			<div class="col-sm-8">
 				<input type="text" class="form-control" id="checkOutDate" name="checkOutDate" value="<?php echo $checkinDtl['checkOutDate'] ?>">
 			</div>
-		</div> 
+		</div>
 
 		<div class="form-group">
 			<label for="idcardno" class="col-lg-2 control-label">รายการที่ชำระเพิ่ม <b style="color: #FF0000">*</b></label>
@@ -217,12 +217,12 @@
 						<th style="text-align: center;width:  80px;">PRICE</th>
 						<th style="text-align: center;width:  80px;">UNIT</th>
 						<th style="text-align: center;width:  80px;">AMOUNT</th>
-						<th style="text-align: center;width:  120px;">TOTAL</th>  
+						<th style="text-align: center;width:  120px;">TOTAL</th>
 						<th style="text-align: center;width:  50px;">#</th>
 					</tr>
 				</thead>
-				<tbody> 
-					<?php 
+				<tbody>
+					<?php
 					$totalprice = 0.00; $totalamount = 0.00; $totalsum = 0.00;
 					$n = 1;
 					if(count($serviceDtl)>0){ ?>
@@ -236,9 +236,9 @@
 							<td><input type="text" name="total[]" class="form-control total" id="total<?php echo $n; ?>"  placeholder="0.00" value="<?php echo number_format($rs['price']*$rs['amount'],2); ?>" required readonly></td>
 							<td><span class="btn btn-danger btn-xs delrow" id="delrow<?php echo $n; ?>" ><i class="fa fa-trash-o fa-2x"></i></span></td>
 						</tr>
-					<?php 
-						$totalprice += $rs['price']; 
-						$totalamount += $rs['amount']; 
+					<?php
+						$totalprice += $rs['price'];
+						$totalamount += $rs['amount'];
 						$totalsum += ($rs['price']*$rs['amount']);
 					?>
 					<?php $n++; } ?>
@@ -246,7 +246,7 @@
 				</tbody>
 				<tfoot>
 					<tr align="right">
-						<td colspan="2" > Total :</td> 
+						<td colspan="2" > Total :</td>
 						<td><span id="totalprice"><?php echo number_format($totalprice,2); ?></span></td>
 						<td></td>
 						<td><span id="totalamount"><?php echo number_format($totalamount); ?></span></td>
@@ -257,9 +257,9 @@
 				</table>
 				<span class="btn btn-primary btn-sm " id="addrows"> <i class="glyphicon glyphicon-plus-sign"></i> เพิ่มรายการ </span>
 			</div>
-			</div>  
-		</div> 
-		<div class="form-group" align="right"> 
+			</div>
+		</div>
+		<div class="form-group" align="right">
 			<label for="idcardno" class="col-lg-2 control-label"></label>
 			<div class="col-lg-8">
 				<div class="col-lg-6">ภาษีมูลค่าเพิ่ม</div><div class="col-lg-5"><input type="text" name="vat" id="vat" class="form-control" value="7" style="text-align: right;height: 28px;"></div><div class="col-lg-1">%</div>
@@ -267,7 +267,7 @@
 				<div class="col-lg-6">ยอดสุทธิ</div><div class="col-lg-5"><input type="text" name="lastamount" id="lastamount"  class="form-control" value="<?php echo number_format($totalsum,2); ?>" style="text-align: right;height: 28px;" readonly></div><div class="col-lg-1">บาท</div>
 			 	<div class="col-lg-12" style="height: 5px;"></div>
 				<div class="col-lg-6">ส่วนลด</div><div class="col-lg-5"><input type="text" name="discount" id="discount" class="form-control" value="0.00" style="text-align: right;height: 28px;"></div><div class="col-lg-1">บาท</div>
-				<div class="col-lg-12" style="height: 5px;"></div> 
+				<div class="col-lg-12" style="height: 5px;"></div>
 				<div class="col-lg-6">เงินมัดจำ</div><div class="col-lg-5"><input type="text" name="deposit" id="deposit"  class="form-control" value="<?php //echo $checkinDtl['cashPledge']; ?>200.00" style="text-align: right;height: 28px;" readonly></div><div class="col-lg-1">บาท</div>
 				<div class="col-lg-12" style="height: 5px;"></div>
 				<div class="col-lg-6">รับเงิน</div><div class="col-lg-5"><input type="text" name="pay" id="pay" class="form-control" value="0.00" style="text-align: right;height: 28px;"></div><div class="col-lg-1">บาท</div>
@@ -275,7 +275,7 @@
 				<div class="col-lg-6">เงินทอน</div><div class="col-lg-5"><input type="text" name="change" id="change" class="form-control" value="0.00" style="text-align: right;height: 28px;" readonly></div><div class="col-lg-1">บาท</div>
 			</div>
 			<label for="idcardno" class="col-lg-2 control-label"></label>
-		</div> 
+		</div>
 
 
 
@@ -284,24 +284,24 @@
 				<label><span id="saveandprint" class="btn btn-secondary">  <input type="checkbox" name="isprint" value="YES" checked> <i class="glyphicon glyphicon-print"></i> พิมพ์ใบเสร็จรับเงิน</span></label>
 			</div>
 		</div>
-</div> 
+</div>
 <script src="<?php echo base_url()?>assets/js/jquery.datetimepicker.full.min.js"></script>
 <script type="text/javascript">
-	$(function() {  
+	$(function() {
 		$('#servicelist tbody tr').each(function(i,n){
-			var val = $(n).attr('id'); 
+			var val = $(n).attr('id');
 			removerow(val);
 			chnrowval(val);
 		});
 
-		$.datetimepicker.setLocale('th'); // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ. 
+		$.datetimepicker.setLocale('th'); // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
 		$('#checkOutDate').datetimepicker({
 			timepicker:true,
 			mask:true,
 			format:'d/m/Y H:i',
 			lang:'th',
 		});
-	});  
+	});
 
 
 
@@ -312,15 +312,15 @@
   		}else{
   			return true;
   		}
-  		
-  	} 
+
+  	}
 
 	$('#addrows').on("click",function() {
-		var max = 0; 
-        $('#servicelist tbody tr').each(function(i,n){  
-          var val = $(n).attr('id'); 
+		var max = 0;
+        $('#servicelist tbody tr').each(function(i,n){
+          var val = $(n).attr('id');
           var id = parseInt(val);
-          if(id > max){ max = id; } 
+          if(id > max){ max = id; }
         });
         var n = max+1;
 
@@ -345,12 +345,12 @@
 			if(confirm("ยืนยันการลบรายการ !")==true){
 				$('#servicelist tbody tr#'+n).remove();
 				sumtotal();
-			} 
+			}
 		});
 	}
 
 	function chnrowval(n){
-		$('#price'+n+', #amount'+n).on("change",function() { 
+		$('#price'+n+', #amount'+n).on("change",function() {
 			var price = $('#price'+n).val()!="" ? $('#price'+n).val():0;
 			var amount = $('#amount'+n).val()!="" ? $('#amount'+n).val():0;
 			var sum = parseInt(price)*parseInt(amount);
@@ -364,18 +364,18 @@
 	});
 
 	function sumtotal(){
-		var totalprice = 0; 
-		var totalamount = 0; 
+		var totalprice = 0;
+		var totalamount = 0;
 		var totalsum = 0;
 		$('#servicelist tbody tr').each(function(i,n){
-			var id = $(n).attr('id'); 
+			var id = $(n).attr('id');
 			var price = $('#price'+id).val()!="" ? $('#price'+id).val():0;
 			var amount = $('#amount'+id).val()!="" ? $('#amount'+id).val():0;
-			var total = $('#total'+id).val()!="" ? $('#total'+id).val():0; 
+			var total = $('#total'+id).val()!="" ? $('#total'+id).val():0;
 			totalprice += parseInt(price);
 			totalamount += parseInt(amount);
 			totalsum += parseInt(total);
-		}); 
+		});
 		$('#totalprice').html(totalprice.toFixed(2));
 		$('#totalamount').html(totalamount);
 		$('#totalsum').html(totalsum.toFixed(2));
@@ -387,17 +387,17 @@
 		var last =0
 		if(vat > 0){
       var to = totalsum > 0 ? totalsum:1;
-			last = totalsum+((to/100)*vat); 
+			last = totalsum+((to/100)*vat);
 			$('#lastamount').val(last.toFixed(2));
 		}else{
 			$('#lastamount').val(totalsum.toFixed(2));
-		} 
+		}
 
 		var dis = (parseInt(discount)+parseInt(deposit)+parseInt(pay))-last;
 		$('#change').val(dis.toFixed(2));
 
 	}
-	
 
- 
+
+
 </script>
