@@ -412,7 +412,7 @@ function calculateDay() {
         $('#lastamount').val(parseInt(last).toFixed(2));
 
       }else{
-      	$('#lastamount').val(totalsum.toFixed(2));
+      	$('#lastamount').val(parseInt(totalsum+cashPledge).toFixed(2));
       }
 
       var dis = (parseInt(discount)+parseInt(pay))-last;
