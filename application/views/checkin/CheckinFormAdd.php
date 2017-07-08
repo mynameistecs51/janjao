@@ -232,18 +232,11 @@
   			</div>
   		</div>
   	</div>
-  	<!-- <script src="<?php echo base_url()?>assets/js/bootstrap-select.min.js"></script> -->
-  	<script src="<?php echo base_url()?>assets/js/jquery.datetimepicker.full.min.js"></script>
-  	<script type="text/javascript">
-// $.datetimepicker.setLocale('th'); // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+<!-- <script src="<?php echo base_url()?>assets/js/bootstrap-select.min.js"></script> -->
+<script src="<?php echo base_url()?>assets/js/jquery.datetimepicker.full.min.js"></script>
+<script type="text/javascript">
 
-// $('#bookedDate').datetimepicker({
-// 	timepicker:true,
-// 	mask:true,
-// 	format:'d/m/Y H:i',
-// 	lang:'th',
-// });
-
+sumtotal();
 
 $("#myModal0").on("hidden.bs.modal", function () {
     // location.reload();
@@ -298,6 +291,7 @@ $(function() {
 		format:'d/m/Y H:i',
 		lang:'th',
 	});
+  /*
 	$('#checkinDate').datetimepicker({
 		timepicker:true,
 		mask:true,
@@ -335,26 +329,26 @@ $(function() {
 		$( "#checkinDate" ).datetimepicker({
 			minDate: expoldeY[0].split('/')[2]+'-'+expoldeY[0].split('/')[1]+'-'+expoldeY[0].split('/')[0],
 		});
-	});
-	calculateDay();
+	}); 
+  */
 });
 
-function calculateDay() {
-  // คำนวนวันที่ count day
-  var startDate = $('#checkinDate').val();
-  var dateStart= startDate.split(' ');
-  var d1 = new Date(dateStart[0].split('/')[2]+'-'+dateStart[0].split('/')[1]+'-'+dateStart[0].split('/')[0]);
+    function calculateDay() {
+      // คำนวนวันที่ count day
+      var startDate = $('#checkinDate').val();
+      var dateStart= startDate.split(' ');
+      var d1 = new Date(dateStart[0].split('/')[2]+'-'+dateStart[0].split('/')[1]+'-'+dateStart[0].split('/')[0]);
 
-  var endDate = $('#checkOutDate').val();
-  var dateEnd= endDate.split(' ');
-  var d2 = new Date(dateEnd[0].split('/')[2]+'-'+dateEnd[0].split('/')[1]+'-'+dateEnd[0].split('/')[0]);
+      var endDate = $('#checkOutDate').val();
+      var dateEnd= endDate.split(' ');
+      var d2 = new Date(dateEnd[0].split('/')[2]+'-'+dateEnd[0].split('/')[1]+'-'+dateEnd[0].split('/')[0]);
 
-  diff = 0;
-  if (d1 && d2) {
-        diff = diff + Math.floor(( (d2.getTime()) - (d1.getTime()) ) / 86400000); // ms per day
-      }
-      // $('.calculated').val(diff);
-      sumtotal();
+          diff = 0;
+          if (d1 && d2) {
+            diff = diff + Math.floor(( (d2.getTime()) - (d1.getTime()) ) / 86400000); // ms per day
+          }
+          
+          return diff;
     }
 
     $('#vat, #discount, #cashPledge, #pay').on("keyup",function() {
@@ -362,15 +356,54 @@ function calculateDay() {
     });
 
     $('#cashPledge').on("keyup",function() {
-    	var val = $(this).val();
-    	$('#cashPledge').val(val);
+    	var val = $(this).val(); 
     	$("#deposit").val(val);  //ให้ไปแสดงใน ช่องคำนวน(แสดงเฉย ๆ เพราะ นำcashPledge ข้างบนไปคิด)
+
     	sumtotal();
     });
 
     $('.bookedType').on("change",function() {
-    	sumtotal();
+      var cin = $('#checkinDate').val();  // เก็บค่าวันที่ Checkin
+
+      if($(this).val()=='SHORT'){
+        // ถ้าเลือกเป็นชั่วคราว  ใส่ค่า Checkout เท่ากับวัน Checkin
+        $('#checkOutDate').val(cin);
+
+      }else if($(this).val()=='MONTH'){
+        // ถ้าเลือกเป็นรายเดือน เดือน  ต้องบวกวัน Checkout เป็นวันที่นั้น ของเดือนถัดไป 
+        var year = cin[6]+cin[7]+cin[8]+cin[9];
+        var month = cin[3]+cin[4];
+        var day = cin[0]+cin[1];
+        var out = calendarAddMonth(year+'-'+month+'-'+day,1); 
+        $('#checkOutDate').val(out+ ' 12:00');
+
+      }
+
+    	sumtotal(); 
+
     });
+
+    function calendarAddMonth(dateStr, month){  
+      //Create date object from input date
+      var date = new Date(dateStr);   
+      //Add month
+      date.setMonth(date.getMonth()+month); 
+
+      var m = date.getMonth()+1; 
+      if(m < 10){
+        var valm = '0'+m;
+      }else{
+        var valm = m;
+      }
+
+      var d = date.getDate();
+      if(d < 10){
+        var vald = '0'+d;
+      }else{
+        var vald = d;
+      }
+      return vald+"/"+valm+"/"+date.getFullYear();
+    } 
 
 
 
@@ -384,19 +417,20 @@ function calculateDay() {
     	var totalsum    = 0;
 
     	$('.roomSelect').each(function(i,n){
-    		priceshort += parseInt($(n).data('priceshort'));
-    		priceday   += parseInt($(n).data('priceday'));
-    		pricemonth += parseInt($(n).data('pricemonth'));
+    		priceshort = priceshort + parseInt($(n).data('priceshort'));
+    		priceday   = priceday + parseInt($(n).data('priceday'));
+    		pricemonth = pricemonth + parseInt($(n).data('pricemonth'));
     	});
 
-	// เช่าแบบ * จำนวนวัน
-	if($('.bookedType:checked').val()=='SHORT'){
-		totalsum = priceshort * diff;
-	}else if($('.bookedType:checked').val()=='DAY'){
-		totalsum = priceday * diff;
-	}else if($('.bookedType:checked').val()=='MONTH'){
-		totalsum = pricemonth * diff;
-	}
+      var diff = calculateDay(); // หาจำนวนวัน 
+    	// เช่าแบบ * จำนวนวัน
+    	if($('.bookedType:checked').val()=='SHORT'){
+    		totalsum = priceshort;
+    	}else if($('.bookedType:checked').val()=='DAY'){
+    		totalsum = priceday * diff;
+    	}else if($('.bookedType:checked').val()=='MONTH'){
+    		totalsum = pricemonth;
+    	}
 
       //  alert('priceshort='+priceshort+' priceday='+priceday+' pricemonth='+pricemonth);
 
