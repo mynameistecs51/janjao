@@ -11,7 +11,7 @@
 			<input type="text" class="form-control"  id="dtcheckin" style="width: 138px;margin-right: 10px;" placeholder="Check In" name="dtcheckin" value="<?php echo $dtcheckin; ?>">
 			CheckOut Date :
 			<input type="text" class="form-control"  id="dtcheckout" style="width: 138px;margin-right: 10px;" placeholder="Check Out" name="dtcheckout" value="<?php echo $dtcheckout; ?>">
-			<!--  
+			<!--
 			Room Type :
 			<select class="form-control" name="roomType" style="width: 120px;margin-right: 10px;">
 				<option value="STANDARD" <?php echo $roomType=='STANDARD'? 'selected':''; ?> >STANDARD</option>
@@ -26,9 +26,9 @@
 				<option value="CHECKOUT" <?php echo $roomstatus=='CHECKOUT'? 'selected':''; ?>  >CHECKOUT</option>
 				<option value="CLEANING" <?php echo $roomstatus=='CLEANING'? 'selected':''; ?>  >CLEANING</option>
 			</select>
-			-->
-		</form>
-	</div>
+		-->
+	</form>
+</div>
 </div>
 <hr class="bd-header">
 <!-- Page Content -->
@@ -49,82 +49,82 @@
 <div class="col-lg-12" >
 	<div class=" col-sm-12 text-center"  >
 
-	<?php 
+		<?php
 		$html ='';
-		foreach ($getfloor2 as $f2) {  
+		foreach ($getfloor2 as $f2) {
 			if($f2['bed']=="SINGLE"){
 				$bed = '		<i class="fa fa-bed fa-2x" aria-hidden="true"></i>';
 			}else{
 				$bed = '		<i class="fa fa-bed fa-2x" aria-hidden="true">&nbsp;</i>
-								<i class="fa fa-bed fa-2x" aria-hidden="true"></i>';
+				<i class="fa fa-bed fa-2x" aria-hidden="true"></i>';
 			}
 
 			if($f2['transaction']=='EMPTY' && $f2['roomtypeCode']!='STAIRCASE'){
-					$html .= ' 
-							<div class="col-sm-1 " style="margin:10px;">
-								<span class="button-checkbox ">
-									<button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
-										'.$bed.'
-										<h4>'.$f2['roomCODE'].'</h4>'.$f2['roomtypeCode'].'
-									</button>
-									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'" data-priceday="'.$f2['price_day'].'" data-pricemonth="'.$f2['price_month'].'"  data-priceshort="'.$f2['price_short'].'"  value="'.$f2['roomCODE'].'" />
-								</span>
-							</div> ';
+				$html .= '
+				<div class="col-sm-1 " style="margin:10px;">
+					<span class="button-checkbox ">
+						<button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
+							'.$bed.'
+							<h4>'.$f2['roomCODE'].'</h4>'.$f2['roomtypeCode'].'
+						</button>
+						<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'" data-priceday="'.$f2['price_day'].'" data-pricemonth="'.$f2['price_month'].'"  data-priceshort="'.$f2['price_short'].'"  value="'.$f2['roomCODE'].'" />
+					</span>
+				</div> ';
 			}else if($f2['transaction']=='BOOKED' && $f2['roomtypeCode']!='STAIRCASE'){
 				$html .= '
-						<div class="col-sm-1 " style="margin:10px;">
-							<span class="button-checkbox ">
-								<button type="button" class="btn btn_room" data-color="warning"   style="width:120px;" disabled>
-								'.$bed.'
-								<h4>'.$f2['roomCODE'].'</h4><i >IN:'.$f2['checkinDate'].'</i>
-								</button>
-								<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'" data-priceday="'.$f2['price_day'].'" data-pricemonth="'.$f2['price_month'].'"  data-priceshort="'.$f2['price_short'].'"  value="'.$f2['roomCODE'].'" checked disabled readonly/>
-							</span>
-						</div>';
+				<div class="col-sm-1 " style="margin:10px;">
+					<span class="button-checkbox ">
+						<button type="button" class="btn btn_room" data-color="warning"   style="width:120px;" disabled>
+							'.$bed.'
+							<h4>'.$f2['roomCODE'].'</h4><i >IN:'.$f2['checkinDate'].'</i>
+						</button>
+						<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'" data-priceday="'.$f2['price_day'].'" data-pricemonth="'.$f2['price_month'].'"  data-priceshort="'.$f2['price_short'].'"  value="'.$f2['roomCODE'].'" checked disabled readonly/>
+					</span>
+				</div>';
 
 			}else if($f2['transaction']=='CHECKIN' && $f2['roomtypeCode']!='STAIRCASE'){
 				$html .= '
-						<div class="col-sm-1 " style="margin:10px;">
-							<span class="button-checkbox ">
-								<button type="button" class="btn btn_room" data-color="danger"   style="width:120px;" disabled>
-								'.$bed.'
-								<h4>'.$f2['roomCODE'].'</h4><i >out:'.$f2['checkoutDate'].'</i>
-								</button>
-								<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'" data-priceday="'.$f2['price_day'].'" data-pricemonth="'.$f2['price_month'].'"  data-priceshort="'.$f2['price_short'].'"  value="'.$f2['roomCODE'].'" checked disabled readonly/>
-							</span>
-						</div>';
+				<div class="col-sm-1 " style="margin:10px;">
+					<span class="button-checkbox ">
+						<button type="button" class="btn btn_room" data-color="danger"   style="width:120px;" disabled>
+							'.$bed.'
+							<h4>'.$f2['roomCODE'].'</h4><i >out:'.$f2['checkoutDate'].'</i>
+						</button>
+						<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'" data-priceday="'.$f2['price_day'].'" data-pricemonth="'.$f2['price_month'].'"  data-priceshort="'.$f2['price_short'].'"  value="'.$f2['roomCODE'].'" checked disabled readonly/>
+					</span>
+				</div>';
 
 			}else if($f2['transaction']=='CHECKOUT' && $f2['roomtypeCode']!='STAIRCASE'){
-					$html .= ' 
-							<div class="col-sm-1 " style="margin:10px;">
-								<span class="button-checkbox ">
-									<button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
-										'.$bed.'
-										<h4>'.$f2['roomCODE'].' </h4>'.$f2['roomtypeCode'].'
-									</button>
-									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'" data-priceday="'.$f2['price_day'].'" data-pricemonth="'.$f2['price_month'].'"  data-priceshort="'.$f2['price_short'].'"  value="'.$f2['roomCODE'].'" />
-								</span>
-							</div> ';
+				$html .= '
+				<div class="col-sm-1 " style="margin:10px;">
+					<span class="button-checkbox ">
+						<button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
+							'.$bed.'
+							<h4>'.$f2['roomCODE'].' </h4>'.$f2['roomtypeCode'].'
+						</button>
+						<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'" data-priceday="'.$f2['price_day'].'" data-pricemonth="'.$f2['price_month'].'"  data-priceshort="'.$f2['price_short'].'"  value="'.$f2['roomCODE'].'" />
+					</span>
+				</div> ';
 
 			}else if($f2['transaction']=='CLEANING' && $f2['roomtypeCode']!='STAIRCASE'){
-					$html .= ' 
-							<div class="col-sm-1 " style="margin:10px;">
-								<span class="button-checkbox ">
-									<button type="button" class="btn btn_room" data-color="success" style="width:120px;">
-										'.$bed.'
-										<h4>'.$f2['roomCODE'].' </h4>'.$f2['roomtypeCode'].'
-									</button>
-									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'"  data-priceday="'.$f2['price_day'].'" data-pricemonth="'.$f2['price_month'].'"  data-priceshort="'.$f2['price_short'].'"  value="'.$f2['roomCODE'].'" checked disabled readonly />
-								</span>
-							</div> '; 
+				$html .= '
+				<div class="col-sm-1 " style="margin:10px;">
+					<span class="button-checkbox ">
+						<button type="button" class="btn btn_room" data-color="success" style="width:120px;">
+							'.$bed.'
+							<h4>'.$f2['roomCODE'].' </h4>'.$f2['roomtypeCode'].'
+						</button>
+						<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'"  data-priceday="'.$f2['price_day'].'" data-pricemonth="'.$f2['price_month'].'"  data-priceshort="'.$f2['price_short'].'"  value="'.$f2['roomCODE'].'" checked disabled readonly />
+					</span>
+				</div> ';
 			}else if($f2['roomtypeCode']=='STAIRCASE'){
 				$html .=' <div class="col-sm-1 " style="margin:10px;"> </div> ';
 			}
-		
-		
-	  	} 
-	  	echo $html;
-	  	?>  
+
+
+		}
+		echo $html;
+		?>
 	</div>
 </div>
 
@@ -133,82 +133,82 @@
 </div>
 <div class="col-lg-12" >
 	<div class=" col-sm-12 text-center"  >
-		<?php 
+		<?php
 		$html ='';
-		foreach ($getfloor3 as $f3) {  
+		foreach ($getfloor3 as $f3) {
 			if($f3['bed']=="SINGLE"){
 				$bed = '		<i class="fa fa-bed fa-2x" aria-hidden="true"></i>';
 			}else{
 				$bed = '		<i class="fa fa-bed fa-2x" aria-hidden="true">&nbsp;</i>
-								<i class="fa fa-bed fa-2x" aria-hidden="true"></i>';
+				<i class="fa fa-bed fa-2x" aria-hidden="true"></i>';
 			}
 
 			if($f3['transaction']=='EMPTY' && $f3['roomtypeCode']!='STAIRCASE'){
-					$html .= ' 
-							<div class="col-sm-1 " style="margin:10px;">
-								<span class="button-checkbox ">
-									<button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
-										'.$bed.'
-										<h4>'.$f3['roomCODE'].'</h4>'.$f3['roomtypeCode'].'
-									</button>
-									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'"  data-priceday="'.$f3['price_day'].'" data-pricemonth="'.$f3['price_month'].'"  data-priceshort="'.$f3['price_short'].'"  value="'.$f3['roomCODE'].'" />
-								</span>
-							</div> ';
+				$html .= '
+				<div class="col-sm-1 " style="margin:10px;">
+					<span class="button-checkbox ">
+						<button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
+							'.$bed.'
+							<h4>'.$f3['roomCODE'].'</h4>'.$f3['roomtypeCode'].'
+						</button>
+						<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'"  data-priceday="'.$f3['price_day'].'" data-pricemonth="'.$f3['price_month'].'"  data-priceshort="'.$f3['price_short'].'"  value="'.$f3['roomCODE'].'" />
+					</span>
+				</div> ';
 			}else if($f3['transaction']=='BOOKED' && $f3['roomtypeCode']!='STAIRCASE'){
 				$html .= '
-						<div class="col-sm-1 " style="margin:10px;">
-							<span class="button-checkbox ">
-								<button type="button" class="btn btn_room" data-color="warning"   style="width:120px;" disabled>
-								'.$bed.'
-								<h4>'.$f3['roomCODE'].'</h4><i>in:'.$f3['checkinDate'].'</i>
-								</button>
-								<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'"  data-priceday="'.$f3['price_day'].'" data-pricemonth="'.$f3['price_month'].'"  data-priceshort="'.$f3['price_short'].'" value="'.$f3['roomCODE'].'" checked disabled readonly/>
-							</span>
-						</div>';
+				<div class="col-sm-1 " style="margin:10px;">
+					<span class="button-checkbox ">
+						<button type="button" class="btn btn_room" data-color="warning"   style="width:120px;" disabled>
+							'.$bed.'
+							<h4>'.$f3['roomCODE'].'</h4><i>in:'.$f3['checkinDate'].'</i>
+						</button>
+						<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'"  data-priceday="'.$f3['price_day'].'" data-pricemonth="'.$f3['price_month'].'"  data-priceshort="'.$f3['price_short'].'" value="'.$f3['roomCODE'].'" checked disabled readonly/>
+					</span>
+				</div>';
 
 			}else if($f3['transaction']=='CHECKIN' && $f3['roomtypeCode']!='STAIRCASE'){
 				$html .= '
-						<div class="col-sm-1 " style="margin:10px;">
-							<span class="button-checkbox ">
-								<button type="button" class="btn btn_room" data-color="danger"   style="width:120px;" disabled>
-								'.$bed.'
-								<h4>'.$f3['roomCODE'].'</h4><i >out:'.$f3['checkoutDate'].'</i>
-								</button>
-								<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'"  data-priceday="'.$f3['price_day'].'" data-pricemonth="'.$f3['price_month'].'"  data-priceshort="'.$f3['price_short'].'" value="'.$f3['roomCODE'].'" checked disabled readonly/>
-							</span>
-						</div>';
+				<div class="col-sm-1 " style="margin:10px;">
+					<span class="button-checkbox ">
+						<button type="button" class="btn btn_room" data-color="danger"   style="width:120px;" disabled>
+							'.$bed.'
+							<h4>'.$f3['roomCODE'].'</h4><i >out:'.$f3['checkoutDate'].'</i>
+						</button>
+						<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'"  data-priceday="'.$f3['price_day'].'" data-pricemonth="'.$f3['price_month'].'"  data-priceshort="'.$f3['price_short'].'" value="'.$f3['roomCODE'].'" checked disabled readonly/>
+					</span>
+				</div>';
 
 			}else if($f3['transaction']=='CHECKOUT' && $f3['roomtypeCode']!='STAIRCASE'){
-					$html .= ' 
-							<div class="col-sm-1 " style="margin:10px;">
-								<span class="button-checkbox ">
-									<button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
-										'.$bed.'
-										<h4>'.$f3['roomCODE'].' </h4>'.$f3['roomtypeCode'].'
-									</button>
-									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'"  data-priceday="'.$f3['price_day'].'"  data-pricemonth="'.$f3['price_month'].'"  data-priceshort="'.$f3['price_short'].'" value="'.$f3['roomCODE'].'" />
-								</span>
-							</div> ';
+				$html .= '
+				<div class="col-sm-1 " style="margin:10px;">
+					<span class="button-checkbox ">
+						<button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
+							'.$bed.'
+							<h4>'.$f3['roomCODE'].' </h4>'.$f3['roomtypeCode'].'
+						</button>
+						<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'"  data-priceday="'.$f3['price_day'].'"  data-pricemonth="'.$f3['price_month'].'"  data-priceshort="'.$f3['price_short'].'" value="'.$f3['roomCODE'].'" />
+					</span>
+				</div> ';
 
 			}else if($f3['transaction']=='CLEANING' && $f3['roomtypeCode']!='STAIRCASE'){
-					$html .= ' 
-							<div class="col-sm-1 " style="margin:10px;">
-								<span class="button-checkbox ">
-									<button type="button" class="btn btn_room" data-color="success" style="width:120px;">
-										'.$bed.'
-										<h4>'.$f3['roomCODE'].' </h4>'.$f3['roomtypeCode'].'
-									</button>
-									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'" data-priceday="'.$f3['price_day'].'"  data-pricemonth="'.$f3['price_month'].'"  data-priceshort="'.$f3['price_short'].'" value="'.$f3['roomCODE'].'" checked disabled readonly />
-								</span>
-							</div> '; 
+				$html .= '
+				<div class="col-sm-1 " style="margin:10px;">
+					<span class="button-checkbox ">
+						<button type="button" class="btn btn_room" data-color="success" style="width:120px;">
+							'.$bed.'
+							<h4>'.$f3['roomCODE'].' </h4>'.$f3['roomtypeCode'].'
+						</button>
+						<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'" data-priceday="'.$f3['price_day'].'"  data-pricemonth="'.$f3['price_month'].'"  data-priceshort="'.$f3['price_short'].'" value="'.$f3['roomCODE'].'" checked disabled readonly />
+					</span>
+				</div> ';
 			}else if($f3['roomtypeCode']=='STAIRCASE'){
 				$html .=' <div class="col-sm-1 " style="margin:10px;"> </div> ';
 			}
-		
-		
-	  	} 
-	  	echo $html;
-	  	?>  
+
+
+		}
+		echo $html;
+		?>
 
 	</div>
 </div>
@@ -218,85 +218,85 @@
 </div>
 <div class="col-lg-12" >
 	<div class=" col-sm-12 text-center"  >
-		<?php 
+		<?php
 		$html ='';
-		foreach ($getfloor4 as $f4) {  
+		foreach ($getfloor4 as $f4) {
 			if($f4['bed']=="SINGLE"){
 				$bed = '		<i class="fa fa-bed fa-2x" aria-hidden="true"></i>';
 			}else{
 				$bed = '		<i class="fa fa-bed fa-2x" aria-hidden="true">&nbsp;</i>
-								<i class="fa fa-bed fa-2x" aria-hidden="true"></i>';
+				<i class="fa fa-bed fa-2x" aria-hidden="true"></i>';
 			}
 
 			if($f4['transaction']=='EMPTY' && $f4['roomtypeCode']!='STAIRCASE'){
-					$html .= ' 
-							<div class="col-sm-1 " style="margin:10px;">
-								<span class="button-checkbox ">
-									<button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
-										'.$bed.'
-										<h4>'.$f4['roomCODE'].'</h4>'.$f4['roomtypeCode'].'
-									</button>
-									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" data-priceday="'.$f4['price_day'].'" data-pricemonth="'.$f4['price_month'].'"  data-priceshort="'.$f4['price_short'].'" value="'.$f4['roomCODE'].'" />
-								</span>
-							</div> ';
+				$html .= '
+				<div class="col-sm-1 " style="margin:10px;">
+					<span class="button-checkbox ">
+						<button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
+							'.$bed.'
+							<h4>'.$f4['roomCODE'].'</h4>'.$f4['roomtypeCode'].'
+						</button>
+						<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" data-priceday="'.$f4['price_day'].'" data-pricemonth="'.$f4['price_month'].'"  data-priceshort="'.$f4['price_short'].'" value="'.$f4['roomCODE'].'" />
+					</span>
+				</div> ';
 			}else if($f4['transaction']=='BOOKED' && $f4['roomtypeCode']!='STAIRCASE'){
 				$html .= '
-						<div class="col-sm-1 " style="margin:10px;">
-							<span class="button-checkbox ">
-								<button type="button" class="btn btn_room" data-color="warning"   style="width:120px;" disabled>
-								'.$bed.'
-								<h4>'.$f4['roomCODE'].'</h4><i >in:'.$f4['checkinDate'].'</i>
-								</button>
-								<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" data-priceday="'.$f4['price_day'].'"  data-pricemonth="'.$f4['price_month'].'"  data-priceshort="'.$f4['price_short'].'" value="'.$f4['roomCODE'].'" checked disabled readonly/>
-							</span>
-						</div>';
+				<div class="col-sm-1 " style="margin:10px;">
+					<span class="button-checkbox ">
+						<button type="button" class="btn btn_room" data-color="warning"   style="width:120px;" disabled>
+							'.$bed.'
+							<h4>'.$f4['roomCODE'].'</h4><i >in:'.$f4['checkinDate'].'</i>
+						</button>
+						<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" data-priceday="'.$f4['price_day'].'"  data-pricemonth="'.$f4['price_month'].'"  data-priceshort="'.$f4['price_short'].'" value="'.$f4['roomCODE'].'" checked disabled readonly/>
+					</span>
+				</div>';
 
 			}else if($f4['transaction']=='CHECKIN' && $f4['roomtypeCode']!='STAIRCASE'){
 				$html .= '
-						<div class="col-sm-1 " style="margin:10px;">
-							<span class="button-checkbox ">
-								<button type="button" class="btn btn_room" data-color="danger"   style="width:120px;" disabled>
-								'.$bed.'
-								<h4>'.$f4['roomCODE'].'</h4><i >out:'.$f4['checkoutDate'].'</i>
-								</button>
-								<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" data-priceday="'.$f4['price_day'].'"  data-pricemonth="'.$f4['price_month'].'"  data-priceshort="'.$f4['price_short'].'" value="'.$f4['roomCODE'].'" checked disabled readonly/>
-							</span>
-						</div>';
+				<div class="col-sm-1 " style="margin:10px;">
+					<span class="button-checkbox ">
+						<button type="button" class="btn btn_room" data-color="danger"   style="width:120px;" disabled>
+							'.$bed.'
+							<h4>'.$f4['roomCODE'].'</h4><i >out:'.$f4['checkoutDate'].'</i>
+						</button>
+						<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" data-priceday="'.$f4['price_day'].'"  data-pricemonth="'.$f4['price_month'].'"  data-priceshort="'.$f4['price_short'].'" value="'.$f4['roomCODE'].'" checked disabled readonly/>
+					</span>
+				</div>';
 
 			}else if($f4['transaction']=='CHECKOUT' && $f4['roomtypeCode']!='STAIRCASE'){
-					$html .= ' 
-							<div class="col-sm-1 " style="margin:10px;">
-								<span class="button-checkbox ">
-									<button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
-										'.$bed.'
-										<h4>'.$f4['roomCODE'].' </h4>'.$f4['roomtypeCode'].'
-									</button>
-									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" data-priceday="'.$f4['price_day'].'"  data-pricemonth="'.$f4['price_month'].'"  data-priceshort="'.$f4['price_short'].'" value="'.$f4['roomCODE'].'" />
-								</span>
-							</div> ';
+				$html .= '
+				<div class="col-sm-1 " style="margin:10px;">
+					<span class="button-checkbox ">
+						<button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
+							'.$bed.'
+							<h4>'.$f4['roomCODE'].' </h4>'.$f4['roomtypeCode'].'
+						</button>
+						<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" data-priceday="'.$f4['price_day'].'"  data-pricemonth="'.$f4['price_month'].'"  data-priceshort="'.$f4['price_short'].'" value="'.$f4['roomCODE'].'" />
+					</span>
+				</div> ';
 
 			}else if($f4['transaction']=='CLEANING' && $f4['roomtypeCode']!='STAIRCASE'){
-					$html .= ' 
-							<div class="col-sm-1 " style="margin:10px;">
-								<span class="button-checkbox ">
-									<button type="button" class="btn btn_room" data-color="success" style="width:120px;">
-										'.$bed.'
-										<h4>'.$f4['roomCODE'].' </h4>'.$f4['roomtypeCode'].'
-									</button>
-									<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" data-priceday="'.$f4['price_day'].'"  data-pricemonth="'.$f4['price_month'].'"  data-priceshort="'.$f4['price_short'].'" value="'.$f4['roomCODE'].'" checked disabled readonly />
-								</span>
-							</div> '; 
+				$html .= '
+				<div class="col-sm-1 " style="margin:10px;">
+					<span class="button-checkbox ">
+						<button type="button" class="btn btn_room" data-color="success" style="width:120px;">
+							'.$bed.'
+							<h4>'.$f4['roomCODE'].' </h4>'.$f4['roomtypeCode'].'
+						</button>
+						<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" data-priceday="'.$f4['price_day'].'"  data-pricemonth="'.$f4['price_month'].'"  data-priceshort="'.$f4['price_short'].'" value="'.$f4['roomCODE'].'" checked disabled readonly />
+					</span>
+				</div> ';
 			}else if($f4['roomtypeCode']=='STAIRCASE'){
 				$html .=' <div class="col-sm-1 " style="margin:10px;"> </div> ';
 			}
-		
-		
-	  	} 
-	  	echo $html;
-	  	?>  
+
+
+		}
+		echo $html;
+		?>
 
 	</div>
-</div> 
+</div>
 
 <div class="col-lg-12">
 	<hr style="margin-top: 40px;margin-left: -15px; margin-right: -15px;">
@@ -315,11 +315,11 @@
 		mask:true,
 		format:'d/m/Y H:i',
 		lang:'th',
-	}); 
+	});
 
 	function checkIn() {
 		var selectRoom=[];
-		$('.check_room').on('change',function(){ 
+		$('.check_room').on('change',function(){
 			if( this.checked){
 				selectRoom.push($(this).val());
 			}else {
@@ -330,13 +330,14 @@
 					});
 				});
 			}
+			console.log(selectRoom);
 		});
 		$('.btn_checkin').click(function(){
 			var dtcheckin = $('#dtcheckin').val();
-			var dtcheckout = $('#dtcheckout').val();  
+			var dtcheckout = $('#dtcheckout').val();
 			var din =  dtcheckin[0]+dtcheckin[1]+'_'+dtcheckin[3]+dtcheckin[4]+'_'+dtcheckin[6]+dtcheckin[7]+dtcheckin[8]+dtcheckin[9]+'T'+dtcheckin[11]+dtcheckin[12]+dtcheckin[13]+dtcheckin[14]+dtcheckin[15];
 			var dout = dtcheckout[0]+dtcheckout[1]+'_'+dtcheckout[3]+dtcheckout[4]+'_'+dtcheckout[6]+dtcheckout[7]+dtcheckout[8]+dtcheckout[9]+'T'+dtcheckout[11]+dtcheckout[12]+dtcheckout[13]+dtcheckout[14]+dtcheckout[15];
-			
+			var price
 			if(selectRoom.length > 0){
 				var room = selectRoom.join('_')
 				load_page('<?php echo base_url().$this->ctl."/checkinformadd/"; ?>'+room+'/'+din+'/'+dout+'/','.:: Data Checkin::.','<?php echo base_url()."checkin/saveAdd/"; ?>',''+dtcheckin+'',''+dtcheckout+'');
@@ -363,10 +364,10 @@
 
 		$('.btn_booking').click(function(){
 			var dtcheckin = $('#dtcheckin').val();
-			var dtcheckout = $('#dtcheckout').val();  
+			var dtcheckout = $('#dtcheckout').val();
 			var din =  dtcheckin[0]+dtcheckin[1]+'_'+dtcheckin[3]+dtcheckin[4]+'_'+dtcheckin[6]+dtcheckin[7]+dtcheckin[8]+dtcheckin[9]+'T'+dtcheckin[11]+dtcheckin[12]+dtcheckin[13]+dtcheckin[14]+dtcheckin[15];
 			var dout = dtcheckout[0]+dtcheckout[1]+'_'+dtcheckout[3]+dtcheckout[4]+'_'+dtcheckout[6]+dtcheckout[7]+dtcheckout[8]+dtcheckout[9]+'T'+dtcheckout[11]+dtcheckout[12]+dtcheckout[13]+dtcheckout[14]+dtcheckout[15];
-			
+
 			if(selectRoom.length > 0){
 				var room = selectRoom.join('_')
 				load_page('<?php echo base_url().$this->ctl."/bookingformadd/"; ?>'+room+'/'+din+'/'+dout+'/','.:: Data Booking ::.','<?php echo base_url()."booked/saveAdd/"; ?>',''+dtcheckin+'',''+dtcheckout+'');
@@ -413,7 +414,7 @@
 		div+='</div><!-- /.modal -->';
 		div+='</form>';
 		$('.div_modal').html(div);
-		
+
 	}
 
 

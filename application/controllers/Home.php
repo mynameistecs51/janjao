@@ -11,6 +11,7 @@ class Home extends CI_Controller {
 		$this->load->model('Mdl_getprovince');
 		$this->load->model('Mdl_booked');
 		$this->load->model('Mdl_checkin');
+		$this->load->model('Mdl_roomType');
 		$this->userID = $this->session->userdata('userID');
 		$this->UserName = $this->session->userdata('UserName');
 		$this->UserGroupID = $this->session->userdata('usergroupID');
@@ -35,9 +36,34 @@ class Home extends CI_Controller {
 		$this->packfunction->packView($this->data,'Dashboard');
 	}
 
-	public function checkinformadd($selectRoom,$din,$dout)
+	public function checkinformadd($selectRoom,$din='',$dout='')
 	{
-		$this->data['selectRoom'] = $selectRoom;
+		$idRoom = array();
+		$count = explode('_',$selectRoom);
+		for($i = 0; $i < count($count);$i++){
+			foreach ($this->Mdl_roomType->getRoomtypeID(MD5($count[$i])) as $keyRoom => $rowRoom) {
+				if(!isset($idRoom[$rowRoom['roomCODE']])){
+					$idRoom[$rowRoom['roomCODE']] = array();
+				}
+				array_push($idRoom[$rowRoom['roomCODE']] ,array(
+					'roomcode'=>$rowRoom['roomCODE'],
+					'roomtypeCode' => $rowRoom['roomtypeCode'],
+					'price_month' => $rowRoom['price_month'],
+					'price_day' => $rowRoom['price_day'],
+					'price_short' => $rowRoom['price_short'],
+					'price_hour' => $rowRoom['price_hour'],
+					'comment' => $rowRoom['comment'],
+					'status' => $rowRoom['status'],
+					'createDT' => $rowRoom['createDT'],
+					'createBY' => $rowRoom['createBY'],
+					'updateDT' => $rowRoom['updateDT'],
+					'updateBY' => $rowRoom['updateBY'],
+					)
+				);
+			}
+		}
+
+		$this->data['selectRoom'] =  $idRoom;
 		$this->data['getMonth'] = $this->packfunction->getMonth();
 		$this->data['getYear'] = $this->packfunction->getYear();
 		$din  = str_replace("_","/",$din);
