@@ -3,23 +3,23 @@
   <input type="hidden" class="form-control" name="transaction" value="CHECKIN">
   <div class="row form_input" style="text-align:left; margin-bottom:20px">
   	<div class="form-horizontal">
-    	<div class="form-group">
-    			<label for="selectRoom" class="col-lg-2 control-label">ห้องที่เลือก</label>
-    			<div class="col-lg-8">
-    				<div class="row">
-      				<div class="col-lg-12">
-      					<?php
-      					foreach ($selectRoom as $key => $room) :?> 
-      					<input type="hidden" name="selectRoom" value="<?php echo $room[0]['roomcode']; ?>">  <!-- //input hidden selectRoom -->
-      					<button type="button" class="btn roomSelect btn-danger btn-xs" data-color="danger" data-room="<?php echo $room[0]['roomcode'] ?>" data-priceshort="<?php echo $room[0]['price_short']; ?>" data-priceday="<?php echo $room[0]['price_day']; ?>" data-pricemonth="<?php echo $room[0]['price_month']; ?>"  disabled >
-      						<i class="fa fa-bed" aria-hidden="true"></i>
-      						<h4><?php echo 'Room '.$room[0]['roomcode']; ?></h4>
-      					</button>
-      				  <?php endforeach; ?>
-      			  </div>
-    		    </div>
-    	    </div>
-      </div>
+  		<div class="form-group">
+  			<label for="selectRoom" class="col-lg-2 control-label">ห้องที่เลือก</label>
+  			<div class="col-lg-8">
+  				<div class="row">
+  					<div class="col-lg-12">
+  						<?php
+  						foreach ($selectRoom as $key => $room) :?>
+  						<input type="hidden" name="selectRoom" value="<?php echo $room[0]['roomcode']; ?>">  <!-- //input hidden selectRoom -->
+  						<button type="button" class="btn roomSelect btn-danger btn-xs" data-color="danger" data-room="<?php echo $room[0]['roomcode'] ?>" data-priceshort="<?php echo $room[0]['price_short']; ?>" data-priceday="<?php echo $room[0]['price_day']; ?>" data-pricemonth="<?php echo $room[0]['price_month']; ?>"  disabled >
+  							<i class="fa fa-bed" aria-hidden="true"></i>
+  							<h4><?php echo 'Room '.$room[0]['roomcode']; ?></h4>
+  						</button>
+  					<?php endforeach; ?>
+  				</div>
+  			</div>
+  		</div>
+  	</div>
   	<div class="form-group">
   		<label for="idcardno" class="col-sm-2 control-label">เลขประจำประชาชน <b style="color: #FF0000">*</b></label>
   		<div class="col-sm-8">
@@ -156,7 +156,7 @@
   		</div>
   	</div>
   	<div class="form-group">
-  		<label for="bookedType" class="col-sm-2 control-label">เช่าแบบ <b style="color: #FF0000">*</b></label> 
+  		<label for="bookedType" class="col-sm-2 control-label">เช่าแบบ <b style="color: #FF0000">*</b></label>
   		<div class="col-sm-8">
   			<label><b class="btn btn-info btn-md"> <input type="radio" name="bookedType" id="SHORT" value="SHORT" class="control-label bookedType">  ชั่วคราว</b></label>
   			&nbsp;&nbsp;&nbsp;
@@ -212,11 +212,11 @@
   		<div class="col-lg-8">
   			<div class="col-lg-6">ภาษีมูลค่าเพิ่ม</div><div class="col-lg-5"><input type="text" name="vat" id="vat" class="form-control" value="7" style="text-align: right;height: 28px;"></div><div class="col-lg-1">%</div>
   			<div class="col-lg-12" style="height: 5px;"></div>
-  			<div class="col-lg-6">ยอดสุทธิ</div><div class="col-lg-5"><input type="text" name="lastamount" id="lastamount"  class="form-control" value="0.00" style="text-align: right;height: 28px;" readonly></div><div class="col-lg-1">บาท</div>
-  			<div class="col-lg-12" style="height: 5px;"></div>
   			<div class="col-lg-6">ส่วนลด</div><div class="col-lg-5"><input type="text" name="discount" id="discount" class="form-control" value="0.00" style="text-align: right;height: 28px;"></div><div class="col-lg-1">บาท</div>
   			<div class="col-lg-12" style="height: 5px;"></div>
   			<div class="col-lg-6">เงินมัดจำ</div><div class="col-lg-5"><input type="text" name="deposit" id="deposit"  class="form-control" value="0.00" style="text-align: right;height: 28px;" readonly></div><div class="col-lg-1">บาท</div>
+  			<div class="col-lg-12" style="height: 5px;"></div>
+  			<div class="col-lg-6">ยอดสุทธิ</div><div class="col-lg-5"><input type="text" name="lastamount" id="lastamount"  class="form-control" value="0.00" style="text-align: right;height: 28px;" readonly></div><div class="col-lg-1">บาท</div>
   			<div class="col-lg-12" style="height: 5px;"></div>
   			<div class="col-lg-6">รับเงิน</div><div class="col-lg-5"><input type="text" name="pay" id="pay" class="form-control" value="0.00" style="text-align: right;height: 28px;"></div><div class="col-lg-1">บาท</div>
   			<div class="col-lg-12" style="height: 5px;"></div>
@@ -340,31 +340,21 @@ $(function() {
 });
 
 function calculateDay() {
-	var startDate = $('#checkinDate').val();
-	var dateStart= startDate.split(' ');
-	var d1 = new Date(dateStart[0].split('/')[2]+'-'+dateStart[0].split('/')[1]+'-'+dateStart[0].split('/')[0]);
+  // คำนวนวันที่ count day
+  var startDate = $('#checkinDate').val();
+  var dateStart= startDate.split(' ');
+  var d1 = new Date(dateStart[0].split('/')[2]+'-'+dateStart[0].split('/')[1]+'-'+dateStart[0].split('/')[0]);
 
-	var endDate = $('#checkOutDate').val();
-	var dateEnd= endDate.split(' ');
-	var d2 = new Date(dateEnd[0].split('/')[2]+'-'+dateEnd[0].split('/')[1]+'-'+dateEnd[0].split('/')[0]);
+  var endDate = $('#checkOutDate').val();
+  var dateEnd= endDate.split(' ');
+  var d2 = new Date(dateEnd[0].split('/')[2]+'-'+dateEnd[0].split('/')[1]+'-'+dateEnd[0].split('/')[0]);
 
-	diff = 0;
-	if (d1 && d2) {
+  diff = 0;
+  if (d1 && d2) {
         diff = diff + Math.floor(( (d2.getTime()) - (d1.getTime()) ) / 86400000); // ms per day
       }
       // $('.calculated').val(diff);
       sumtotal();
-    }
-
-    function chnrowval(n){
-    	$('#price'+n+', #amount'+n).on("change",function() {
-    		var price = $('#price'+n).val()!="" ? $('#price'+n).val():0;
-    		var amount = $('#amount'+n).val()!="" ? $('#amount'+n).val():0;
-    		// var sum = parseInt(price)*parseInt(amount);
-    		var sum = parseInt(300);
-    		$('#total').val(300);
-    		sumtotal();
-    	});
     }
 
     $('#vat, #discount, #cashPledge, #pay').on("keyup",function() {
@@ -372,40 +362,42 @@ function calculateDay() {
     });
 
     $('#cashPledge').on("keyup",function() {
-        var val = $(this).val();
-        $('#cashPledge').val(val);
-        sumtotal();
+    	var val = $(this).val();
+    	$('#cashPledge').val(val);
+    	$("#deposit").val(val);  //ให้ไปแสดงใน ช่องคำนวน(แสดงเฉย ๆ เพราะ นำcashPledge ข้างบนไปคิด)
+    	sumtotal();
     });
 
     $('.bookedType').on("change",function() {
-        sumtotal();
+    	sumtotal();
     });
 
-    
+
 
     function sumtotal(){
-      var totalsum    = 0;
-      var priceshort  = 0;
-      var priceday    = 0;
-      var pricemonth  = 0;
-      var totalprice  = 0;
-      var totalamount = 0;
-      var totalsum    = 0;
+    	var totalsum    = 0;
+    	var priceshort  = 0;
+    	var priceday    = 0;
+    	var pricemonth  = 0;
+    	var totalprice  = 0;
+    	var totalamount = 0;
+    	var totalsum    = 0;
 
-      $('.roomSelect').each(function(i,n){
-        priceshort += parseInt($(n).data('priceshort'));
-        priceday   += parseInt($(n).data('priceday'));
-        pricemonth += parseInt($(n).data('pricemonth'));
-      });
+    	$('.roomSelect').each(function(i,n){
+    		priceshort += parseInt($(n).data('priceshort'));
+    		priceday   += parseInt($(n).data('priceday'));
+    		pricemonth += parseInt($(n).data('pricemonth'));
+    	});
 
-      if($('.bookedType:checked').val()=='SHORT'){
-        totalsum = priceshort;
-      }else if($('.bookedType:checked').val()=='DAY'){
-        totalsum = priceday;
-      }else if($('.bookedType:checked').val()=='MONTH'){
-        totalsum = pricemonth;
-      }
- 
+	// เช่าแบบ * จำนวนวัน
+	if($('.bookedType:checked').val()=='SHORT'){
+		totalsum = priceshort * diff;
+	}else if($('.bookedType:checked').val()=='DAY'){
+		totalsum = priceday * diff;
+	}else if($('.bookedType:checked').val()=='MONTH'){
+		totalsum = pricemonth * diff;
+	}
+
       //  alert('priceshort='+priceshort+' priceday='+priceday+' pricemonth='+pricemonth);
 
       var vat = $('#vat').val()!="" ? parseInt($('#vat').val()):0;
@@ -415,18 +407,18 @@ function calculateDay() {
       var last=0;
 
       if(vat > 0){
-        var to = totalsum > 0 ? totalsum:1;
-        last = cashPledge+totalsum+((to/100)*vat); // เงินมัดจำ + ยอดรวมค่าห้อง  + Vat 
+      	var to = totalsum > 0 ? totalsum:1;
+        last = cashPledge+totalsum+((to/100)*vat); // เงินมัดจำ + ยอดรวมค่าห้อง  + Vat
         $('#lastamount').val(parseInt(last).toFixed(2));
 
       }else{
-        $('#lastamount').val(totalsum.toFixed(2));
+      	$('#lastamount').val(totalsum.toFixed(2));
       }
 
       var dis = (parseInt(discount)+parseInt(pay))-last;
 
       $('#change').val(dis.toFixed(2));
-  
+
     }
 
   </script>
