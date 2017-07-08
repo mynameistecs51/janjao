@@ -377,6 +377,10 @@ function calculateDay() {
         sumtotal();
     });
 
+    $('.bookedType').on("change",function() {
+        sumtotal();
+    });
+
     
 
     function sumtotal(){
