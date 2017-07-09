@@ -308,12 +308,13 @@
 
 
   	function confirmvalid(){
-  		if($('#servicelist tbody tr').length==0){
-  			alert('กรุณาเลือก เพิ่มรายการ !');
-  			return false;
-  		}else{
-  			return true;
-  		}
+  		// if($('#servicelist tbody tr').length==0){
+  		// 	alert('กรุณาเลือก เพิ่มรายการ !');
+  		// 	return false;
+  		// }else{
+  		// 	return true;
+  		// }
+      return true;
 
   	}
 
@@ -352,7 +353,7 @@
 	}
 
 	function chnrowval(n){
-		$('#price'+n+', #amount'+n).on("change",function() {
+		$('#price'+n+', #amount'+n).on("keyup",function() {
 			var price = $('#price'+n).val()!="" ? $('#price'+n).val():0;
 			var amount = $('#amount'+n).val()!="" ? $('#amount'+n).val():0;
 			var sum = parseInt(price)*parseInt(amount);
@@ -381,10 +382,10 @@
 		$('#totalprice').html(totalprice.toFixed(2));
 		$('#totalamount').html(totalamount);
 		$('#totalsum').html(totalsum.toFixed(2));
-		var vat = $('#vat').val()!="" ? $('#vat').val():0;
-		var pay = $('#pay').val()!="" ? $('#pay').val():0;
-		var discount = $('#discount').val()!="" ? $('#discount').val():0;
-		var deposit = $('#deposit').val()!="" ? $('#deposit').val():0;
+		var vat = $('#vat').val()!="" ? parseInt($('#vat').val()):0;
+		var pay = $('#pay').val()!="" ? parseInt($('#pay').val()):0;
+		var discount = $('#discount').val()!="" ? parseInt($('#discount').val()):0;
+		var deposit = $('#deposit').val()!="" ? parseInt($('#deposit').val()):0;
 
 		var last =0
 		if(vat > 0){
