@@ -68,6 +68,7 @@ class User extends CI_Controller {
 				"userTitle"	=>$_POST['userTitle'],
 				"userFname"	=>$_POST['userFname'],
 				"userLname"	=>$_POST['userLname'],
+				"position"	=>$_POST['position'],
 				"address"		=>$_POST['address'],
 				"mobile"		=>$_POST['mobile'],
 				"usergroupID"	=>$_POST['usergroupID'], 
@@ -90,33 +91,45 @@ class User extends CI_Controller {
 		if($_POST)
 		{ 
 			$data = array( 
-				"username"	=>$_POST['username'], 
-				"useremail"	=>$_POST['useremail'],
-				"userIdcard"=>$_POST['userIdcard'],
-				"userTitle"	=>$_POST['userTitle'],
-				"userFname"	=>$_POST['userFname'],
-				"userMname"	=>$_POST['userMname'],
-				"userLname"	=>$_POST['userLname'],
-				"countryID"	=>$_POST['countryID'],
-				"companyName"	=>$_POST['companyName'],
+				"username"		=>$_POST['username'],
+				"password"		=>MD5(TRIM($_POST['password'])), 
+				"useremail"		=>$_POST['useremail'],
+				"userIdcard"	=>$_POST['userIdcard'],
+				"userTitle"		=>$_POST['userTitle'],
+				"userFname"		=>$_POST['userFname'],
+				"userLname"		=>$_POST['userLname'],
 				"position"		=>$_POST['position'],
 				"address"		=>$_POST['address'],
-				"city"			=>$_POST['city'],
-				"state"			=>$_POST['state'],
-				"postcode"		=>$_POST['postcode'],
-				"telephone"		=>$_POST['telephone'],
 				"mobile"		=>$_POST['mobile'],
-				"usergroupID"	=>$_POST['usergroupID'],
-				"tradeID"		=>$_POST['tradeID'],
-				"status"		=>'ON',
-				"createDT"		=>$this->packfunction->dtYMDnow(), 
-				"createBY"		=>$this->UserName, 
+				"usergroupID"	=>$_POST['usergroupID'], 
+				"status"		=>$_POST['status'],
 				"updateDT"		=>$this->packfunction->dtYMDnow(), 
 				"updateBY"		=>$this->UserName
 			);
 			$userID = $_POST['userID'];
 			$this->Mdl_user->updateData($data,'tm_user',$userID);
+			
 			redirect('user/last/'.md5($userID));
+			
+
+		}else{
+			redirect('authen/');
+		} 
+	}
+
+	public function saveCancle()
+	{
+		if($_POST)
+		{ 
+			$data = array( 
+				"status"		=>"DISABLE",
+				"updateDT"		=>$this->packfunction->dtYMDnow(), 
+				"updateBY"		=>$this->UserName
+			);
+			$userID = $_POST['key'];
+			$this->Mdl_user->updateData($data,'tm_user',$userID);
+			echo json_encode(['status'=>'success']);
+			
 		}else{
 			redirect('authen/');
 		} 

@@ -52,14 +52,13 @@ class Mdl_user extends CI_Model
 				a.useremail, 
 				a.userFname, 
 				a.userLname, 
-				CONCAT(a.userFname,' ',a.userLname) AS fullname,
-				c.countryName
+				CONCAT(a.userFname,' ',a.userLname) AS fullname
 				FROM  tm_user  a
 				INNER JOIN tm_usergroup g ON a.usergroupID = g.usergroupID
-				INNER JOIN ts_country c ON a.countryID=c.countryID
-				WHERE a.userID > 1 ";
+				WHERE a.userID > 1
+				AND a.status <> 'DISABLE' ";
 		if($keyword != ''){
-			$sql .= " AND CONCAT(g.usergroupName,a.username,a.useremail,a.userFname,' ',a.userLname,c.countryName) LIKE '%".$keyword."%' ";
+			$sql .= " AND CONCAT(g.usergroupName,a.username,a.useremail,a.userFname,' ',a.userLname) LIKE '%".$keyword."%' ";
 		}
 		$sql .= " ORDER BY a.userID  DESC  LIMIT 40";  
 		$query = $this->db->query($sql); 
@@ -76,11 +75,9 @@ class Mdl_user extends CI_Model
 				a.useremail, 
 				a.userFname, 
 				a.userLname, 
-				CONCAT(a.userFname,' ',a.userLname) AS fullname,
-				c.countryName
+				CONCAT(a.userFname,' ',a.userLname) AS fullname
 				FROM  tm_user  a
-				INNER JOIN tm_usergroup g ON a.usergroupID = g.usergroupID
-				INNER JOIN ts_country c ON a.countryID=c.countryID
+				LEFT JOIN tm_usergroup g ON a.usergroupID = g.usergroupID 
 				WHERE MD5(a.userID) = '".$key."' "; 
 		$query = $this->db->query($sql); 
 		return $query->result_array(); 
@@ -100,22 +97,15 @@ class Mdl_user extends CI_Model
 				a.userTitle,
 				a.userFname,
 				a.userMname,
-				a.userLname,
-				a.countryID,  
+				a.userLname, 
+				a.position,
 				a.address,
-				a.city,
-				a.state,
-				a.postcode,
-				a.mobile, 
-				a.imgProfile,
-				a.imgPassport,
+				a.mobile,  
 				a.usergroupID,
 				a.status,
-				g.usergroupName,
-				c.countryName
+				g.usergroupName 
 				FROM  tm_user  a
-				LEFT JOIN tm_usergroup g ON a.usergroupID = g.usergroupID
-				LEFT JOIN ts_country c ON a.countryID=c.countryID
+				LEFT JOIN tm_usergroup g ON a.usergroupID = g.usergroupID 
 				WHERE MD5(a.userID) = '".$id."' ";  
 		$query = $this->db->query($sql); 
 		$rs = $query->result_array();

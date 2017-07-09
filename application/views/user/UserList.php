@@ -25,29 +25,30 @@
                 <table id="fairlist" class="table table-striped table-bordered" cellspacing="0" width="100%" >
                     <thead>
                         <tr>
-                            <th>No.</th> 
+                            <th width="60">No.</th> 
                             <th width="150">UserName</th>
                             <th width="150">Email</th>
-                            <th>First Name - Last Name</th> 
-                            <th>Company Name</th>
-                            <th>Country Name</th>
+                            <th>First Name - Last Name</th>  
                             <th width="200">User Group</th> 
-                            <th width="80">#</th>
+                            <th width="120">#</th>
                         </tr>
                     </thead> 
                     <tbody>
                     <?php if(count($getlist)>0){  ?>
                     <?php $n=1; foreach ($getlist as $rs) { ?>
-                    		<tr>
+                    		<tr id="row<?php echo $rs['userID']; ?>">
 	                            <td><?php echo $n; ?></td>
                                 <td><?php echo $rs['username']; ?></td>
 	                            <td><?php echo $rs['useremail']; ?></td>
-	                            <td><?php echo $rs['fullname']; ?></td>
-                                <td><?php echo $rs['companyName']; ?></td>
-                                <td><?php echo $rs['countryName']; ?></td>
+	                            <td><?php echo $rs['fullname']; ?></td> 
                                 <td><?php echo $rs['usergroupName']; ?></td>
-	                            <td align="center">
-		                            <a href="<?php echo base_url(); ?>user/edit/<?php echo md5($rs['userID']); ?>" class="btn btn-danger btn-sm" style="width: 60px;">EDIT</a>  
+	                            <td align="center">  
+                                    <button class="btn btn-primary btn-xs btn_edit" id="<?php echo MD5($rs['userID']); ?>" title="edit" style='margin-left:5px;'>
+                                        <i class="fa fa-edit fa-2x"></i>
+                                    </button>
+                                    <button class="btn btn-danger btn-xs btn_cancel" id="<?php echo $rs['userID']; ?>" title="Cancle" style='margin-left:5px;'>
+                                        <i class="fa fa-trash-o fa-2x" title="Cancle"></i>
+                                    </button>
 	                            </td> 
 	                        </tr>  
                     <?php $n++; }  ?> 
@@ -69,16 +70,19 @@
 <!--  END Fair List -->
 <script type="text/javascript">
 	$(function() { 
-	    $('.btn_create').click(function(){
-                var id = $(this).attr('id');
+	    $('.btn_create').click(function(){ 
                 load_page('<?php echo base_url()."user/create/"; ?>','.:: Create User ::.','<?php echo base_url()."user/saveData/"; ?>');
         });
+        $('.btn_edit').click(function(){
+                var id = $(this).attr('id');
+                load_page('<?php echo base_url()."user/edit/"; ?>'+id,'.:: Create User ::.','<?php echo base_url()."user/saveUpdate/"; ?>');
+        });
         $('.btn_cancel').click(function(){
-            var cfm = confirm("ยืนยันยกเลิกการเช่าห้องพัก คุณไม่สามารถย้อนกลับมาใช้ข้อมูลได้ !");
+            var cfm = confirm("ยืนยันการลบรายการ !");
             if(cfm == true){
-                var id = $(this).attr('id');   
+                var id = $(this).attr('id');
                 $.ajax({
-                    url: '<?php echo base_url().$this->ctl."/saveCancle/";?>',
+                    url: '<?php echo base_url()."user/saveCancle/";?>',
                     data:{key:id},
                     type: 'POST',
                     dataType: 'json',
