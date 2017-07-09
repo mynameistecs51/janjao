@@ -153,93 +153,93 @@
   		<label for="checkOutDate" class="col-sm-2 control-label">วันที่ Checkout <b style="color: #FF0000">*</b></label>
   		<div class="col-sm-3">
   			<input type="text" class="form-control" id="checkOutDate" name="checkOutDate" value="<?php echo $dout; ?>" readonly >
-        <input type="hidden" class="form-control" id="checkOutDate_old" value="<?php echo $dout; ?>" readonly >
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="bookedType" class="col-sm-2 control-label">เช่าแบบ <b style="color: #FF0000">*</b></label>
-      <div class="col-sm-8">
-       <label><b class="btn btn-info btn-md"> <input type="radio" name="bookedType" id="SHORT" value="SHORT" class="control-label bookedType">  ชั่วคราว</b></label>
-       &nbsp;&nbsp;&nbsp;
-       <label><b class="btn btn-warning btn-md"> <input type="radio" name="bookedType" id="DAY" value="DAY" class="control-label bookedType" checked>  รายวัน</b></label>
-       &nbsp;&nbsp;&nbsp;
-       <label><b class="btn btn-primary btn-md"> <input type="radio" name="bookedType" id="MONTH" value="MONTH" class="control-label bookedType">  รายเดือน</b></label>
-     </div>
-   </div>
-   <div class="form-group">
-    <label for="deposit" class="col-sm-2 control-label">เงินมัดจำ <b style="color: #FF0000">*</b></label>
-    <div class="col-sm-8">
-     <div class="input-group">
-      <input type="text" class="form-control" id="cashPledge" name="cashPledge" placeholder="300" value="">
-      <span class="input-group-addon">บาท</span>
-    </div>
-  </div>
-</div>
-<div class="form-group">
-  <label for="is_breakfast" class="col-sm-2 control-label">อาหารเช้า</label>
-  <div class="col-sm-8">
-   <label><b class="btn btn-danger btn-md"> <input type="radio" name="is_breakfast" id="breakfast0" value="0" class="control-label" checked> ไม่รับอาหารเช้า</b></label>
-   &nbsp;&nbsp;&nbsp;
-   <label><b class="btn btn-success btn-md"> <input type="radio" name="is_breakfast" id="breakfast1" value="1" class="control-label"> รับอาหารเช้า</b></label>
- </div>
-</div>
-<div class="form-group">
-  <label for="deposit" class="col-sm-2 control-label">Comment</label>
-  <div class="col-sm-8">
-   <textarea name="comment" id="comment" class="form-control"></textarea>
- </div>
-</div>
-<div class="form-group">
-  <label for="btnsnap" class="col-sm-2 control-label"></label>
-  <div class="col-sm-10">
-   <video id="video" class="" width="260" height="195" autoplay></video>
-   <canvas id="canvas"  name="idcardPicture"  class="bg-primary " width="260" height="195" ></canvas>
-   <input type="hidden" name="images" id="images" value="">
+  			<input type="hidden" class="form-control" id="checkOutDate_old" value="<?php echo $dout; ?>" readonly >
+  		</div>
+  	</div>
+  	<div class="form-group">
+  		<label for="bookedType" class="col-sm-2 control-label">เช่าแบบ <b style="color: #FF0000">*</b></label>
+  		<div class="col-sm-8">
+  			<label><b class="btn btn-info btn-md"> <input type="radio" name="bookedType" id="SHORT" value="SHORT" class="control-label bookedType">  ชั่วคราว</b></label>
+  			&nbsp;&nbsp;&nbsp;
+  			<label><b class="btn btn-warning btn-md"> <input type="radio" name="bookedType" id="DAY" value="DAY" class="control-label bookedType" checked>  รายวัน</b></label>
+  			&nbsp;&nbsp;&nbsp;
+  			<label><b class="btn btn-primary btn-md"> <input type="radio" name="bookedType" id="MONTH" value="MONTH" class="control-label bookedType">  รายเดือน</b></label>
+  		</div>
+  	</div>
+  	<div class="form-group">
+  		<label for="deposit" class="col-sm-2 control-label">เงินมัดจำ <b style="color: #FF0000">*</b></label>
+  		<div class="col-sm-8">
+  			<div class="input-group">
+  				<input type="text" class="form-control" id="cashPledge" name="cashPledge" placeholder="300" value="">
+  				<span class="input-group-addon">บาท</span>
+  			</div>
+  		</div>
+  	</div>
+  	<div class="form-group">
+  		<label for="is_breakfast" class="col-sm-2 control-label">อาหารเช้า</label>
+  		<div class="col-sm-8">
+  			<label><b class="btn btn-danger btn-md"> <input type="radio" name="is_breakfast" id="breakfast0" value="0" class="control-label" checked> ไม่รับอาหารเช้า</b></label>
+  			&nbsp;&nbsp;&nbsp;
+  			<label><b class="btn btn-success btn-md"> <input type="radio" name="is_breakfast" id="breakfast1" value="1" class="control-label"> รับอาหารเช้า</b></label>
+  		</div>
+  	</div>
+  	<div class="form-group">
+  		<label for="deposit" class="col-sm-2 control-label">Comment</label>
+  		<div class="col-sm-8">
+  			<textarea name="comment" id="comment" class="form-control"></textarea>
+  		</div>
+  	</div>
+  	<div class="form-group">
+  		<label for="btnsnap" class="col-sm-2 control-label"></label>
+  		<div class="col-sm-10">
+  			<video id="video" class="" width="260" height="195" autoplay></video>
+  			<canvas id="canvas"  name="idcardPicture"  class="bg-primary " width="260" height="195" ></canvas>
+  			<input type="hidden" name="images" id="images" value="">
 
- </div>
-</div>
-<div class="form-group">
-  <label for="btnsnap" class="col-sm-2 control-label"></label>
-  <div class="col-sm-3" align="center">
-   <i class="fa fa-camera btn btn-primary "  id="snap"> ถ่ายภาพ <i class="glyphicon glyphicon-menu-right"></i></i>
- </div>
-</div>
-<!-- </div> -->
-<!-- </div> -->
-<hr>
-<!-- add service price total -->
-<div class="form-group" align="right">
-  <label for="idcardno" class="col-lg-2 control-label"></label>
-  <div class="col-lg-8">
-   <div class="col-lg-6">ภาษีมูลค่าเพิ่ม</div><div class="col-lg-5"><input type="text" name="vat" id="vat" class="form-control" value="7" style="text-align: right;height: 28px;"></div><div class="col-lg-1">%</div>
-   <div class="col-lg-12" style="height: 5px;"></div>
-   <div class="col-lg-6">ส่วนลด</div><div class="col-lg-5"><input type="text" name="discount" id="discount" class="form-control" value="0.00" style="text-align: right;height: 28px;"></div><div class="col-lg-1">บาท</div>
-   <div class="col-lg-12" style="height: 5px;"></div>
-   <div class="col-lg-6">เงินมัดจำ</div><div class="col-lg-5"><input type="text" name="deposit" id="deposit"  class="form-control" value="0.00" style="text-align: right;height: 28px;" readonly></div><div class="col-lg-1">บาท</div>
-   <div class="col-lg-12" style="height: 5px;"></div>
-   <div class="col-lg-6">ยอดสุทธิ</div><div class="col-lg-5"><input type="text" name="lastamount" id="lastamount"  class="form-control" value="0.00" style="text-align: right;height: 28px;" readonly></div><div class="col-lg-1">บาท</div>
-   <div class="col-lg-12" style="height: 5px;"></div>
-   <div class="col-lg-6">รับเงิน</div><div class="col-lg-5"><input type="text" name="pay" id="pay" class="form-control" value="0.00" style="text-align: right;height: 28px;"></div><div class="col-lg-1">บาท</div>
-   <div class="col-lg-12" style="height: 5px;"></div>
-   <div class="col-lg-6">เงินทอน</div><div class="col-lg-5"><input type="text" name="change" id="change" class="form-control" value="0.00" style="text-align: right;height: 28px;" readonly></div><div class="col-lg-1">บาท</div>
- </div>
- <label for="idcardno" class="col-lg-2 control-label"></label>
- <!-- </div> -->
+  		</div>
+  	</div>
+  	<div class="form-group">
+  		<label for="btnsnap" class="col-sm-2 control-label"></label>
+  		<div class="col-sm-3" align="center">
+  			<i class="fa fa-camera btn btn-primary "  id="snap"> ถ่ายภาพ <i class="glyphicon glyphicon-menu-right"></i></i>
+  		</div>
+  	</div>
+  	<!-- </div> -->
+  	<!-- </div> -->
+  	<hr>
+  	<!-- add service price total -->
+  	<div class="form-group" align="right">
+  		<label for="idcardno" class="col-lg-2 control-label"></label>
+  		<div class="col-lg-8">
+  			<div class="col-lg-6">ภาษีมูลค่าเพิ่ม</div><div class="col-lg-5"><input type="text" name="vat" id="vat" class="form-control" value="0" style="text-align: right;height: 28px;"></div><div class="col-lg-1">%</div>
+  			<div class="col-lg-12" style="height: 5px;"></div>
+  			<div class="col-lg-6">ส่วนลด</div><div class="col-lg-5"><input type="text" name="discount" id="discount" class="form-control" value="0.00" style="text-align: right;height: 28px;"></div><div class="col-lg-1">บาท</div>
+  			<div class="col-lg-12" style="height: 5px;"></div>
+  			<div class="col-lg-6">เงินมัดจำ</div><div class="col-lg-5"><input type="text" name="deposit" id="deposit"  class="form-control" value="0.00" style="text-align: right;height: 28px;" readonly></div><div class="col-lg-1">บาท</div>
+  			<div class="col-lg-12" style="height: 5px;"></div>
+  			<div class="col-lg-6">ยอดสุทธิ</div><div class="col-lg-5"><input type="text" name="lastamount" id="lastamount"  class="form-control" value="0.00" style="text-align: right;height: 28px;" readonly></div><div class="col-lg-1">บาท</div>
+  			<div class="col-lg-12" style="height: 5px;"></div>
+  			<div class="col-lg-6">รับเงิน</div><div class="col-lg-5"><input type="text" name="pay" id="pay" class="form-control" value="0.00" style="text-align: right;height: 28px;"></div><div class="col-lg-1">บาท</div>
+  			<div class="col-lg-12" style="height: 5px;"></div>
+  			<div class="col-lg-6">เงินทอน</div><div class="col-lg-5"><input type="text" name="change" id="change" class="form-control" value="0.00" style="text-align: right;height: 28px;" readonly></div><div class="col-lg-1">บาท</div>
+  		</div>
+  		<label for="idcardno" class="col-lg-2 control-label"></label>
+  		<!-- </div> -->
 
 
- <div class="form-group" align="center">
-   <div class="col-lg-12"><br><br><br>
-    <label><span id="saveandprint" class="btn btn-secondary">  <input type="checkbox" name="isprint" value="YES" checked> <i class="glyphicon glyphicon-print"></i> พิมพ์ใบเสร็จรับเงิน</span></label>
-  </div>
-</div>
-</div>
-<!-- <script src="<?php echo base_url()?>assets/js/bootstrap-select.min.js"></script> -->
-<script src="<?php echo base_url()?>assets/js/jquery.datetimepicker.full.min.js"></script>
-<script type="text/javascript">
+  		<div class="form-group" align="center">
+  			<div class="col-lg-12"><br><br><br>
+  				<label><span id="saveandprint" class="btn btn-secondary">  <input type="checkbox" name="isprint" value="YES" checked> <i class="glyphicon glyphicon-print"></i> พิมพ์ใบเสร็จรับเงิน</span></label>
+  			</div>
+  		</div>
+  	</div>
+  	<!-- <script src="<?php echo base_url()?>assets/js/bootstrap-select.min.js"></script> -->
+  	<script src="<?php echo base_url()?>assets/js/jquery.datetimepicker.full.min.js"></script>
+  	<script type="text/javascript">
 
-  sumtotal();
+  		sumtotal();
 
-  $("#myModal0").on("hidden.bs.modal", function () {
+  		$("#myModal0").on("hidden.bs.modal", function () {
     // location.reload();
   });
 
@@ -314,11 +314,11 @@ function calculateDay() {
         }
 
         $('#vat, #discount, #cashPledge, #pay').on("keyup",function() {
-         sumtotal();
-       });
+        	sumtotal();
+        });
 
         $('#cashPledge').on("keyup",function() {
-         var val = $(this).val();
+        	var val = $(this).val();
     	$("#deposit").val(val);  //ให้ไปแสดงใน ช่องคำนวน(แสดงเฉย ๆ เพราะ นำcashPledge ข้างบนไปคิด)
 
     	sumtotal();
@@ -339,13 +339,13 @@ function calculateDay() {
        var out = calendarAddMonth(year+'-'+month+'-'+day,1);
        $('#checkOutDate').val(out+ ' 12:00');
      }else{
-      var old = $('#checkOutDate_old').val();
-      $('#checkOutDate').val(old);
-    }
+     	var old = $('#checkOutDate_old').val();
+     	$('#checkOutDate').val(old);
+     }
 
-    sumtotal();
+     sumtotal();
 
-  });
+   });
 
         function calendarAddMonth(dateStr, month){
       //Create date object from input date
@@ -355,16 +355,16 @@ function calculateDay() {
 
       var m = date.getMonth()+1;
       if(m < 10){
-        var valm = '0'+m;
+      	var valm = '0'+m;
       }else{
-        var valm = m;
+      	var valm = m;
       }
 
       var d = date.getDate();
       if(d < 10){
-        var vald = '0'+d;
+      	var vald = '0'+d;
       }else{
-        var vald = d;
+      	var vald = d;
       }
       return vald+"/"+valm+"/"+date.getFullYear();
     }
