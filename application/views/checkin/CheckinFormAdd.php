@@ -23,7 +23,7 @@
   	<div class="form-group">
   		<label for="idcardno" class="col-sm-2 control-label">เลขประจำประชาชน <b style="color: #FF0000">*</b></label>
   		<div class="col-sm-8">
-  			<input type="text" class="form-control" name="idcardno" id="idcardno" placeholder="เลขประจำประชาชน/ Passport No" >
+  			<input type="text" class="form-control" name="idcardno" id="idcardno" placeholder="เลขประจำประชาชน/ Passport No" required>
   		</div>
   	</div>
   	<div class="form-group">
@@ -37,10 +37,10 @@
   	<div class="form-group">
   		<label for="gender" class="col-sm-2 control-label">ชื่อ-สกุล <b style="color: #FF0000">*</b></label>
   		<div class="col-sm-4">
-  			<input type="text" class="form-control" id="firstName" name="firstName" placeholder="ชื่อ">
+  			<input type="text" class="form-control" id="firstName" name="firstName" placeholder="ชื่อ" required>
   		</div>
   		<div class="col-sm-4">
-  			<input type="text" class="form-control" id="lastName" name="lastName" placeholder="นามสกุล">
+  			<input type="text" class="form-control" id="lastName" name="lastName" placeholder="นามสกุล" required>
   		</div>
   	</div>
   	<div class="form-group">
@@ -142,7 +142,7 @@
   	<div class="form-group">
   		<label for="bookedDate" class="col-sm-2 control-label">วันที่ จอง <b style="color: #FF0000">*</b></label>
   		<div class="col-sm-8">
-  			<input type="text" class="form-control" id="bookedDate" name="bookedDate" value="<?php echo $this->packfunction->dtDMYnow(); ?> ">
+  			<input type="text" class="form-control" id="bookedDate" name="bookedDate" value="<?php echo $this->packfunction->dtDMYnow(); ?> " readonly required>
   		</div>
   	</div>
   	<div class="form-group">
