@@ -408,7 +408,8 @@
         $('#lastamount').val(parseInt(last).toFixed(2));
 
       }else{
-      	$('#lastamount').val(parseInt(totalsum+cashPledge).toFixed(2));
+        var last = totalsum+cashPledge;
+      	$('#lastamount').val(parseInt(last).toFixed(2));
       }
 
       var dis = (parseInt(discount)+parseInt(pay))-last;
