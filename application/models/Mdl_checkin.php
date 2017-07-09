@@ -59,12 +59,13 @@ class Mdl_checkin extends CI_Model {
 		$this->db->insert('ts_booked',$saveAdd);
 		$idBooked= $this->db->insert_id();
 
+		// $selectRoom = implode('_',$this->input->post('selectRoom'));
 		$selectRoom = $this->input->post('selectRoom');
-		$room = explode('_',$selectRoom);
-		for ($i=0; $i < count($room) ; $i++) :
+		// $room = explode('_',$selectRoom);
+		for ($i=0; $i < count($selectRoom) ; $i++) :
 			$saveBookedRoom[$i] = array(
 				'bookedID '     => $idBooked,
-				'roomID '       => $room[$i],
+				'roomID '       => $selectRoom[$i],
 				'checkinDate '  => $this->packfunction->dtTosql($_POST['checkinDate']),
 				'checkoutDate ' => $this->packfunction->dtTosql($this->input->post('checkOutDate')),
 				'comment '      => $this->input->post('comment'),
@@ -95,7 +96,7 @@ class Mdl_checkin extends CI_Model {
 			$log = array(
 				'bookedID '     => $idBooked,
 				'bookedroomID' => $idBookedRoom[$i],
-				'roomID'       => $room[$i],
+				'roomID'       => $selectRoom[$i],
 				'logDate'      => $startDate->format('Y-m-d').' 12:00:00',
 				'comment'      => $this->input->post('comment'),
 				'status'       => 'CHECKIN',
@@ -113,7 +114,7 @@ class Mdl_checkin extends CI_Model {
 			// 'cashhdrID ' => $this->input->post(''),
 			'cashCode ' => $bookedCode[0]['CODE'],
 			'bookedID ' => $idBooked,
-			'roomID ' => $room[$i],
+			'roomID ' => $selectRoom[$i],
 			'cashDate ' => $this->packfunction->dtYMDnow(),
 			'totalVat ' => $this->input->post('vat'),
 			'totalDiscount ' => $this->input->post('discount'),
@@ -539,6 +540,7 @@ class Mdl_checkin extends CI_Model {
 		#AND tb.status <> 'CANCLE'
 		#AND tb.status <> 'CHECKOUT'
 		WHERE MD5(tb.bookedID) = '".$value."'
+		GROUP BY tsch.roomID
 		";
 		$data = $this->db->query($sql)->result_array();
 		return $data;

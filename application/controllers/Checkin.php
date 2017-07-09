@@ -103,6 +103,7 @@ class Checkin extends CI_Controller {
 
 	public function saveAdd()
 	{
+
 		$id = $this->Mdl_checkin->saveAdd();
 		if(isset($_POST['isprint'])==true){
 			echo "<script>window.open('".base_url()."checkin/billprintcheckin/".md5($id)."','_new');</script>";
@@ -113,7 +114,7 @@ class Checkin extends CI_Controller {
 	}
 
 	public function  billprintcheckin($key=''){
-		// $key =MD5('2');
+		$key =MD5('14');
 		$countDay = $this->Mdl_checkin->booked($key);
 		$this->data['dateDtl'] = date_diff(date_create($countDay['checkInAppointDate']),date_create($countDay['checkOutAppointDate'])->modify("+1 hour"));
 		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
@@ -139,6 +140,7 @@ class Checkin extends CI_Controller {
 					array(
 						'bookedroomID' => $rowBooked['bookedroomID'],
 						'roomID' => $rowBooked['roomID'],
+						'cashr_roomID' => $rowBooked['cashr_roomID'],
 						'checkinDate' => $rowBooked['checkinDate'],
 						'checkoutDate' => $rowBooked['checkoutDate'],
 						'comment' => $rowBooked['comment'],
@@ -195,6 +197,7 @@ class Checkin extends CI_Controller {
 						array(
 							'bookedroomID' => $rowBooked['bookedroomID'],
 							'roomID' => $rowBooked['roomID'],
+							'cashr_roomID' => $rowBooked['cashr_roomID'],
 							'checkinDate' => $rowBooked['checkinDate'],
 							'checkoutDate' => $rowBooked['checkoutDate'],
 							'comment' => $rowBooked['comment'],

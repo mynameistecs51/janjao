@@ -38,7 +38,7 @@
 								<label style="padding-right: 0%;text-align: right;">1234</label>
 								<br>
 								<label style="width: 40%;padding-left: 0px;text-align: left;">วันที่ </label>
-								<label style="padding-right: 0%;text-align: right;"><?php echo date('d-m-y'); ?></label>
+								<label style="padding-right: 0%;text-align: right;"><?php echo date('d-m-Y'); ?></label>
 								<br>
 								<label style="width: 40%;padding-left: 0px;text-align: left;">ออกโดย </label>
 								<label style="padding-right: 0%;text-align: right;">Administrator</label>
@@ -72,7 +72,7 @@
 								<td style="border-bottom:1px solid black" >
 									ห้อง
 									<?php
-									echo $rowDetail['selectRoom'][$i]['roomID'];
+									echo $rowDetail['selectRoom'][$i]['cashr_roomID'];
 									echo $bed = ($rowDetail['selectRoom'][$i]['bed'] == "SINGLE")? "<li>เตียงเดี่ยว</li>" : "<li>เตียงคู่</li>";
 									?>
 								</td>
@@ -110,17 +110,22 @@
 									?>
 								</td>
 							</tr>
-							<tr>
-								<td style="border-bottom:1px solid black" ><?php echo $j++; ?></td>
-								<td style="border-bottom:1px solid black" colspan="3">เงินมัดจำ</td>
-								<td style="border-bottom:1px solid black" align="right"><?php echo $rowDetail['cashPledge']; ?> </td>
-							</tr>
-							<tr>
-								<td style="border-bottom:1px solid black" ><?php echo $j++; ?></td>
-								<td style="border-bottom:1px solid black" colspan="3">VAT</td>
-								<td style="border-bottom:1px solid black" align="right"><?php echo $rowDetail['totalVat']; ?> %</td>
-							</tr>
+
 						<?php endfor; ?>
+						<tr>
+							<td colspan="3"  ></td>
+							<td style="border-bottom:1px solid black" align="right">เงินมัดจำ</td>
+							<td style="border-bottom:1px solid black" align="right">
+								<?php echo $rowDetail['cashPledge']; ?>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3"  ></td>
+							<td style="border-bottom:1px solid black" align="right">VAT</td>
+							<td style="border-bottom:1px solid black" align="right">
+								<?php echo $rowDetail['totalVat']; ?> %
+							</td>
+						</tr>
 					<?php endforeach; ?>
 				</tbody>
 				<tfoot >

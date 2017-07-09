@@ -10,7 +10,7 @@
   					<div class="col-lg-12">
   						<?php
   						foreach ($selectRoom as $key => $room) :?>
-  						<input type="hidden" name="selectRoom" value="<?php echo $room[0]['roomcode']; ?>">  <!-- //input hidden selectRoom -->
+  						<input type="hidden" name="selectRoom[]" value="<?php echo $room[0]['roomcode']; ?>">  <!-- //input hidden selectRoom -->
   						<button type="button" class="btn roomSelect btn-danger btn-xs" data-color="danger" data-room="<?php echo $room[0]['roomcode'] ?>" data-priceshort="<?php echo $room[0]['price_short']; ?>" data-priceday="<?php echo $room[0]['price_day']; ?>" data-pricemonth="<?php echo $room[0]['price_month']; ?>"  disabled >
   							<i class="fa fa-bed" aria-hidden="true"></i>
   							<h4><?php echo 'Room '.$room[0]['roomcode']; ?></h4>
@@ -292,46 +292,7 @@ $(function() {
 		format:'d/m/Y H:i',
 		lang:'th',
 	});
-  /*
-	$('#checkinDate').datetimepicker({
-		timepicker:true,
-		mask:true,
-		format:'d/m/Y H:i',
-		lang:'th',
-	});
 
-	$('#checkOutDate').datetimepicker({
-		timepicker:true,
-		mask:true,
-		format:'d/m/Y H:i',
-		lang:'th',
-	});
-
-	// start checkinDate form  bookedDate
-	$('#bookedDate').on('change',function(){
-		var startDate = $('#bookedDate').val();
-		var expoldeY= startDate.split(' ');
-		$( "#checkinDate" ).datetimepicker({
-			minDate: expoldeY[0].split('/')[2]+'-'+expoldeY[0].split('/')[1]+'-'+expoldeY[0].split('/')[0],
-		});
-	});
-
-	$('#checkinDate').on("change",function() {
-		var startDate = $('#checkinDate').val();
-		var expoldeY= startDate.split(' ');
-		$( "#checkOutDate" ).datetimepicker({
-			minDate: expoldeY[0].split('/')[2]+'-'+expoldeY[0].split('/')[1]+'-'+expoldeY[0].split('/')[0],
-		});
-	});
-
-	$('#checkOutDate').on("change",function() {
-		var startDate = $('#bookedDate').val();
-		var expoldeY= startDate.split(' ');
-		$( "#checkinDate" ).datetimepicker({
-			minDate: expoldeY[0].split('/')[2]+'-'+expoldeY[0].split('/')[1]+'-'+expoldeY[0].split('/')[0],
-		});
-	});
-  */
 });
 
 function calculateDay() {
