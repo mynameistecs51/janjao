@@ -382,6 +382,7 @@
 		$('#totalprice').html(totalprice.toFixed(2));
 		$('#totalamount').html(totalamount);
 		$('#totalsum').html(totalsum.toFixed(2));
+
 		var vat = $('#vat').val()!="" ? parseInt($('#vat').val()):0;
 		var pay = $('#pay').val()!="" ? parseInt($('#pay').val()):0;
 		var discount = $('#discount').val()!="" ? parseInt($('#discount').val()):0;
@@ -393,7 +394,8 @@
 			last = totalsum+((to/100)*vat);
 			$('#lastamount').val(last.toFixed(2));
 		}else{
-			$('#lastamount').val(totalsum.toFixed(2));
+      last = totalsum;
+			$('#lastamount').val(last.toFixed(2));
 		}
 
 		var dis = (parseInt(discount)+parseInt(deposit)+parseInt(pay))-last;
