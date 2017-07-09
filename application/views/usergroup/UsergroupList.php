@@ -1,8 +1,8 @@
     <!-- Page Name -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/datatable/css/dataTables.bootstrap.min.css"> 
     <div class="col-lg-12">
-        <i style="font-size: 18px;">USER LIST</i>
-        <span class="btn btn-success btn_create"  style="float: right;margin-top: -10px;">CREATE USER</span>
+        <i style="font-size: 18px;">USER GROUP LIST</i>
+        <span class="btn btn-success btn_create"  style="float: right;margin-top: -10px;">CREATE USER GROUP</span>
     </div> 
     <hr style="margin-top: 30px;">
 
@@ -13,7 +13,7 @@
         <div class="row text-center">  
             <div class="col-lg-12" align="right">
                 <div class="sh-right">
-                	<form name="formSearch" id="formSearch" method="POST" action="<?php echo base_url()?>user/search/">
+                	<form name="formSearch" id="formSearch" method="POST" action="<?php echo base_url()?>usergroup/search/">
 	                    <button  type="submit" class="btn btn-primary " style="float: right;">Search</button>
 	                    <input type="text" class="form-control"  id="keyword" style="width: 250px;margin-right: 10px;" placeholder="keyword" name="keyword" value="<?php echo $keyword; ?>">  
                     </form>
@@ -26,27 +26,23 @@
                     <thead>
                         <tr>
                             <th width="60">No.</th> 
-                            <th width="150">UserName</th>
-                            <th width="150">Email</th>
-                            <th>First Name - Last Name</th>  
-                            <th width="200">User Group</th> 
+                            <th width="300">USER GROUP Name</th>
+                            <th >DESCRIPTION</th> 
                             <th width="120">#</th>
                         </tr>
                     </thead> 
                     <tbody>
                     <?php if(count($getlist)>0){  ?>
                     <?php $n=1; foreach ($getlist as $rs) { ?>
-                    		<tr id="row<?php echo $rs['userID']; ?>">
+                    		<tr id="row<?php echo $rs['usergroupID']; ?>">
 	                            <td><?php echo $n; ?></td>
-                                <td><?php echo $rs['username']; ?></td>
-	                            <td><?php echo $rs['useremail']; ?></td>
-	                            <td><?php echo $rs['fullname']; ?></td> 
                                 <td><?php echo $rs['usergroupName']; ?></td>
+	                            <td><?php echo $rs['usergroupDesc']; ?></td> 
 	                            <td align="center">  
-                                    <button class="btn btn-primary btn-xs btn_edit" id="<?php echo MD5($rs['userID']); ?>" title="edit" style='margin-left:5px;'>
+                                    <button class="btn btn-primary btn-xs btn_edit" id="<?php echo MD5($rs['usergroupID']); ?>" title="edit" style='margin-left:5px;'>
                                         <i class="fa fa-edit fa-2x"></i>
                                     </button>
-                                    <button class="btn btn-danger btn-xs btn_cancel" id="<?php echo $rs['userID']; ?>" title="Cancle" style='margin-left:5px;'>
+                                    <button class="btn btn-danger btn-xs btn_cancel" id="<?php echo $rs['usergroupID']; ?>" title="Cancle" style='margin-left:5px;'>
                                         <i class="fa fa-trash-o fa-2x" title="Cancle"></i>
                                     </button>
 	                            </td> 
@@ -71,18 +67,18 @@
 <script type="text/javascript">
 	$(function() { 
 	    $('.btn_create').click(function(){ 
-                load_page('<?php echo base_url()."user/create/"; ?>','.:: CREATE User ::.','<?php echo base_url()."user/saveData/"; ?>');
+                load_page('<?php echo base_url()."usergroup/create/"; ?>','.:: CREATE USER GROUP ::.','<?php echo base_url()."usergroup/saveData/"; ?>');
         });
         $('.btn_edit').click(function(){
                 var id = $(this).attr('id');
-                load_page('<?php echo base_url()."user/edit/"; ?>'+id,'.:: EDIT User ::.','<?php echo base_url()."user/saveUpdate/"; ?>');
+                load_page('<?php echo base_url()."usergroup/edit/"; ?>'+id,'.:: EDIT USER GROUP ::.','<?php echo base_url()."usergroup/saveUpdate/"; ?>');
         });
         $('.btn_cancel').click(function(){
             var cfm = confirm("ยืนยันการลบรายการ !");
             if(cfm == true){
                 var id = $(this).attr('id');
                 $.ajax({
-                    url: '<?php echo base_url()."user/saveCancle/";?>',
+                    url: '<?php echo base_url()."usergroup/saveCancle/";?>',
                     data:{key:id},
                     type: 'POST',
                     dataType: 'json',
