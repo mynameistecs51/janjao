@@ -108,6 +108,24 @@ class Mdl_checkin extends CI_Model {
 
 			$startDate->modify("+1 day");
 		}
+
+		$dataCashHDR = array(
+			// 'cashhdrID ' => $this->input->post(''),
+			'cashCode ' => $bookedCode[0]['CODE'],
+			'bookedID ' => $idBooked,
+			'roomID ' => $room[$i],
+			'cashDate ' => $this->packfunction->dtYMDnow(),
+			'totalVat ' => $this->input->post('vat'),
+			'totalDiscount ' => $this->input->post('discount'),
+			'totalLast ' => $this->input->post('lastamount'),
+			'comment ' => $this->input->post('comment'),
+			'status ' => 'PAY',
+			"createDT"	   => $this->packfunction->dtYMDnow(),
+			"createBY"	   => $this->UserName,
+			"updateDT"	   => $this->packfunction->dtYMDnow(),
+			"updateBY"	   => $this->UserName
+			);
+		$this->db->insert('ts_cash_hdr',$dataCashHDR);
 		endfor; // End ts_booked_room
 		return $idBooked;
 	}
@@ -500,11 +518,22 @@ class Mdl_checkin extends CI_Model {
 		tmrt.price_month,
 		tmrt.price_hour,
 		tmrt.price_short,
-		tmrt.price_day
+		tmrt.price_day,
+		tsch.cashhdrID,
+		tsch.cashCode,
+		tsch.roomID AS cashr_roomID,
+		tsch.cashDate,
+		tsch.totalVat,
+		tsch.totalDiscount,
+		tsch.totalLast,
+		tsch.comment,
+		tsch.status,
+		tsch.createDT
 		FROM ts_booked tb
 		INNER JOIN ts_booked_room tbr ON tb.bookedID = tbr.bookedID
 		INNER JOIN tm_room tmr ON tmr.roomCODE = tbr.roomID
 		INNER JOIN tm_roomtype tmrt ON tmrt.roomtypeID = tmr.roomtypeID
+		INNER JOIN ts_cash_hdr tsch ON tsch.bookedID  = tb.bookedID
 		#WHERE tb.status <> 'HIDDEN'
 		#AND tb.status <> 'LATE'
 		#AND tb.status <> 'CANCLE'

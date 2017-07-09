@@ -87,6 +87,16 @@
 									?>
 								</td>
 							</tr>
+							<tr>
+								<td style="border-bottom:1px solid black" ><?php echo $j++; ?></td>
+								<td style="border-bottom:1px solid black" colspan="3">เงินมัดจำ</td>
+								<td style="border-bottom:1px solid black" align="right"><?php echo $rowDetail['cashPledge']; ?> </td>
+							</tr>
+							<tr>
+								<td style="border-bottom:1px solid black" ><?php echo $j++; ?></td>
+								<td style="border-bottom:1px solid black" colspan="3">VAT</td>
+								<td style="border-bottom:1px solid black" align="right"><?php echo $rowDetail['totalVat']; ?> %</td>
+							</tr>
 						<?php endfor; ?>
 					<?php endforeach; ?>
 				</tbody>

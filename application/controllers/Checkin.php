@@ -113,7 +113,7 @@ class Checkin extends CI_Controller {
 	}
 
 	public function  billprintcheckin($key=''){
-		$key =MD5('1');
+		$key =MD5('2');
 		$countDay = $this->Mdl_checkin->booked($key);
 		$this->data['dateDtl'] = date_diff(date_create($countDay['checkInAppointDate']),date_create($countDay['checkOutAppointDate'])->modify("+1 hour"));
 		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
@@ -138,17 +138,17 @@ class Checkin extends CI_Controller {
 				array_push($data_array[$rowBooked['bookedID']]['selectRoom'],
 					array(
 						'bookedroomID' => $rowBooked['bookedroomID'],
-							'roomID' => $rowBooked['roomID'],
-							'checkinDate' => $rowBooked['checkinDate'],
-							'checkoutDate' => $rowBooked['checkoutDate'],
-							'comment' => $rowBooked['comment'],
-							'status' => $rowBooked['status'],
-							'bed' => $rowBooked['bed'],
-							'roomtypeCode' => $rowBooked['roomtypeCode'],
-							'price_month' => $rowBooked['price_month'],
-							'price_hour' => $rowBooked['price_hour'],
-							'price_short' => $rowBooked['price_short'],
-							'price_day' => $rowBooked['price_day'],
+						'roomID' => $rowBooked['roomID'],
+						'checkinDate' => $rowBooked['checkinDate'],
+						'checkoutDate' => $rowBooked['checkoutDate'],
+						'comment' => $rowBooked['comment'],
+						'status' => $rowBooked['status'],
+						'bed' => $rowBooked['bed'],
+						'roomtypeCode' => $rowBooked['roomtypeCode'],
+						'price_month' => $rowBooked['price_month'],
+						'price_hour' => $rowBooked['price_hour'],
+						'price_short' => $rowBooked['price_short'],
+						'price_day' => $rowBooked['price_day'],
 						)
 					);
 				continue;
@@ -181,6 +181,10 @@ class Checkin extends CI_Controller {
 					'bookedType' =>  $rowBooked['bookedType'],
 					'cashPledge' =>  $rowBooked['cashPledge'],
 					'cashPledgePath' =>  $rowBooked['cashPledgePath'],
+					'cashDate' => $rowBooked['cashDate'],
+					'totalVat' => $rowBooked['totalVat'],
+					'totalDiscount' => $rowBooked['totalDiscount'],
+					'totalLast' => $rowBooked['totalLast'],
 					'comment' =>  $rowBooked['comment'],
 					'status' =>  $rowBooked['status'],
 					'createDT' =>  $rowBooked['createDT'],
