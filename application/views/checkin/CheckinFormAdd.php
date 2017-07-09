@@ -239,63 +239,60 @@
 
   		sumtotal();
 
-  		$("#myModal0").on("hidden.bs.modal", function () {
-    // location.reload();
-  });
+  		
 
+      // Grab elements, create settings, etc.
+      var video = document.getElementById('video');
 
-// Grab elements, create settings, etc.
-var video = document.getElementById('video');
+      // Get access to the camera!
+      if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+          // Not adding `{ audio: true }` since we only want video now
+          navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+          	video.src = window.URL.createObjectURL(stream);
+          	video.play();
+          });
+        }
 
-// Get access to the camera!
-if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-    // Not adding `{ audio: true }` since we only want video now
-    navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
-    	video.src = window.URL.createObjectURL(stream);
-    	video.play();
-    });
-  }
+        // Elements for taking the snapshot
+        var canvas = document.getElementById('canvas');
 
-  // Elements for taking the snapshot
-  var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
+        var video = document.getElementById('video');
 
-  var context = canvas.getContext('2d');
-  var video = document.getElementById('video');
+        var filesup = document.getElementById('images');
+      // Trigger photo take
+      document.getElementById("snap").addEventListener("click", function() {
 
-  var filesup = document.getElementById('images');
-// Trigger photo take
-document.getElementById("snap").addEventListener("click", function() {
+      	var data = context.drawImage(video, 0, 0, 300, 200);
 
-	var data = context.drawImage(video, 0, 0, 300, 200);
+      	var imageData = canvas.toDataURL('image/png');
 
-	var imageData = canvas.toDataURL('image/png');
+      	filesup.setAttribute('value',imageData);
 
-	filesup.setAttribute('value',imageData);
+      });
 
-});
+      function dataURLtoFile(dataurl, filename) {
+      	var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+      	bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+      	while(n--){
+      		u8arr[n] = bstr.charCodeAt(n);
+      	}
+      	return new File([u8arr], filename, {type:mime});
+      }
 
-function dataURLtoFile(dataurl, filename) {
-	var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-	bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-	while(n--){
-		u8arr[n] = bstr.charCodeAt(n);
-	}
-	return new File([u8arr], filename, {type:mime});
-}
+      $(function() {
+      	var diff ;
+      	$.datetimepicker.setLocale('th'); // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+      	$('#bookedDate').datetimepicker({
+      		timepicker:true,
+      		mask:true,
+      		format:'d/m/Y H:i',
+      		lang:'th',
+      	});
 
-$(function() {
-	var diff ;
-	$.datetimepicker.setLocale('th'); // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
-	$('#bookedDate').datetimepicker({
-		timepicker:true,
-		mask:true,
-		format:'d/m/Y H:i',
-		lang:'th',
-	});
+      });
 
-});
-
-function calculateDay() {
+    function calculateDay() {
       // คำนวนวันที่ count day
       var startDate = $('#checkinDate').val();
       var dateStart= startDate.split(' ');
@@ -347,7 +344,7 @@ function calculateDay() {
 
    });
 
-        function calendarAddMonth(dateStr, month){
+    function calendarAddMonth(dateStr, month){
       //Create date object from input date
       var date = new Date(dateStr);
       //Add month
