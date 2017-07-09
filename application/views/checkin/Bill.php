@@ -76,14 +76,37 @@
 									echo $bed = ($rowDetail['selectRoom'][$i]['bed'] == "SINGLE")? "<li>เตียงเดี่ยว</li>" : "<li>เตียงคู่</li>";
 									?>
 								</td>
-								<td style="border-bottom:1px solid black" align="right"><?php echo $dateDtl->days; ?> วัน</td>
 								<td style="border-bottom:1px solid black" align="right">
-									<?php echo $price =($rowDetail['bookedType'] == 'DAY')?$rowDetail['selectRoom'][$i]['price_day']:'';?>
-
+									<?php
+									if($rowDetail['bookedType'] == 'SHORT'){
+										echo "ชั่วคราว";
+									}else if($rowDetail['bookedType'] == 'DAY'){
+										echo $dateDtl->days ."วัน";
+									}else if($rowDetail['bookedType'] == 'MONTH'){
+										echo $dateDtl->m .'เดือน';
+									}
+									?>
 								</td>
 								<td style="border-bottom:1px solid black" align="right">
 									<?php
-									echo $dateDtl->days * $price;
+									if($rowDetail['bookedType'] == 'SHORT'){
+										echo $rowDetail['selectRoom'][$i]['price_short'];
+									}else if($rowDetail['bookedType'] == 'DAY'){
+										echo $rowDetail['selectRoom'][$i]['price_day'];
+									}else if($rowDetail['bookedType'] == 'MONTH'){
+										echo $rowDetail['selectRoom'][$i]['price_month'];
+									}
+									;?>
+								</td>
+								<td style="border-bottom:1px solid black" align="right">
+									<?php
+									if($rowDetail['bookedType'] == 'SHORT'){
+										echo $price = $rowDetail['selectRoom'][$i]['price_short'];
+									}else if($rowDetail['bookedType'] == 'DAY'){
+										echo $price = $dateDtl->days * $rowDetail['selectRoom'][$i]['price_day'];
+									}else if($rowDetail['bookedType'] == 'MONTH'){
+										echo $price = $dateDtl->m * $rowDetail['selectRoom'][$i]['price_month'];
+									}
 									?>
 								</td>
 							</tr>
@@ -103,7 +126,9 @@
 				<tfoot >
 					<tr style="background:#E6E6E6;" >
 						<td colspan="4" align="center">รวม</td>
-						<td align="right"><?php echo (($dateDtl->days * $price) * $numRoom ); ?>	</td>
+						<?php $sumTotal = ( ($price * $numRoom)  +$rowDetail['cashPledge']); ?>
+						<!-- cashPledge+totalsum+((to/100)*vat); // เงินมัดจำ + ยอดรวมค่าห้อง  + Vat -->
+						<td align="right"><?php echo $sumTotal + ( ($sumTotal * 7 ) /100 ) ; ?>	</td>
 					</tr>
 					<tr>
 						<td colspan="5" align="right" style="width: 100%;text-align: right; height: 200px;">
