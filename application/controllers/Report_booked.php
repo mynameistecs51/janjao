@@ -19,7 +19,7 @@ class Report_booked extends CI_Controller {
 		}
 	}
 
-	public function bookedday()
+	public function index()
 	{
 		$this->data['viewName']=$this->pagename;
 		$this->data['keyword']='';

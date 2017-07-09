@@ -239,7 +239,7 @@
 
   		sumtotal();
 
-  		
+
 
       // Grab elements, create settings, etc.
       var video = document.getElementById('video');

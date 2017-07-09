@@ -114,14 +114,14 @@
 						<?php endfor; ?>
 						<tr>
 							<td colspan="3"  ></td>
-							<td style="border-bottom:1px solid black" align="right">เงินมัดจำ</td>
+							<td align="right">เงินมัดจำ</td>
 							<td style="border-bottom:1px solid black" align="right">
 								<?php echo $rowDetail['cashPledge']; ?>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="3"  ></td>
-							<td style="border-bottom:1px solid black" align="right">VAT</td>
+							<td  align="right">+ VAT</td>
 							<td style="border-bottom:1px solid black" align="right">
 								<?php echo $rowDetail['totalVat']; ?> %
 							</td>

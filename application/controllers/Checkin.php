@@ -119,12 +119,12 @@ class Checkin extends CI_Controller {
 		$this->data['dateDtl'] = date_diff(date_create($countDay['checkInAppointDate']),date_create($countDay['checkOutAppointDate'])->modify("+1 hour"));
 		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
 		if(count($this->data['checkinDtl'])>0){
-		$this->data['billCode']=$this->Mdl_checkin->getBillCode();
-		$this->data['getMonth'] = $this->packfunction->getMonth();
-		$this->data['getDetail'] = $this->showListBill($key);
-		$this->data['getYear'] = $this->packfunction->getYear();
-		$this->data['serviceDtl']=$this->Mdl_checkin->serviceList($key,'ROOM');
-		$this->load->view('checkin/Bill',$this->data);
+			$this->data['billCode']=$this->Mdl_checkin->getBillCode();
+			$this->data['getMonth'] = $this->packfunction->getMonth();
+			$this->data['getDetail'] = $this->showListBill($key);
+			$this->data['getYear'] = $this->packfunction->getYear();
+			$this->data['serviceDtl']=$this->Mdl_checkin->serviceList($key,'ROOM');
+			$this->load->view('checkin/Bill',$this->data);
 		}else{
 			redirect('authen/','refresh');
 		}
@@ -306,6 +306,7 @@ class Checkin extends CI_Controller {
 	}
 
 	public function checkoutform($key=''){
+		$this->data['tscashHTD'] = $this->Mdl_checkin->getCashHDR($key);
 		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
 		$this->data['serviceDtl']=$this->Mdl_checkin->serviceList($key,'DESTROY');
 		$this->data['checkinRoomDtl']=$this->Mdl_checkin->bookedRoom($this->data['checkinDtl']['bookedID']);

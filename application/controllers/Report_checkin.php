@@ -20,7 +20,7 @@ class Report_checkin extends CI_Controller {
 
 	}
 
-	public function checkInDay()
+	public function index()
 	{
 		$this->data['viewName']=$this->pagename;
 		$this->data['keyword']='';

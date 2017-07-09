@@ -274,6 +274,7 @@ class Mdl_checkin extends CI_Model {
 	}
 
 	public function saveCheckout(){
+
 		if($_POST){
 			$key = $_POST['bookedID'];
 			$this->db->where('bookedID',$_POST['bookedID']);
@@ -321,6 +322,30 @@ class Mdl_checkin extends CI_Model {
 		$this->db->where('bookedID',$key);
 		$this->db->delete('ts_booked_room_log');
 
+		//save ts_cash_dtl
+		$cashhdrID = $this->getBillCheckin(MD5($key));
+		print_r($cashhdrID);
+		foreach ($_POST['serviceName'] as $svk => $rowsvk) {
+			$dataTschashDTL[$svk] = array(
+				'cashhdrID' => $cashhdrID[0]['cashhdrID'],
+				'bookedID' => $_POST['bookedID'],
+				'cashName' => $_POST['serviceName'][$svk],
+				'cashDesc' => '',
+				'cashDate' => $this->packfunction->dtYMDnow(),
+				'price' => $_POST['price'][$svk],
+				'amount' => $_POST['amount'][$svk],
+				'unit' => $_POST['unit'][$svk],
+				'total' => $_POST['lastamount'],
+				'comment' => '',
+				'status' => 'PAY',
+				"createDT"	  => $this->packfunction->dtYMDnow(),
+				"createBY"	  => $this->UserName,
+				"updateDT"	  => $this->packfunction->dtYMDnow(),
+				"updateBY"	  => $this->UserName
+				);
+			$this->db->insert('ts_cash_dtl' , $dataTschashDTL[$svk]);
+
+		}
 	}
 
 
@@ -541,6 +566,30 @@ class Mdl_checkin extends CI_Model {
 		#AND tb.status <> 'CHECKOUT'
 		WHERE MD5(tb.bookedID) = '".$value."'
 		GROUP BY tsch.roomID
+		";
+		$data = $this->db->query($sql)->result_array();
+		return $data;
+	}
+
+	public function getCashHDR($id = '')
+	{
+		$sql = "
+		SELECT
+		cashhdrID,
+		cashCode,
+		bookedID,
+		roomID,
+		cashDate,
+		totalVat,
+		totalDiscount,
+		totalLast,
+		comment,
+		status,
+		createDT,
+		createBY,
+		updateDT
+		FROM ts_cash_hdr
+		WHERE MD5(bookedID) = '".$id."'
 		";
 		$data = $this->db->query($sql)->result_array();
 		return $data;

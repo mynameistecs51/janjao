@@ -4,7 +4,7 @@
     	<i style="font-size: 18px;">REPORT BOOKED <u><span class="text-primary">DAY</span></u></i>
     </div>
     <div class="col-lg-10 text-right" >
-    	<?php echo anchor(base_url().'report_booked/bookedday/', '<i class="fa fa-list" aria-hidden="true"></i> รายวัน', 'class="btn btn-success"'); ?>
+    	<?php echo anchor(base_url().'report_booked/', '<i class="fa fa-list" aria-hidden="true"></i> รายวัน', 'class="btn btn-success"'); ?>
     	<?php echo anchor(base_url().'report_booked/bookedmonth/', '<i class="fa fa-list" aria-hidden="true"></i> รายเดือน', 'class="btn btn-danger"'); ?>
     </div>
     <hr style="margin-top: 30px;">
