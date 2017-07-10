@@ -4,9 +4,9 @@
 	<i style="font-size: 18px;"><?php echo $viewName .'<u><span class="text-primary">  DAY</span></u>';?></i>
 </div>
 <div class="col-lg-9 text-right" >
-	<?php echo anchor(base_url().'report_booked/bookedday/', '<i class="fa fa-list" aria-hidden="true"></i> รายวัน', 'class="btn btn-success"'); ?>
-	<?php echo anchor(base_url().'report_booked/bookedmonth/', '<i class="fa fa-list" aria-hidden="true"></i> รายเดือน', 'class="btn btn-danger"'); ?>
-	<?php echo anchor(base_url().'report_booked/bookedmonth/', '<i class="fa fa-list" aria-hidden="true"></i> รายปี', 'class="btn btn-info"'); ?>
+	<?php echo anchor(base_url().'report_checkin/', '<i class="fa fa-list" aria-hidden="true"></i> รายวัน', 'class="btn btn-success"'); ?>
+	<?php echo anchor(base_url().'report_checkin/checkinmonth/', '<i class="fa fa-list" aria-hidden="true"></i> รายเดือน', 'class="btn btn-danger"'); ?>
+	<?php echo anchor(base_url().'report_checkin/checkinmonth/', '<i class="fa fa-list" aria-hidden="true"></i> รายปี', 'class="btn btn-info"'); ?>
 </div>
 <hr style="margin-top: 30px;">
 <!-- Page Content -->
@@ -31,9 +31,9 @@
 						<th style="text-align: center;width:  120px;">BOOKED No.</th>
 						<th style="text-align: center;">NAME </th>
 						<th style="text-align: center;width:  250px;">ROOM</th>
-						<th style="text-align: center;width:  140px;">BOOKED DATE</th>
 						<th style="text-align: center;width:  140px;">CHECKIN DATE</th>
 						<th style="text-align: center;width:  140px;">CHECKOUT DATE</th>
+						<th style="text-align: center;width:  140px;">CREATE DTATE</th>
 						<th style="text-align: center;width:  80px;"> STATUS</th>
 						<th style="text-align: center;width:  230px;">#</th>
 					</tr>
@@ -48,42 +48,19 @@
 							<td><?php echo $rowCheckin['bookedCode'] ?></td>
 							<td><?php echo $rowCheckin['firstName']." ".$rowCheckin['lastName']; ?></td>
 							<td >
-								<?php $color = $rowCheckin['status']=='CHECKIN' ? 'danger':'warning';
+								<?php $color = $rowCheckin['status']=='CHECKOUT' ? 'danger':'warning';
 								for($i=0;$i < $numRoom; $i++)
 								{
 									echo "<button class='col-lg-3 btn-".$color."' style='margin-left:5px;'>",$rowCheckin['selectRoom'][$i]['roomID']."</button> ";
 								}
 								?>
 							</td>
-							<td><?php echo $rowCheckin['bookedDate']; ?></td>
-							<td><?php echo $rowCheckin['status']=='CHECKIN' ? $rowCheckin['checkinDate']:'' ; ?></td>
-							<td><?php echo $rowCheckin['status']=='CHECKIN' ? $rowCheckin['checkoutDate']:'' ; ?></td>
+							<td><?php echo $rowCheckin['checkinDate'] ; ?></td>
+							<td><?php echo $rowCheckin['checkoutDate'] ; ?></td>
+							<td><?php echo $rowCheckin['createDT'] ; ?></td>
 							<td><?php echo $rowCheckin['status']; ?></td>
 							<td >
-								<?php if($rowCheckin['status']=='CHECKIN'){ ?>
-								<button class="btn btn-primary btn-xs btn_edit" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="edit" style='margin-left:5px;'>
-									<i class="fa fa-edit fa-2x"></i>
-								</button>
-								<button class="btn btn-warning btn-xs btn_addservice" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="Add Service" style='margin-left:5px;'>
-									<i class="fa fa-cutlery fa-2x" title="Add Service"></i>
-								</button>
-								<button class="btn btn-success btn-xs btn_checkout" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="Checkout" style='margin-left:5px;'>
-									<i class="fa fa-sign-out fa-2x" title="Checkout"></i>
-								</button>
-								<button class="btn btn-info btn-xs btn_print" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="Print" style='margin-left:5px;'>
-									<i class="fa fa-print fa-2x" title="Print"></i>
-								</button>
-								<button class="btn btn-danger btn-xs btn_cancel" id="<?php echo $rowCheckin['bookedID']; ?>" title="Cancle" style='margin-left:5px;'>
-									<i class="fa fa-trash-o fa-2x" title="Cancle"></i>
-								</button>
-								<?php }else{ ?>
-								<button class="btn btn-danger btn-xs btn_checkin" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="edit" style='margin-left:5px;'>
-									<i class="fa fa-edit fa-2x"></i>
-								</button>
-								<button class="btn btn-danger btn-xs btn_cancel" id="<?php echo $rowCheckin['bookedID']; ?>" title="Add Service" style='margin-left:5px;'>
-									<i class="fa fa-trash-o fa-2x" title="Cancle"></i>
-								</button>
-								<?php } ?>
+								<?php //print_r($serviceDtl);?>
 							</td>
 						</tr>
 					<?php endforeach; ?>

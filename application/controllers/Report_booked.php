@@ -39,7 +39,7 @@ class Report_booked extends CI_Controller {
 	public function showList($keyword='')
 	{
 		$data_array = array();
-		foreach ($this->Mdl_booked->getBookedAll($keyword) as $key => $rowBooked) {
+		foreach ($this->Mdl_booked->getBookedAll($keyword,'BOOKED') as $key => $rowBooked) {
 			if(isset($data_array[$rowBooked['bookedID']]))
 			{
 				array_push($data_array[$rowBooked['bookedID']]['selectRoom'],

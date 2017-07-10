@@ -8,6 +8,7 @@ class Report_checkin extends CI_Controller {
 		parent::__construct();
 		$this->ctl="Report_checkin";
 		$this->pagename="REPORT CHECKIN";
+		$this->load->model('Mdl_booked');
 		$this->load->model('Mdl_checkin');
 		$this->dtnow = $this->packfunction->dtYMDnow();
 		$this->ip_addr = $this->input->ip_address();
@@ -28,11 +29,10 @@ class Report_checkin extends CI_Controller {
 		$this->packfunction->packView($this->data,"report/reportcheckin/ReportCheckinDay.php");
 	}
 
-
 	public function showList($keyword='')
 	{
 		$data_array = array();
-		foreach ($this->Mdl_checkin->getCheckinAll($keyword) as $key => $rowBooked) {
+		foreach ($this->Mdl_booked->getBookedAll($keyword,'CHECKOUT') as $key => $rowBooked) {
 			if(isset($data_array[$rowBooked['bookedID']]))
 			{
 				array_push($data_array[$rowBooked['bookedID']]['selectRoom'],

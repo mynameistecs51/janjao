@@ -10,7 +10,7 @@ class Mdl_booked extends CI_Model {
 
 	}
 
-	public function getBookedAll($keyword='')
+	public function getBookedAll($keyword='',$status='')
 	{
 		$sql = "
 				SELECT
@@ -50,9 +50,8 @@ class Mdl_booked extends CI_Model {
 					DATE_FORMAT(tbr.checkinDate,'%d/%m/%Y %H:%i') AS checkinDate,
 					DATE_FORMAT(tbr.checkoutDate,'%d/%m/%Y %H:%i') AS checkoutDate
 				FROM ts_booked tb
-				INNER JOIN ts_booked_room tbr
-				ON tbr.bookedID = tb.bookedID
-				WHERE tbr.status = 'BOOKED'
+				INNER JOIN ts_booked_room tbr	ON tbr.bookedID = tb.bookedID
+				WHERE tbr.status = '".$status."'
 				AND CONCAT(tb.bookedCode,tb.idcardno,tb.firstName,' ',tb.lastName,tbr.roomID,DATE_FORMAT(tb.bookedDate,'%d/%m/%Y')) LIKE '%".$keyword."%'
 				";
 		$data = $this->db->query($sql)->result_array();
