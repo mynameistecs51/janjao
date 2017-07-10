@@ -39,26 +39,8 @@ class RoomType extends CI_Controller {
 	}
 
 	public function RoomtypeEdit($id)
-	{
-		$getRoomtypeID = $this->Mdl_roomType->getRoomtypeID($id);
-		$this->data['getRoomtype'] = '';
-		foreach ($getRoomtypeID as $key => $rowRoomType) {
-			$this->data['getRoomtype'] = array(
-				'roomtypeID' => $rowRoomType['roomtypeID'],
-				'bed' => $rowRoomType['bed'],
-				'roomtypeCode' => $rowRoomType['roomtypeCode'],
-				'price_month' => $rowRoomType['price_month'],
-				'price_day' => $rowRoomType['price_day'],
-				'price_short' => $rowRoomType['price_short'],
-				'price_hour' => $rowRoomType['price_hour'],
-				'comment' => $rowRoomType['comment'],
-				'status' => $rowRoomType['status'],
-				'createDT' => $rowRoomType['createDT'],
-				'createBY' => $rowRoomType['createBY'],
-				'updateDT' => $rowRoomType['updateDT'],
-				'updateB' => $rowRoomType['updateBY'],
-				);
-		}
+	{ 
+		$this->data['getRoomtype'] = $this->Mdl_roomType->getRoomtypeID($id); 
 		$this->load->view('roomtype/RoomtypeEdit',$this->data);
 	}
 
@@ -70,8 +52,8 @@ class RoomType extends CI_Controller {
 
 	public function deleteRoomtype()
 	{
-		$data = $this->Mdl_roomType->deleteRoomtype();
-		redirect($this->ctl,'refresh');
+		$this->Mdl_roomType->deleteRoomtype($_POST['roomtypeID']);
+		echo json_encode(['status'=>'success']);
 	}
 
 }

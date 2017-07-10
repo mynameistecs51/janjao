@@ -65,6 +65,25 @@ class Usergroup extends CI_Controller {
 			);
 			$usergroupID = $this->Mdl_usergroup->addNewData($data,'tm_usergroup');
 
+			$getmenu = $this->Mdl_usergroup->getmenu();
+			foreach ($getmenu as $me) {
+				$dataconf = array( 
+						"userGroupID"	=>$usergroupID,
+						"menuID"		=>$me['MenuID'],
+						"canAdd"		=>'ON',
+						"canView"		=>'ON',
+						"canEdit"		=>'ON',
+						"canDrop"		=>'ON',
+						"canPrint"		=>'ON',
+						"canApprove"    =>'ON',
+						"status"		=>'ON',
+						"updateDT"		=>$this->packfunction->dtYMDnow(), 
+						"updateBY"		=>$this->UserName
+					);
+				$this->Mdl_usergroup->addNewData($dataconf,'tc_menu_config');
+			} 
+
+
 			redirect('usergroup/last/'.md5($usergroupID));
 		}else{
 			redirect('authen/');

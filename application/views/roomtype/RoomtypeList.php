@@ -1,45 +1,37 @@
     <!-- Page Name -->
     <!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/datatable/css/dataTables.bootstrap.min.css"> -->
     <div class="col-lg-12">
-    	<i style="font-size: 18px;">ROOMTYPE LIST</i>
-    </div>
+        <i style="font-size: 18px;">ROOMTYPE LIST</i>
+        <span class="btn btn-success btn_add"  style="float: right;margin-top: -10px;">CREATE ROOM TYPE</span>
+    </div> 
     <hr style="margin-top: 30px;">
 
 
     <!-- Page Content -->
     <div class="col-lg-12">
     	<!-- Page Features -->
-    	<div class="row text-center">
-    		<div class="col-sm-12" align="right">
-    			<div class="sh-left pull-left col-sm-6">
-    				<button  type="submit" class="btn btn-success btn_add " style="float: left;" >
-    					<span class="fa fa-plus"> </span> ADD ROOM TYPE</button>
-    				</div>
-    				<div class="sh-right  pull-right  col-sm-6">
-    					<form name="formSearch" id="formSearch" method="POST" action="<?php echo base_url() ?>user/search/">
-    						<button  type="submit" class="btn btn-primary " style="float: right;">Search</button>
-    						<input type="text" class="form-control"  id="keyword" style="width: 250px;margin-right: 10px;" placeholder="keyword" name="keyword" value="<?php echo $keyword; ?>">
-    					</form>
-    				</div>
-    			</div>
-    		</div>
+            <div class="row text-center">  
+                <div class="col-lg-12" align="right">
+                    <div class="sh-right">
+                        <form name="formSearch" id="formSearch" method="POST" action="<?php echo base_url()?>roomtype/search/">
+                            <button  type="submit" class="btn btn-primary " style="float: right;">Search</button>
+                            <input type="text" class="form-control"  id="keyword" style="width: 250px;margin-right: 10px;" placeholder="keyword" name="keyword" value="<?php echo $keyword; ?>">  
+                        </form>
+                    </div> 
+                </div> 
+            </div>
     		<div class="row text-center" style="margin-top: 10px;">
     			<div class="col-lg-12" align="left">
     				<table id="fairlist" class="table table-striped table-bordered" cellspacing="0" width="100%" >
     					<thead style="background:#BDBDBD;font-size: 12px; ">
     						<tr >
     							<th  style="text-align: center;width: 40px;">No.</th>
-    							<th style="text-align: center;width:  150px;">ROOM TYPE DETAILS</th>
-    							<th style="text-align: center;width:  80px;">PRICE SHORT</th>
-    							<th style="text-align: center;width:  80px;">PRICE HOUR</th>
-    							<th style="text-align: center;width:  70px;">PRICE DAY</th>
-    							<th style="text-align: center;width:  80px;">PRICE MONTH</th>
+    							<th style="text-align: center; ">ROOM TYPE DETAILS</th>
+    							<th style="text-align: center;width:  150px;">PRICE SHORT</th> 
+    							<th style="text-align: center;width:  150px;">PRICE DAY</th>
+    							<th style="text-align: center;width:  150px;">PRICE MONTH</th>
     							<th style="text-align: center;width:  80px;">STATUS</th>
-    							<th style="text-align: center;width:  190px;">COMMENT</th>
-    							<th style="text-align: center;width:  100px;">CREATE DATE</th>
-    							<th style="text-align: center;width:  100px;">UPDATE DATE</th>
-    							<th style="text-align: center;width:  100px;"> CREATE BY</th>
-    							<th style="text-align: center;width:  150px;">#</th>
+    							<th style="text-align: center;width:  100px;">#</th>
     						</tr>
     					</thead>
     					<tbody>
@@ -53,28 +45,20 @@
     										<li><?php echo $rowRoomType['bed']; ?> </li>
     									</ul>
     								</td>
-    								<td><?php echo $rowRoomType['price_short']; ?></td>
-    								<td><?php echo $rowRoomType['price_hour']; ?></td>
-    								<td><?php echo $rowRoomType['price_day'] ?></td>
-    								<td><?php echo $rowRoomType['price_month']; ?></td>
-    								<td><?php echo $rowRoomType['status']; ?></td>
-    								<td><?php echo $rowRoomType['comment']; ?></td>
-    								<td><?php echo $rowRoomType['createDT'] ?></td>
-    								<td><?php echo $rowRoomType['updateDT'] ?></td>
-    								<td><?php echo $rowRoomType['updateBY'] ?></td>
+    								<td align="right"><?php echo $rowRoomType['price_short']; ?></td> 
+    								<td align="right"><?php echo $rowRoomType['price_day'] ?></td>
+    								<td align="right"><?php echo $rowRoomType['price_month']; ?></td>
+    								<td><?php echo $rowRoomType['status']; ?></td> 
     								<td >
     									<?php if ($rowRoomType['status'] == 'ON') {?>
-    									<button class="btn btn-primary col-sm-3  btn-xs btn_edit" id="<?php echo MD5($rowRoomType['roomtypeID']); ?>" title="edit" style='margin-left:5px;'>
+    									<button class="btn btn-primary btn-xs btn_edit" id="<?php echo MD5($rowRoomType['roomtypeID']); ?>" title="edit" style='margin-left:5px;'>
     										<i class="fa fa-edit fa-2x"></i>
     									</button>
-    									<button class="btn btn-warning col-sm-3  btn-xs  btn_delete" id="<?php echo MD5($rowRoomType['roomtypeID']); ?>"  style='margin-left:5px;'>
+    									<button class="btn btn-warning btn-xs  btn_delete" id="<?php echo $rowRoomType['roomtypeID']; ?>"  style='margin-left:5px;'>
     										<i class="fa fa-trash-o fa-2x" title="deleteRoomtype"></i>
-    									</button>
-    									<button class="btn btn-info col-sm-3  btn-xs btn_info" id="<?php echo MD5($rowRoomType['roomtypeID']); ?>" title="Print" style='margin-left:5px;'>
-    										<i class="fa fa-print fa-2x" title="Print"></i>
-    									</button>
+    									</button> 
     									<?php } else {?>
-    									<button class="btn btn-danger col-sm-3  btn-xs btn_edit" id="<?php echo MD5($rowRoomType['roomtypeID']); ?>" title="edit" style='margin-left:5px;'>
+    									<button class="btn btn-danger btn-xs btn_edit" id="<?php echo MD5($rowRoomType['roomtypeID']); ?>" title="edit" style='margin-left:5px;'>
     										<i class="fa fa-edit fa-2x"></i>
     									</button>
     									<?php }?>
@@ -87,27 +71,24 @@
     		</div>
     		<div class="div_modal"> <!-- show modal Bill --> </div>
     		<!-- /.row -->
-    		<!-- <script type="text/javascript"  src="<?php echo base_url() ?>assets/datatable/js/jquery-1.12.4.js" ></script> -->
-    		<!-- <script type="text/javascript"  src="<?php echo base_url() ?>assets/datatable/js/dataTables.bootstrap.min.js" ></script> -->
-    		<!-- <script type="text/javascript"  src="<?php echo base_url() ?>assets/datatable/js/jquery.dataTables.min.js" ></script> -->
     		<!--  END Fair List -->
     		<script type="text/javascript">
     			$(function() {
-			 // $('#fairlist').DataTable();
-			 roomAdd();
-			 roomEdit();
-			 roomDelete();
-			} );
+    			 // $('#fairlist').DataTable();
+    			 roomAdd();
+    			 roomEdit();
+    			 roomDelete();
+    			});
 
     			function roomAdd() {
     				$('.btn_add').click(function(){
-    					load_page('<?php echo base_url() . "index.php/roomtype/RoomtypeAdd/"; ?>','.:: Data ROOM TYPE ::.','<?php echo base_url() . "roomtype/saveAdd/"; ?>');
+    					load_page('<?php echo base_url() . "roomtype/RoomtypeAdd/"; ?>','.:: Data ROOM TYPE ::.','<?php echo base_url() . "roomtype/saveAdd/"; ?>');
     				});
     			}
 
     			function roomEdit() {
-    				$('.btn_edit').click(function(){
-    					load_page('<?php echo base_url() . "index.php/roomtype/RoomtypeEdit/"; ?>'+$(this).attr('id'),'.:: EDIT ROOM TYPE ::.','<?php echo base_url()."roomtype/saveEdit/"; ?>');
+    				$('.btn_edit').click(function(){ 
+    					load_page('<?php echo base_url() . "roomtype/RoomtypeEdit/"; ?>'+$(this).attr('id'),'.:: EDIT ROOM TYPE ::.','<?php echo base_url()."roomtype/saveEdit/"; ?>');
     				});
     			}
 
@@ -118,18 +99,19 @@
     					if(cfm == true){
     						$.ajax({
     							url: '<?php echo base_url()."roomtype/deleteRoomtype/";?>',
-    							type: "post",
-    							data: {'roomtypeID': $(this).attr('id')},
+    							type: 'POST',
+                                dataType: 'json',
+    							data: {roomtypeID: roomtypeID },
     							success: function(rs)
     							{
-								// alert("ลบข้อมูลเสร็จเรียบร้อย.");
-								window.location.reload();
-							},
-							error:function(err){
-								alert("เกิดข้อผิดพลาดในการลบข้อมูล");
-								window.location.reload();
-							}
-						});
+    								alert("ลบข้อมูลเสร็จเรียบร้อย.");
+    								window.location.reload();
+    							},
+    							error:function(err){
+    								alert("เกิดข้อผิดพลาดในการลบข้อมูล");
+    								window.location.reload();
+    							}
+						    });
     					}else{
     						return false;
     					}

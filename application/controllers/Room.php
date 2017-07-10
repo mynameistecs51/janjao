@@ -7,7 +7,7 @@ class Room extends CI_Controller {
 	{
 		parent::__construct();
 		$this->ctl="Room";
-		$this->pagename="ROOM";
+		$this->pagename="SETTING";
 		$this->load->model('Mdl_user');
 		$this->load->model('Mdl_room');
 		$this->load->model('Mdl_roomType');

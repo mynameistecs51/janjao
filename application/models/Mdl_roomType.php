@@ -55,14 +55,17 @@ class Mdl_roomType extends CI_Model {
 		tmrt.createDT,
 		tmrt.createBY,
 		tmrt.updateDT,
-		tmrt.updateBY,
-		tmr.roomCODE
-		FROM tm_roomtype tmrt
-		INNER JOIN tm_room tmr ON tmr.roomtypeID = tmrt.roomtypeID
-		WHERE  MD5(tmr.roomCODE) ='".$id."'
-		";
-		$query = $this->db->query($sql)->result_array();
-		return $query;
+		tmrt.updateBY
+		FROM tm_roomtype tmrt 
+		WHERE  MD5(tmrt.roomtypeID) ='".$id."' ";
+		$query = $this->db->query($sql);
+		$rs = $query->result_array();
+		if(count($rs)>0){
+			return $rs[0];
+		}else{
+			return [];
+		}
+		
 	}
 
 	public function saveAdd()
@@ -74,7 +77,7 @@ class Mdl_roomType extends CI_Model {
 			'price_month' 	 => $this->input->post('price_month'),
 			'price_day' 		  => $this->input->post('price_day'),
 			'price_short'	  => $this->input->post('price_short'),
-			'price_hour'		=> $this->input->post('price_hour'),
+			'price_hour'		=> '0.00',
 			'comment' 		    => $this->input->post('comment'),
 			'status' 			    => $this->input->post('status'),
 			"createDT"		    => $this->packfunction->dtYMDnow(),
@@ -92,7 +95,7 @@ class Mdl_roomType extends CI_Model {
 			'bed'          => $this->input->post('bed'),
 			'roomtypeCode' => $this->input->post('roomtypeCode'),
 			'price_short'  => $this->input->post('price_short'),
-			'price_hour'   => $this->input->post('price_hour'),
+			'price_hour'   => '0.00',
 			'price_day'    => $this->input->post('price_day'),
 			'price_month'  => $this->input->post('price_month'),
 			'status'			    => $this->input->post('status'),
@@ -106,12 +109,10 @@ class Mdl_roomType extends CI_Model {
 		$this->db->update('tm_roomtype',$data);
 	}
 
-	public function deleteRoomtype()
-	{
-		$id = $this->getRoomtypeID($this->input->post('roomtypeID'));
-
-		$this->db->where('roomtypeID',$id[0]['roomtypeID']);
-		$data = $this->db->delete('tm_roomtype');
+	public function deleteRoomtype($id)
+	{ 
+		$this->db->where('roomtypeID',$id);
+		$this->db->delete('tm_roomtype');
 	}
 
 }

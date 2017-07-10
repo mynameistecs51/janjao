@@ -74,6 +74,17 @@ class Mdl_usergroup extends CI_Model
 			return array();
 		}
    }
+
+   public function getmenu(){
+   		$sql = "
+                SELECT  
+				a.MenuID, 
+				a.MenuName,
+				a.status
+				FROM  tm_menu  a   ";
+		$query = $this->db->query($sql); 
+		return $query->result_array(); 
+   }
  
 
        
