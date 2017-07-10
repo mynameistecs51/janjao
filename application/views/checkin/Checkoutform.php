@@ -263,12 +263,12 @@
 			<label for="idcardno" class="col-lg-2 control-label"></label>
 			<div class="col-lg-8">
 				<div class="col-lg-6">ภาษีมูลค่าเพิ่ม</div><div class="col-lg-5"><input type="text" name="vat" id="vat" class="form-control" value="0" style="text-align: right;height: 28px;"></div><div class="col-lg-1">%</div>
-				<div class="col-lg-12" style="height: 5px;"></div>
-				<div class="col-lg-6">ยอดสุทธิ</div><div class="col-lg-5"><input type="text" name="lastamount" id="lastamount"  class="form-control" value="<?php echo number_format($totalsum,2); ?>" style="text-align: right;height: 28px;" readonly></div><div class="col-lg-1">บาท</div>
 			 	<div class="col-lg-12" style="height: 5px;"></div>
 				<div class="col-lg-6">ส่วนลด</div><div class="col-lg-5"><input type="text" name="discount" id="discount" class="form-control" value="0.00" style="text-align: right;height: 28px;"></div><div class="col-lg-1">บาท</div>
 				<div class="col-lg-12" style="height: 5px;"></div>
-				<div class="col-lg-6">เงินมัดจำ</div><div class="col-lg-5"><input type="text" name="deposit" id="deposit"  class="form-control" value="<?php //echo $checkinDtl['cashPledge']; ?>200.00" style="text-align: right;height: 28px;" readonly></div><div class="col-lg-1">บาท</div>
+				<div class="col-lg-6">เงินมัดจำ</div><div class="col-lg-5"><input type="text" name="deposit" id="deposit"  class="form-control" value="<?php echo $checkinDtl['cashPledge']; ?>" style="text-align: right;height: 28px;" readonly></div><div class="col-lg-1">บาท</div>
+                  <div class="col-lg-12" style="height: 5px;"></div>
+                  <div class="col-lg-6">ยอดสุทธิ</div><div class="col-lg-5"><input type="text" name="lastamount" id="lastamount"  class="form-control" value="<?php echo number_format($totalsum,2); ?>" style="text-align: right;height: 28px;" readonly></div><div class="col-lg-1">บาท</div>
 				<div class="col-lg-12" style="height: 5px;"></div>
 				<div class="col-lg-6">รับเงิน</div><div class="col-lg-5"><input type="text" name="pay" id="pay" class="form-control" value="0.00" style="text-align: right;height: 28px;"></div><div class="col-lg-1">บาท</div>
 				<div class="col-lg-12" style="height: 5px;"></div>

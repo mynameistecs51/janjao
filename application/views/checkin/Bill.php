@@ -130,10 +130,11 @@
 				</tbody>
 				<tfoot >
 					<tr style="background:#E6E6E6;" >
-						<td colspan="4" align="center">รวม</td>
-						<?php $sumTotal = ( ($price * $numRoom)  +$rowDetail['cashPledge']); ?>
-						<!-- cashPledge+totalsum+((to/100)*vat); // เงินมัดจำ + ยอดรวมค่าห้อง  + Vat -->
-						<td align="right"><?php echo $sumTotal + ( ($sumTotal * 7 ) /100 ) ; ?>	</td>
+						<td colspan="4" align="right">รวมสุทธิ</td>
+						<td  align="right" style="border-bottom:3px double black">
+							<?php $sumTotal = ( ($price * $numRoom)  +$rowDetail['cashPledge']); ?>
+							<?php echo $sumTotal + ( ($sumTotal * $rowDetail['totalVat'] ) /100 ) ; ?>
+						</td>
 					</tr>
 					<tr>
 						<td colspan="5" align="right" style="width: 100%;text-align: right; height: 200px;">

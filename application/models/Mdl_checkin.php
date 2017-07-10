@@ -324,26 +324,39 @@ class Mdl_checkin extends CI_Model {
 
 		//save ts_cash_dtl
 		$cashhdrID = $this->getBillCheckin(MD5($key));
-		print_r($cashhdrID);
+		// print_r($cashhdrID);
+
+		$datadtl = array(
+			// 'cashdtlID' => $_POST[''],
+			'cashhdrID' => $cashhdrID[0]['cashhdrID'],
+			'bookedID' => $key,
+			'cashDate' => $this->packfunction->dtYMDnow(),
+			'discount' => $_POST['discount'],
+			'vat' => $_POST['vat'],
+			'sumtotal' => $_POST['lastamount'],
+			'status' => 'PAY',
+			"createDT"	  => $this->packfunction->dtYMDnow(),
+			"createBY"	  => $this->UserName,
+			"updateDT"	  => $this->packfunction->dtYMDnow(),
+			"updateBY"	  => $this->UserName
+			);
+		$this->db->insert('ts_cash_dtl',$datadtl);
+		$idcashdtl = $this->db->insert_id();
+
 		foreach ($_POST['serviceName'] as $svk => $rowsvk) {
-			$dataTschashDTL[$svk] = array(
-				'cashhdrID' => $cashhdrID[0]['cashhdrID'],
-				'bookedID' => $_POST['bookedID'],
+			$datadtlList[$svk] = array(
+				'cashdtlID' => $idcashdtl,
 				'cashName' => $_POST['serviceName'][$svk],
-				'cashDesc' => '',
-				'cashDate' => $this->packfunction->dtYMDnow(),
 				'price' => $_POST['price'][$svk],
 				'amount' => $_POST['amount'][$svk],
 				'unit' => $_POST['unit'][$svk],
 				'total' => $_POST['lastamount'],
-				'comment' => '',
-				'status' => 'PAY',
 				"createDT"	  => $this->packfunction->dtYMDnow(),
 				"createBY"	  => $this->UserName,
 				"updateDT"	  => $this->packfunction->dtYMDnow(),
 				"updateBY"	  => $this->UserName
 				);
-			$this->db->insert('ts_cash_dtl' , $dataTschashDTL[$svk]);
+			$this->db->insert('ts_cash_dtl_list' , $datadtlList[$svk]);
 
 		}
 	}
@@ -490,12 +503,39 @@ class Mdl_checkin extends CI_Model {
 		s.price,
 		s.unit,
 		s.amount,
-		s.type
+		s.type,
+		tsch.cashhdrID,
+		tsch.cashCode,
+		tsch.bookedID,
+		tsch.roomID,
+		tsch.cashDate,
+		tsch.totalVat,
+		tsch.totalDiscount,
+		tsch.totalLast,
+		tsch.comment,
+		tscd.cashdtlID,
+		tscd.cashDate,
+		tscd.discount,
+		tscd.vat,
+		tscd.sumtotal,
+		tscd.status,
+		tscdl.cashdtllistID,
+		tscdl.cashdtlID,
+		tscdl.cashName,
+		tscdl.price AS tscdlPrice,
+		tscdl.amount AS tscdlAmount,
+		tscdl.unit AS tscdlUnit,
+		tscdl.total AS tscdlTotal
 		FROM ts_service s
+		INNER JOIN ts_cash_hdr tsch ON tsch.bookedID =  s.bookedID
+		INNER JOIN ts_cash_dtl tscd ON tscd.cashhdrID = tsch.cashhdrID
+		INNER JOIN ts_cash_dtl_list tscdl ON tscdl.cashdtlID = tscd.cashdtlID
 		WHERE MD5(s.bookedID) = '".$key."'
 		AND s.type = '".$type."'
 		AND s.status<>'CANCLE'
-		AND s.status<>'HIDDEN' ";
+		AND s.status<>'HIDDEN'
+		GROUP BY s.serviceID
+		";
 		$query 	= $this->db->query($sql);
 		return $query->result_array();
 	}

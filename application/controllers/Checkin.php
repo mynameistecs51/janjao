@@ -114,7 +114,7 @@ class Checkin extends CI_Controller {
 	}
 
 	public function  billprintcheckin($key=''){
-		// $key =MD5('14');
+		// $key =MD5('2');
 		$countDay = $this->Mdl_checkin->booked($key);
 		$this->data['dateDtl'] = date_diff(date_create($countDay['checkInAppointDate']),date_create($countDay['checkOutAppointDate'])->modify("+1 hour"));
 		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
@@ -274,6 +274,7 @@ class Checkin extends CI_Controller {
 	}
 
 	public function  billCheckout($key=''){
+		$key = MD5('6');
 		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
 		if(count($this->data['checkinDtl'])>0){
 			$this->data['billCode']=$this->Mdl_checkin->getBillCode();
