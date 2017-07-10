@@ -40,7 +40,7 @@ class RoomType extends CI_Controller {
 
 	public function RoomtypeEdit($id)
 	{ 
-		$this->data['getRoomtype'] = $this->Mdl_roomType->getRoomtypeID($id); 
+		$this->data['getRoomtype'] = $this->Mdl_roomType->getRoomtypeDtl($id); 
 		$this->load->view('roomtype/RoomtypeEdit',$this->data);
 	}
 

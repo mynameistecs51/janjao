@@ -35,6 +35,7 @@ class Mdl_roomType extends CI_Model {
 		$query = $this->db->query($sql)->result_array();
 		return $query;
 	}
+ 
 
 	public function getRoomtypeID($id)
 	{
@@ -55,9 +56,37 @@ class Mdl_roomType extends CI_Model {
 		tmrt.createDT,
 		tmrt.createBY,
 		tmrt.updateDT,
-		tmrt.updateBY
+		tmrt.updateBY,
+		tmr.roomCODE
+		FROM tm_roomtype tmrt
+		INNER JOIN tm_room tmr ON tmr.roomtypeID = tmrt.roomtypeID
+		WHERE  MD5(tmr.roomCODE) ='".$id."'
+		";
+		$query = $this->db->query($sql)->result_array();
+		return $query;
+	}
+
+	public function getRoomtypeDtl($id){
+		$sql = "
+		SELECT
+			tmrt.roomtypeID,
+			CASE tmrt.bed
+			WHEN 'SINGLE' THEN 'เตียงดี่ยว'
+			WHEN 'MULTIPLE' THEN 'เตียงคู่'
+			END  bed,
+			tmrt.roomtypeCode,
+			tmrt.price_month,
+			tmrt.price_day,
+			tmrt.price_short,
+			tmrt.price_hour,
+			tmrt.comment,
+			tmrt.status,
+			tmrt.createDT,
+			tmrt.createBY,
+			tmrt.updateDT,
+			tmrt.updateBY
 		FROM tm_roomtype tmrt 
-		WHERE  MD5(tmrt.roomtypeID) ='".$id."' ";
+		WHERE  MD5(tmrt.roomtypeID) ='".$id."'  ";
 		$query = $this->db->query($sql);
 		$rs = $query->result_array();
 		if(count($rs)>0){
@@ -65,7 +94,6 @@ class Mdl_roomType extends CI_Model {
 		}else{
 			return [];
 		}
-		
 	}
 
 	public function saveAdd()
