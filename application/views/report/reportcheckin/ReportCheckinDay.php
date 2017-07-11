@@ -40,27 +40,24 @@
 				</thead>
 				<tbody>
 					<?php $j=1; ?>
-					<?php if(count($getCheckin)>0) { ?>
-					<?php foreach ($getCheckin as $key => $rowCheckin) :?>
-						<?php $numRoom = count($rowCheckin['selectRoom']); ?>
-						<tr id="row<?php echo $rowCheckin['bookedID']; ?>">
-							<td><?php echo $j++; ?></td>
-							<td><?php echo $rowCheckin['bookedCode'] ?></td>
-							<td><?php echo $rowCheckin['firstName']." ".$rowCheckin['lastName']; ?></td>
-							<td >
-								<?php $color = $rowCheckin['status']=='CHECKOUT' ? 'danger':'warning';
-								for($i=0;$i < $numRoom; $i++)
-								{
-									echo "<button class='col-lg-3 btn-".$color."' style='margin-left:5px;'>",$rowCheckin['selectRoom'][$i]['roomID']."</button> ";
-								}
+					<?php echo "<pre>"; ?>
+					<?php if(count($repCheckout)>0) { ?>
+					<?php foreach ($repCheckout as $key => $report) :?>
+						<tr>
+							<td ><?php echo $j++; ?></td>
+							<td><?php echo $report['bookedCode']; ?></td>
+							<td><?php echo $report['firstName']." ".$report['lastName']; ?></td>
+							<td><?php echo $report['roomID']; ?></td>
+							<td><?php echo $report['checkinDate']; ?></td>
+							<td><?php echo $report['checkoutDate']; ?></td>
+							<td><?php echo $report['createDT']; ?></td>
+							<td><?php echo $report['status']; ?></td>
+							<td>
+								<?php ;
+								$sumtotal = $report['totalLast']+($report['cashPledge'] - ($report['discount'] + $report['sumtotal']) );
+								echo number_format($sumtotal,2);
 								?>
-							</td>
-							<td><?php echo $rowCheckin['checkinDate'] ; ?></td>
-							<td><?php echo $rowCheckin['checkoutDate'] ; ?></td>
-							<td><?php echo $rowCheckin['createDT'] ; ?></td>
-							<td><?php echo $rowCheckin['status']; ?></td>
-							<td >
-								<?php //print_r($serviceDtl);?>
+
 							</td>
 						</tr>
 					<?php endforeach; ?>

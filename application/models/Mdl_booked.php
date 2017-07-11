@@ -13,47 +13,47 @@ class Mdl_booked extends CI_Model {
 	public function getBookedAll($keyword='',$status='')
 	{
 		$sql = "
-				SELECT
-					tb.bookedID,
-					tb.bookedCode,
-					tb.idcardno,
-					tb.idcardnoPath,
-					tb.titleName,
-					tb.firstName,
-					tb.middleName,
-					tb.lastName,
-					tb.birthdate,
-					tb.address,
-					tb.district,
-					tb.amphur,
-					tb.province,
-					tb.country,
-					tb.postcode,
-					tb.mobile,
-					tb.licenseplate,
-					tb.email,
-					DATE_FORMAT(tb.bookedDate,'%d/%m/%Y %H:%i') AS bookedDate,
-					DATE_FORMAT(tb.checkInAppointDate,'%d/%m/%Y %H:%i') AS checkInAppointDate,
-					tb.checkOutAppointDate,
-					tb.is_breakfast,
-					tb.bookedType,
-					tb.cashPledge,
-					tb.cashPledgePath,
-					tb.comment,
-					tb.status,
-					tb.createDT,
-					tb.createBY,
-					tb.updateDT,
-					tb.updateBY,
-					tbr.bookedroomID,
-					tbr.roomID,
-					DATE_FORMAT(tbr.checkinDate,'%d/%m/%Y %H:%i') AS checkinDate,
-					DATE_FORMAT(tbr.checkoutDate,'%d/%m/%Y %H:%i') AS checkoutDate
-				FROM ts_booked tb
-				INNER JOIN ts_booked_room tbr	ON tbr.bookedID = tb.bookedID
-				WHERE tbr.status = '".$status."'
-				AND CONCAT(tb.bookedCode,tb.idcardno,tb.firstName,' ',tb.lastName,tbr.roomID,DATE_FORMAT(tb.bookedDate,'%d/%m/%Y')) LIKE '%".$keyword."%'
-				";
+		SELECT
+		tb.bookedID,
+		tb.bookedCode,
+		tb.idcardno,
+		tb.idcardnoPath,
+		tb.titleName,
+		tb.firstName,
+		tb.middleName,
+		tb.lastName,
+		tb.birthdate,
+		tb.address,
+		tb.district,
+		tb.amphur,
+		tb.province,
+		tb.country,
+		tb.postcode,
+		tb.mobile,
+		tb.licenseplate,
+		tb.email,
+		DATE_FORMAT(tb.bookedDate,'%d/%m/%Y %H:%i') AS bookedDate,
+		DATE_FORMAT(tb.checkInAppointDate,'%d/%m/%Y %H:%i') AS checkInAppointDate,
+		tb.checkOutAppointDate,
+		tb.is_breakfast,
+		tb.bookedType,
+		tb.cashPledge,
+		tb.cashPledgePath,
+		tb.comment,
+		tb.status,
+		tb.createDT,
+		tb.createBY,
+		tb.updateDT,
+		tb.updateBY,
+		tbr.bookedroomID,
+		tbr.roomID,
+		DATE_FORMAT(tbr.checkinDate,'%d/%m/%Y %H:%i') AS checkinDate,
+		DATE_FORMAT(tbr.checkoutDate,'%d/%m/%Y %H:%i') AS checkoutDate
+		FROM ts_booked tb
+		INNER JOIN ts_booked_room tbr	ON tbr.bookedID = tb.bookedID
+		WHERE tbr.status = '".$status."'
+		AND CONCAT(tb.bookedCode,tb.idcardno,tb.firstName,' ',tb.lastName,tbr.roomID,DATE_FORMAT(tb.bookedDate,'%d/%m/%Y')) LIKE '%".$keyword."%'
+		";
 		$data = $this->db->query($sql)->result_array();
 		return $data;
 	}
@@ -126,34 +126,34 @@ class Mdl_booked extends CI_Model {
 		$idBookedRoom[$i] = $this->db->insert_id();
 
 			// Insert ts_booked_room_log
-			$startDate = date_create($this->packfunction->dateTosql($_POST['checkinDate']));
-			$endDate  = date_create($this->packfunction->dateTosql($this->input->post('checkOutDate')));
-			$interval = date_diff($startDate, $endDate);
-			$runDay = array();
-			while ($startDate <= $endDate) {
-				$year = $startDate->format("Y");
-				$month = $startDate->format("m");
+		$startDate = date_create($this->packfunction->dateTosql($_POST['checkinDate']));
+		$endDate  = date_create($this->packfunction->dateTosql($this->input->post('checkOutDate')));
+		$interval = date_diff($startDate, $endDate);
+		$runDay = array();
+		while ($startDate <= $endDate) {
+			$year = $startDate->format("Y");
+			$month = $startDate->format("m");
 
-				if(!array_key_exists($year, $runDay))
-					$runDay[$year] = array();
-				if(!array_key_exists($month, $runDay[$year]))
-					$runDay[$year][$month] = 0;
-					$runDay[$year][$month]++;
-				$log = array(
-					'bookedID '    => $idBooked,
-					'bookedroomID' => $idBookedRoom[$i],
-					'roomID'       => $room[$i],
-					'logDate'      => $startDate->format('Y-m-d').' 12:00:00',
-					'comment'      => $this->input->post('comment'),
-					'status'       => 'BOOKED',
-					"createDT"	   => $this->packfunction->dtYMDnow(),
-					"createBY"	   => $this->UserName,
-					"updateDT"	   => $this->packfunction->dtYMDnow(),
-					"updateBY"	   => $this->UserName
+			if(!array_key_exists($year, $runDay))
+				$runDay[$year] = array();
+			if(!array_key_exists($month, $runDay[$year]))
+				$runDay[$year][$month] = 0;
+			$runDay[$year][$month]++;
+			$log = array(
+				'bookedID '    => $idBooked,
+				'bookedroomID' => $idBookedRoom[$i],
+				'roomID'       => $room[$i],
+				'logDate'      => $startDate->format('Y-m-d').' 12:00:00',
+				'comment'      => $this->input->post('comment'),
+				'status'       => 'BOOKED',
+				"createDT"	   => $this->packfunction->dtYMDnow(),
+				"createBY"	   => $this->UserName,
+				"updateDT"	   => $this->packfunction->dtYMDnow(),
+				"updateBY"	   => $this->UserName
 				);
-				$this->db->insert('ts_booked_room_log',$log);
-				$startDate->modify("+1 day");
-			}
+			$this->db->insert('ts_booked_room_log',$log);
+			$startDate->modify("+1 day");
+		}
 		endfor; // End ts_booked_room
 
 	}
@@ -196,7 +196,7 @@ class Mdl_booked extends CI_Model {
 			'status' => 'BOOKED',
 			"updateDT"		=>$this->packfunction->dtYMDnow(),
 			"updateBY"		=>$this->UserName
-		);
+			);
 		$bookedID = $this->input->post('bookedID');
 		$this->db->where('bookedID',$bookedID);
 		$this->db->update('ts_booked',$saveCheckin);
@@ -242,7 +242,7 @@ class Mdl_booked extends CI_Model {
 					"createBY"	   => $this->UserName,
 					"updateDT"	   => $this->packfunction->dtYMDnow(),
 					"updateBY"	   => $this->UserName
-				);
+					);
 				$this->db->insert('ts_booked_room_log',$log);
 				$startDate->modify("+1 day");
 			}
@@ -257,7 +257,7 @@ class Mdl_booked extends CI_Model {
 			'status'  => 'CANCLE',
 			"updateDT"=>$this->packfunction->dtYMDnow(),
 			"updateBY"=>$this->UserName
-		);
+			);
 		$this->db->where('bookedID',$key);
 		$this->db->update('ts_booked',$saveCheckin);
 
@@ -307,13 +307,13 @@ class Mdl_booked extends CI_Model {
 		LEFT JOIN tm_roomtype rt ON r.roomtypeID=rt.roomtypeID
 		LEFT JOIN ts_booked_room br ON r.roomCODE=br.roomID AND br.status <> 'CANCLE'
 		LEFT JOIN (
-			SELECT
-				lg.roomID,
-			    COUNT(lg.logroomdateID) AS total,
-			    lg.status
-			FROM ts_booked_room_log lg
-			WHERE lg.logDate BETWEEN '".$df.":00' AND '".$dt.":00'
-			GROUP by lg.roomID
+		SELECT
+		lg.roomID,
+		COUNT(lg.logroomdateID) AS total,
+		lg.status
+		FROM ts_booked_room_log lg
+		WHERE lg.logDate BETWEEN '".$df.":00' AND '".$dt.":00'
+		GROUP by lg.roomID
 		) AS log ON r.roomCODE=log.roomID
 		WHERE r.status<>'DISABLE'
 		AND r.floor = '".$floor."'
@@ -326,43 +326,43 @@ class Mdl_booked extends CI_Model {
 
 	public function booked($key){
 		$sql = 	"
-				SELECT
-					tb.bookedID,
-					tb.bookedCode,
-					tb.idcardno,
-					tb.idcardnoPath,
-					tb.titleName,
-					tb.firstName,
-					tb.middleName,
-					tb.lastName,
-					DATE_FORMAT(tb.birthdate,'%Y') AS birthdate_y,
-					DATE_FORMAT(tb.birthdate,'%m') AS birthdate_m,
-					DATE_FORMAT(tb.birthdate,'%d') AS birthdate_d,
-					tb.address,
-					tb.district,
-					tb.amphur,
-					tb.province,
-					tb.country,
-					tb.postcode,
-					tb.mobile,
-					tb.licenseplate,
-					tb.email,
-					DATE_FORMAT(tb.bookedDate,'%d/%m/%Y %H:%i') AS bookedDate,
-					DATE_FORMAT(br.checkinDate,'%d/%m/%Y %H:%i') AS checkinDate,
-					DATE_FORMAT(br.checkoutDate,'%d/%m/%Y %H:%i') AS checkOutDate,
-					tb.is_breakfast,
-					tb.bookedType,
-					tb.cashPledge,
-					tb.cashPledgePath,
-					tb.comment,
-					tb.status,
-					tb.createDT,
-					tb.createBY,
-					tb.updateDT,
-					tb.updateBY
-				FROM ts_booked tb
-				LEFT JOIN ts_booked_room br ON  tb.bookedID=br.bookedID
-				WHERE MD5(tb.bookedID) = '".$key."' ";
+		SELECT
+		tb.bookedID,
+		tb.bookedCode,
+		tb.idcardno,
+		tb.idcardnoPath,
+		tb.titleName,
+		tb.firstName,
+		tb.middleName,
+		tb.lastName,
+		DATE_FORMAT(tb.birthdate,'%Y') AS birthdate_y,
+		DATE_FORMAT(tb.birthdate,'%m') AS birthdate_m,
+		DATE_FORMAT(tb.birthdate,'%d') AS birthdate_d,
+		tb.address,
+		tb.district,
+		tb.amphur,
+		tb.province,
+		tb.country,
+		tb.postcode,
+		tb.mobile,
+		tb.licenseplate,
+		tb.email,
+		DATE_FORMAT(tb.bookedDate,'%d/%m/%Y %H:%i') AS bookedDate,
+		DATE_FORMAT(br.checkinDate,'%d/%m/%Y %H:%i') AS checkinDate,
+		DATE_FORMAT(br.checkoutDate,'%d/%m/%Y %H:%i') AS checkOutDate,
+		tb.is_breakfast,
+		tb.bookedType,
+		tb.cashPledge,
+		tb.cashPledgePath,
+		tb.comment,
+		tb.status,
+		tb.createDT,
+		tb.createBY,
+		tb.updateDT,
+		tb.updateBY
+		FROM ts_booked tb
+		LEFT JOIN ts_booked_room br ON  tb.bookedID=br.bookedID
+		WHERE MD5(tb.bookedID) = '".$key."' ";
 		$query 	= $this->db->query($sql);
 		$rs 	= $query->result_array();
 		if (count($rs) > 0) {
@@ -375,16 +375,50 @@ class Mdl_booked extends CI_Model {
 
 	public function bookedRoom($bookedID){
 		$sql = 	"
-				SELECT
-					rm.bookedroomID,
-				    rm.bookedID,
-				    rm.roomID
-				FROM ts_booked_room rm
-				WHERE rm.bookedID = '".$bookedID."' ";
+		SELECT
+		rm.bookedroomID,
+		rm.bookedID,
+		rm.roomID
+		FROM ts_booked_room rm
+		WHERE rm.bookedID = '".$bookedID."' ";
 		$query 	= $this->db->query($sql);
 		return $query->result_array();
 
 
 	}
+
+	public function report_checkout($value = "")
+	{
+		$sql = "
+		SELECT
+		tb.bookedID,
+		tb.bookedCode,
+		tb.idcardno,
+		tb.idcardnoPath,
+		tb.titleName,
+		tb.firstName,
+		tb.middleName,
+		tb.lastName,
+		tb.birthdate,
+		tb.address,
+		tb.cashPledge,
+		tb.status,
+		tb.createDT,
+		tbr.roomID,
+		tbr.checkinDate,
+		tbr.checkoutDate,
+		tch.totalLast,
+		tcd.sumtotal,
+		tcd.discount
+		FROM
+		ts_booked tb
+		INNER JOIN ts_booked_room  tbr ON tb.bookedID =	tbr.bookedID
+		INNER JOIN ts_cash_hdr tch ON tbr.bookedID =	tch.bookedID
+		INNER JOIN ts_cash_dtl tcd ON tch.cashhdrID =		tcd.cashhdrID
+		";
+		$query = $this->db->query($sql)->result_array();
+		return $query;
+	}
+
 
 }

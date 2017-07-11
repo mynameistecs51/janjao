@@ -25,79 +25,37 @@ class Report_checkin extends CI_Controller {
 	{
 		$this->data['viewName']=$this->pagename;
 		$this->data['keyword']='';
-		$this->data['getCheckin'] = $this->showList($this->data['keyword']);
+		// $this->data['repCheckout'] = $this->showList($this->data['keyword']);
+		$this->data['repCheckout'] = $this->Mdl_booked->report_checkout($this->data['keyword']);
 		$this->packfunction->packView($this->data,"report/reportcheckin/ReportCheckinDay.php");
 	}
 
 	public function showList($keyword='')
 	{
 		$data_array = array();
-		foreach ($this->Mdl_booked->getBookedAll($keyword,'CHECKOUT') as $key => $rowBooked) {
-			if(isset($data_array[$rowBooked['bookedID']]))
-			{
-				array_push($data_array[$rowBooked['bookedID']]['selectRoom'],
-					array(
-						'bookedroomID' => $rowBooked['bookedroomID'],
-						'roomID' => $rowBooked['roomID'],
-						'checkinDate' => $rowBooked['checkinDate'],
-						'checkoutDate' => $rowBooked['checkoutDate'],
-						'comment' => $rowBooked['comment'],
-						'status' => $rowBooked['status'],
-						)
-					);
-				continue;
-			}
-			if(!isset($data_array[$rowBooked['bookedID']]))
-			{
-				$data_array[$rowBooked['bookedID']] =  array(
-					'bookedID' =>  $rowBooked['bookedID'],
-					'bookedCode' =>  $rowBooked['bookedCode'],
-					'idcardno' =>  $rowBooked['idcardno'],
-					'idcardnoPath' =>  $rowBooked['idcardnoPath'],
-					'titleName' =>  $rowBooked['titleName'],
-					'firstName' =>  $rowBooked['firstName'],
-					'middleName' =>  $rowBooked['middleName'],
-					'lastName' =>  $rowBooked['lastName'],
-					'birthdate' =>  $rowBooked['birthdate'],
-					'address' =>  $rowBooked['address'],
-					'district' =>  $rowBooked['district'],
-					'province' =>  $rowBooked['province'],
-					'country' =>  $rowBooked['country'],
-					'postcode' =>  $rowBooked['postcode'],
-					'mobile' =>  $rowBooked['mobile'],
-					'email' =>  $rowBooked['email'],
-					'bookedDate' =>  $rowBooked['bookedDate'],
-					'checkInAppointDate' =>  $rowBooked['checkInAppointDate'],
-					'checkOutAppointDate' =>  $rowBooked['checkOutAppointDate'],
-					'checkinDate' =>  $rowBooked['checkinDate'],
-					'checkoutDate' =>  $rowBooked['checkoutDate'],
-					'is_breakfast' =>  $rowBooked['is_breakfast'],
-					'bookedType' =>  $rowBooked['bookedType'],
-					'cashPledge' =>  $rowBooked['cashPledge'],
-					'cashPledgePath' =>  $rowBooked['cashPledgePath'],
-					'comment' =>  $rowBooked['comment'],
-					'status' =>  $rowBooked['status'],
-					'createDT' =>  $rowBooked['createDT'],
-					'createBY' =>  $rowBooked['createBY'],
-					'updateDT' =>  $rowBooked['updateDT'],
-					'updateBY' =>  $rowBooked['updateBY'],
-					'selectRoom' => array(
-						array(
-							'bookedroomID' => $rowBooked['bookedroomID'],
-							'roomID' => $rowBooked['roomID'],
-							'checkinDate' => $rowBooked['checkinDate'],
-							'checkoutDate' => $rowBooked['checkoutDate'],
-							'comment' => $rowBooked['comment'],
-							'status' => $rowBooked['status'],
-							)
-						)
-					);
-			}
+		foreach ($this->Mdl_booked->report_checkout($keyword) as $key => $rowList) {
+			$data_array = array(
+				'bookedID' => $rowList['bookedID'],
+				'bookedCode' => $rowList['bookedCode'],
+				'idcardno' => $rowList['idcardno'],
+				'idcardnoPath' => $rowList['idcardnoPath'],
+				'titleName' => $rowList['titleName'],
+				'firstName' => $rowList['firstName'],
+				'lastName' => $rowList['lastName'],
+				'birthdate' => $rowList['birthdate'],
+				'address' => $rowList['address'],
+				'roomID' => $rowList['roomID'],
+				'checkinDate' => $rowList['checkinDate'],
+				'checkoutDate' => $rowList['checkoutDate'],
+				'totalLast' => $rowList['totalLast'],
+				'sumtotal' => $rowList['sumtotal'],
+				'discount' => $rowList['discount'],
+				);
 		}
 		return $data_array;
 	}
-
 }
+
 
 /* End of file Report_checkin.php */
 /* Location: ./application/controllers/Report_checkin.php */

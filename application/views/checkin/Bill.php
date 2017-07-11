@@ -90,22 +90,22 @@
 								<td style="border-bottom:1px solid black" align="right">
 									<?php
 									if($rowDetail['bookedType'] == 'SHORT'){
-										echo $rowDetail['selectRoom'][$i]['price_short'];
+										echo number_format($rowDetail['selectRoom'][$i]['price_short'],2);
 									}else if($rowDetail['bookedType'] == 'DAY'){
-										echo $rowDetail['selectRoom'][$i]['price_day'];
+										echo number_format($rowDetail['selectRoom'][$i]['price_day'],2);
 									}else if($rowDetail['bookedType'] == 'MONTH'){
-										echo $rowDetail['selectRoom'][$i]['price_month'];
+										echo number_format($rowDetail['selectRoom'][$i]['price_month'],2);
 									}
 									;?>
 								</td>
 								<td style="border-bottom:1px solid black" align="right">
 									<?php
 									if($rowDetail['bookedType'] == 'SHORT'){
-										echo $price = $rowDetail['selectRoom'][$i]['price_short'];
+										echo $price = number_format($rowDetail['selectRoom'][$i]['price_short'],2);
 									}else if($rowDetail['bookedType'] == 'DAY'){
-										echo $price = $dateDtl->days * $rowDetail['selectRoom'][$i]['price_day'];
+										echo $price = number_format($dateDtl->days * $rowDetail['selectRoom'][$i]['price_day'],2);
 									}else if($rowDetail['bookedType'] == 'MONTH'){
-										echo $price = $dateDtl->m * $rowDetail['selectRoom'][$i]['price_month'];
+										echo $price = number_format($dateDtl->m * $rowDetail['selectRoom'][$i]['price_month'],2);
 									}
 									?>
 								</td>
@@ -133,7 +133,7 @@
 						<td colspan="4" align="right">รวมสุทธิ</td>
 						<td  align="right" style="border-bottom:3px double black">
 							<?php $sumTotal = ( ($price * $numRoom)  +$rowDetail['cashPledge']); ?>
-							<?php echo $sumTotal + ( ($sumTotal * $rowDetail['totalVat'] ) /100 ) ; ?>
+							<?php echo number_format($sumTotal + ( ($sumTotal * $rowDetail['totalVat'] ) /100 ),2 ); ?>
 						</td>
 					</tr>
 					<tr>
