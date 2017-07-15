@@ -302,18 +302,19 @@ class Mdl_booked extends CI_Model {
 		r.floor,
 		IFNULL(DATE_FORMAT(br.checkinDate,'%d/%m/%Y'),'') AS checkinDate,
 		IFNULL(DATE_FORMAT(br.checkoutDate,'%d/%m/%Y'),'') AS checkoutDate,
-		IFNULL(log.total,0) AS total
+		IFNULL(log.total,0) AS total,
+		r.status
 		FROM tm_room r
 		LEFT JOIN tm_roomtype rt ON r.roomtypeID=rt.roomtypeID
 		LEFT JOIN ts_booked_room br ON r.roomCODE=br.roomID AND br.status <> 'CANCLE'
 		LEFT JOIN (
 		SELECT
-		lg.roomID,
-		COUNT(lg.logroomdateID) AS total,
-		lg.status
-		FROM ts_booked_room_log lg
-		WHERE lg.logDate BETWEEN '".$df.":00' AND '".$dt.":00'
-		GROUP by lg.roomID
+			lg.roomID,
+			COUNT(lg.logroomdateID) AS total,
+			lg.status
+			FROM ts_booked_room_log lg
+			WHERE lg.logDate BETWEEN '".$df.":00' AND '".$dt.":00'
+			GROUP by lg.roomID
 		) AS log ON r.roomCODE=log.roomID
 		WHERE r.status<>'DISABLE'
 		AND r.floor = '".$floor."'
