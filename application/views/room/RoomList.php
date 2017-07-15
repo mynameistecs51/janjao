@@ -17,7 +17,7 @@
     				</button>
     			</div> -->
     			<div class="sh-right  pull-right  col-sm-6">
-    				<form name="formSearch" id="formSearch" method="POST" action="<?php echo base_url()?>user/search/">
+    				<form name="formSearch" id="formSearch" method="POST" action="<?php echo base_url()?>room/search/">
     					<button  type="submit" class="btn btn-primary " style="float: right;">Search</button>
     					<input type="text" class="form-control"  id="keyword" style="width: 250px;margin-right: 10px;" placeholder="keyword" name="keyword" value="<?php echo $keyword; ?>">
     				</form>
@@ -36,10 +36,7 @@
     						<th style="text-align: center;width:  80px;">COMMENT</th>
     						<th style="text-align: center;width:  50px;">TRANSACTION</th>
     						<th style="text-align: center;width:  80px;">STATUS</th>
-    						<th style="text-align: center;width:  100px;">CREATE DATE</th>
-    						<th style="text-align: center;width:  100px;">UPDATE DATE</th>
-    						<th style="text-align: center;width:  100px;"> CREATE BY</th>
-    						<th style="text-align: center;width:  80px;">#</th>
+    						<th style="text-align: center;width:  60px;">#</th>
     					</tr>
     				</thead>
     				<tbody>
@@ -47,41 +44,18 @@
     					<?php foreach ($getRoomAll as $rowRoom): ?>
     						<tr>
     							<td><?php echo $no++; ?></td>
+    							<td><?php echo "ROOM ".$rowRoom['roomCODE']; ?></td>
     							<td>
-    								<button class="btn btn-primary"><?php echo "ROOM ".$rowRoom['roomCODE']; ?></button>
-    							</td>
-    							<td>
-    								<?php echo $rowRoom['roomtypeCode']."<br>".$bed = ($rowRoom['bed'] == "SINGLE")? "<li>เตียงเดี่ยว</li>" : "<li>เตียงคู่</li>"; ?>
+    								<?php echo $rowRoom['roomtypeCode'].$bed = ($rowRoom['bed'] == "SINGLE")? " - เตียงเดี่ยว" : " - เตียงคู่"; ?>
     							</td>
     							<td><?php echo "FLOOR ".$rowRoom['floor']; ?></td>
     							<td></td>
     							<td>
-    								<?php
-    								if($rowRoom['transaction'] == 'EMPTY'){
-    									echo "<button class='btn btn-default col-sm-10'>".$rowRoom['transaction']."</button>";
-    								}else if( $rowRoom['transaction'] == 'BOOKED'){
-    									echo "<button class='btn btn-warning col-sm-10'>".$rowRoom['transaction']."</button>";
-    								}else if($rowRoom['transaction'] == "CHECKIN"){
-    									echo "<button class='btn btn-danger col-sm-10'>".$rowRoom['transaction']."</button>";
-    								}else if($rowRoom['transaction'] == "CLEANING"){
-    									echo "<button class='btn btn-success col-sm-10'>".$rowRoom['transaction']."</button>";
-    								}else{
-    									echo "บันได";
-    								}
-    								?>
+    								<?php  echo $rowRoom['transaction']; ?>
     							</td>
     							<td>
-    								<?php
-    								if($rowRoom['status'] == 'ON'){
-    									echo "<button class='btn btn-success col-sm-10 '>".$rowRoom['status']."</button>";
-    								}else {
-    									echo "<button class='btn btn-danger col-sm-10 '>".$rowRoom['status']."</button>";
-    								}
-    								?>
+    								<?php echo $rowRoom['status']; ?>
     							</td>
-    							<td><?php echo $rowRoom['createDT'] ?></td>
-    							<td><?php echo $rowRoom['updateDT'] ?></td>
-    							<td><?php echo $rowRoom['createBY'] ?></td>
     							<td>
     								<button class="btn btn-primary btn-xs btn_edit" id="<?php echo MD5($rowRoom['roomID']); ?>" title="edit" style='margin-left:5px;'>
     									<i class="fa fa-edit fa-2x"></i>

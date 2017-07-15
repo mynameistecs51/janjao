@@ -25,8 +25,8 @@ class Room extends CI_Controller {
 	public function index(){
 		$this->data['viewName']=$this->pagename;
 		$this->data['keyword']='';
-		$this->data['getlist']=$this->Mdl_user->getList($this->data['keyword']);
-		$this->data['getRoomAll'] = $this->Mdl_room->getRoomAll();
+		//$this->data['getlist']=$this->Mdl_user->getList($this->data['keyword']);
+		$this->data['getRoomAll'] = $this->Mdl_room->getRoomAll($this->data['keyword']);
 		$this->packfunction->packView($this->data,"room/RoomList");
 	}
 

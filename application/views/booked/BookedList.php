@@ -76,7 +76,7 @@
 		$(function() {
 			$('.btn_edit').click(function(){
 				var id = $(this).attr('id');
-				load_page('<?php echo base_url()."checkin/checkinformedit/"; ?>'+id+'','.:: Data BOOKED ::.','<?php echo base_url()."checkin/saveUpdate/"; ?>');
+				load_page('<?php echo base_url()."booked/bookedformedit/"; ?>'+id+'','.:: Data BOOKED ::.','<?php echo base_url()."booked/saveUpdate/"; ?>');
 			});
 			$('.btn_cancel').click(function(){
 				var cfm = confirm("ยืนยันยกเลิกการเช่าห้องพัก คุณไม่สามารถย้อนกลับมาใช้ข้อมูลได้ !");
