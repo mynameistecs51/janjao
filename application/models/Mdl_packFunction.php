@@ -18,6 +18,11 @@ class Mdl_packFunction extends CI_Model
     return $this->db->insert($table, $data);
   }
 
+  public function updateData($data,$table,$fild,$id){
+    $this->db->where($fild,$id);
+    $this->db->update($table,$data);
+  }
+
   public function getuserlogo($id=''){
     $this->db->where('UserID',$id);
     $this->db->select('IFNULL(UserLogo,"userlogo.png") AS UserLogo');

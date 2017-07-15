@@ -301,8 +301,6 @@
 				$html .=' <div class="col-sm-1 " style="margin:10px;"> </div> ';
 			}
 
-
-
 		}
 		echo $html;
 		?>

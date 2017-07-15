@@ -78,6 +78,10 @@ class Mdl_checkin extends CI_Model {
 		$this->db->insert('ts_booked_room',$saveBookedRoom[$i]);
 		$idBookedRoom[$i] = $this->db->insert_id();
 
+		// Update สถานะห้อง 
+		$this->packfunction->updateRoom($status='CHECKIN', $roomcode=$selectRoom[$i]);
+
+
 			// Insert ts_booked_room_log
 		$startDate = date_create($this->packfunction->dateTosql($_POST['checkinDate']));
 		$endDate  = date_create($this->packfunction->dateTosql($this->input->post('checkOutDate')));
@@ -192,6 +196,8 @@ class Mdl_checkin extends CI_Model {
 			$this->db->where('bookedroomID',$bookedroomID[$sr]);
 			$this->db->update('ts_booked_room',$saveCheckRoom[$sr]);
 
+			// Update สถานะห้อง 
+			$this->packfunction->updateRoom($status='CHECKIN', $roomcode=$this->input->post('roomID')[$sr]);
 
 			// เคลียร์ Log เดิม
 			$this->db->where('bookedroomID',$bookedroomID[$sr]);
@@ -243,6 +249,15 @@ class Mdl_checkin extends CI_Model {
 			);
 		$this->db->where('bookedID',$key);
 		$this->db->update('ts_booked_room',$saveCheckRoom);
+
+		// ดึงข้อมูล รายการห้อง
+		$sql =" SELECT roomID FROM  ts_booked_room WHERE bookedID='".$key."' ";
+		$qr = $this->db->query($sql);
+		$rs =  $qr->result_array();
+		foreach ($rs as $rid) {
+			// Update สถานะห้อง 
+			$this->packfunction->updateRoom($status='EMPTY', $roomcode=$rid['roomID']);
+		}
 
 
 		$this->db->where('bookedID',$key);
@@ -319,6 +334,15 @@ class Mdl_checkin extends CI_Model {
 		$this->db->update('ts_booked_room',$saveCheckRoom);
 
 
+		// ดึงข้อมูล รายการห้อง
+		$sql =" SELECT roomID FROM  ts_booked_room WHERE bookedID='".$key."' ";
+		$qr = $this->db->query($sql);
+		$rs =  $qr->result_array();
+		foreach ($rs as $rid) {
+			// Update สถานะห้อง 
+			$this->packfunction->updateRoom($status='CHECKOUT', $roomcode=$rid['roomID']);
+		}
+		
 		$this->db->where('bookedID',$key);
 		$this->db->delete('ts_booked_room_log');
 
@@ -326,38 +350,41 @@ class Mdl_checkin extends CI_Model {
 		$cashhdrID = $this->getBillCheckin(MD5($key));
 		// print_r($cashhdrID);
 
-		$datadtl = array(
-			// 'cashdtlID' => $_POST[''],
-			'cashhdrID' => $cashhdrID[0]['cashhdrID'],
-			'bookedID' => $key,
-			'cashDate' => $this->packfunction->dtYMDnow(),
-			'discount' => $_POST['discount'],
-			'vat' => $_POST['vat'],
-			'sumtotal' => $_POST['lastamount'],
-			'status' => 'PAY',
-			"createDT"	  => $this->packfunction->dtYMDnow(),
-			"createBY"	  => $this->UserName,
-			"updateDT"	  => $this->packfunction->dtYMDnow(),
-			"updateBY"	  => $this->UserName
-			);
-		$this->db->insert('ts_cash_dtl',$datadtl);
-		$idcashdtl = $this->db->insert_id();
-
-		foreach ($_POST['serviceName'] as $svk => $rowsvk) {
-			$datadtlList[$svk] = array(
-				'cashdtlID' => $idcashdtl,
-				'cashName' => $_POST['serviceName'][$svk],
-				'price' => $_POST['price'][$svk],
-				'amount' => $_POST['amount'][$svk],
-				'unit' => $_POST['unit'][$svk],
-				'total' => $_POST['lastamount'],
+		if(count($cashhdrID)>0)
+		{
+			$datadtl = array(
+				// 'cashdtlID' => $_POST[''],
+				'cashhdrID' => $cashhdrID[0]['cashhdrID'],
+				'bookedID' => $key,
+				'cashDate' => $this->packfunction->dtYMDnow(),
+				'discount' => $_POST['discount'],
+				'vat' => $_POST['vat'],
+				'sumtotal' => $_POST['lastamount'],
+				'status' => 'PAY',
 				"createDT"	  => $this->packfunction->dtYMDnow(),
 				"createBY"	  => $this->UserName,
 				"updateDT"	  => $this->packfunction->dtYMDnow(),
 				"updateBY"	  => $this->UserName
 				);
-			$this->db->insert('ts_cash_dtl_list' , $datadtlList[$svk]);
+			$this->db->insert('ts_cash_dtl',$datadtl);
+			$idcashdtl = $this->db->insert_id();
 
+			foreach ($_POST['serviceName'] as $svk => $rowsvk) {
+				$datadtlList[$svk] = array(
+					'cashdtlID'  => $idcashdtl,
+					'cashName' => $_POST['serviceName'][$svk],
+					'price' => $_POST['price'][$svk],
+					'amount' => $_POST['amount'][$svk],
+					'unit' => $_POST['unit'][$svk],
+					'total' => $_POST['lastamount'],
+					"createDT"	  => $this->packfunction->dtYMDnow(),
+					"createBY"	  => $this->UserName,
+					"updateDT"	  => $this->packfunction->dtYMDnow(),
+					"updateBY"	  => $this->UserName
+					);
+				$this->db->insert('ts_cash_dtl_list' , $datadtlList[$svk]);
+
+			}
 		}
 	}
 

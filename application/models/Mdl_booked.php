@@ -125,6 +125,9 @@ class Mdl_booked extends CI_Model {
 		$this->db->insert('ts_booked_room',$saveBookedRoom[$i]);
 		$idBookedRoom[$i] = $this->db->insert_id();
 
+		// Update สถานะห้อง 
+		$this->packfunction->updateRoom($status='BOOKED', $roomcode=$room[$i]);
+
 			// Insert ts_booked_room_log
 		$startDate = date_create($this->packfunction->dateTosql($_POST['checkinDate']));
 		$endDate  = date_create($this->packfunction->dateTosql($this->input->post('checkOutDate')));
@@ -212,13 +215,15 @@ class Mdl_booked extends CI_Model {
 				'checkoutDate ' => $this->packfunction->dtTosql($this->input->post('checkOutDate')),
 				'comment '      => $this->input->post('comment'),
 				'status '       => 'BOOKED',
-				"updateDT"		    => $this->packfunction->dtYMDnow(),
-				"updateBY"		    => $this->UserName
+				"updateDT"		=> $this->packfunction->dtYMDnow(),
+				"updateBY"		=> $this->UserName
 				);
 			$bookedroomID[$sr] = $this->input->post('bookedroomID')[$sr];
 			$this->db->where('bookedroomID',$bookedroomID[$sr]);
 			$this->db->update('ts_booked_room',$saveCheckRoom[$sr]);
 
+			// Update สถานะห้อง 
+			$this->packfunction->updateRoom($status='BOOKED', $roomcode=$this->input->post('roomID')[$sr]);
 
 			// เคลียร์ Log เดิม
 			$this->db->where('bookedroomID',$bookedroomID[$sr]);
@@ -271,6 +276,15 @@ class Mdl_booked extends CI_Model {
 		$this->db->where('bookedID',$key);
 		$this->db->update('ts_booked_room',$saveCheckRoom);
 
+		// ดึงข้อมูล รายการห้อง
+		$sql =" SELECT roomID FROM  ts_booked_room WHERE bookedID='".$key."' ";
+		$qr = $this->db->query($sql);
+		$rs =  $qr->result_array();
+		foreach ($rs as $rid) {
+			// Update สถานะห้อง 
+			$this->packfunction->updateRoom($status='EMPTY', $roomcode=$rid['roomID']);
+		}
+
 
 		$this->db->where('bookedID',$key);
 		$this->db->delete('ts_booked_room_log');
@@ -298,7 +312,8 @@ class Mdl_booked extends CI_Model {
 		rt.price_short,
 		rt.bed,
 		r.roomCODE,
-		IFNULL(log.status,'EMPTY') AS transaction,
+		IFNULL(log.status,r.transaction) AS transaction,
+		r.transaction AS room_status,
 		r.floor,
 		IFNULL(DATE_FORMAT(br.checkinDate,'%d/%m/%Y'),'') AS checkinDate,
 		IFNULL(DATE_FORMAT(br.checkoutDate,'%d/%m/%Y'),'') AS checkoutDate,
