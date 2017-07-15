@@ -95,7 +95,7 @@ class Mdl_booked extends CI_Model {
 			'checkOutAppointDate'=> $this->packfunction->dtTosql($this->input->post('checkOutDate')),
 			'is_breakfast' 	=> $this->input->post('is_breakfast'),
 			'bookedType' 	=> $this->input->post('bookedType'),
-			'cashPledge' 	=> '',
+			'cashPledge' 	=>  $this->input->post('deposit'),
 			'cashPledgePath'=> '',
 			'comment' 	=> $this->input->post('comment'),
 			'status' 	=> 'BOOKED',
@@ -157,6 +157,24 @@ class Mdl_booked extends CI_Model {
 			$this->db->insert('ts_booked_room_log',$log);
 			$startDate->modify("+1 day");
 		}
+
+		$dataCashHDR[$i] = array(
+			// 'cashhdrID ' => $this->input->post(''),
+			'cashCode ' => $bookedCode[0]['CODE'],
+			'bookedID ' => $idBooked,
+			'roomID ' => $room[$i],
+			'cashDate ' => $this->packfunction->dtYMDnow(),
+			'totalVat ' => '',//$this->input->post('vat'),
+			'totalDiscount ' => '',//$this->input->post('discount'),
+			'totalLast ' => '',//$this->input->post('lastamount'),
+			'comment ' => "TRANSACTIONS BY".$this->UserName,
+			'status ' => 'PAY',
+			"createDT"	   => $this->packfunction->dtYMDnow(),
+			"createBY"	   => $this->UserName,
+			"updateDT"	   => $this->packfunction->dtYMDnow(),
+			"updateBY"	   => $this->UserName
+			);
+		$this->db->insert('ts_cash_hdr',$dataCashHDR[$i]);
 		endfor; // End ts_booked_room
 
 	}
@@ -330,12 +348,12 @@ class Mdl_booked extends CI_Model {
 		LEFT JOIN ts_booked_room br ON r.roomCODE=br.roomID AND br.status <> 'CANCLE'
 		LEFT JOIN (
 		SELECT
-			lg.roomID,
-			COUNT(lg.logroomdateID) AS total,
-			lg.status
-			FROM ts_booked_room_log lg
-			WHERE lg.logDate BETWEEN '".$df.":00' AND '".$dt.":00'
-			GROUP by lg.roomID
+		lg.roomID,
+		COUNT(lg.logroomdateID) AS total,
+		lg.status
+		FROM ts_booked_room_log lg
+		WHERE lg.logDate BETWEEN '".$df.":00' AND '".$dt.":00'
+		GROUP by lg.roomID
 		) AS log ON r.roomCODE=log.roomID
 		WHERE r.status<>'DISABLE'
 		AND r.floor = '".$floor."'
@@ -396,13 +414,24 @@ class Mdl_booked extends CI_Model {
 	}
 
 	public function bookedRoom($bookedID){
+		# SELECT
+		# rm.bookedroomID,
+		# rm.bookedID,
+		#rm.roomID
+		#FROM ts_booked_room rm
 		$sql = 	"
 		SELECT
-		rm.bookedroomID,
-		rm.bookedID,
-		rm.roomID
-		FROM ts_booked_room rm
-		WHERE rm.bookedID = '".$bookedID."' ";
+		tbr.bookedroomID,
+		tbr.bookedID,
+		tbr.roomID,
+		tr.roomtypeID,
+		trp.price_month,
+		trp.price_day,
+		trp.price_short
+		FROM ts_booked_room tbr
+		INNER JOIN tm_room tr ON tbr.roomID = tr.roomCODE
+		INNER JOIN tm_roomtype trp ON tr.roomtypeID = trp.roomtypeID
+		WHERE tbr.bookedID = '".$bookedID."' ";
 		$query 	= $this->db->query($sql);
 		return $query->result_array();
 

@@ -59,9 +59,8 @@ class Mdl_checkin extends CI_Model {
 		$this->db->insert('ts_booked',$saveAdd);
 		$idBooked= $this->db->insert_id();
 
-		// $selectRoom = implode('_',$this->input->post('selectRoom'));
-		$selectRoom = $this->input->post('selectRoom');
-		// $room = explode('_',$selectRoom);
+		$selectRoom = implode('_',$this->input->post('selectRoom'));
+		$room = explode('_',$selectRoom);
 		for ($i=0; $i < count($selectRoom) ; $i++) :
 			$saveBookedRoom[$i] = array(
 				'bookedID '     => $idBooked,
@@ -112,9 +111,11 @@ class Mdl_checkin extends CI_Model {
 			$this->db->insert('ts_booked_room_log',$log);
 
 			$startDate->modify("+1 day");
+
 		}
 
-		$dataCashHDR = array(
+
+		$dataCashHDR[$i] = array(
 			// 'cashhdrID ' => $this->input->post(''),
 			'cashCode ' => $bookedCode[0]['CODE'],
 			'bookedID ' => $idBooked,
@@ -130,7 +131,7 @@ class Mdl_checkin extends CI_Model {
 			"updateDT"	   => $this->packfunction->dtYMDnow(),
 			"updateBY"	   => $this->UserName
 			);
-		$this->db->insert('ts_cash_hdr',$dataCashHDR);
+		$this->db->insert('ts_cash_hdr',$dataCashHDR[$i]);
 		endfor; // End ts_booked_room
 		return $idBooked;
 	}
@@ -178,54 +179,77 @@ class Mdl_checkin extends CI_Model {
 		$this->db->where('bookedID',$bookedID);
 		$this->db->update('ts_booked',$saveCheckin);
 
+		$countRoom = count($this->input->post('roomID'));
+		$roomID = $this->input->post('roomID');
+		for($i = 0 ;$i < $countRoom; $i++):
+			foreach ($this->input->post('bookedroomID') as $sr => $value) {
 
-
-		foreach ($this->input->post('bookedroomID') as $sr => $value) {
-
-			$saveCheckRoom[$sr] = array(
-				'bookedID '     => $bookedID,
-				'roomID '       => $this->input->post('roomID')[$sr],
-				'checkinDate '  => $this->packfunction->dtTosql($_POST['checkinDate']),
-				'checkoutDate ' => $this->packfunction->dtTosql($this->input->post('checkOutDate')),
-				'comment '      => $this->input->post('comment'),
-				'status '       => 'CHECKIN',
-				"updateDT"		    => $this->packfunction->dtYMDnow(),
-				"updateBY"		    => $this->UserName
-				);
-			$bookedroomID[$sr] = $this->input->post('bookedroomID')[$sr];
-			$this->db->where('bookedroomID',$bookedroomID[$sr]);
-			$this->db->update('ts_booked_room',$saveCheckRoom[$sr]);
+				$saveCheckRoom[$sr] = array(
+					'bookedID '     => $bookedID,
+					'roomID '       => $roomID[$i],
+					'checkinDate '  => $this->packfunction->dtTosql($_POST['checkinDate']),
+					'checkoutDate ' => $this->packfunction->dtTosql($this->input->post('checkOutDate')),
+					'comment '      => $this->input->post('comment'),
+					'status '       => 'CHECKIN',
+					"updateDT"		    => $this->packfunction->dtYMDnow(),
+					"updateBY"		    => $this->UserName
+					);
+				$bookedroomID[$sr] = $this->input->post('bookedroomID')[$sr];
+				$this->db->where('bookedroomID',$bookedroomID[$sr]);
+				$this->db->update('ts_booked_room',$saveCheckRoom[$sr]);
 
 			// Update สถานะห้อง 
 			$this->packfunction->updateRoom($status='CHECKIN', $roomcode=$this->input->post('roomID')[$sr]);
 
 			// เคลียร์ Log เดิม
-			$this->db->where('bookedroomID',$bookedroomID[$sr]);
-			$this->db->delete('ts_booked_room_log');
+				$this->db->where('bookedroomID',$bookedroomID[$sr]);
+				$this->db->delete('ts_booked_room_log');
 
 
 			// Insert ts_booked_room_log
-			$startDate = date_create($this->packfunction->dateTosql($_POST['checkinDate']));
-			$endDate  = date_create($this->packfunction->dateTosql($this->input->post('checkOutDate')));
-			$interval = date_diff($startDate, $endDate);
-			$runDay = array();
-			while ($startDate <= $endDate) {
-				$log = array(
-					'bookedID '    => $bookedID,
-					'bookedroomID' => $bookedroomID[$sr],
-					'roomID'       => $this->input->post('roomID')[$sr],
-					'logDate'      => $startDate->format('Y-m-d').' 12:00:00',
-					'comment'      => $this->input->post('comment'),
-					'status'       => 'CHECKIN',
-					"createDT"	   => $this->packfunction->dtYMDnow(),
-					"createBY"	   => $this->UserName,
-					"updateDT"	   => $this->packfunction->dtYMDnow(),
-					"updateBY"	   => $this->UserName
-					);
-				$this->db->insert('ts_booked_room_log',$log);
-				$startDate->modify("+1 day");
-			}
+				$startDate = date_create($this->packfunction->dateTosql($_POST['checkinDate']));
+				$endDate  = date_create($this->packfunction->dateTosql($this->input->post('checkOutDate')));
+				$interval = date_diff($startDate, $endDate);
+				$runDay = array();
+				while ($startDate <= $endDate) {
+					$log = array(
+						'bookedID '    => $bookedID,
+						'bookedroomID' => $bookedroomID[$sr],
+						'roomID'       =>  $roomID[$i],
+						'logDate'      => $startDate->format('Y-m-d').' 12:00:00',
+						'comment'      => $this->input->post('comment'),
+						'status'       => 'CHECKIN',
+						"createDT"	   => $this->packfunction->dtYMDnow(),
+						"createBY"	   => $this->UserName,
+						"updateDT"	   => $this->packfunction->dtYMDnow(),
+						"updateBY"	   => $this->UserName
+						);
+					$this->db->insert('ts_booked_room_log',$log);
+					$startDate->modify("+1 day");
+				}
+
 		} // End ts_booked_room
+
+		$dataCashHDR[$i] = array(
+			// 'cashhdrID ' => $this->input->post(''),
+				// 'cashCode ' => $bookedCode[0]['CODE'],
+			'bookedID ' => $bookedID,
+			'roomID ' =>  $roomID[$i],
+			'cashDate ' => $this->packfunction->dtYMDnow(),
+			'totalVat ' => $this->input->post('vat'),
+			'totalDiscount ' => $this->input->post('discount'),
+			'totalLast ' => $this->input->post('lastamount'),
+			'comment ' => "TRANSACTIONS BY".$this->UserName,
+			'status ' => 'PAY',
+			"createDT"	   => $this->packfunction->dtYMDnow(),
+			"createBY"	   => $this->UserName,
+			"updateDT"	   => $this->packfunction->dtYMDnow(),
+			"updateBY"	   => $this->UserName
+			);
+		$this->db->where('bookedID',$bookedID);
+		$this->db->where('roomID' ,  $roomID[$i]);
+		$this->db->update('ts_cash_hdr',$dataCashHDR[$i]);
+		endfor;
 	}
 
 	public function saveCancle($key='')
@@ -510,13 +534,26 @@ class Mdl_checkin extends CI_Model {
 	}
 
 	public function bookedRoom($bookedID){
-		$sql = 	"
+		/*
 		SELECT
 		rm.bookedroomID,
 		rm.bookedID,
 		rm.roomID
 		FROM ts_booked_room rm
-		WHERE rm.bookedID = '".$bookedID."' ";
+		 */
+		$sql = 	"
+		SELECT
+		tbr.bookedroomID,
+		tbr.bookedID,
+		tbr.roomID,
+		tr.roomtypeID,
+		trp.price_month,
+		trp.price_day,
+		trp.price_short
+		FROM ts_booked_room tbr
+		INNER JOIN tm_room tr ON tbr.roomID = tr.roomCODE
+		INNER JOIN tm_roomtype trp ON tr.roomtypeID = trp.roomtypeID
+		WHERE tbr.bookedID = '".$bookedID."' ";
 		$query 	= $this->db->query($sql);
 		return $query->result_array();
 	}

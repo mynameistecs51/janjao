@@ -16,7 +16,7 @@
 					<?php $selected = ($getRoom['floor'] == 3)? 'selected':''; ?>
 					<option value="3" <?php echo $selected; ?>>FLOOR 3</option>
 					<?php $selected = ($getRoom['floor'] == 4)? 'selected':''; ?>
-					<option value="4" <?php $selected; ?>>FLOOR 4</option>
+					<option value="4" <?php echo $selected; ?>>FLOOR 4</option>
 					option
 				</select>
 			</div>

@@ -114,10 +114,15 @@ class Checkin extends CI_Controller {
 	}
 
 	public function  billprintcheckin($key=''){
-		// $key =MD5('2');
-		$countDay = $this->Mdl_checkin->booked($key);
-		$this->data['dateDtl'] = date_diff(date_create($countDay['checkInAppointDate']),date_create($countDay['checkOutAppointDate'])->modify("+1 hour"));
+		// echo MD5('40');
+		echo $key;
+		// $key =MD5('37');
+		// echo "<pre>";
 		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
+		// print_r($this->data['checkinDtl']);
+		// $countDay = $this->Mdl_checkin->booked($key);
+		$this->data['dateDtl'] = date_diff(date_create($this->data['checkinDtl']['checkInAppointDate']),date_create($this->data['checkinDtl']['checkOutAppointDate'])->modify("+1 hour"));
+		// print_r($this->data['dateDtl']);
 		if(count($this->data['checkinDtl'])>0){
 			$this->data['billCode']=$this->Mdl_checkin->getBillCode();
 			$this->data['getMonth'] = $this->packfunction->getMonth();
@@ -126,7 +131,7 @@ class Checkin extends CI_Controller {
 			$this->data['serviceDtl']=$this->Mdl_checkin->serviceList($key,'ROOM');
 			$this->load->view('checkin/Bill',$this->data);
 		}else{
-			redirect('authen/','refresh');
+			// redirect('authen/','refresh');
 		}
 	}
 
@@ -218,8 +223,14 @@ class Checkin extends CI_Controller {
 
 	public function saveCheckin()
 	{
+		$id = $_POST['bookedID'];
 		$this->Mdl_checkin->saveCheckin();
-		redirect('checkin/','refresh');
+		if(isset($_POST['isprint'])==true){
+			echo "<script>window.open('".base_url()."checkin/billprintcheckin/".md5(trim($id))."','_new');</script>";
+			redirect('checkin/','refresh');
+		}else{
+			redirect('checkin/','refresh');
+		}
 	}
 
 	public function saveUpdate(){
@@ -274,7 +285,7 @@ class Checkin extends CI_Controller {
 	}
 
 	public function  billCheckout($key=''){
-		$key = MD5('6');
+		// $key = MD5('6');
 		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
 		if(count($this->data['checkinDtl'])>0){
 			$this->data['billCode']=$this->Mdl_checkin->getBillCode();
