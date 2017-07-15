@@ -340,7 +340,7 @@ class Mdl_checkin extends CI_Model {
 		$rs =  $qr->result_array();
 		foreach ($rs as $rid) {
 			// Update สถานะห้อง 
-			$this->packfunction->updateRoom($status='CHECKOUT', $roomcode=$rid['roomID']);
+			$this->packfunction->updateRoom($status='CLEANING', $roomcode=$rid['roomID']);
 		}
 		
 		$this->db->where('bookedID',$key);

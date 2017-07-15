@@ -112,11 +112,11 @@
 				$html .= '
 						<div class="col-sm-1 " style="margin:10px;">
 							<span class="button-checkbox ">
-								<button type="button" class="btn btn_room" data-color="success" style="width:120px;">
+								<button type="button" class="btn btn_room" data-color="success" style="width:120px;color: #fff;background-color:#449d44;border-color: #398439;">
 									'.$bed.'
 									<h4>'.$f2['roomCODE'].' </h4>'.$f2['roomtypeCode'].'
 								</button>
-								<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'"  data-priceday="'.$f2['price_day'].'" data-pricemonth="'.$f2['price_month'].'"  data-priceshort="'.$f2['price_short'].'"  value="'.$f2['roomCODE'].'" checked disabled readonly />
+								<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'"  data-priceday="'.$f2['price_day'].'" data-pricemonth="'.$f2['price_month'].'"  data-priceshort="'.$f2['price_short'].'"  value="'.$f2['roomCODE'].'" />
 							</span>
 						</div> ';
 			}else if($f2['roomtypeCode']=='STAIRCASE'  && $f2['status']=='ON'){
@@ -199,11 +199,11 @@
 				$html .= '
 				<div class="col-sm-1 " style="margin:10px;">
 					<span class="button-checkbox ">
-						<button type="button" class="btn btn_room" data-color="success" style="width:120px;">
+						<button type="button" class="btn btn_room" data-color="success" style="width:120px;color: #fff;background-color:#449d44;border-color: #398439;">
 							'.$bed.'
 							<h4>'.$f3['roomCODE'].' </h4>'.$f3['roomtypeCode'].'
 						</button>
-						<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'" data-priceday="'.$f3['price_day'].'"  data-pricemonth="'.$f3['price_month'].'"  data-priceshort="'.$f3['price_short'].'" value="'.$f3['roomCODE'].'" checked disabled readonly />
+						<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'" data-priceday="'.$f3['price_day'].'"  data-pricemonth="'.$f3['price_month'].'"  data-priceshort="'.$f3['price_short'].'" value="'.$f3['roomCODE'].'"  />
 					</span>
 				</div> ';
 			}else if($f3['roomtypeCode']=='STAIRCASE' && $f3['status']=='ON'){
@@ -287,11 +287,11 @@
 				$html .= '
 				<div class="col-sm-1 " style="margin:10px;">
 					<span class="button-checkbox ">
-						<button type="button" class="btn btn_room" data-color="success" style="width:120px;">
+						<button type="button" class="btn btn_room" data-color="success" style="width:120px;color: #fff;background-color:#449d44;border-color: #398439;">
 							'.$bed.'
 							<h4>'.$f4['roomCODE'].' </h4>'.$f4['roomtypeCode'].'
 						</button>
-						<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" data-priceday="'.$f4['price_day'].'"  data-pricemonth="'.$f4['price_month'].'"  data-priceshort="'.$f4['price_short'].'" value="'.$f4['roomCODE'].'" checked disabled readonly />
+						<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" data-priceday="'.$f4['price_day'].'"  data-pricemonth="'.$f4['price_month'].'"  data-priceshort="'.$f4['price_short'].'" value="'.$f4['roomCODE'].'" />
 					</span>
 				</div> ';
 			}else if($f4['roomtypeCode']=='STAIRCASE' && $f4['status']=='ON'){
