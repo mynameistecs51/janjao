@@ -312,13 +312,19 @@ class Mdl_booked extends CI_Model {
 		rt.price_short,
 		rt.bed,
 		r.roomCODE,
-		IFNULL(log.status,r.transaction) AS transaction,
-		r.transaction AS room_status,
+		-- IFNULL(log.status,r.transaction) AS transaction,
+		CASE IFNULL(log.status,r.transaction)
+		WHEN 'CLEANING' 
+		THEN ( CASE WHEN DATE_ADD(r.updateDT,INTERVAL 30 MINUTE) > now() THEN 'CLEANING' ELSE 'EMPTY' END )
+		ELSE IFNULL(log.status,r.transaction)
+		END AS transaction,
 		r.floor,
 		IFNULL(DATE_FORMAT(br.checkinDate,'%d/%m/%Y'),'') AS checkinDate,
 		IFNULL(DATE_FORMAT(br.checkoutDate,'%d/%m/%Y'),'') AS checkoutDate,
 		IFNULL(log.total,0) AS total,
-		r.status
+		r.status,
+		DATE_FORMAT(DATE_ADD(r.updateDT,INTERVAL 30 MINUTE),'%d/%m/%Y %H:%i') AS checkdt,
+		DATE_FORMAT(r.updateDT,'%d/%m/%Y  %H:%i') AS updateDT
 		FROM tm_room r
 		LEFT JOIN tm_roomtype rt ON r.roomtypeID=rt.roomtypeID
 		LEFT JOIN ts_booked_room br ON r.roomCODE=br.roomID AND br.status <> 'CANCLE'
