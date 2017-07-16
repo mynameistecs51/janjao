@@ -125,7 +125,7 @@ class Mdl_booked extends CI_Model {
 		$this->db->insert('ts_booked_room',$saveBookedRoom[$i]);
 		$idBookedRoom[$i] = $this->db->insert_id();
 
-		// Update สถานะห้อง 
+		// Update สถานะห้อง
 		$this->packfunction->updateRoom($status='BOOKED', $roomcode=$room[$i]);
 
 			// Insert ts_booked_room_log
@@ -240,7 +240,7 @@ class Mdl_booked extends CI_Model {
 			$this->db->where('bookedroomID',$bookedroomID[$sr]);
 			$this->db->update('ts_booked_room',$saveCheckRoom[$sr]);
 
-			// Update สถานะห้อง 
+			// Update สถานะห้อง
 			$this->packfunction->updateRoom($status='BOOKED', $roomcode=$this->input->post('roomID')[$sr]);
 
 			// เคลียร์ Log เดิม
@@ -299,7 +299,7 @@ class Mdl_booked extends CI_Model {
 		$qr = $this->db->query($sql);
 		$rs =  $qr->result_array();
 		foreach ($rs as $rid) {
-			// Update สถานะห้อง 
+			// Update สถานะห้อง
 			$this->packfunction->updateRoom($status='EMPTY', $roomcode=$rid['roomID']);
 		}
 
@@ -332,7 +332,7 @@ class Mdl_booked extends CI_Model {
 		r.roomCODE,
 		-- IFNULL(log.status,r.transaction) AS transaction,
 		CASE IFNULL(log.status,r.transaction)
-		WHEN 'CLEANING' 
+		WHEN 'CLEANING'
 		THEN ( CASE WHEN DATE_ADD(r.updateDT,INTERVAL 30 MINUTE) > now() THEN 'CLEANING' ELSE 'EMPTY' END )
 		ELSE IFNULL(log.status,r.transaction)
 		END AS transaction,
@@ -438,38 +438,38 @@ class Mdl_booked extends CI_Model {
 
 	}
 
-	public function report_checkout($value = "")
-	{
-		$sql = "
-		SELECT
-		tb.bookedID,
-		tb.bookedCode,
-		tb.idcardno,
-		tb.idcardnoPath,
-		tb.titleName,
-		tb.firstName,
-		tb.middleName,
-		tb.lastName,
-		tb.birthdate,
-		tb.address,
-		tb.cashPledge,
-		tb.status,
-		tb.createDT,
-		tbr.roomID,
-		tbr.checkinDate,
-		tbr.checkoutDate,
-		tch.totalLast,
-		tcd.sumtotal,
-		tcd.discount
-		FROM
-		ts_booked tb
-		INNER JOIN ts_booked_room  tbr ON tb.bookedID =	tbr.bookedID
-		INNER JOIN ts_cash_hdr tch ON tbr.bookedID =	tch.bookedID
-		INNER JOIN ts_cash_dtl tcd ON tch.cashhdrID =		tcd.cashhdrID
-		";
-		$query = $this->db->query($sql)->result_array();
-		return $query;
-	}
+	// public function report_checkout($value = "")
+	// {
+	// 	$sql = "
+	// 	SELECT
+	// 	tb.bookedID,
+	// 	tb.bookedCode,
+	// 	tb.idcardno,
+	// 	tb.idcardnoPath,
+	// 	tb.titleName,
+	// 	tb.firstName,
+	// 	tb.middleName,
+	// 	tb.lastName,
+	// 	tb.birthdate,
+	// 	tb.address,
+	// 	tb.cashPledge,
+	// 	tb.status,
+	// 	tb.createDT,
+	// 	tbr.roomID,
+	// 	tbr.checkinDate,
+	// 	tbr.checkoutDate,
+	// 	tch.totalLast,
+	// 	tcd.sumtotal,
+	// 	tcd.discount
+	// 	FROM
+	// 	ts_booked tb
+	// 	INNER JOIN ts_booked_room  tbr ON tb.bookedID =	tbr.bookedID
+	// 	INNER JOIN ts_cash_hdr tch ON tbr.bookedID =	tch.bookedID
+	// 	INNER JOIN ts_cash_dtl tcd ON tch.cashhdrID =		tcd.cashhdrID
+	// 	";
+	// 	$query = $this->db->query($sql)->result_array();
+	// 	return $query;
+	// }
 
 
 }
