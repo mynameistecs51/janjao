@@ -51,10 +51,10 @@
 					<thead>
 						<tr style="background:#E6E6E6;" align="left">
 							<th style="border-bottom:1px solid black">#</th>
-							<th style="border-bottom:1px solid black" >รายการ</th>
-							<th style="border-bottom:1px solid black" width="15%" align="right">จำนวน</th>
-							<th style="border-bottom:1px solid black" width="20%" align="right">หน่วยละ</th>
-							<th style="border-bottom:1px solid black" width="20%" align="right">รวม</th>
+							<th style="border-bottom:1px solid black;text-align: right;text-align: center" >รายการ</th>
+							<th style="border-bottom:1px solid black;text-align: right;" width="15%" align="right">จำนวน</th>
+							<th style="border-bottom:1px solid black;text-align: right;" width="20%" align="right">หน่วยละ</th>
+							<th style="border-bottom:1px solid black;text-align: right;" width="20%" align="right">รวม</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -64,63 +64,71 @@
 						foreach ($serviceDtl as $rs) {  ?>
 						<tr id="<?php echo $n; ?>">
 							<td style="border-bottom:1px solid black"><?php echo $n; ?></td>
-							<td style="border-bottom:1px solid black"><?php echo $serviceName = (empty($rs['serviceName']))?'':$rs['serviceName']; ?></td>
-							<td style="border-bottom:1px solid black" align="right"><?php echo $amount = (empty($rs['amount']))?0.00:$rs['amount']; ?></td>
-							<td style="border-bottom:1px solid black" align="right"><?php echo $price = (empty($rs['price']))?0.00:$rs['price']; ?></td>
-							<td style="border-bottom:1px solid black" align="right"><?php echo number_format($price*$amount,2);?>
-							</tr>
-							<?php
-							$totalsum 	 += ($price*$amount);
-							?>
-							<?php $n++; } ?>
-						</tbody>
-						<tfoot >
-							<tr >
-								<td colspan="5" height="20">	</td>
-							</tr>
-							<tr height="25">
-								<td colspan="3" align="right">+ VAT  </td>
-								<td colspan="2" align="right" style="border-bottom:1px solid black"> <?php echo $vat =(empty($rs['vat']))?$serviceDtl[0]['totalVat'] : $rs['vat'] ; ?> &nbsp;&nbsp;&nbsp;&nbsp;%</td>
-							</tr>
-							<tr height="25">
-								<td colspan="3" align="right">รวม</td>
-								<td colspan="2" align="right" style="border-bottom:1px solid black">
-									<?php echo number_format($totalsum + (($totalsum * $vat)/100),2); ?> บาท
-								</td>
-							</tr>
-							<tr height="25">
-								<td colspan="3" align="right">ส่วนลด</td>
-								<td colspan="2" align="right" style="border-bottom:1px solid black"><?php echo $discount = (empty($rs['discount']))?$serviceDtl[0]['totalDiscount'] : $rs['discount'] ; ?> บาท</td>
-							</tr>
-							<tr height="25">
-								<td colspan="3" align="right">เงินมัดจำ</td>
-								<td colspan="2" align="right" style="border-bottom:1px solid black"><?php echo $checkinDtl['cashPledge']; ?> บาท</td>
-							</tr>
-							<tr height="25">
-								<td colspan="3" align="right">รวมสุทธิ</td>
-								<td colspan="2" align="right" style="border-bottom:3px double black">
-									<?php $sumTotal = ($checkinDtl['cashPledge'] + $discount) - $totalsum;?>
-									<?php echo number_format($sumTotal,2); ?> บาท
-								</td>
-							</tr>
-						</tfoot>
-					</table>
+							<td style="border-bottom:1px solid black">
+								<?php echo $serviceName = (empty($rs['serviceName']))?'':$rs['serviceName']; ?>
+							</td>
+							<td style="border-bottom:1px solid black" align="right">
+								<?php echo $amount = (empty($rs['amount']))?0.00:$rs['amount']; ?>
+							</td>
+							<td style="border-bottom:1px solid black" align="right">
+								<?php echo $price = (empty($rs['price']))?0.00:$rs['price']; ?>
+							</td>
+							<td style="border-bottom:1px solid black" align="right">
+								<?php echo number_format($price*$amount,2);?>
+							</td>
+						</tr>
+						<?php
+						$totalsum 	 += ($price*$amount);
+						?>
+						<?php $n++; } ?>
+					</tbody>
+					<tfoot >
+						<tr >
+							<td colspan="5" height="20">	</td>
+						</tr>
+						<tr height="25">
+							<td colspan="3" align="right">+ VAT  </td>
+							<td colspan="2" align="right" style="border-bottom:1px solid black"> <?php echo $vat =(empty($rs['vat']))?$serviceDtl[0]['totalVat'] : $rs['vat'] ; ?> &nbsp;&nbsp;&nbsp;&nbsp;%</td>
+						</tr>
+						<tr height="25">
+							<td colspan="3" align="right">รวม</td>
+							<td colspan="2" align="right" style="border-bottom:1px solid black">
+								<?php echo number_format($totalsum + (($totalsum * $vat)/100),2); ?> บาท
+							</td>
+						</tr>
+						<tr height="25">
+							<td colspan="3" align="right">ส่วนลด</td>
+							<td colspan="2" align="right" style="border-bottom:1px solid black"><?php echo $discount = (empty($rs['discount']))?$serviceDtl[0]['totalDiscount'] : $rs['discount'] ; ?> บาท</td>
+						</tr>
+						<tr height="25">
+							<td colspan="3" align="right">เงินมัดจำ</td>
+							<td colspan="2" align="right" style="border-bottom:1px solid black"><?php echo $checkinDtl['cashPledge']; ?> บาท</td>
+						</tr>
+						<tr height="25">
+							<td colspan="3" align="right">รวมสุทธิ</td>
+							<td colspan="2" align="right" style="border-bottom:3px double black">
+								<?php $sumTotal = ($checkinDtl['cashPledge'] + $discount) - $totalsum;?>
+								<?php echo number_format($sumTotal,2); ?> บาท
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+			<div class="col-sm-12" > <br><br><br></div>
+			<div class="col-sm-12">
+				<div class="col-sm-9 clearfix " style="text-align: left;font-size: 14px;">
+					ลงชื่อ....................................ผู้รับเงิน <br>
+					วันที่  <?php echo date('j').' เดือน '.$getMonth[date('m')].' พ.ศ. '.$getYear[date('Y')];?>
 				</div>
-				<div class="col-sm-12" > <br><br><br></div>
-				<div class="col-sm-12">
-					<div class="col-sm-9 clearfix " style="text-align: left;font-size: 14px;">
-						ลงชื่อ....................................ผู้รับเงิน <br>
-						วันที่  <?php echo date('j').' เดือน '.$getMonth[date('m')].' พ.ศ. '.$getYear[date('Y')];?>
-					</div>
-					<!-- <div class="col-sm-6 clearfix">asdf</div> -->
-				</div>
+				<!-- <div class="col-sm-6 clearfix">asdf</div> -->
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript">
-		var data = document.getElementById('example');
-		newWin = window.open("");
-		newWin.document.write(data.outerHTML);
-		newWin.print();
-		newWin.close();
-	</script>
+</div>
+<script type="text/javascript">
+	var data = document.getElementById('example');
+	newWin = window.open("");
+	newWin.document.write(data.outerHTML);
+	newWin.print();
+	newWin.close();
+</script>
