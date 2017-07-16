@@ -286,12 +286,13 @@ class Checkin extends CI_Controller {
 
 	public function  billCheckout($key=''){
 		// $key = MD5('6');
+
 		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
 		if(count($this->data['checkinDtl'])>0){
 			$this->data['billCode']=$this->Mdl_checkin->getBillCode();
 			$this->data['getMonth'] = $this->packfunction->getMonth();
 			$this->data['getYear'] = $this->packfunction->getYear();
-			$this->data['serviceDtl']=$this->Mdl_checkin->serviceList($key,'DESTROY');
+			$this->data['serviceDtl']=(empty($this->Mdl_checkin->serviceList($key,'DESTROY'))?$this->Mdl_checkin->outdontservice(trim($key)) : $this->Mdl_checkin->serviceList($key,'DESTROY') );
 			$this->load->view('checkin/BillService',$this->data);
 		}else{
 			redirect('authen/','refresh');

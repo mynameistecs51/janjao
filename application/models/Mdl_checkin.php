@@ -77,7 +77,7 @@ class Mdl_checkin extends CI_Model {
 		$this->db->insert('ts_booked_room',$saveBookedRoom[$i]);
 		$idBookedRoom[$i] = $this->db->insert_id();
 
-		// Update สถานะห้อง 
+		// Update สถานะห้อง
 		$this->packfunction->updateRoom($status='CHECKIN', $roomcode=$selectRoom[$i]);
 
 
@@ -198,8 +198,8 @@ class Mdl_checkin extends CI_Model {
 				$this->db->where('bookedroomID',$bookedroomID[$sr]);
 				$this->db->update('ts_booked_room',$saveCheckRoom[$sr]);
 
-			// Update สถานะห้อง 
-			$this->packfunction->updateRoom($status='CHECKIN', $roomcode=$this->input->post('roomID')[$sr]);
+			// Update สถานะห้อง
+				$this->packfunction->updateRoom($status='CHECKIN', $roomcode=$this->input->post('roomID')[$sr]);
 
 			// เคลียร์ Log เดิม
 				$this->db->where('bookedroomID',$bookedroomID[$sr]);
@@ -279,7 +279,7 @@ class Mdl_checkin extends CI_Model {
 		$qr = $this->db->query($sql);
 		$rs =  $qr->result_array();
 		foreach ($rs as $rid) {
-			// Update สถานะห้อง 
+			// Update สถานะห้อง
 			$this->packfunction->updateRoom($status='EMPTY', $roomcode=$rid['roomID']);
 		}
 
@@ -363,10 +363,10 @@ class Mdl_checkin extends CI_Model {
 		$qr = $this->db->query($sql);
 		$rs =  $qr->result_array();
 		foreach ($rs as $rid) {
-			// Update สถานะห้อง 
+			// Update สถานะห้อง
 			$this->packfunction->updateRoom($status='CLEANING', $roomcode=$rid['roomID']);
 		}
-		
+
 		$this->db->where('bookedID',$key);
 		$this->db->delete('ts_booked_room_log');
 
@@ -602,6 +602,31 @@ class Mdl_checkin extends CI_Model {
 		";
 		$query 	= $this->db->query($sql);
 		return $query->result_array();
+	}
+
+	public function outdontservice($id='')
+	{
+		$sql = "
+		SELECT
+		ts_booked.bookedID,
+		ts_booked.bookedCode,
+		ts_booked.firstName,
+		ts_booked.lastName,
+		ts_booked.address,
+		ts_booked.mobile,
+		ts_booked_room.roomID,
+		ts_booked_room.checkinDate,
+		ts_booked_room.checkoutDate,
+		ts_cash_hdr.cashDate,
+		ts_cash_hdr.totalVat,
+		ts_cash_hdr.totalDiscount,
+		ts_cash_hdr.totalLast
+		FROM ts_booked INNER JOIN ts_booked_room ON ts_booked.bookedID = ts_booked_room.bookedID
+		INNER JOIN ts_cash_hdr ON ts_booked_room.roomID = ts_cash_hdr.roomID
+		WHERE MD5(ts_booked.bookedID) = '".$id."'
+		";
+		$query = $this->db->query($sql)->result_array();
+		return $query;
 	}
 
 	public function getBillCheckin($value='')
