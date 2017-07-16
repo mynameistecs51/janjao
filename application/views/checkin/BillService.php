@@ -88,7 +88,10 @@
 						</tr>
 						<tr height="25">
 							<td colspan="3" align="right">+ VAT  </td>
-							<td colspan="2" align="right" style="border-bottom:1px solid black"> <?php echo $vat =(empty($rs['vat']))?$serviceDtl[0]['totalVat'] : $rs['vat'] ; ?> &nbsp;&nbsp;&nbsp;&nbsp;%</td>
+							<td colspan="2" align="right" style="border-bottom:1px solid black">
+							 <?php echo $vat =(empty($rs['vat']))?$serviceDtl[0]['totalVat'] : $rs['vat'] ; ?>
+							 &nbsp;&nbsp;%
+							 </td>
 						</tr>
 						<tr height="25">
 							<td colspan="3" align="right">รวม</td>

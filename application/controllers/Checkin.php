@@ -106,7 +106,7 @@ class Checkin extends CI_Controller {
 
 		$id = $this->Mdl_checkin->saveAdd();
 		if(isset($_POST['isprint'])==true){
-			echo "<script>window.open('".base_url()."checkin/billprintcheckin/".md5($id)."','_new');</script>";
+			echo "<script>window.open('".base_url()."checkin/billprintcheckin/".MD5(trim($id))."','_new');</script>";
 			redirect('checkin/','refresh');
 		}else{
 			redirect('checkin/','refresh');
@@ -114,12 +114,8 @@ class Checkin extends CI_Controller {
 	}
 
 	public function  billprintcheckin($key=''){
-		// echo MD5('40');
-		echo $key;
-		// $key =MD5('37');
-		// echo "<pre>";
+		 // $key = MD5(44);
 		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
-		// print_r($this->data['checkinDtl']);
 		// $countDay = $this->Mdl_checkin->booked($key);
 		$this->data['dateDtl'] = date_diff(date_create($this->data['checkinDtl']['checkInAppointDate']),date_create($this->data['checkinDtl']['checkOutAppointDate'])->modify("+1 hour"));
 		// print_r($this->data['dateDtl']);

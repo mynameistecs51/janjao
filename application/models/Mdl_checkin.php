@@ -61,10 +61,10 @@ class Mdl_checkin extends CI_Model {
 
 		$selectRoom = implode('_',$this->input->post('selectRoom'));
 		$room = explode('_',$selectRoom);
-		for ($i=0; $i < count($selectRoom) ; $i++) :
+		for ($i=0; $i < count($room) ; $i++) :
 			$saveBookedRoom[$i] = array(
 				'bookedID '     => $idBooked,
-				'roomID '       => $selectRoom[$i],
+				'roomID '       => $room[$i],
 				'checkinDate '  => $this->packfunction->dtTosql($_POST['checkinDate']),
 				'checkoutDate ' => $this->packfunction->dtTosql($this->input->post('checkOutDate')),
 				'comment '      => $this->input->post('comment'),
@@ -78,7 +78,7 @@ class Mdl_checkin extends CI_Model {
 		$idBookedRoom[$i] = $this->db->insert_id();
 
 		// Update สถานะห้อง
-		$this->packfunction->updateRoom($status='CHECKIN', $roomcode=$selectRoom[$i]);
+		$this->packfunction->updateRoom($status='CHECKIN', $roomcode=$room[$i]);
 
 
 			// Insert ts_booked_room_log
@@ -99,7 +99,7 @@ class Mdl_checkin extends CI_Model {
 			$log = array(
 				'bookedID '     => $idBooked,
 				'bookedroomID' => $idBookedRoom[$i],
-				'roomID'       => $selectRoom[$i],
+				'roomID'       => $room[$i],
 				'logDate'      => $startDate->format('Y-m-d').' 12:00:00',
 				'comment'      => $this->input->post('comment'),
 				'status'       => 'CHECKIN',
@@ -119,7 +119,7 @@ class Mdl_checkin extends CI_Model {
 			// 'cashhdrID ' => $this->input->post(''),
 			'cashCode ' => $bookedCode[0]['CODE'],
 			'bookedID ' => $idBooked,
-			'roomID ' => $selectRoom[$i],
+			'roomID ' => $room[$i],
 			'cashDate ' => $this->packfunction->dtYMDnow(),
 			'totalVat ' => $this->input->post('vat'),
 			'totalDiscount ' => $this->input->post('discount'),
