@@ -197,7 +197,9 @@
 		</div>
 		<?php }?>
 		<div class="form-group">
-			<hr>
+      <div class="col-sm-12">
+			 <hr>
+      </div>
 		</div>
 		<div class="form-group">
 			<label for="checkOutDate" class="col-sm-2 control-label">วันที่ Checkout <b style="color: #FF0000">*</b></label>

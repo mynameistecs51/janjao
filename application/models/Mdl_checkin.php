@@ -318,22 +318,24 @@ class Mdl_checkin extends CI_Model {
 			$key = $_POST['bookedID'];
 			$this->db->where('bookedID',$_POST['bookedID']);
 			$this->db->delete('ts_service');
-			foreach ($_POST['serviceName'] as $sv => $value) {
-				$data[$sv] = array(
-					'bookedID' 	  => $_POST['bookedID'],
-					'serviceName' => $_POST['serviceName'][$sv],
-					'price' 	  => $_POST['price'][$sv],
-					'amount'      => $_POST['amount'][$sv],
-					'unit'		  => $_POST['unit'][$sv],
-					'type'		  => 'DESTROY',
-					'comment' 	  => '',
-					'status'  	  => 'ORDER',
-					"createDT"	  => $this->packfunction->dtYMDnow(),
-					"createBY"	  => $this->UserName,
-					"updateDT"	  => $this->packfunction->dtYMDnow(),
-					"updateBY"	  => $this->UserName
-					);
-				$this->db->insert('ts_service',$data[$sv]);
+			if(isset($_POST['serviceName'])){
+				foreach ($_POST['serviceName'] as $sv => $value) {
+					$data[$sv] = array(
+						'bookedID' 	  => $_POST['bookedID'],
+						'serviceName' => $_POST['serviceName'][$sv],
+						'price' 	  => $_POST['price'][$sv],
+						'amount'      => $_POST['amount'][$sv],
+						'unit'		  => $_POST['unit'][$sv],
+						'type'		  => 'DESTROY',
+						'comment' 	  => '',
+						'status'  	  => 'ORDER',
+						"createDT"	  => $this->packfunction->dtYMDnow(),
+						"createBY"	  => $this->UserName,
+						"updateDT"	  => $this->packfunction->dtYMDnow(),
+						"updateBY"	  => $this->UserName
+						);
+					$this->db->insert('ts_service',$data[$sv]);
+				}
 			}
 		}
 
@@ -393,22 +395,25 @@ class Mdl_checkin extends CI_Model {
 			$this->db->insert('ts_cash_dtl',$datadtl);
 			$idcashdtl = $this->db->insert_id();
 
-			foreach ($_POST['serviceName'] as $svk => $rowsvk) {
-				$datadtlList[$svk] = array(
-					'cashdtlID'  => $idcashdtl,
-					'cashName' => $_POST['serviceName'][$svk],
-					'price' => $_POST['price'][$svk],
-					'amount' => $_POST['amount'][$svk],
-					'unit' => $_POST['unit'][$svk],
-					'total' => $_POST['lastamount'],
-					"createDT"	  => $this->packfunction->dtYMDnow(),
-					"createBY"	  => $this->UserName,
-					"updateDT"	  => $this->packfunction->dtYMDnow(),
-					"updateBY"	  => $this->UserName
-					);
-				$this->db->insert('ts_cash_dtl_list' , $datadtlList[$svk]);
+			if(isset($_POST['serviceName'])){
+				foreach ($_POST['serviceName'] as $svk => $rowsvk) {
+					$datadtlList[$svk] = array(
+						'cashdtlID'  => $idcashdtl,
+						'cashName' => $_POST['serviceName'][$svk],
+						'price' => $_POST['price'][$svk],
+						'amount' => $_POST['amount'][$svk],
+						'unit' => $_POST['unit'][$svk],
+						'total' => $_POST['lastamount'],
+						"createDT"	  => $this->packfunction->dtYMDnow(),
+						"createBY"	  => $this->UserName,
+						"updateDT"	  => $this->packfunction->dtYMDnow(),
+						"updateBY"	  => $this->UserName
+						);
+					$this->db->insert('ts_cash_dtl_list' , $datadtlList[$svk]);
 
+				}
 			}
+			
 		}
 	}
 
