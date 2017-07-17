@@ -101,6 +101,21 @@ class Report_checkin extends CI_Controller {
 		}
 		return $data_array;
 	}
+
+	public function search($keywork = "")
+	{
+		$keywordDay = $this->input->post('keywordDay');
+		if(!empty($keywordDay )){
+			if($_POST){
+				$this->data['viewName']=$this->pagename;
+				$this->data['keyword']= $keywordDay;
+				$this->data['repCheckout'] = $this->showList($this->data['keyword']);
+				$this->packfunction->packView($this->data,"report/reportcheckin/ReportCheckinDay.php");
+			}else{
+				redirect('report/reportbooked/booked','refresh');
+			}
+		}
+	}
 }
 
 

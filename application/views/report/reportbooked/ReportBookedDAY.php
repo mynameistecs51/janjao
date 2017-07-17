@@ -72,7 +72,7 @@
 		</div>
 	</div>
 </div>
-<div class="div_modal"> <!-- show modal Bill --> </div>
+
 <script src="<?php echo base_url()?>assets/js/jquery.datetimepicker.full.min.js"></script>
 <script type="text/javascript">
 	$(function() {
