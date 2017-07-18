@@ -115,7 +115,7 @@ class Report_booked extends CI_Controller {
 				$this->data['getBooked'] = $this->showList($this->data['keyword']);
 				$this->packfunction->packView($this->data,"report/reportbooked/ReportBookedDAY");
 			}else{
-				redirect('report/reportbooked/booked','refresh');
+				redirect('report/report_booked/','refresh');
 			}
 		}else if(!empty($keywordMonth)){
 			if($_POST){
@@ -125,10 +125,10 @@ class Report_booked extends CI_Controller {
 				$this->data['getBooked'] = $this->showList($this->data['keyword']);
 				$this->packfunction->packView($this->data,"report/reportbooked/ReportBookedMonth");
 			}else{
-				redirect('report/reportbooked/bookedmonth/','refresh');
+				redirect('report/report_booked/bookedmonth/','refresh');
 			}
 		}else{
-			redirect('report/reportbooked/booked','refresh');
+			redirect('report/report_booked/','refresh');
 		}
 	}
 

@@ -26,8 +26,18 @@ class Report_checkin extends CI_Controller {
 		$this->data['viewName']=$this->pagename;
 		$this->data['keyword']='';
 		$this->data['repCheckout'] = $this->showList($this->data['keyword']);
-		// $this->data['repCheckout'] = $this->Mdl_booked->report_checkout($this->data['keyword']);
+		$this->data['getMonth'] = $this->packfunction->getMonth();
 		$this->packfunction->packView($this->data,"report/reportcheckin/ReportCheckinDay.php");
+	}
+
+	public function checkinmonth($value='')
+	{
+		$this->data['viewName']=$this->pagename;
+		$this->data['keyword']='';
+		$this->data['repCheckout'] = $this->showList($this->data['keyword']);
+		$this->data['getMonth'] = $this->packfunction->getMonth();
+		// $this->data['repCheckout'] = $this->Mdl_booked->report_checkout($this->data['keyword']);
+		$this->packfunction->packView($this->data,"report/reportcheckin/ReportCheckinMonth.php");
 	}
 
 	public function showList($keyword = "")
@@ -105,16 +115,38 @@ class Report_checkin extends CI_Controller {
 	public function search($keywork = "")
 	{
 		$keywordDay = $this->input->post('keywordDay');
+		$keywordMonth = $this->input->post('startMonth');
 		if(!empty($keywordDay )){
 			if($_POST){
 				$this->data['viewName']=$this->pagename;
 				$this->data['keyword']= $keywordDay;
 				$this->data['repCheckout'] = $this->showList($this->data['keyword']);
+				$this->data['getMonth'] = $this->packfunction->getMonth();
 				$this->packfunction->packView($this->data,"report/reportcheckin/ReportCheckinDay.php");
 			}else{
 				redirect('report/reportbooked/booked','refresh');
 			}
+		}else if(!empty($keywordMonth)){
+			if($_POST){
+				$this->data['viewName']=$this->pagename;
+				$this->data['keyword']= '/'.$keywordMonth.'/'.$this->input->post('startYear') ;
+				$this->data['repCheckout'] = $this->showList($this->data['keyword']);
+				$this->data['getMonth'] = $this->packfunction->getMonth();
+				$this->packfunction->packView($this->data,"report/reportcheckin/ReportCheckinMonth.php");
+			}else{
+				redirect('report/report_checkin/checkinmonth','refresh');
+			}
+		}else{
+			redirect('report/report_checkin/','refresh');
 		}
+	}
+
+	public function PDF($keyword="")
+	{
+		$this->data['keyword'] = ($keyword == '__________')?'':str_replace('_','/',$keyword);
+		// print_r($this->data['keyword']);
+		$this->data['repCheckout'] = $this->showList($this->data['keyword']);
+		$this->load->view('report/reportcheckin/ReportCheckinPDF',$this->data);
 	}
 }
 

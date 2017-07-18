@@ -118,7 +118,7 @@ $html = '
 			// สร้างเนื้อหาจาก  HTML code
 			// $pdf->writeHTML($html, true, 0, true, 0);
 $pdf->writeHTML($html, true, false, true, false, '');
-$pdf->Output('student request.pdf','I');
+$pdf->Output('ReportBooked.pdf','I');
 			// ---------------------------------------------------------
 
 			//Close and output PDF document

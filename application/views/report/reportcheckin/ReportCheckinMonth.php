@@ -1,8 +1,6 @@
-<!-- Page Name -->
-<!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/datatable/css/dataTables.bootstrap.min.css"> -->
 <link href="<?php echo base_url()?>assets/css/jquery.datetimepicker.css" rel="stylesheet">
 <div class="col-lg-3">
-	<i style="font-size: 18px;"><?php echo $viewName .'<u><span class="text-primary">  DAY</span></u>';?></i>
+	<i style="font-size: 18px;"><?php echo $viewName .'<u><span class="text-primary">  MONTH </span></u>';?></i>
 </div>
 <div class="col-lg-9 text-right" >
 	<?php echo anchor(base_url().'report_checkin/', '<i class="fa fa-list" aria-hidden="true"></i> รายวัน', 'class="btn btn-success"'); ?>
@@ -20,7 +18,21 @@
 		<div class="col-lg-5" align="right">
 			<div class="sh-left">
 				<form name="formSearch" id="formSearch" class="form-inline" method="POST" action="<?php echo base_url()?>report_checkin/search/">
-					<input type="text" class="form-control"  id="startDate" style="margin-right: 10px;" name="keywordDay" value="">
+					Select Month :
+					<select name="startMonth" class="form-control"  style="width: 138px;margin-right: 10px;">
+						<?php foreach ($getMonth as $keyMonth => $valueMonth) :?>
+							<?php $selectedM = ($keyMonth == date('m'))?'selected':'' ?>
+							<option value="<?php echo $keyMonth; ?>" <?php echo $selectedM; ?>><?php echo $valueMonth; ?></option>
+						<?php endforeach; ?>
+					</select>
+					Select Year :
+					<select name="startYear" class="form-control"  style="width: 138px;margin-right: 10px;">
+						<?php for($i=(-2);$i <= (+2);$i++): ?>
+							<?php $selectedY = (date('Y')+$i == date('Y'))?'selected':'' ?>
+							<option value="<?php echo date('Y')+$i; ?>" <?php echo $selectedY; ?>><?php echo (date('Y')+$i)+543; ?></option>
+						<?php endfor; ?>
+					</select>
+					&nbsp;
 					<button  type="submit" class="btn btn-primary " style="float: right;">Search</button>
 				</form>
 			</div>
@@ -39,10 +51,11 @@
 						<th style="text-align: center;width:  140px;">CHECKOUT DATE</th>
 						<th style="text-align: center;width:  140px;">CREATE DTATE</th>
 						<th style="text-align: center;width:  80px;"> STATUS</th>
-						<th style="text-align: center;width:  230px;">#</th>
+						<th style="text-align: center;width:  230px;"># </th>
 					</tr>
 				</thead>
 				<tbody>
+					<?php $sumAll = array(); $roomAll = array(); ?>
 					<?php $j=1; ?>
 					<?php if(count($repCheckout)>0) { ?>
 					<?php foreach ($repCheckout as $key => $report) :?>
@@ -56,10 +69,11 @@
 								?>
 							</td>
 							<td>
-								<?php //echo $report['roomID'];
+								<?php
 								for($i=0;$i < $numRoom; $i++)
 								{
 									echo "ROOM ".$report['selectRoom'][$i]['roomID'].",&nbsp;&nbsp;";
+									array_push($roomAll,$report['selectRoom'][$i]['roomID']);
 								}
 								?>
 							</td>
@@ -86,17 +100,27 @@
 								echo "BY ",$report['updateBY'];
 								?>
 							</td>
-							<td align="center">
-								<?php ;
-								echo $sum = (empty($report['sumtotal']))?$report['totalLast'] : $report['sumtotal'] + $report['totalLast'];
-								// echo $report['totalLast'];
-								// $sumtotal = $report['totalLast']+($report['cashPledge'] - ($report['discount'] + $report['sumtotal']) );
-								// echo number_format($sumtotal,2);
+							<td align="center"> <!-- (ยอดสุทธิ - เงินมัดจำ)+(เงินมัดจำ+ค่าห้อง+vat)-->
+								<?php
+								$sum = (empty($report['sumtotal']))?$report['totalLast'] : $report['sumtotal'] + $report['totalLast'];
+								echo number_format($sum,2);
+								array_push($sumAll, $sum);
 								?>
 								บาท
 							</td>
 						</tr>
 					<?php endforeach; ?>
+					<tr>
+						<td colspan="3">
+						</td>
+						<td> <b>รวมพัก  <?php echo count($roomAll);?> ห้อง</b>
+						</td>
+						<td colspan="4">
+						</td>
+						<td align="center">
+							<b>รวมเงิน 	<?php  echo number_format(array_sum($sumAll),2);?>บาท</b>
+						</td>
+					</tr>
 					<?php }else{ ?>
 					<tr>
 						<td colspan="9">No Booked And Checkin Data !</td>

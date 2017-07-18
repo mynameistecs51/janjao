@@ -13,7 +13,6 @@
     	<!-- Page Features -->
     	<div class="row text-center">
     		<div class="col-lg-6" align="left">
-    			<!-- <button type="button" class="btn btn-primary"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> export PDF</button> -->
     			<?php echo anchor(base_url().'report_booked/PDF/'.$date = str_replace('/','_',$keyword),'<i class="fa fa-file-pdf-o" aria-hidden="true"></i>  export PDF', 'class="btn btn-primary" target ="_blank"'); ?>
     		</div>
     		<div class="col-lg-6" align="right">
