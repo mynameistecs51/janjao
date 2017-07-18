@@ -39,10 +39,11 @@
 						<th style="text-align: center;width:  140px;">CHECKOUT DATE</th>
 						<th style="text-align: center;width:  140px;">CREATE DTATE</th>
 						<th style="text-align: center;width:  80px;"> STATUS</th>
-						<th style="text-align: center;width:  230px;">#</th>
+						<th style="text-align: center;width:  230px;"># </th>
 					</tr>
 				</thead>
 				<tbody>
+					<?php $sumAll = array(); $roomAll = array(); ?>
 					<?php $j=1; ?>
 					<?php if(count($repCheckout)>0) { ?>
 					<?php foreach ($repCheckout as $key => $report) :?>
@@ -56,10 +57,11 @@
 								?>
 							</td>
 							<td>
-								<?php //echo $report['roomID'];
+								<?php
 								for($i=0;$i < $numRoom; $i++)
 								{
 									echo "ROOM ".$report['selectRoom'][$i]['roomID'].",&nbsp;&nbsp;";
+									array_push($roomAll,$report['selectRoom'][$i]['roomID']);
 								}
 								?>
 							</td>
@@ -86,17 +88,27 @@
 								echo "BY ",$report['updateBY'];
 								?>
 							</td>
-							<td align="center">
-								<?php ;
-								echo $sum = (empty($report['sumtotal']))?$report['totalLast'] : $report['sumtotal'] + $report['totalLast'];
-								// echo $report['totalLast'];
-								// $sumtotal = $report['totalLast']+($report['cashPledge'] - ($report['discount'] + $report['sumtotal']) );
-								// echo number_format($sumtotal,2);
+							<td align="center"> <!-- (ค่าห้อง + เงินมัดจำ)-(มัดจำ - service)-->
+								<?php
+								 $sum = (empty($report['sumtotal']))?$report['totalLast'] :  $report['totalLast'] - ($report['cashPledge'] - $report['sumtotal']) ;
+								echo number_format($sum,2);
+								array_push($sumAll, $sum);
 								?>
 								บาท
 							</td>
 						</tr>
 					<?php endforeach; ?>
+					<tr>
+						<td colspan="3">
+						</td>
+						<td> <b>รวมพัก  <?php echo count($roomAll);?> ห้อง</b>
+						</td>
+						<td colspan="4">
+						</td>
+						<td align="center">
+							<b>รวมเงิน 	<?php  echo number_format(array_sum($sumAll),2);?>บาท</b>
+						</td>
+					</tr>
 					<?php }else{ ?>
 					<tr>
 						<td colspan="9">No Booked And Checkin Data !</td>
@@ -122,6 +134,9 @@
 			});
 		});
 	</script>
+
+
+
 
 
 

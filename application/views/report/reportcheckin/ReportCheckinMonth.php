@@ -18,14 +18,14 @@
 		<div class="col-lg-5" align="right">
 			<div class="sh-left">
 				<form name="formSearch" id="formSearch" class="form-inline" method="POST" action="<?php echo base_url()?>report_checkin/search/">
-					Select Month :
+					เดือน :
 					<select name="startMonth" class="form-control"  style="width: 138px;margin-right: 10px;">
 						<?php foreach ($getMonth as $keyMonth => $valueMonth) :?>
 							<?php $selectedM = ($keyMonth == date('m'))?'selected':'' ?>
 							<option value="<?php echo $keyMonth; ?>" <?php echo $selectedM; ?>><?php echo $valueMonth; ?></option>
 						<?php endforeach; ?>
 					</select>
-					Select Year :
+					ปี :
 					<select name="startYear" class="form-control"  style="width: 138px;margin-right: 10px;">
 						<?php for($i=(-2);$i <= (+2);$i++): ?>
 							<?php $selectedY = (date('Y')+$i == date('Y'))?'selected':'' ?>
@@ -100,9 +100,9 @@
 								echo "BY ",$report['updateBY'];
 								?>
 							</td>
-							<td align="center"> <!-- (ยอดสุทธิ - เงินมัดจำ)+(เงินมัดจำ+ค่าห้อง+vat)-->
+							<td align="center"> <!-- (ค่าห้อง + เงินมัดจำ)-(มัดจำ - service)-->
 								<?php
-								$sum = (empty($report['sumtotal']))?$report['totalLast'] : $report['sumtotal'] + $report['totalLast'];
+								 $sum = (empty($report['sumtotal']))?$report['totalLast'] :  $report['totalLast'] - ($report['cashPledge'] - $report['sumtotal']) ;
 								echo number_format($sum,2);
 								array_push($sumAll, $sum);
 								?>
