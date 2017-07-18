@@ -49,7 +49,7 @@
 						<th style="text-align: center;width:  250px;">ROOM</th>
 						<th style="text-align: center;width:  140px;">CHECKIN DATE</th>
 						<th style="text-align: center;width:  140px;">CHECKOUT DATE</th>
-						<th style="text-align: center;width:  140px;">CREATE DTATE</th>
+						<th style="text-align: center;width:  140px;">UPDATE DTATE</th>
 						<th style="text-align: center;width:  80px;"> STATUS</th>
 						<th style="text-align: center;width:  230px;"># </th>
 					</tr>
@@ -90,7 +90,7 @@
 							</td>
 							<td>
 								<?php
-								$dateCreate = explode('-',$report['createDT']); $yearCreate = explode(" ",$dateCreate[2]);
+								$dateCreate = explode('-',$report['updateDT']); $yearCreate = explode(" ",$dateCreate[2]);
 								echo $yearCreate[0]." ".$getMonth[$dateCreate[1]]." ".($dateCreate[0]+543)."  <br>เวลา ".$yearCreate[1];
 								?>
 							</td>
