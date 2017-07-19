@@ -733,7 +733,10 @@ class Mdl_checkin extends CI_Model {
 	{
 	// แสดงรายงานยอดเช่าห้อง
 		$sql = "
-		SELECT tb.bookedID,
+		SELECT 
+		tb.bookedID,
+		tbr.bookedroomID,
+		tbr.roomID,
 		tb.bookedCode,
 		tb.idcardno,
 		tb.idcardnoPath,
@@ -743,11 +746,6 @@ class Mdl_checkin extends CI_Model {
 		tb.lastName,
 		tb.birthdate,
 		tb.address,
-		tb.district,
-		tb.amphur,
-		tb.province,
-		tb.country,
-		tb.postcode,
 		tb.mobile,
 		tb.licenseplate,
 		tb.email,
@@ -764,8 +762,6 @@ class Mdl_checkin extends CI_Model {
 		tb.createBY,
 		tb.updateDT,
 		tb.updateBY,
-		tbr.bookedroomID,
-		tbr.roomID,
 		DATE_FORMAT(tbr.checkinDate,'%d/%m/%Y %H:%i') AS checkinDate,
 		DATE_FORMAT(tbr.checkoutDate,'%d/%m/%Y %H:%i') AS checkoutDate,
 		tch.cashCode,
@@ -780,12 +776,14 @@ class Mdl_checkin extends CI_Model {
 		FROM ts_booked tb
 		INNER JOIN ts_booked_room tbr ON tb.bookedID = tbr.bookedID
 		INNER JOIN ts_cash_hdr tch ON tbr.roomID = tch.roomID
+		-- INNER JOIN ts_cash_dtl tcd ON tch.cashhdrID = tcd.cashhdrID
 		LEFT JOIN ts_cash_dtl tcd ON tch.cashhdrID = tcd.cashhdrID
 		WHERE tb.status <> 'HIDDEN'
 		AND tb.status <> 'LATE'
 		AND tb.status <> 'CANCLE'
 		AND CONCAT(tb.bookedCode,tb.idcardno,tb.firstName,' ',tb.lastName,tbr.roomID,DATE_FORMAT(tb.checkInAppointDate,'%d/%m/%Y')) LIKE '%".$keyword."%'
-		ORDER BY tb.bookedID DESC
+	 GROUP BY tbr.bookedroomID
+		#ORDER BY tb.bookedID DESC
 		";
 		$data = $this->db->query($sql)->result_array();
 		return $data;

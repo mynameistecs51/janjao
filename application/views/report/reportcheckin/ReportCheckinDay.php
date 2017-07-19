@@ -31,18 +31,21 @@
 			<table id="fairlist" class="table table-striped table-bordered" cellspacing="0" width="100%" >
 				<thead style="background:#BDBDBD;font-size: 12px; ">
 					<tr >
-						<th  style="text-align: center;width: 40px;">No.</th>
-						<th style="text-align: center;width:  120px;">BOOKED No.</th>
-						<th style="text-align: center;width: 200px;">NAME </th>
-						<th style="text-align: center;width:  250px;">ROOM</th>
-						<th style="text-align: center;width:  140px;">CHECKIN DATE</th>
-						<th style="text-align: center;width:  140px;">CHECKOUT DATE</th>
-						<th style="text-align: center;width:  140px;">UPDATE DTATE</th>
-						<th style="text-align: center;width:  80px;"> STATUS</th>
-						<th style="text-align: center;width:  230px;"># </th>
+						<th style="text-align: center;width: 40px;">No.</th>
+						<th style="text-align: center;width: 120px;">BOOKED No.</th>
+						<th style="text-align: center;width: 150px;">NAME </th>
+						<th style="text-align: center;width: 180px;">ROOM</th>
+						<th style="text-align: center;width: 140px;">CHECKIN DATE</th>
+						<th style="text-align: center;width: 140px;">CHECKOUT DATE</th>
+						<th style="text-align: center;width: 140px;">UPDATE DTATE</th>
+						<th style="text-align: center;width: 80px;"> STATUS</th>
+						<th style="text-align: center;width: 80px;"> CASH PLEDGE</th>
+						<th style="text-align: center;width: 80px;"> RETES ROOM</th>
+						<th style="text-align: center;width: 80px;"> SERVICE </th>
+						<th style="text-align: center;width: 230px;"># </th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody style="font-size: 12px;">
 					<?php $sumAll = array(); $roomAll = array(); ?>
 					<?php $j=1; ?>
 					<?php if(count($repCheckout)>0) { ?>
@@ -68,18 +71,18 @@
 							<td>
 								<?php
 								$dateIn = explode('/',$report['checkinDate']); $yearIn = explode(" ",$dateIn[2]);
-								echo $dateIn[0]." ".$getMonth[$dateIn[1]]." ".($yearIn[0]+543)."  <br>เวลา ".$yearIn[1];
+								echo $dateIn[0]."/".$dateIn[1]."/".($yearIn[0]+543)." เวลา ".$yearIn[1];
 								?>
 							</td>
 							<td>
 								<?php
 								$dateOut = explode('/',$report['checkoutDate']); $yearYear = explode(" ",$dateOut[2]);
-								echo $dateOut[0]." ".$getMonth[$dateOut[1]]." ".($yearYear[0]+543)."  <br>เวลา ".$yearYear[1];?>
+								echo $dateOut[0]."/".$dateOut[1]."/".($yearYear[0]+543)."  เวลา ".$yearYear[1];?>
 							</td>
 							<td>
 								<?php
 								$dateCreate = explode('-',$report['updateDT']); $yearCreate = explode(" ",$dateCreate[2]);
-								echo $yearCreate[0]." ".$getMonth[$dateCreate[1]]." ".($dateCreate[0]+543)."  <br>เวลา ".$yearCreate[1];
+								echo $yearCreate[0]."/".$dateCreate[1]."/".($dateCreate[0]+543)." เวลา ".date_format(date_create($yearCreate[1]),"H:i");
 								?>
 							</td>
 							<td>
@@ -87,6 +90,15 @@
 								echo $report['status'],"<br>";
 								echo "BY ",$report['updateBY'];
 								?>
+							</td>
+							<td align="center"> 
+								<?php echo $report['cashPledge']; ?>
+							</td>
+							<td align="center"> 
+								<?php echo number_format(($report['totalLast']-$report['cashPledge']),2); ?>
+							</td>
+							<td align="center">
+								<?php echo number_format($report['sumtotal'],2); ?>
 							</td>
 							<td align="center"> <!-- (ค่าห้อง + เงินมัดจำ)+(service-มัดจำ)-->
 								<?php
@@ -103,10 +115,10 @@
 						</td>
 						<td> <b>รวมพัก  <?php echo count($roomAll);?> ห้อง</b>
 						</td>
-						<td colspan="4">
+						<td colspan="6">
 						</td>
 						<td align="center">
-							<b>รวมเงิน 	<?php  echo number_format(array_sum($sumAll),2);?>บาท</b>
+							<b>รวมเงิน 	<?php  echo number_format(array_sum($sumAll),2);?> บาท</b>
 						</td>
 					</tr>
 					<?php }else{ ?>
@@ -115,25 +127,24 @@
 					</tr>
 					<?php } ?>
 				</tbody>
-			</table>
+			</div>
 		</div>
-	</div>
 
-	<!-- /.row -->
-	<!--  END Fair List -->
+		<!-- /.row -->
+		<!--  END Fair List -->
 
-	<script src="<?php echo base_url()?>assets/js/jquery.datetimepicker.full.min.js"></script>
-	<script type="text/javascript">
-		$(function() {
-			$.datetimepicker.setLocale('th');
-			$('#startDate').datetimepicker({
-				timepicker:true,
-				mask:true,
-				format:'d/m/Y',
-				lang:'th',
+		<script src="<?php echo base_url()?>assets/js/jquery.datetimepicker.full.min.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$.datetimepicker.setLocale('th');
+				$('#startDate').datetimepicker({
+					timepicker:true,
+					mask:true,
+					format:'d/m/Y',
+					lang:'th',
+				});
 			});
-		});
-	</script>
+		</script>
 
 
 

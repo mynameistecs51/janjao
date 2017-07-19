@@ -36,7 +36,6 @@ class Report_checkin extends CI_Controller {
 		$this->data['keyword']='';
 		$this->data['repCheckout'] = $this->showList($this->data['keyword']);
 		$this->data['getMonth'] = $this->packfunction->getMonth();
-		// $this->data['repCheckout'] = $this->Mdl_booked->report_checkout($this->data['keyword']);
 		$this->packfunction->packView($this->data,"report/reportcheckin/ReportCheckinMonth.php");
 	}
 
@@ -72,10 +71,6 @@ class Report_checkin extends CI_Controller {
 					'lastName' =>  $rowBooked['lastName'],
 					'birthdate' =>  $rowBooked['birthdate'],
 					'address' =>  $rowBooked['address'],
-					'district' =>  $rowBooked['district'],
-					'province' =>  $rowBooked['province'],
-					'country' =>  $rowBooked['country'],
-					'postcode' =>  $rowBooked['postcode'],
 					'mobile' =>  $rowBooked['mobile'],
 					'email' =>  $rowBooked['email'],
 					'bookedDate' =>  $rowBooked['bookedDate'],
