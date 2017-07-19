@@ -88,7 +88,7 @@ $html = '
 		if(count($repCheckout)>0) {
 			foreach ($repCheckout as $key => $report) {
 				$mobile = (empty($report['mobile']))?"" : "( ".$report['mobile'].")";
-				 $sum = (empty($report['sumtotal']))?$report['totalLast'] :  $report['totalLast'] - ($report['cashPledge'] - $report['sumtotal']) ;
+				$sum = (empty($report['sumtotal']))?$report['totalLast'] :  $report['totalLast'] + ($report['sumtotal'] - $report['cashPledge']) ;
 				$numRoom = count($report['selectRoom']);
 				$html .= '<tr>';
 				$html .='<td style="text-align: center;width: 20px;">'.$j++.'</td>';

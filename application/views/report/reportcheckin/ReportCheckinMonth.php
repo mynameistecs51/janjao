@@ -100,9 +100,9 @@
 								echo "BY ",$report['updateBY'];
 								?>
 							</td>
-							<td align="center"> <!-- (ค่าห้อง + เงินมัดจำ)-(มัดจำ - service)-->
+							<td align="center"> <!-- (ค่าห้อง + เงินมัดจำ)+(service-มัดจำ)-->
 								<?php
-								 $sum = (empty($report['sumtotal']))?$report['totalLast'] :  $report['totalLast'] - ($report['cashPledge'] - $report['sumtotal']) ;
+								$sum = (empty($report['sumtotal']))?$report['totalLast'] :  $report['totalLast'] + ($report['sumtotal'] - $report['cashPledge']) ;
 								echo number_format($sum,2);
 								array_push($sumAll, $sum);
 								?>
