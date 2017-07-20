@@ -39,14 +39,17 @@
 						<th style="text-align: center;width: 140px;">CHECKOUT DATE</th>
 						<th style="text-align: center;width: 140px;">UPDATE DTATE</th>
 						<th style="text-align: center;width: 80px;"> STATUS</th>
-						<th style="text-align: center;width: 80px;"> CASH PLEDGE</th>
-						<th style="text-align: center;width: 80px;"> RETES ROOM</th>
-						<th style="text-align: center;width: 80px;"> SERVICE </th>
+						<th style="text-align: center;width: 100px;"> CASH PLEDGE</th>
+						<th style="text-align: center;width: 100px;"> RETES ROOM</th>
+						<th style="text-align: center;width: 100px;"> SERVICE </th>
+						<th style="text-align: center;width: 100px;"> DISCOUNT </th>
 						<th style="text-align: center;width: 230px;"># </th>
 					</tr>
 				</thead>
 				<tbody style="font-size: 12px;">
-					<?php $sumAll = array(); $roomAll = array(); ?>
+					<?php
+					$sumAll = array(); $roomAll = array(); $sumPledge = array(); $sumRetes = array(); $sumService = array(); $sumDiscount = array();
+					?>
 					<?php $j=1; ?>
 					<?php if(count($repCheckout)>0) { ?>
 					<?php foreach ($repCheckout as $key => $report) :?>
@@ -91,18 +94,37 @@
 								echo "BY ",$report['updateBY'];
 								?>
 							</td>
-							<td align="center"> 
-								<?php echo $report['cashPledge']; ?>
-							</td>
-							<td align="center"> 
-								<?php echo number_format(($report['totalLast']-$report['cashPledge']),2); ?>
+							<td align="center">
+								<!-- เงินมัดจำ -->
+								<?php
+								$pledge = ($report['status'] == 'CHECKOUT')? 0.00 :$report['cashPledge'];
+								echo number_format($pledge,2);
+								array_push($sumPledge, $pledge);
+								?>
 							</td>
 							<td align="center">
-								<?php echo number_format($report['sumtotal'],2); ?>
+								<!-- ค่าห้อง (ค่าห้อง+มัดจำ)-มัดจำ -->
+								<?php echo $retes = ($report['totalLast'] == 0.00)? 0.00 : number_format(($report['totalLast'] - $report['cashPledge']),2); ?>
+								<?php array_push($sumRetes, $a = ($retes == 0.00)? 0.00 :$report['totalLast'] - $report['cashPledge']); ?>
+							</td>
+							<td align="center">
+								<!-- service -->
+								<?php
+								$service= $report['sumtotal'];
+								echo  number_format($service,2);
+								array_push($sumService,$report['sumtotal']);
+								?>
+							</td>
+							<td align="center">
+								<?php
+								$discount = (empty($report['discount']))?0.00 : $report['discount'];
+								echo number_format($discount,2);
+								array_push($sumDiscount, $discount);
+								?>
 							</td>
 							<td align="center"> <!-- (ค่าห้อง + เงินมัดจำ)+(service-มัดจำ)-->
 								<?php
-								$sum = (empty($report['sumtotal']))?$report['totalLast'] :  $report['totalLast'] + ($report['sumtotal'] - $report['cashPledge']) ;
+								$sum = (empty($report['sumtotal']))?$report['totalLast'] :  $report['totalLast'] + ($report['sumtotal'] - $report['cashPledge']) - $discount ;
 								echo number_format($sum,2);
 								array_push($sumAll, $sum);
 								?>
@@ -115,36 +137,39 @@
 						</td>
 						<td> <b>รวมพัก  <?php echo count($roomAll);?> ห้อง</b>
 						</td>
-						<td colspan="6">
+						<td colspan="4">
 						</td>
-						<td align="center">
-							<b>รวมเงิน 	<?php  echo number_format(array_sum($sumAll),2);?> บาท</b>
-						</td>
+						<td align="center"><?php echo number_format(array_sum($sumPledge),2); ?>  บาท</td>
+						<td align="center"><?php echo number_format(array_sum($sumRetes),2); ?>  บาท</td>
+						<td align="center"><?php echo number_format(array_sum($sumService),2); ?>  บาท </td>
+						<td align="center"><?php echo number_format(array_sum($sumDiscount),2); ?>  บาท </td>
+						<td align="center">	<b>รวมเงิน 	<?php  echo number_format(array_sum($sumAll),2);?> บาท</b>	</td>
 					</tr>
 					<?php }else{ ?>
 					<tr>
-						<td colspan="9">No Booked And Checkin Data !</td>
+						<td colspan="13">No Booked And Checkin Data !</td>
 					</tr>
 					<?php } ?>
 				</tbody>
-			</div>
+			</table>
 		</div>
+	</div>
 
-		<!-- /.row -->
-		<!--  END Fair List -->
+	<!-- /.row -->
+	<!--  END Fair List -->
 
-		<script src="<?php echo base_url()?>assets/js/jquery.datetimepicker.full.min.js"></script>
-		<script type="text/javascript">
-			$(function() {
-				$.datetimepicker.setLocale('th');
-				$('#startDate').datetimepicker({
-					timepicker:true,
-					mask:true,
-					format:'d/m/Y',
-					lang:'th',
-				});
+	<script src="<?php echo base_url()?>assets/js/jquery.datetimepicker.full.min.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$.datetimepicker.setLocale('th');
+			$('#startDate').datetimepicker({
+				timepicker:true,
+				mask:true,
+				format:'d/m/Y',
+				lang:'th',
 			});
-		</script>
+		});
+	</script>
 
 
 
