@@ -116,9 +116,9 @@ class Checkin extends CI_Controller {
 	public function  billprintcheckin($key=''){
 		 // $key = MD5(44);
 		$this->data['checkinDtl']=$this->Mdl_checkin->booked($key);
-		// $countDay = $this->Mdl_checkin->booked($key);
+
 		$this->data['dateDtl'] = date_diff(date_create($this->data['checkinDtl']['checkInAppointDate']),date_create($this->data['checkinDtl']['checkOutAppointDate'])->modify("+1 hour"));
-		// print_r($this->data['dateDtl']);
+
 		if(count($this->data['checkinDtl'])>0){
 			$this->data['billCode']=$this->Mdl_checkin->getBillCode();
 			$this->data['getMonth'] = $this->packfunction->getMonth();
@@ -127,7 +127,7 @@ class Checkin extends CI_Controller {
 			$this->data['serviceDtl']=$this->Mdl_checkin->serviceList($key,'ROOM');
 			$this->load->view('checkin/Bill',$this->data);
 		}else{
-			// redirect('authen/','refresh');
+			redirect('authen/','refresh');
 		}
 	}
 

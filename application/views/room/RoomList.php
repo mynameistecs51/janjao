@@ -1,9 +1,14 @@
     <!-- Page Name -->
     <!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/datatable/css/dataTables.bootstrap.min.css"> -->
-    <div class="col-lg-12">
+    <div class="col-lg-6">
     	<i style="font-size: 18px;">SERVICE LIST</i>
     </div>
-    <hr style="margin-top: 30px;">
+    <div class="sh-right col-lg-6">
+    	<button  type="submit" class="btn btn-success btn_add pull-right" style="float: left;" >
+    		<span class="fa fa-plus"> </span> ADD ROOM
+    	</button>
+    </div>
+    <hr class="col-lg-12" style="margin-top: 6px;">
 
 
     <!-- Page Content -->
@@ -11,11 +16,6 @@
     	<!-- Page Features -->
     	<div class="row text-center">
     		<div class="col-sm-12" align="right">
-    			<!-- <div class="sh-left pull-left col-sm-6">
-    				<button  type="submit" class="btn btn-success btn_add " style="float: left;" >
-    					<span class="fa fa-plus"> </span> ADD ROOM
-    				</button>
-    			</div> -->
     			<div class="sh-right  pull-right  col-sm-6">
     				<form name="formSearch" id="formSearch" method="POST" action="<?php echo base_url()?>room/search/">
     					<button  type="submit" class="btn btn-primary " style="float: right;">Search</button>
@@ -86,19 +86,19 @@
 
     		function roomAdd() {
     			$('.btn_add').click(function(){
-    				load_page('<?php echo base_url()."index.php/Room/RoomFormAdd/"; ?>','.:: Data ROOM TYPE ::.','<?php echo base_url()."room/saveAdd/" ?>');
+    				load_page('<?php echo base_url()."index.php/Room/RoomFormAdd/"; ?>','.:: ADD ROOM ::.','<?php echo base_url()."room/saveAdd/" ?>');
     			});
     		}
 
     		function roomEdit() {
     			$('.btn_edit').click(function(){
-    				load_page('<?php echo base_url()."index.php/room/roomEdit/"; ?>'+$(this).attr('id'),'.:: EDIT ROOM TYPE ::.','<?php echo base_url()."room/saveEdit"; ?>');
+    				load_page('<?php echo base_url()."index.php/room/roomEdit/"; ?>'+$(this).attr('id'),'.:: EDIT ROOM ::.','<?php echo base_url()."room/saveEdit"; ?>');
     			});
     		}
 
     		function roomView() {
     			$('.btn_view').click(function(){
-    				load_page('<?php echo base_url()."index.php/room/roomView/"; ?>'+$(this).attr('id'),'.:: INFO ROOM TYPE ::.','#');
+    				load_page('<?php echo base_url()."index.php/room/roomView/"; ?>'+$(this).attr('id'),'.:: INFO ROOM ::.','#');
     			});
     		}
 

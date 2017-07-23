@@ -119,6 +119,7 @@ class Home extends CI_Controller {
 			// $this->data['roomstatus']=$_POST['roomstatus'];
 			$this->data['viewName'] =$this->pagename;
 			$this->data['viewshow']='show';
+			$this->data['getfloor1']=$this->Mdl_booked->getRoom(1,$this->data['dtcheckin'],$this->data['dtcheckout']);
 			$this->data['getfloor2']=$this->Mdl_booked->getRoom(2,$this->data['dtcheckin'],$this->data['dtcheckout']);
 			$this->data['getfloor3']=$this->Mdl_booked->getRoom(3,$this->data['dtcheckin'],$this->data['dtcheckout']);
 			$this->data['getfloor4']=$this->Mdl_booked->getRoom(4,$this->data['dtcheckin'],$this->data['dtcheckout']);

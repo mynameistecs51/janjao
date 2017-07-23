@@ -22,6 +22,7 @@ class Mdl_checkin extends CI_Model {
 			$img = str_replace('data:image/png;base64,', '', $img);
 			$img = str_replace(' ', '+', $img);
 			$data = base64_decode($img);
+			chmod('/assets/images/imgcard',0777);
 			$file = 'assets/images/imgcard/'.$this->input->post('idcardno').'.png';
 			$success = file_put_contents($file, $data);
 			$fileName = $this->input->post('idcardno').'.png';
