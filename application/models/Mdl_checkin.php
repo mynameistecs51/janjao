@@ -733,7 +733,7 @@ class Mdl_checkin extends CI_Model {
 	{
 	// แสดงรายงานยอดเช่าห้อง
 		$sql = "
-		SELECT 
+		SELECT
 		tb.bookedID,
 		tbr.bookedroomID,
 		tbr.roomID,
@@ -783,7 +783,7 @@ class Mdl_checkin extends CI_Model {
 		AND tb.status <> 'CANCLE'
 		AND CONCAT(tb.bookedCode,tb.idcardno,tb.firstName,' ',tb.lastName,tbr.roomID,DATE_FORMAT(tb.checkInAppointDate,'%d/%m/%Y')) LIKE '%".$keyword."%'
 		GROUP BY tbr.bookedroomID
-		ORDER BY tb.bookedID DESC
+		ORDER BY tb.bookedCode DESC
 		";
 		$data = $this->db->query($sql)->result_array();
 		return $data;

@@ -45,8 +45,8 @@ if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
 // ---------------------------------------------------------
 
 
-// add a page
-$pdf->AddPage();
+// add a page กระดาษแนวนอน
+$pdf->AddPage('L', 'A4');
 // set font
 
 // $pdf->AddFont(''thsarabunnew','',''thsarabunnew.php');
@@ -70,20 +70,25 @@ $html = '
 <caption> <h3><b>รายงานยอดการเข้าพัก '.$keyword.'</b></h3></caption>
 <table id="fairlist" class="table table-striped table-bordered" cellspacing="0" width="100%" border="1" >
 	<thead style="background:#BDBDBD;font-size: 12px; ">
-		<tr >
-			<th  style="text-align: center;width: 20px;">No.</th>
-			<th style="text-align: center;width:  90px;">BOOKED No.</th>
-			<th style="text-align: center;width: 100px;">NAME </th>
-			<th style="text-align: center;width:  50px;">ROOM</th>
-			<th style="text-align: center;width:  100px;">CHECKIN DATE</th>
-			<th style="text-align: center;width:  100px;">CHECKOUT DATE</th>
-			<th style="text-align: center;width:  100px;">CREATE DTATE</th>
-			<th style="text-align: center;width:  50px;"> STATUS</th>
-			<th style="text-align: center;width:  100px;"># </th>
+		<tr>
+			<th style="text-align: center;width: 20px;"> No. </th>
+			<th style="text-align: center;width: 80px;"> BOOKED No. </th>
+			<th style="text-align: center;width: 100px;"> NAME  </th>
+			<th style="text-align: center;width: 50px;"> ROOM </th>
+			<th style="text-align: center;width: 80px;"> CHECKIN DATE </th>
+			<th style="text-align: center;width: 80px;"> CHECKOUT DATE </th>
+			<th style="text-align: center;width: 80px;"> UPDATE DTATE </th>
+			<th style="text-align: center;width: 80px;"> STATUS </th>
+			<th style="text-align: center;width: 90px;"> CASH PLEDGE </th>
+			<th style="text-align: center;width: 90px;"> RETES ROOM </th>
+			<th style="text-align: center;width: 90px;"> SERVICE </th>
+			<th style="text-align: center;width: 90px;"> DISCOUNT </th>
+			<th style="text-align: center;width: 80px;"> # </th>
 		</tr>
 	</thead>
 	<tbody>';
-		$sumAll = array(); $roomAll = array();
+
+		$sumAll = array(); $roomAll = array(); $sumPledge = array(); $sumRetes = array(); $sumService = array(); $sumDiscount = array();
 		$j=1;
 		if(count($repCheckout)>0) {
 			foreach ($repCheckout as $key => $report) {
@@ -92,47 +97,83 @@ $html = '
 				$numRoom = count($report['selectRoom']);
 				$html .= '<tr>';
 				$html .='<td style="text-align: center;width: 20px;">'.$j++.'</td>';
-				$html .='<td style="text-align: center;width:  90px;">'.$report['bookedCode'] .'</td>';
+				$html .='<td style="text-align: center;width:  80px;">'.$report['bookedCode'] .'</td>';
 				$html .='<td style="text-align: center;width: 100px;">'.$report['firstName']." ".$report['lastName'].$mobile.'</td>';
 				$html .='<td style="text-align: center;width:  50px;display:block;">';
 				for($i=0;$i < $numRoom; $i++)
 				{
-					$html .= $report['selectRoom'][$i]['roomID'].',        ';
+					$html .= "<u>".$report['selectRoom'][$i]['roomID'].'</u>, &nbsp;';
 					array_push($roomAll,$report['selectRoom'][$i]['roomID']);
 				}
 				$html .='</td>';
-				$html .='<td style="text-align: center;width:  100px;">'. $report['checkinDate'].'</td>';
-				$html .='<td style="text-align: center;width:  100px;">'. $report['checkoutDate'] .'</td>';
-				$html .='<td style="text-align: center;width:  100px;">'. $report['createDT'] .'</td>';
-				$html .='<td style="text-align: center;width:  50px;">' .$report['status']."<br> BY ".$report['updateBY'].'</td>';
-		 		$html .='<td align="center">';  //<!-- (ยอดสุทธิ - เงินมัดจำ)+(เงินมัดจำ+ค่าห้อง+vat)-->
-		 		$html .= number_format($sum,2).' บาท';
-		 		array_push($sumAll, $sum);
-		 		$html .='</td>';
-		 		$html .= '</tr>';
-		 	}
-		 	$html .='<tr>';
-		 	$html .='<td colspan="3" >';
-		 	$html .='</td>';
-		 	$html .='<td style="text-align: center;width:  50px;"> <b>รวมพัก <br>'. count($roomAll) .' ห้อง</b>';
-		 	$html .='</td>';
-		 	$html .='<td colspan="4">';
-		 	$html .='</td>';
-		 	$html .='<td align="center">';
-		 	$html .='	<b>รวมเงิน '. number_format(array_sum($sumAll),2) .'บาท</b>';
-		 	$html .='</td>';
-		 	$html .='</tr>';
-		 }else{
-		 	$html .='<tr>';
-		 	$html .='<td colspan="9">No Booked And Checkin Data !</td>';
-		 	$html .='</tr>';
-		 }
-		 $html .='
-		</tbody>
-	</table>
-	';
-	$pdf->writeHTML($html, true, false, true, false, '');
-	$pdf->Output('ReportCheckin.pdf','I');
+				// date checkin
+				$dateIn = explode('/',$report['checkinDate']); $yearIn = explode(" ",$dateIn[2]);
+				$html .='<td style="text-align: center;width:  80px;">'.$dateIn[0]."/".$dateIn[1]."/".($yearIn[0]+543).'</td>';
+
+				// date checkout
+				$dateOut = explode('/',$report['checkoutDate']); $yearYear = explode(" ",$dateOut[2]);
+				$html .='<td style="text-align: center;width:  80px;">'.$dateOut[0]."/".$dateOut[1]."/".($yearYear[0]+543).'</td>';
+
+				//date update
+				$dateUpdate = explode('-',$report['updateDT']); $yearCreate = explode(" ",$dateUpdate[2]);
+				$html .='<td style="text-align: center;width:  80px;">'.$yearCreate[0]."/".$dateUpdate[1]."/".($dateUpdate[0]+543)." <br> เวลา ".date_format(date_create($yearCreate[1]),"H:i").'</td>';
+
+				// status
+				$html .='<td style="text-align: center;width:  80px;">' .$report['status']."<br> BY ".$report['updateBY'].'</td>';
+
+				// มัดจำ
+				$pledge = ($report['status'] == 'CHECKOUT')? 0.00 :$report['cashPledge'];
+				array_push($sumPledge, $pledge);
+				$html .='<td style="text-align: center;width:  90px;">'.	number_format($pledge,2).'</td>';
+
+				//ค่าห้อง
+				$retes = ($report['totalLast'] == 0.00)? 0.00 : ($report['totalLast'] - $report['cashPledge']);
+				array_push($sumRetes, $a = ($retes == 0.00)? 0.00 :$report['totalLast'] - $report['cashPledge']);
+				$html .='<td style="text-align: center;width:  90px;">'.	number_format($retes,2).'</td>';
+
+				//service
+				$service = $report['sumtotal'];
+				array_push($sumService,$report['sumtotal']);
+				$html .='<td style="text-align: center;width:  90px;">'.	number_format($service,2).'</td>';
+
+				//มัดจำ
+				$discount = (empty($report['discount']))?0.00 : $report['discount'];
+				array_push($sumDiscount, $discount);
+				$html .='<td style="text-align: center;width:  90px;">'.	number_format($discount,2).'</td>';
+
+				//รวม
+				$sum = (empty($report['sumtotal']))?$report['totalLast'] :  $report['totalLast'] + ($report['sumtotal'] - $report['cashPledge']) - $discount ;
+				array_push($sumAll, $sum);
+				$html .='<td style="text-align: center;width:  80px;">'.number_format($sum,2).' บาท</td>';
+
+				$html .= '</tr>';
+
+			}
+
+			$html .= '<tr>';
+			$html .= '<td colspan="3">';
+			$html .= '	</td>';
+			$html .= '	<td align="center"> <b>'. count($roomAll).' ห้อง</b>';
+			$html .= '</td>';
+			$html .= '<td colspan="4">';
+			$html .= '</td>';
+			$html .= '<td align="center">'. number_format(array_sum($sumPledge),2).' บาท</td>';
+			$html .= '<td align="center">'. number_format(array_sum($sumRetes),2).'  บาท</td>';
+			$html .= '	<td align="center">'. number_format(array_sum($sumService),2).'  บาท </td>';
+			$html .= '	<td align="center">'. number_format(array_sum($sumDiscount),2).'  บาท </td>';
+			$html .= '	<td align="center">	<b> '. number_format(array_sum($sumAll),2).'  บาท</b>	</td>';
+			$html .= '</tr>';
+		}else{
+			$html .= '<tr>';
+			$html .= '<td colspan="13">No Booked And Checkin Data !</td>';
+			$html .= '</tr>';
+		}
+		$html .='
+	</tbody>
+</table>
+';
+$pdf->writeHTML($html, true, false, true, false, '');
+$pdf->Output('ReportCheckin.pdf','I');
 		// ---------------------------------------------------------
 
 		//Close and output PDF document
@@ -147,4 +188,4 @@ $html = '
 
 
 		//header('Content-type: application/pdf');
-	?>
+?>

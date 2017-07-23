@@ -28,20 +28,20 @@
 	</div>
 	<div class="row text-center" style="margin-top: 10px;">
 		<div class="col-lg-12" align="left">
-			<table id="fairlist" class="table table-striped table-bordered" cellspacing="0" width="100%" >
+			<table id="fairlist" class="table table-striped table-bordered" cellspacing="0" style="overflow-x:auto;width: 100%">
 				<thead style="background:#BDBDBD;font-size: 12px; ">
 					<tr >
 						<th style="text-align: center;width: 40px;">No.</th>
 						<th style="text-align: center;width: 120px;">BOOKED No.</th>
 						<th style="text-align: center;width: 150px;">NAME </th>
-						<th style="text-align: center;width: 180px;">ROOM</th>
-						<th style="text-align: center;width: 140px;">CHECKIN DATE</th>
-						<th style="text-align: center;width: 140px;">CHECKOUT DATE</th>
-						<th style="text-align: center;width: 140px;">UPDATE DTATE</th>
+						<th style="text-align: center;width: 200px;">ROOM</th>
+						<th style="text-align: center;width: 100px;">CHECKIN DATE</th>
+						<th style="text-align: center;width: 100px;">CHECKOUT DATE</th>
+						<th style="text-align: center;width: 10px;">UPDATE DTATE</th>
 						<th style="text-align: center;width: 80px;"> STATUS</th>
-						<th style="text-align: center;width: 100px;"> CASH PLEDGE</th>
-						<th style="text-align: center;width: 100px;"> RETES ROOM</th>
-						<th style="text-align: center;width: 100px;"> SERVICE </th>
+						<th style="text-align: center;width: 150px;"> CASH PLEDGE</th>
+						<th style="text-align: center;width: 150px;"> RETES ROOM</th>
+						<th style="text-align: center;width: 150px;"> SERVICE </th>
 						<th style="text-align: center;width: 100px;"> DISCOUNT </th>
 						<th style="text-align: center;width: 230px;"># </th>
 					</tr>
@@ -66,7 +66,7 @@
 								<?php
 								for($i=0;$i < $numRoom; $i++)
 								{
-									echo "ROOM ".$report['selectRoom'][$i]['roomID'].",&nbsp;&nbsp;";
+									echo "<u>ROOM ".$report['selectRoom'][$i]['roomID']."</u>,&nbsp;&nbsp;";
 									array_push($roomAll,$report['selectRoom'][$i]['roomID']);
 								}
 								?>
@@ -74,18 +74,18 @@
 							<td>
 								<?php
 								$dateIn = explode('/',$report['checkinDate']); $yearIn = explode(" ",$dateIn[2]);
-								echo $dateIn[0]."/".$dateIn[1]."/".($yearIn[0]+543)." เวลา ".$yearIn[1];
+								echo $dateIn[0]."/".$dateIn[1]."/".($yearIn[0]+543)."  <br> เวลา ".$yearIn[1];
 								?>
 							</td>
 							<td>
 								<?php
 								$dateOut = explode('/',$report['checkoutDate']); $yearYear = explode(" ",$dateOut[2]);
-								echo $dateOut[0]."/".$dateOut[1]."/".($yearYear[0]+543)."  เวลา ".$yearYear[1];?>
+								echo $dateOut[0]."/".$dateOut[1]."/".($yearYear[0]+543)." <br> เวลา ".$yearYear[1];?>
 							</td>
 							<td>
 								<?php
 								$dateCreate = explode('-',$report['updateDT']); $yearCreate = explode(" ",$dateCreate[2]);
-								echo $yearCreate[0]."/".$dateCreate[1]."/".($dateCreate[0]+543)." เวลา ".date_format(date_create($yearCreate[1]),"H:i");
+								echo $yearCreate[0]."/".$dateCreate[1]."/".($dateCreate[0]+543)." <br> เวลา ".date_format(date_create($yearCreate[1]),"H:i");
 								?>
 							</td>
 							<td>
