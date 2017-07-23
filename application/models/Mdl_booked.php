@@ -320,6 +320,7 @@ class Mdl_booked extends CI_Model {
 	function getRoom($floor='',$checkinDate='',$checkoutDate=''){
 		$df = $checkinDate[6].$checkinDate[7].$checkinDate[8].$checkinDate[9].'-'.$checkinDate[3].$checkinDate[4].'-'.$checkinDate[0].$checkinDate[1].' '.$checkinDate[11].$checkinDate[12].':'.$checkinDate[14].$checkinDate[15];
 		$dt = $checkoutDate[6].$checkoutDate[7].$checkoutDate[8].$checkoutDate[9].'-'.$checkoutDate[3].$checkoutDate[4].'-'.$checkoutDate[0].$checkoutDate[1].' '.$checkoutDate[11].$checkoutDate[12].':'.$checkoutDate[14].$checkoutDate[15];
+
 		$sql = "
 		SELECT
 		r.roomID,
@@ -330,12 +331,12 @@ class Mdl_booked extends CI_Model {
 		rt.price_short,
 		rt.bed,
 		r.roomCODE,
-		-- IFNULL(log.status,r.transaction) AS transaction,
-		CASE IFNULL(log.status,r.transaction)
-		WHEN 'CLEANING'
-		THEN ( CASE WHEN DATE_ADD(r.updateDT,INTERVAL 30 MINUTE) > now() THEN 'CLEANING' ELSE 'EMPTY' END )
-		ELSE IFNULL(log.status,r.transaction)
-		END AS transaction,
+		IFNULL(log.status,r.transaction) AS transaction,
+		-- CASE IFNULL(log.status,r.transaction)
+		-- WHEN 'CLEANING'
+		-- THEN ( CASE WHEN DATE_ADD(r.updateDT,INTERVAL 30 MINUTE) > now() THEN 'CLEANING' ELSE 'EMPTY' END )
+		-- ELSE IFNULL(log.status,r.transaction)
+		-- END AS transaction,
 		r.floor,
 		IFNULL(DATE_FORMAT(br.checkinDate,'%d/%m/%Y'),'') AS checkinDate,
 		IFNULL(DATE_FORMAT(br.checkoutDate,'%d/%m/%Y'),'') AS checkoutDate,

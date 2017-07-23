@@ -110,7 +110,7 @@
 				$html .= '
 				<div class="col-sm-1 " style="margin:10px;">
 					<span class="button-checkbox ">
-						<button type="button" class="btn btn_room" data-color="success" style="width:120px;color: #fff;background-color:#449d44;border-color: #398439;">
+						<button type="button" class="btn btn_room" data-color="danger" style="width:120px;color: #fff;background-color:#449d44;border-color: #398439;">
 							'.$bed.'
 							<h4>'.$f1['roomCODE'].' </h4>'.$f1['roomtypeCode'].'
 						</button>
