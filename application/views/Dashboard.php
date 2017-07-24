@@ -110,11 +110,11 @@
 				$html .= '
 				<div class="col-sm-1 " style="margin:10px;">
 					<span class="button-checkbox ">
-						<button type="button" class="btn btn_room" data-color="danger" style="width:120px;color: #fff;background-color:#449d44;border-color: #398439;">
+						<button type="button" class="btn btn_cleaning" data-room="'.$f1['roomCODE'].'" data-color="success" style="width:120px;color: #fff;background-color:#449d44;border-color: #398439;">
 							'.$bed.'
 							<h4>'.$f1['roomCODE'].' </h4>'.$f1['roomtypeCode'].'
 						</button>
-						<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f1['roomCODE'].'"  data-priceday="'.$f1['price_day'].'" data-pricemonth="'.$f1['price_month'].'"  data-priceshort="'.$f1['price_short'].'"  value="'.$f1['roomCODE'].'" />
+						<!-- <input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f1['roomCODE'].'"  data-priceday="'.$f1['price_day'].'" data-pricemonth="'.$f1['price_month'].'"  data-priceshort="'.$f1['price_short'].'"  value="'.$f1['roomCODE'].'" /> -->
 					</span>
 				</div> ';
 			}else if($f1['roomtypeCode']=='STAIRCASE'  && $f1['status']=='ON'){
@@ -199,7 +199,7 @@
 				$html .= '
 				<div class="col-sm-1 " style="margin:10px;">
 					<span class="button-checkbox ">
-						<button type="button" class="btn btn_room" data-color="success" style="width:120px;color: #fff;background-color:#449d44;border-color: #398439;">
+						<button type="button" class="btn btn_cleaning" data-room="'.$f2['roomCODE'].'" data-color="success" style="width:120px;color: #fff;background-color:#449d44;border-color: #398439;">
 							'.$bed.'
 							<h4>'.$f2['roomCODE'].' </h4>'.$f2['roomtypeCode'].'
 						</button>
@@ -286,7 +286,7 @@
 				$html .= '
 				<div class="col-sm-1 " style="margin:10px;">
 					<span class="button-checkbox ">
-						<button type="button" class="btn btn_room" data-color="success" style="width:120px;color: #fff;background-color:#449d44;border-color: #398439;">
+						<button type="button" class="btn btn_cleaning" data-room="'.$f3['roomCODE'].'" data-color="success" style="width:120px;color: #fff;background-color:#449d44;border-color: #398439;">
 							'.$bed.'
 							<h4>'.$f3['roomCODE'].' </h4>'.$f3['roomtypeCode'].'
 						</button>
@@ -374,7 +374,7 @@
 				$html .= '
 				<div class="col-sm-1 " style="margin:10px;">
 					<span class="button-checkbox ">
-						<button type="button" class="btn btn_room" data-color="success" style="width:120px;color: #fff;background-color:#449d44;border-color: #398439;">
+						<button type="button" class="btn btn_cleaning" data-room="'.$f4['roomCODE'].'" data-color="success" style="width:120px;color: #fff;background-color:#449d44;border-color: #398439;">
 							'.$bed.'
 							<h4>'.$f4['roomCODE'].' </h4>'.$f4['roomtypeCode'].'
 						</button>
@@ -409,6 +409,7 @@
 	$(function(){
 		checkIn();
 		booking();
+		cleaning();
 
 	});
 	$.datetimepicker.setLocale('th');
@@ -479,6 +480,18 @@
 		});
 	}
 
+	function cleaning() {
+		$('.btn_cleaning').click(function(){
+			$(this).popover({
+				'placement': 'top',
+				'html':true,
+				'title': 'ยกเลิกการทำความสะอาดห้อง',
+				'content': '<button type="reset" class="btn btn-danger " data-dismiss="modal"><span class="glyphicon glyphicon-floppy-remove"> ยกเลิก</span></button>',
+			});
+			// console.log($(this).data('room'));
+		});
+	}
+
 	function load_page(loadUrl,texttitle,urlsend,dtcheckin,dtcheckout){
 		var screenname= texttitle;
 		var url = loadUrl;
@@ -521,75 +534,75 @@
 
 
 
-        // status ckecked button room //
-        $(function () {
-        	$('.button-checkbox').each(function () {
+  // status ckecked button room //
+  $(function () {
+  	$('.button-checkbox').each(function () {
 
-            // Settings
-            var $widget = $(this),
-            $button = $widget.find('button'),
-            $checkbox = $widget.find('input:checkbox'),
-            color = $button.data('color'),
-            settings = {
-            	on: {
-            		icon: 'glyphicon glyphicon-check'
-            	},
-            	off: {
-            		icon: 'glyphicon glyphicon-unchecked'
-            	}
-            };
+     // Settings
+     var $widget = $(this),
+     $button = $widget.find('button'),
+     $checkbox = $widget.find('input:checkbox'),
+     color = $button.data('color'),
+     settings = {
+     	on: {
+     		icon: 'glyphicon glyphicon-check'
+     	},
+     	off: {
+     		icon: 'glyphicon glyphicon-unchecked'
+     	}
+     };
 
-            // Event Handlers
-            $button.on('click', function () {
-            	$checkbox.prop('checked', !$checkbox.is(':checked'));
-            	$checkbox.triggerHandler('change');
-            	updateDisplay();
-            });
-            $checkbox.on('change', function () {
-            	updateDisplay();
-            });
+     // Event Handlers
+     $button.on('click', function () {
+     	$checkbox.prop('checked', !$checkbox.is(':checked'));
+     	$checkbox.triggerHandler('change');
+     	updateDisplay();
+     });
+     $checkbox.on('change', function () {
+     	updateDisplay();
+     });
 
-            // Actions
-            function updateDisplay() {
-            	var isChecked = $checkbox.is(':checked');
+     // Actions
+     function updateDisplay() {
+     	var isChecked = $checkbox.is(':checked');
 
-                // Set the button's state
-                $button.data('state', (isChecked) ? "on" : "off");
+        // Set the button's state
+        $button.data('state', (isChecked) ? "on" : "off");
 
-                // Set the button's icon
-                $button.find('.state-icon')
-                .removeClass()
-                .addClass('state-icon ' + settings[$button.data('state')].icon);
+       // Set the button's icon
+       $button.find('.state-icon')
+       .removeClass()
+       .addClass('state-icon ' + settings[$button.data('state')].icon);
 
-                // Update the button's color
-                if (isChecked) {
-                	$button
-                	.removeClass('btn-default')
-                	.addClass('btn-' + color + ' active');
-                }
-                else {
-                	$button
-                	.removeClass('btn-' + color + ' active')
-                	.addClass('btn-default');
-                }
-              }
+     // Update the button's color
+     if (isChecked) {
+     	$button
+     	.removeClass('btn-default')
+     	.addClass('btn-' + color + ' active');
+     }
+     else {
+     	$button
+     	.removeClass('btn-' + color + ' active')
+     	.addClass('btn-default');
+     }
+   }
 
-            // Initialization
-            function init() {
+   		// Initialization
+   		function init() {
 
-            	updateDisplay();
+   			updateDisplay();
 
-                // Inject the icon if applicable
-                if ($button.find('.state-icon').length == 0) {
-                	$button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
-                }
-              }
-              init();
-            });
-        });
+  		  // Inject the icon if applicable
+  		  if ($button.find('.state-icon').length == 0) {
+  		  	$button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
+  		  }
+  		}
+  		init();
+  	});
+  });
 
 
-      </script>
+</script>
 
 
 
