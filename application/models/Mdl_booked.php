@@ -439,6 +439,12 @@ class Mdl_booked extends CI_Model {
 
 	}
 
+	public function updateRoomStatus($numRoom)
+	{
+		$this->db->where('roomCODE',$numRoom);
+		$this->db->update('tm_room',array('transaction'=>'EMPTY'));
+	}
+
 	// public function report_checkout($value = "")
 	// {
 	// 	$sql = "
@@ -472,5 +478,5 @@ class Mdl_booked extends CI_Model {
 	// 	return $query;
 	// }
 
-
 }
+

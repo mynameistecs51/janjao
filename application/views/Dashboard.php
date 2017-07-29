@@ -203,7 +203,7 @@
 							'.$bed.'
 							<h4>'.$f2['roomCODE'].' </h4>'.$f2['roomtypeCode'].'
 						</button>
-						<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'"  data-priceday="'.$f2['price_day'].'" data-pricemonth="'.$f2['price_month'].'"  data-priceshort="'.$f2['price_short'].'"  value="'.$f2['roomCODE'].'" />
+						<!-- <input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'"  data-priceday="'.$f2['price_day'].'" data-pricemonth="'.$f2['price_month'].'"  data-priceshort="'.$f2['price_short'].'"  value="'.$f2['roomCODE'].'" /> -->
 					</span>
 				</div> ';
 			}else if($f2['roomtypeCode']=='STAIRCASE'  && $f2['status']=='ON'){
@@ -290,7 +290,7 @@
 							'.$bed.'
 							<h4>'.$f3['roomCODE'].' </h4>'.$f3['roomtypeCode'].'
 						</button>
-						<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'" data-priceday="'.$f3['price_day'].'"  data-pricemonth="'.$f3['price_month'].'"  data-priceshort="'.$f3['price_short'].'" value="'.$f3['roomCODE'].'"  />
+						<!-- <input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f3['roomCODE'].'" data-priceday="'.$f3['price_day'].'"  data-pricemonth="'.$f3['price_month'].'"  data-priceshort="'.$f3['price_short'].'" value="'.$f3['roomCODE'].'"  /> -->
 					</span>
 				</div> ';
 			}else if($f3['roomtypeCode']=='STAIRCASE' && $f3['status']=='ON'){
@@ -378,7 +378,7 @@
 							'.$bed.'
 							<h4>'.$f4['roomCODE'].' </h4>'.$f4['roomtypeCode'].'
 						</button>
-						<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" data-priceday="'.$f4['price_day'].'"  data-pricemonth="'.$f4['price_month'].'"  data-priceshort="'.$f4['price_short'].'" value="'.$f4['roomCODE'].'" />
+						<!-- <input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f4['roomCODE'].'" data-priceday="'.$f4['price_day'].'"  data-pricemonth="'.$f4['price_month'].'"  data-priceshort="'.$f4['price_short'].'" value="'.$f4['roomCODE'].'" /> -->
 					</span>
 				</div> ';
 			}else if($f4['roomtypeCode']=='STAIRCASE' && $f4['status']=='ON'){
@@ -412,6 +412,7 @@
 		cleaning();
 
 	});
+
 	$.datetimepicker.setLocale('th');
 	$('#dtcheckin, #dtcheckout').datetimepicker({
 		timepicker:true,
@@ -481,14 +482,47 @@
 	}
 
 	function cleaning() {
-		$('.btn_cleaning').click(function(){
-			$(this).popover({
-				'placement': 'top',
-				'html':true,
-				'title': 'ยกเลิกการทำความสะอาดห้อง',
-				'content': '<button type="reset" class="btn btn-danger " data-dismiss="modal"><span class="glyphicon glyphicon-floppy-remove"> ยกเลิก</span></button>',
+		$('.btn_cleaning').on('click',function(){
+			var numRoom = $(this).data('room');
+			// $('.btn_cleaning').popover({
+				$(this).popover({
+					'html':true,
+					// 'trigger': 'manual',
+					'trigger': 'focus',
+					'placement': 'top',
+					'title': 'สถานะ',
+					'container': 'body',
+					content: function () {
+						var html = '<div class="container">';
+						html += '<div class="row">';
+						// html += '<div class="clearfix">';
+						html += '<button class="btn btn-success btn-xs col-sm-1 cleaningOK"><span class="glyphicon glyphicon-floppy-remove"> success</span></button>';
+						html += '<button class="btn btn-warning btn-xs col-sm-1 cancel"><span class="glyphicon glyphicon-floppy-remove"> cancel</span></button>';
+						// html += '</div>';
+						html += '</div>';
+						html += '</div>';
+						return html;
+					}
+				}).popover('toggle');
+				cleaning_success(numRoom);
 			});
-			// console.log($(this).data('room'));
+
+	}
+
+	function cleaning_success(numRoom) {
+		$('.cleaningOK').click(function(){
+			$.ajax({
+				url: '<?php echo base_url()."home/updateRoomStatus/"; ?>',
+				type: 'POST',
+				// dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
+				data: {Room: numRoom},
+				success:function(){
+					location.reload();
+				},
+				error: function(){
+					alert("มีบางอย่างผิดพลาด !!");
+				}
+			})
 		});
 	}
 

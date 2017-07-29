@@ -130,4 +130,11 @@ class Home extends CI_Controller {
 		}
 	}
 
-}?>
+	public function updateRoomStatus()
+	{
+		$numRoom = $this->input->post('Room');
+		$this->Mdl_booked->updateRoomStatus($numRoom);
+	}
+
+}
+?>
