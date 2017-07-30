@@ -286,9 +286,16 @@
 					var bbm= res.data.birthdateM;
 					var bby= res.data.birthdateY;
 
-					$('#birthdate_d').html('<option value="'+bbd+'" selected>'+bbd+'</option>');
-					$('#birthdate_m').html('<option value="'+bbm+'" selected>'+monthai(bbm)+'</option>');
-					$('#birthdate_y').html('<option value="'+bby+'" selected>'+bby+'</option>');
+					$('#birthdate_d').append('<option value="'+bbd+'" selected>'+bbd+'</option>');
+					$('#birthdate_m').append('<option value="'+bbm+'" selected>'+monthai(bbm)+'</option>');
+					$('#birthdate_y').append('<option value="'+bby+'" selected>'+bby+'</option>');
+				}else{
+					$('#firstName').val("");
+					$('#lastName').val("");
+					$('#address').val("");
+					$('#mobile').val("");
+					$('#licenseplate').val("");
+					$('#email').val(""); 
 				}
 			},
 			error:function(res){ }
