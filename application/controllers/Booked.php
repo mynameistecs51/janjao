@@ -168,4 +168,17 @@ class Booked extends CI_Controller {
 		echo json_encode($result);
 	}
 
+	public function getolddata(){
+		$this->load->model('Mdl_packFunction');
+		$rs = $this->Mdl_packFunction->getuserdatalod($_POST['idcardno']);
+		if(count($rs)>0){
+			$data = ["status"=>"success","data"=>$rs[0] ];
+			echo json_encode($data);
+		}else{
+			$data = ["status"=>"false"];
+			echo json_encode($data);
+		}
+		
+	}
+
 }?>

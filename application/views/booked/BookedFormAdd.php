@@ -53,7 +53,7 @@
 		<div class="col-sm-8"> 
 			<div class="row">
 				<div class="col-sm-2">
-					<select class="form-control" name="birthdate_d">
+					<select class="form-control" name="birthdate_d" id="birthdate_d" >
 						<option value="01">01</option>
 						<option value="02">02</option>
 						<option value="03">03</option>
@@ -88,7 +88,7 @@
 					</select>
 				</div>
 				<div class="col-sm-4">
-					<select class="form-control" name="birthdate_m">
+					<select class="form-control" name="birthdate_m" id="birthdate_m">
 						<option value="01">มกราคม</option>
 						<option value="02">กุมภาพันธ์</option>
 						<option value="03">มีนาคม</option>
@@ -104,11 +104,11 @@
 					</select>
 				</div>
 				<div class="col-sm-2">
-					<select class="form-control" name="birthdate_y">
+					<select class="form-control" name="birthdate_y"  id="birthdate_y">
 					<?php 
 						$y = $this->packfunction->yearnow()+543;
 						for ($i=0; $i < 80; $i++) { 
-							echo '<option value="'.$y.'">'.$y.'</option> ';
+							echo '<option value="'.$y.'" >'.$y.'</option> ';
 							$y--;
 						}
 					 ?>
@@ -223,27 +223,77 @@
 		format:'d/m/Y H:i',
 		lang:'th',
 	});
-	// start checkinDate form  bookedDate
-	// $('#bookedDate').on('change',function(){
-	// 	var startDate = $('#bookedDate').val();
-	// 	var expoldeY= startDate.split(' ');
-	// 	$( "#checkinDate" ).datetimepicker({
-	// 		minDate: expoldeY[0].split('-')[2]+'-'+expoldeY[0].split('-')[1]+'-'+expoldeY[0].split('-')[0],
-	// 	});
-	// });
 
-	// $('#checkinDate').on("change",function() {
-	// 	var startDate = $('#checkinDate').val();
-	// 	var expoldeY= startDate.split(' ');
-	// 	$( "#checkOutDate" ).datetimepicker({
-	// 		minDate: expoldeY[0].split('-')[2]+'-'+expoldeY[0].split('-')[1]+'-'+expoldeY[0].split('-')[0],
-	// 	});
-	// });
+	function monthai(num){
+		var mon = "";
+		switch (num) {
+		    case "01":
+		        mon = "มกราคม";
+		        break;
+		    case "02":
+		        mon = "กุมภาพันธ์";
+		        break;
+		    case "03":
+		        mon = "มีนาคม";
+		        break;
+		    case "04":
+		        mon = "เมษายน";
+		        break;
+		    case "05":
+		        mon = "พฤษภาคม";
+		        break;
+		    case "06":
+		        mon = "มิถุนายน";
+		        break;
+		    case "07":
+		        mon = "กรกฎาคม";
+		        break;
+		    case "08":
+		        mon = "สิงหาคม";
+		        break;
+		    case "09":
+		        mon = "กันยายน";
+		        break;
+		    case "10":
+		        mon = "ตุลาคม";
+		        break;
+		    case "11":
+		        mon = "พฤศจิกายน";
+		        break;
+		    case "12":
+		        mon = "ธันวาคม";
+		        break;
+		}
+		return  mon;
+	}
 
-	$("#myModal0").on("hidden.bs.modal", function () {
-	    // location.reload();
-	});
+	$('#idcardno').change(function(){
+		var idcardno = $(this).val();
+		$.ajax({
+			url: '<?php echo base_url()."booked/getolddata/";?>',
+			data: {idcardno:idcardno},
+			type: 'POST',
+			dataType: 'json',
+			success:function(res){
+				if(res.status=='success'){
+					$('#firstName').val(res.data.firstName);
+					$('#lastName').val(res.data.lastName);
+					$('#address').val(res.data.address);
+					$('#mobile').val(res.data.mobile);
+					$('#licenseplate').val(res.data.licenseplate);
+					$('#email').val(res.data.email); 
+					var bbd= res.data.birthdateD;
+					var bbm= res.data.birthdateM;
+					var bby= res.data.birthdateY;
 
+					$('#birthdate_d').html('<option value="'+bbd+'" selected>'+bbd+'</option>');
+					$('#birthdate_m').html('<option value="'+bbm+'" selected>'+monthai(bbm)+'</option>');
+					$('#birthdate_y').html('<option value="'+bby+'" selected>'+bby+'</option>');
+				}
+			},
+			error:function(res){ }
+		});
+	}); 
 
 	// Grab elements, create settings, etc.
 	var video = document.getElementById('video');
@@ -281,6 +331,8 @@
 		}
 		return new File([u8arr], filename, {type:mime});
 	}
+
+
 
 // function getProvince(){
 // 	$("input[name=zipcode]").change(function(){

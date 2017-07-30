@@ -30,6 +30,43 @@ class Mdl_packFunction extends CI_Model
     return $query->result_array();
   }
 
+  public function getuserdatalod($idcardno){ 
+    $sql = " SELECT 
+              bookedID,
+              bookedCode,
+              idcardno,
+              idcardnoPath,
+              titleName,
+              firstName,
+              middleName,
+              lastName,
+              DATE_FORMAT(birthdate,'%d') AS birthdateD,
+              DATE_FORMAT(birthdate,'%m') AS birthdateM,
+              DATE_FORMAT(birthdate,'%Y') AS birthdateY,
+              address,
+              district,
+              amphur,
+              province,
+              country,
+              postcode,
+              mobile,
+              licenseplate,
+              email,
+              bookedDate,
+              checkInAppointDate,
+              checkOutAppointDate,
+              is_breakfast,
+              bookedType,
+              cashPledge,
+              cashPledgePath
+              FROM  ts_booked 
+              WHERE idcardno = '".$idcardno."' 
+              ORDER BY bookedID DESC LIMIT 1 "; 
+    $query = $this->db->query($sql); 
+    $rs = $query->result_array();
+    return $rs;
+  }
+
   public function getInfo($tb='', $id=''){
     $field = $this->db->list_fields($tb);
     $this->db->where($field[0],$id);
