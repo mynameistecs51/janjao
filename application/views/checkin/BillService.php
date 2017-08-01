@@ -25,9 +25,14 @@
 					<tr>
 						<td colspan="2"  style="widows: 100%;text-align: left;">
 							<div class="headname"><img src="<?php echo base_url().'assets/images/logoBlack.png'; ?>" width="150"></div>
-							666 หมู่ 6	ถ.โพนพิสัย ต.หมากแข้ง 	อ.เมือง จ.อุดรธานี 41000 <br>
+							<!-- 666 หมู่ 6	ถ.โพนพิสัย ต.หมากแข้ง 	อ.เมือง จ.อุดรธานี 41000 <br>
 							โทร 0910571616 <br>
-							หมายเลขผู้เสียภาษี  111111111111
+							หมายเลขผู้เสียภาษี  111111111111 -->
+							<?php echo $aboutList['address']; ?>
+							<br>
+							<?php echo "โทรศัพท์ ".$aboutList['mobile']; ?>
+							<br>
+							<?php echo "เลขประจำตัวผู้เสียภาษี ".$aboutList['vatNumber']; ?>
 						</td>
 						<td style="widows: 100%;text-align: right;">
 							<label > ต้นฉบับ</label>
@@ -89,9 +94,9 @@
 						<tr height="25">
 							<td colspan="3" align="right">+ VAT  </td>
 							<td colspan="2" align="right" style="border-bottom:1px solid black">
-							 <?php echo $vat =(empty($rs['vat']))?$serviceDtl[0]['totalVat'] : $rs['vat'] ; ?>
-							 &nbsp;&nbsp;%
-							 </td>
+								<?php echo $vat =(empty($rs['vat']))?$serviceDtl[0]['totalVat'] : $rs['vat'] ; ?>
+								&nbsp;&nbsp;%
+							</td>
 						</tr>
 						<tr height="25">
 							<td colspan="3" align="right">รวม</td>

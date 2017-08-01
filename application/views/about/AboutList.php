@@ -27,36 +27,43 @@
 			<table id="fairlist" class="table table-striped table-bordered" cellspacing="0" width="100%" >
 				<thead style="background:#BDBDBD;font-size: 12px; ">
 					<tr>
-						<th style="text-align: center;width: 20px;">No.</th>
+						<th style="text-align: center;" class="col-sm-1">No.</th>
 						<th style="text-align: center;width: 90px;">Address</th>
 						<th style="text-align: center;width: 50px;">Mobile</th>
 						<th style="text-align: center;width: 70px;">Vat number</th>
+						<th style="text-align: center;width: 70px;">Comment</th>
 						<th style="text-align: center;width: 60px;">#</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>
-							1
-						</td>
-						<td>
-							666 หมู่ 6	ถ.โพนพิสัย ต.หมากแข้ง 	อ.เมือง จ.อุดรธานี 41000
-						</td>
-						<td>
-							โทร 0910571616
-						</td>
-						<td>
-							หมายเลขผู้เสียภาษี  111111111111
-						</td>
-						<td>
-							<button class="btn btn-warning btn-xs btn_edit" id="" title="edit" style='margin-left:5px;'>
-								<i class="fa fa-edit fa-2x"></i>
-							</button>
-							<button class="btn btn-info btn-xs btn_view" id="" title="Cancle" style='margin-left:5px;'>
-								<i class="fa fa-info-circle fa-2x" title="Info"></i>
-							</button>
-						</td>
-					</tr>
+					<?php  $num = 1;?>
+					<?php foreach ($aboutList as $rowAbout): ?>
+						<tr>
+							<td class="col-sm-1 text-center">
+								<?php echo $num++; ?>
+							</td>
+							<td>
+								<?php echo $rowAbout['address']; ?>
+							</td>
+							<td>
+								<?php echo "โทรศัพท์ ".$rowAbout['mobile']; ?>
+							</td>
+							<td>
+								<?php echo $rowAbout['vatNumber']; ?>
+							</td>
+							<td>
+								<?php echo $rowAbout['comment']; ?>
+							</td>
+							<td class="text-center">
+								<button class="btn btn-warning btn-xs btn_edit" id="<?php echo trim(MD5($rowAbout['companyID'])); ?>" title="edit" style='margin-left:5px;'>
+									<i class="fa fa-edit fa-2x"></i>
+								</button>
+								<!-- <button class="btn btn-info btn-xs btn_view" id="<?php echo MD5($rowAbout['companyID']); ?>" title="Cancle" style='margin-left:5px;'>
+									<i class="fa fa-info-circle fa-2x" title="Info"></i>
+								</button> -->
+							</td>
+						</tr>
+					<?php endforeach ?>
 				</tbody>
 			</table>
 		</div>
@@ -70,7 +77,7 @@
 	$(function() {
 		aboutAdd();
 		aboutEdit();
-		aboutView();
+		// aboutView();
 	});
 
 	function aboutAdd() {
@@ -81,15 +88,15 @@
 
 	function aboutEdit() {
 		$('.btn_edit').click(function(){
-			load_page('<?php echo base_url()."index.php/about/aboutEdit/"; ?>'+$(this).attr('id'),'.:: EDIT about ::.','<?php echo base_url()."about/saveEdit"; ?>');
+			load_page('<?php echo base_url()."index.php/about/aboutFormEdit/"; ?>'+$(this).attr('id'),'.:: EDIT about ::.','<?php echo base_url()."about/saveEdit"; ?>');
 		});
 	}
 
-	function aboutView() {
-		$('.btn_view').click(function(){
-			load_page('<?php echo base_url()."index.php/about/aboutView/"; ?>'+$(this).attr('id'),'.:: INFO about ::.','#');
-		});
-	}
+	// function aboutView() {
+	// 	$('.btn_view').click(function(){
+	// 		load_page('<?php echo base_url()."index.php/about/aboutView/"; ?>'+$(this).attr('id'),'.:: INFO about ::.','#');
+	// 	});
+	// }
 
 
 	function load_page(loadUrl,texttitle,urlsend){
