@@ -29,6 +29,7 @@ class Home extends CI_Controller {
 		// $this->data['roomType']="STANDARD";
 		// $this->data['roomstatus']='EMPTY';
 		$this->data['viewshow']='none';
+		$this->data['getfloor1']=$this->Mdl_booked->getRoom(1,$this->data['dtcheckin'],$this->data['dtcheckout']);
 		$this->data['getfloor2']=$this->Mdl_booked->getRoom(2,$this->data['dtcheckin'],$this->data['dtcheckout']);
 		$this->data['getfloor3']=$this->Mdl_booked->getRoom(3,$this->data['dtcheckin'],$this->data['dtcheckout']);
 		$this->data['getfloor4']=$this->Mdl_booked->getRoom(4,$this->data['dtcheckin'],$this->data['dtcheckout']);

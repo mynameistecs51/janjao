@@ -104,8 +104,11 @@
 							</td>
 							<td align="center">
 								<!-- ค่าห้อง (ค่าห้อง+มัดจำ)-มัดจำ -->
-								<?php echo $retes = ($report['totalLast'] == 0.00)? 0.00 : number_format(($report['totalLast'] - $report['cashPledge']),2); ?>
-								<?php array_push($sumRetes, $a = ($retes == 0.00)? 0.00 :$report['totalLast'] - $report['cashPledge']); ?>
+								<?php $retes = ($report['totalLast'] == 0.00)? 0.00 : ($report['totalLast'] - $report['cashPledge']);
+								echo number_format($retes,2)."<br>";
+								// echo $report['totalLast'];
+								array_push($sumRetes, $a = ($retes == 0.00)? 0.00 :$report['totalLast'] - $report['cashPledge']);
+								?>
 							</td>
 							<td align="center">
 								<!-- service -->

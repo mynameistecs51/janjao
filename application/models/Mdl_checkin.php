@@ -146,6 +146,7 @@ class Mdl_checkin extends CI_Model {
 			$img = str_replace('data:image/png;base64,', '', $img);
 			$img = str_replace(' ', '+', $img);
 			$data = base64_decode($img);
+			chmod('/assets/images/imgcard',0777);
 			$file = 'assets/images/imgcard/'.$this->input->post('idcardno').'.png';
 			$success = file_put_contents($file, $data);
 			$fileName = $this->input->post('idcardno').'.png';
@@ -783,7 +784,8 @@ class Mdl_checkin extends CI_Model {
 		AND tb.status <> 'LATE'
 		AND tb.status <> 'CANCLE'
 		AND CONCAT(tb.bookedCode,tb.idcardno,tb.firstName,' ',tb.lastName,tbr.roomID,DATE_FORMAT(tb.checkInAppointDate,'%d/%m/%Y')) LIKE '%".$keyword."%'
-		GROUP BY tbr.bookedroomID
+		# GROUP BY tbr.bookedroomID
+		GROUP BY tb.bookedCode
 		ORDER BY tb.bookedCode DESC
 		";
 		$data = $this->db->query($sql)->result_array();
