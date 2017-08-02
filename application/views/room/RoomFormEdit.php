@@ -11,12 +11,10 @@
 			<label for="floor" class="col-sm-2 control-label">ชั้น </label>
 			<div class="col-sm-8">
 				<select name="floor" class="form-control" id="floor">
-					<?php $selected = ($getRoom['floor'] == 2)? 'selected':''; ?>
-					<option value="2" <?php echo $selected; ?>>FLOOR 2</option>
-					<?php $selected = ($getRoom['floor'] == 3)? 'selected':''; ?>
-					<option value="3" <?php echo $selected; ?>>FLOOR 3</option>
-					<?php $selected = ($getRoom['floor'] == 4)? 'selected':''; ?>
-					<option value="4" <?php echo $selected; ?>>FLOOR 4</option>
+					<option value="1" <?php $getRoom['floor'] == 1 ? 'selected':''; ?> >FLOOR 1</option>
+					<option value="2" <?php $getRoom['floor'] == 2 ? 'selected':''; ?> >FLOOR 2</option>
+					<option value="3" <?php $getRoom['floor'] == 3 ? 'selected':''; ?> >FLOOR 3</option>
+					<option value="4" <?php $getRoom['floor'] == 4 ? 'selected':''; ?> >FLOOR 4</option>
 					option
 				</select>
 			</div>

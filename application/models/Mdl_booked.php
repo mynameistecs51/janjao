@@ -346,7 +346,14 @@ class Mdl_booked extends CI_Model {
 		DATE_FORMAT(r.updateDT,'%d/%m/%Y  %H:%i') AS updateDT
 		FROM tm_room r
 		LEFT JOIN tm_roomtype rt ON r.roomtypeID=rt.roomtypeID
-		LEFT JOIN ts_booked_room br ON r.roomCODE=br.roomID AND br.status <> 'CANCLE'
+		LEFT JOIN (
+				SELECT bookedroomID,roomID,checkinDate,checkoutDate 
+				FROM ts_booked_room  
+				WHERE status <> 'CANCLE'
+				GROUP BY roomID
+				ORDER BY bookedroomID DESC 
+
+		) AS br ON r.roomCODE=br.roomID
 		LEFT JOIN (
 		SELECT
 		lg.roomID,
