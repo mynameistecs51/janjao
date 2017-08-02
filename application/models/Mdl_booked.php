@@ -347,12 +347,11 @@ class Mdl_booked extends CI_Model {
 		FROM tm_room r
 		LEFT JOIN tm_roomtype rt ON r.roomtypeID=rt.roomtypeID
 		LEFT JOIN (
-				SELECT bookedroomID,roomID,checkinDate,checkoutDate 
-				FROM ts_booked_room  
-				WHERE status <> 'CANCLE'
-				GROUP BY roomID
-				ORDER BY bookedroomID DESC 
-
+			SELECT br.bookedroomID,br.roomID,br.checkinDate,br.checkoutDate 
+			FROM ts_booked_room br
+			INNER JOIN (
+					SELECT roomID,MAX(bookedroomID) AS bookedroomID FROM ts_booked_room WHERE status <> 'CANCLE' GROUP BY roomID
+			) AS a ON br.bookedroomID=a.bookedroomID
 		) AS br ON r.roomCODE=br.roomID
 		LEFT JOIN (
 		SELECT
@@ -366,7 +365,7 @@ class Mdl_booked extends CI_Model {
 		WHERE r.status<>'DISABLE'
 		AND r.floor = '".$floor."'
 		GROUP BY r.roomID
-		ORDER BY r.roomID ASC
+		ORDER BY r.roomID ASC 
 		";
 		$data = $this->db->query($sql);
 		return $data->result_array();
