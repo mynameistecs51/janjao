@@ -350,7 +350,10 @@ class Mdl_booked extends CI_Model {
 			SELECT br.bookedroomID,br.roomID,br.checkinDate,br.checkoutDate 
 			FROM ts_booked_room br
 			INNER JOIN (
-					SELECT roomID,MAX(bookedroomID) AS bookedroomID FROM ts_booked_room WHERE status <> 'CANCLE' GROUP BY roomID
+					SELECT roomID,MAX(bookedroomID) AS bookedroomID 
+					FROM ts_booked_room 
+					WHERE status <> 'CANCLE' 
+					GROUP BY roomID
 			) AS a ON br.bookedroomID=a.bookedroomID
 		) AS br ON r.roomCODE=br.roomID
 		LEFT JOIN (
