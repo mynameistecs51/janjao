@@ -19,13 +19,13 @@
 				<caption >
 					<table width="100%" >
 						<tr >
-							<td class="col-sm-4" style="width: 30%;"></td>
-							<td class="col-sm-4" align="center" > <b>ใบเสร็จรับเงิน </b></td>
-							<td class="col-sm-4" style="width: 30%;"></td>
+							<td style="width: 30%;"></td>
+							<td align="center" > <b>ใบเสร็จรับเงิน </b></td>
+							<td style="width: 30%;"></td>
 						</tr>
 						<tr>
 							<td colspan="2"  style="widows: 100%;text-align: left;">
-							<div class="headname"><img src="<?php echo base_url().'assets/images/logoBlack.png'; ?>" width="150"></div>
+								<div class="headname"><img src="<?php echo base_url().'assets/images/logoBlack.png'; ?>" width="150"/></div>
 								<!-- จันทร์เจ้า โฮเทล  <br>-->
 								<!-- 666 หมู่ 6	ถ.โพนพิสัย ต.หมากแข้ง 	อ.เมือง จ.อุดรธานี 41000 <br>
 								โทร 0910571616 <br>

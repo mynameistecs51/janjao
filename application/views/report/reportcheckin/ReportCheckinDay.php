@@ -94,32 +94,32 @@
 								echo "BY ",$report['updateBY'];
 								?>
 							</td>
-							<td align="center">
+							<td align="right">
 								<!-- เงินมัดจำ -->
 								<?php
 								$pledge = ($report['status'] == 'CHECKOUT')? 0.00 : $report['cashPledge'];
-								echo number_format($pledge,2)."<br>";
+								echo "<label>".number_format($pledge,2)." "."<input type='checkbox' name='checkPlede' class='checkPlede' id='checkPlede".$report['bookedID']."' style='zoom: 1.5;'></label>";
 								// echo $report['cashPledge'];
 								array_push($sumPledge, $pledge);
 								?>
 							</td>
-							<td align="center">
+							<td align="right">
 								<!-- ค่าห้อง (ค่าห้อง+มัดจำ)-มัดจำ -->
 								<?php $retes = ($report['totalLast'] == 0.00)? 0.00 : ($report['totalLast'] - $report['cashPledge']);
-								echo number_format($retes,2)."<br>";
+								echo "<label>".number_format($retes,2)." "."<input type='checkbox' name='checkrete' class='checkrete' id='checkrete".$report['bookedID']."' style='zoom: 1.5;'></label>";
 								// echo $report['totalLast'];
 								array_push($sumRetes, $a = ($retes == 0.00)? 0.00 :$report['totalLast'] - $report['cashPledge']);
 								?>
 							</td>
-							<td align="center">
+							<td align="right">
 								<!-- service -->
 								<?php
 								$service= $report['sumtotal'];
-								echo  number_format($service,2);
+								echo "<label>".number_format($service,2)." "."<input type='checkbox' name='checkservice' class='checkservice' id='checkservice".$report['bookedID']."' style='zoom: 1.5;'></label>";
 								array_push($sumService,$report['sumtotal']);
 								?>
 							</td>
-							<td align="center">
+							<td align="right">
 								<?php
 								$discount = (empty($report['discount']))?0.00 : $report['discount'];
 								echo number_format($discount,2);
