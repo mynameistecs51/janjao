@@ -97,8 +97,9 @@
 							<td align="center">
 								<!-- เงินมัดจำ -->
 								<?php
-								$pledge = ($report['status'] == 'CHECKOUT')? 0.00 :$report['cashPledge'];
-								echo number_format($pledge,2);
+								$pledge = ($report['status'] == 'CHECKOUT')? 0.00 : $report['cashPledge'];
+								echo number_format($pledge,2)."<br>";
+								// echo $report['cashPledge'];
 								array_push($sumPledge, $pledge);
 								?>
 							</td>

@@ -777,15 +777,16 @@ class Mdl_checkin extends CI_Model {
 		tcd.sumtotal
 		FROM ts_booked tb
 		INNER JOIN ts_booked_room tbr ON tb.bookedID = tbr.bookedID
-		INNER JOIN ts_cash_hdr tch ON tbr.roomID = tch.roomID
+		INNER JOIN ts_cash_hdr tch ON tbr.bookedID = tch.bookedID
+		-- INNER JOIN ts_cash_hdr tch ON tbr.roomID = tch.roomID
 		-- INNER JOIN ts_cash_dtl tcd ON tch.cashhdrID = tcd.cashhdrID
 		LEFT JOIN ts_cash_dtl tcd ON tch.cashhdrID = tcd.cashhdrID
 		WHERE tb.status <> 'HIDDEN'
 		AND tb.status <> 'LATE'
 		AND tb.status <> 'CANCLE'
 		AND CONCAT(tb.bookedCode,tb.idcardno,tb.firstName,' ',tb.lastName,tbr.roomID,DATE_FORMAT(tb.checkInAppointDate,'%d/%m/%Y')) LIKE '%".$keyword."%'
-		# GROUP BY tbr.bookedroomID
-		GROUP BY tb.bookedCode
+		GROUP BY tbr.bookedroomID
+		#GROUP BY tb.bookedCode
 		ORDER BY tb.bookedCode DESC
 		";
 		$data = $this->db->query($sql)->result_array();
