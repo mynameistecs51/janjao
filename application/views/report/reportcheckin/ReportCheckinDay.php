@@ -7,7 +7,7 @@
 <div class="col-lg-9 text-right" >
 	<?php echo anchor(base_url().'report_checkin/', '<i class="fa fa-list" aria-hidden="true"></i> รายวัน', 'class="btn btn-success"'); ?>
 	<?php echo anchor(base_url().'report_checkin/checkinmonth/', '<i class="fa fa-list" aria-hidden="true"></i> รายเดือน', 'class="btn btn-danger"'); ?>
-	<?php //echo anchor(base_url().'report_checkin/checkinyear/', '<i class="fa fa-list" aria-hidden="true"></i> รายปี', 'class="btn btn-info"'); ?>
+	<?php echo anchor(base_url().'report_checkin/checkinyear/', '<i class="fa fa-list" aria-hidden="true"></i> รายปี', 'class="btn btn-info"'); ?>
 </div>
 <hr style="margin-top: 30px;">
 <!-- Page Content -->
@@ -97,16 +97,18 @@
 							<td align="right">
 								<!-- เงินมัดจำ -->
 								<?php
+								$checkPledge = ($report['checkPledge'] == '0')?'':'checked';
 								$pledge = ($report['status'] == 'CHECKOUT')? 0.00 : $report['cashPledge'];
-								echo "<label>".number_format($pledge,2)." "."<input type='checkbox' name='checkPlede' class='checkPlede' id='checkPlede".$report['bookedID']."' style='zoom: 1.5;'></label>";
-								// echo $report['cashPledge'];
+								echo "<label>".number_format($pledge,2)." "."<input type='checkbox' name='checkPledge' class='checkPledge' id='checkPledge".$report['bookedID']."' style='zoom: 1.5;' value=".$report['bookedID']." ".$checkPledge."></label>";
 								array_push($sumPledge, $pledge);
 								?>
 							</td>
 							<td align="right">
 								<!-- ค่าห้อง (ค่าห้อง+มัดจำ)-มัดจำ -->
-								<?php $retes = ($report['totalLast'] == 0.00)? 0.00 : ($report['totalLast'] - $report['cashPledge']);
-								echo "<label>".number_format($retes,2)." "."<input type='checkbox' name='checkrete' class='checkrete' id='checkrete".$report['bookedID']."' style='zoom: 1.5;'></label>";
+								<?php
+								$checkedRetes = ($report['checktotalLast'] == '0')?'' : 'checked';
+								$retes = ($report['totalLast'] == 0.00)? 0.00 : ($report['totalLast'] - $report['cashPledge']);
+								echo "<label>".number_format($retes,2)." "."<input type='checkbox' name='checkrete' class='checkrete' id='checkrete".$report['bookedID']."' style='zoom: 1.5;' value=".$report['bookedID']." ".$checkedRetes."></label>";
 								// echo $report['totalLast'];
 								array_push($sumRetes, $a = ($retes == 0.00)? 0.00 :$report['totalLast'] - $report['cashPledge']);
 								?>
@@ -114,8 +116,9 @@
 							<td align="right">
 								<!-- service -->
 								<?php
+								$checkservice = ($report['checkservice'] == '0')?'':'checked';
 								$service= $report['sumtotal'];
-								echo "<label>".number_format($service,2)." "."<input type='checkbox' name='checkservice' class='checkservice' id='checkservice".$report['bookedID']."' style='zoom: 1.5;'></label>";
+								echo "<label>".number_format($service,2)." "."<input type='checkbox' name='checkservice' class='checkservice' id='checkservice".$report['bookedID']."' style='zoom: 1.5;' value=".$report['bookedID']." ".$checkservice."></label>";
 								array_push($sumService,$report['sumtotal']);
 								?>
 							</td>
@@ -165,6 +168,10 @@
 	<script src="<?php echo base_url()?>assets/js/jquery.datetimepicker.full.min.js"></script>
 	<script type="text/javascript">
 		$(function() {
+			checkrete();
+			checkPledge();
+			checkservice();
+
 			$.datetimepicker.setLocale('th');
 			$('#startDate').datetimepicker({
 				timepicker:true,
@@ -173,6 +180,67 @@
 				lang:'th',
 			});
 		});
+
+		function checkPledge(){
+			$('.checkPledge').change(function() {
+				if($(this).is(':checked')){
+					$.ajax({
+						url: '<?php echo base_url()."report_checkin/checkPledge";?>',
+						type: 'post',
+						// dataType: 'json',
+						data: {'checkPledge': this.value,'checked': '1'},
+					});
+				}else if($(this).removeAttr('checked')) {
+					$.ajax({
+						url: '<?php echo base_url()."report_checkin/checkPledge";?>',
+						type: 'post',
+						dataType: 'json',
+						data: {'checkPledge': this.value,'checked': '0'},
+					});
+				}
+			});
+		}
+
+		function checkrete() {
+			$('.checkrete').change(function() {
+				if($(this).is(':checked')){
+					$.ajax({
+						url: '<?php echo base_url()."report_checkin/checkrete";?>',
+						type: 'post',
+						// dataType: 'json',
+						data: {'checkrete': this.value,'checked': '1'},
+					});
+				}else if($(this).removeAttr('checked')) {
+					$.ajax({
+						url: '<?php echo base_url()."report_checkin/checkrete";?>',
+						type: 'post',
+						// dataType: 'json',
+						data: {'checkrete': this.value,'checked': '0'},
+					});
+				}
+			});
+
+		}
+
+		function checkservice(){
+			$(".checkservice").change(function() {
+				if($(this).is(':checked')){
+					$.ajax({
+						url: '<?php echo base_url()."report_checkin/checkservice";?>',
+						type: 'post',
+						dataType: 'json',
+						data: {'checkservice': this.value,'checked': '1'},
+					});
+				}else if($(this).removeAttr('checked')) {
+					$.ajax({
+						url: '<?php echo base_url()."report_checkin/checkservice";?>',
+						type: 'post',
+						dataType: 'json',
+						data: {'checkservice': this.value,'checked': '0'},
+					});
+				}
+			});
+		}
 	</script>
 
 

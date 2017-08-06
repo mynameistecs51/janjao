@@ -81,10 +81,13 @@ class Report_checkin extends CI_Controller {
 					'is_breakfast' =>  $rowBooked['is_breakfast'],
 					'bookedType' =>  $rowBooked['bookedType'],
 					'cashPledge' =>  $rowBooked['cashPledge'],
+					'checkPledge' => $rowBooked['checkPledge'],
 					'cashPledgePath' =>  $rowBooked['cashPledgePath'],
 					'totalLast' => $rowBooked['totalLast'],
+					'checktotalLast' => $rowBooked['checktotalLast'],
 					'discount' => $rowBooked['discount'],	//form ts_cash_dtl
 					'sumtotal' => $rowBooked['sumtotal'], 	//form ts_cash_dtl
+					'checkservice' => $rowBooked['checkservice'],
 					'comment' =>  $rowBooked['comment'],
 					'status' =>  $rowBooked['status'],
 					'createDT' =>  $rowBooked['createDT'],
@@ -143,6 +146,22 @@ class Report_checkin extends CI_Controller {
 		$this->data['repCheckout'] = $this->showList($this->data['keyword']);
 		$this->load->view('report/reportcheckin/ReportCheckinPDF',$this->data);
 	}
+
+	public function checkPledge()
+	{ //check เวลาลูกค้าเก็บเงินจากลิ้นชัก (ลูกค้า requert )
+		$this->Mdl_checkin->checkPledge();
+	}
+
+	public function checkrete()
+	{ //check เวลาลูกค้าเก็บเงินจากลิ้นชัก (ลูกค้า requert )
+		$this->Mdl_checkin->checkrete();
+	}
+
+	public function checkservice()
+	{ //check เวลาลูกค้าเก็บเงินจากลิ้นชัก (ลูกค้า requert )
+		$this->Mdl_checkin->checkservice();
+	}
+
 }
 
 

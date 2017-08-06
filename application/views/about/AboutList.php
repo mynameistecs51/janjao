@@ -1,27 +1,16 @@
 <div class="col-lg-6">
 	<i style="font-size: 18px;">DETAIL COMPANY</i>
 </div>
-<div class="sh-right col-lg-6">
+<!-- <div class="sh-right col-lg-6">
 	<button  type="submit" class="btn btn-success btn_add pull-right" style="float: left;" >
 		<span class="fa fa-plus"> </span> ADD DETAIL
 	</button>
-</div>
+</div> -->
 <hr class="col-lg-12" style="margin-top: 6px;">
 
 
 <!-- Page Content -->
 <div class="col-lg-12">
-	<!-- Page Features -->
-	<!-- <div class="row text-center">
-		<div class="col-sm-12" align="right">
-			<div class="sh-right  pull-right  col-sm-6">
-				<form name="formSearch" id="formSearch" method="POST" action="<?php echo base_url()?>about/search/">
-					<button  type="submit" class="btn btn-primary " style="float: right;">Search</button>
-					<input type="text" class="form-control"  id="keyword" style="width: 250px;margin-right: 10px;" placeholder="keyword" name="keyword" value="<?php echo $keyword; ?>">
-				</form>
-			</div>
-		</div>
-	</div> -->
 	<div class="row text-center" style="margin-top: 10px;">
 		<div class="col-lg-12" align="left">
 			<table id="fairlist" class="table table-striped table-bordered" cellspacing="0" width="100%" >

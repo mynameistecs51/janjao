@@ -41,7 +41,8 @@
 						<tr id="row<?php echo $rowCheckin['bookedID']; ?>">
 							<td><?php echo $j++; ?></td>
 							<td><?php echo $rowCheckin['bookedCode'] ?></td>
-							<td><?php echo $rowCheckin['firstName']." ".$rowCheckin['lastName']; ?></td>
+							<?php $mobile = (empty($rowCheckin['mobile']))?'':"(".$rowCheckin['mobile'].")"; ?>
+							<td><?php echo $rowCheckin['firstName']." ".$rowCheckin['lastName']." ".$mobile; ?></td>
 							<td >
 								<?php $color = $rowCheckin['status']=='CHECKIN' ? 'danger':'warning';
 								for($i=0;$i < $numRoom; $i++)

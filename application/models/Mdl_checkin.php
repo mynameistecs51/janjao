@@ -757,6 +757,7 @@ class Mdl_checkin extends CI_Model {
 		tb.is_breakfast,
 		tb.bookedType,
 		tb.cashPledge,
+		tb.checkPledge,
 		tb.cashPledgePath,
 		tb.`comment`,
 		tb.`status`,
@@ -771,10 +772,12 @@ class Mdl_checkin extends CI_Model {
 		tch.totalVat,
 		tch.totalDiscount,
 		tch.totalLast,
+		tch.checktotalLast,
 		tcd.cashdtLID,
 		tcd.discount,
 		tcd.vat,
-		tcd.sumtotal
+		tcd.sumtotal,
+		tcd.checkservice
 		FROM ts_booked tb
 		INNER JOIN ts_booked_room tbr ON tb.bookedID = tbr.bookedID
 		INNER JOIN ts_cash_hdr tch ON tbr.bookedID = tch.bookedID
@@ -793,6 +796,41 @@ class Mdl_checkin extends CI_Model {
 		return $data;
 
 	}
+
+	public function checkPledge()
+	{
+		$data = array(
+			"checkPledge" 	=> $this->input->post('checked'),
+			"updateDT"	  => $this->packfunction->dtYMDnow(),
+			"updateBY"	  => $this->UserName
+			);
+		$this->db->where('bookedID',$this->input->post('checkPledge'));
+		$this->db->update('ts_booked',$data);
+	}
+
+
+	public function checkrete()
+	{
+		$data = array(
+			"checktotalLast" 	=> $this->input->post('checked'),
+			"updateDT"	  => $this->packfunction->dtYMDnow(),
+			"updateBY"	  => $this->UserName
+			);
+		$this->db->where('bookedID',$this->input->post('checkrete'));
+		$this->db->update('ts_cash_hdr',$data);
+	}
+
+	public function checkservice()
+	{
+		$data = array(
+			"checkService" 	=> $this->input->post('checked'),
+			"updateDT"	  => $this->packfunction->dtYMDnow(),
+			"updateBY"	  => $this->UserName
+			);
+		$this->db->where('bookedID',$this->input->post('checkservice'));
+		$this->db->update('ts_cash_dtl',$data);
+	}
+
 }
 
 

@@ -67,7 +67,7 @@ $now = new DateTime(null, new DateTimeZone('Asia/Bangkok'));
 // --------------------------------//
 
 $html = '
-<caption> <h3><b>รายงานยอดการเข้าพัก '.$keyword.'</b></h3></caption>
+<caption> <h3><b>รายงานยอดการเข้าพัก (จันทร์เจ้าโฮเทล)'.$keyword.'</b></h3></caption>
 <table id="fairlist" class="table table-striped table-bordered" cellspacing="0" width="100%" border="1" >
 	<thead style="background:#BDBDBD;font-size: 12px; ">
 		<tr>
