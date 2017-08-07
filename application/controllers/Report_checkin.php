@@ -27,7 +27,7 @@ class Report_checkin extends CI_Controller {
 		$this->data['keyword']='';
 		$this->data['repCheckout'] = $this->showList($this->data['keyword']);
 		$this->data['getMonth'] = $this->packfunction->getMonth();
-		$this->packfunction->packView($this->data,"report/reportcheckin/ReportCheckinDay.php");
+		$this->packfunction->packView($this->data,"report/reportcheckin/ReportCheckinDay");
 	}
 
 	public function checkinmonth($value='')
@@ -36,7 +36,16 @@ class Report_checkin extends CI_Controller {
 		$this->data['keyword']='';
 		$this->data['repCheckout'] = $this->showList($this->data['keyword']);
 		$this->data['getMonth'] = $this->packfunction->getMonth();
-		$this->packfunction->packView($this->data,"report/reportcheckin/ReportCheckinMonth.php");
+		$this->packfunction->packView($this->data,"report/reportcheckin/ReportCheckinMonth");
+	}
+
+	public function checkinyear($value='')
+	{
+		$this->data['viewName']=$this->pagename;
+		$this->data['keyword']='';
+		$this->data['repCheckout'] = $this->showList($this->data['keyword']);
+		$this->data['getMonth'] = $this->packfunction->getMonth();
+		$this->packfunction->packView($this->data,"report/reportcheckin/ReportCheckinYear");
 	}
 
 	public function showList($keyword = "")
@@ -114,13 +123,14 @@ class Report_checkin extends CI_Controller {
 	{
 		$keywordDay = $this->input->post('keywordDay');
 		$keywordMonth = $this->input->post('startMonth');
+		$keywordYear = $this->input->post('startYear');
 		if(!empty($keywordDay )){
 			if($_POST){
 				$this->data['viewName']=$this->pagename;
 				$this->data['keyword']= $keywordDay;
 				$this->data['repCheckout'] = $this->showList($this->data['keyword']);
 				$this->data['getMonth'] = $this->packfunction->getMonth();
-				$this->packfunction->packView($this->data,"report/reportcheckin/ReportCheckinDay.php");
+				$this->packfunction->packView($this->data,"report/reportcheckin/ReportCheckinDay");
 			}else{
 				redirect('report/reportbooked/booked','refresh');
 			}
@@ -130,7 +140,17 @@ class Report_checkin extends CI_Controller {
 				$this->data['keyword']= '/'.$keywordMonth.'/'.$this->input->post('startYear') ;
 				$this->data['repCheckout'] = $this->showList($this->data['keyword']);
 				$this->data['getMonth'] = $this->packfunction->getMonth();
-				$this->packfunction->packView($this->data,"report/reportcheckin/ReportCheckinMonth.php");
+				$this->packfunction->packView($this->data,"report/reportcheckin/ReportCheckinMonth");
+			}else{
+				redirect('report/report_checkin/checkinmonth','refresh');
+			}
+		}else if(!empty($keywordYear)){
+			if($_POST){
+				$this->data['viewName']=$this->pagename;
+				$this->data['keyword']= '/'.$this->input->post('startYear') ;
+				$this->data['repCheckout'] = $this->showList($this->data['keyword']);
+				$this->data['getMonth'] = $this->packfunction->getMonth();
+				$this->packfunction->packView($this->data,"report/reportcheckin/ReportCheckinYear");
 			}else{
 				redirect('report/report_checkin/checkinmonth','refresh');
 			}
@@ -165,5 +185,5 @@ class Report_checkin extends CI_Controller {
 }
 
 
-/* End of file Report_checkin.php */
-/* Location: ./application/controllers/Report_checkin.php */
+/* End of file Report_checkin */
+/* Location: ./application/controllers/Report_checkin */

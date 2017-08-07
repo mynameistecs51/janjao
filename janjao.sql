@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 02, 2017 at 11:45 AM
+-- Generation Time: Aug 07, 2017 at 06:59 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -10258,7 +10258,7 @@ INSERT INTO `tm_menu` (`MenuID`, `MenuName`, `MenuType`, `MenuParent`, `MenuURL`
 (26, 'User', 'none', 6, 'user', NULL, 2, 13, 'ON', '2017-03-16 14:09:23', NULL),
 (27, 'รายงานยอดจองห้อง', NULL, 5, 'report_booked', NULL, 2, 14, 'ON', '2017-06-14 21:07:29', NULL),
 (28, 'รายงานยอดเช่าห้อง', NULL, 5, 'report_checkin', NULL, 2, 15, 'ON', '2017-06-14 21:07:33', NULL),
-(29, 'สินค้าบริการ', NULL, 5, 'report/service', NULL, 2, 16, 'ON', '2017-06-14 21:09:45', NULL),
+(29, '<!-- สินค้าบริการ -->', NULL, 5, 'report/servi ce', NULL, 2, 16, 'ON', '2017-06-14 21:09:45', NULL),
 (30, 'ทรัพสินเสียหาย', NULL, 5, 'report/service', NULL, 2, 17, 'ON', '2017-06-14 21:09:50', NULL),
 (31, 'About', NULL, 6, 'about', NULL, 2, 18, 'ON', '2017-07-31 22:05:20', NULL);
 
@@ -10293,11 +10293,11 @@ INSERT INTO `tm_room` (`roomID`, `roomtypeID`, `floor`, `zone`, `roomCODE`, `tra
 (3, 1, '2', 'LEFT', '206', 'EMPTY', NULL, 'ON', '2560-06-20 22:06:59', 'admin', NULL, NULL),
 (4, 1, '2', 'LEFT', '208', 'EMPTY', NULL, 'ON', '2560-06-20 22:06:59', 'admin', '2017-07-20 23:51:24', 'admin'),
 (5, 1, '2', 'LEFT', '210', 'EMPTY', NULL, 'ON', '2560-06-20 22:06:59', 'admin', '2017-07-19 18:45:15', 'admin'),
-(6, 1, '2', 'LEFT', '212', 'EMPTY', NULL, 'ON', '2560-06-20 22:06:59', 'admin', '2017-07-21 00:43:22', 'admin'),
-(7, 1, '2', 'LEFT', '214', 'EMPTY', NULL, 'ON', '2560-06-20 22:06:59', 'admin', '2017-07-21 00:31:42', 'admin'),
-(8, 1, '2', 'LEFT', '216', 'EMPTY', NULL, 'ON', '2560-06-20 22:06:59', 'admin', '2017-07-21 20:38:10', 'admin'),
-(9, 1, '2', 'LEFT', '218', 'CLEANING', NULL, 'ON', '2560-06-20 22:06:59', 'admin', '2017-07-21 20:38:10', 'admin'),
-(10, 1, '2', 'LEFT', '220', 'CLEANING', NULL, 'ON', '2560-06-20 22:06:59', 'admin', '2017-07-21 00:33:17', 'admin'),
+(6, 1, '2', 'LEFT', '212', 'CLEANING', NULL, 'ON', '2560-06-20 22:06:59', 'admin', '2017-08-06 20:57:58', 'admin'),
+(7, 1, '2', 'LEFT', '214', 'CLEANING', NULL, 'ON', '2560-06-20 22:06:59', 'admin', '2017-08-06 20:57:46', 'admin'),
+(8, 1, '2', 'LEFT', '216', 'CLEANING', NULL, 'ON', '2560-06-20 22:06:59', 'admin', '2017-08-06 21:04:55', 'admin'),
+(9, 1, '2', 'LEFT', '218', 'CLEANING', NULL, 'ON', '2560-06-20 22:06:59', 'admin', '2017-08-06 21:04:39', 'admin'),
+(10, 1, '2', 'LEFT', '220', 'CLEANING', NULL, 'ON', '2560-06-20 22:06:59', 'admin', '2017-08-06 21:04:48', 'admin'),
 (11, 1, '2', 'LEFT', '201', 'EMPTY', NULL, 'ON', '2560-06-20 22:06:59', 'admin', NULL, NULL),
 (12, 1, '2', 'LEFT', '203', 'EMPTY', NULL, 'ON', '2560-06-20 22:06:59', 'admin', NULL, NULL),
 (13, 1, '2', 'LEFT', '205', 'EMPTY', NULL, 'ON', '2560-06-20 22:06:59', 'admin', NULL, NULL),
@@ -10308,7 +10308,7 @@ INSERT INTO `tm_room` (`roomID`, `roomtypeID`, `floor`, `zone`, `roomCODE`, `tra
 (18, 1, '2', 'LEFT', '215', 'EMPTY', '', 'ON', '2017-07-19 17:31:08', 'admin', '2017-07-19 17:31:08', 'admin'),
 (19, 1, '2', 'LEFT', '217', 'EMPTY', '', 'ON', '2017-07-19 17:31:27', 'admin', '2017-07-19 17:31:27', 'admin'),
 (20, 1, '2', 'LEFT', '219', 'EMPTY', '', 'ON', '2017-07-19 17:31:39', 'admin', '2017-07-19 17:31:39', 'admin'),
-(21, 1, '3', 'LEFT', '302', 'EMPTY', NULL, 'ON', '2560-06-20 22:06:59', 'admin', NULL, NULL),
+(21, 1, '3', 'LEFT', '302', 'CLEANING', NULL, 'ON', '2560-06-20 22:06:59', 'admin', '2017-08-06 20:58:05', 'admin'),
 (22, 1, '3', 'LEFT', '304', 'EMPTY', NULL, 'ON', '2560-06-20 22:06:59', 'admin', NULL, NULL),
 (23, 1, '3', 'LEFT', '306', 'EMPTY', NULL, 'ON', '2560-06-20 22:06:59', 'admin', NULL, NULL),
 (24, 1, '3', 'LEFT', '308', 'EMPTY', NULL, 'ON', '2560-06-20 22:06:59', 'admin', NULL, NULL),
@@ -10469,7 +10469,8 @@ INSERT INTO `tsc_gensn` (`id_tsc_gen`, `sncode`, `day_number`, `last_number`, `r
 (0, 'CH', '1707', 27, 'CH1707', '2017-07-23 23:12:29'),
 (0, 'BLS', '1707', 61, 'BLS1707', '2017-07-23 23:12:37'),
 (0, 'BK', '1707', 2, 'BK1707', '2017-07-21 00:22:06'),
-(0, 'BLS', '1708', 19, 'BLS1708', '2017-08-01 22:54:45');
+(0, 'BLS', '1708', 50, 'BLS1708', '2017-08-06 21:04:55'),
+(0, 'CH', '1708', 9, 'CH1708', '2017-08-03 14:45:48');
 
 -- --------------------------------------------------------
 
@@ -10502,6 +10503,7 @@ CREATE TABLE `ts_booked` (
   `is_breakfast` enum('YES','NO') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'NO',
   `bookedType` enum('HOUR','SHORT','DAY','MONTH') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'DAY',
   `cashPledge` double(10,2) DEFAULT NULL,
+  `checkPledge` enum('0','1') COLLATE utf8_unicode_ci NOT NULL COMMENT 'สถานะเก็บเงิน 0 = ยังไม่เก็บ 1 = เก็บแล้ว',
   `cashPledgePath` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `comment` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status` enum('BOOKED','CHECKIN','LATE','CANCLE','HIDDEN','CHECKOUT') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'BOOKED',
@@ -10515,14 +10517,23 @@ CREATE TABLE `ts_booked` (
 -- Dumping data for table `ts_booked`
 --
 
-INSERT INTO `ts_booked` (`bookedID`, `bookedCode`, `idcardno`, `idcardnoPath`, `titleName`, `firstName`, `middleName`, `lastName`, `birthdate`, `address`, `district`, `amphur`, `province`, `country`, `postcode`, `mobile`, `licenseplate`, `email`, `bookedDate`, `checkInAppointDate`, `checkOutAppointDate`, `is_breakfast`, `bookedType`, `cashPledge`, `cashPledgePath`, `comment`, `status`, `createDT`, `createBY`, `updateDT`, `updateBY`) VALUES
-(20, 'CH170700022', 111, '111.png', 'MALE', '11', '', '11', '2558-04-02 00:00:00', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '2017-07-21 00:19:00', '2017-07-21 13:00:00', '2017-07-22 12:00:00', '', 'DAY', 100.00, '', 'CHECKOUT BY admin', 'CHECKOUT', '2017-07-21 00:20:24', 'admin', '2017-07-21 00:33:17', 'admin'),
-(21, 'CH170700023', 222, '', 'MALE', '222', '', '222', '2555-04-04 00:00:00', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '2017-07-21 00:20:00', '2017-07-21 13:00:00', '2017-07-22 12:00:00', '', 'DAY', 200.00, '', 'CHECKOUT BY admin', 'CHECKOUT', '2017-07-21 00:21:13', 'admin', '2017-07-21 20:38:10', 'admin'),
-(22, 'BK170700002', 333, NULL, 'MALE', '333', '', '333', '2560-01-01 00:00:00', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '2017-07-21 00:21:00', '2017-07-21 13:00:00', '2017-07-22 12:00:00', 'NO', 'DAY', 300.00, '', 'CHECKOUT BY admin', 'CHECKOUT', '2017-07-21 00:22:06', 'admin', '2017-07-21 00:31:42', 'admin'),
-(23, 'CH170700024', 666, '666.png', 'MALE', 'ไชยวัฒน์', '', 'ไชยวํฒน์', '2556-05-03 00:00:00', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '2017-07-21 00:39:00', '2017-07-21 13:00:00', '2017-07-22 12:00:00', '', 'DAY', 100.00, '', 'CHECKOUT BY admin', 'CHECKOUT', '2017-07-21 00:40:02', 'admin', '2017-07-21 00:43:22', 'admin'),
-(24, 'CH170700025', 1234, '1234.png', 'MALE', 'homsang', '', 'chaiwat', '2555-05-08 00:00:00', '', NULL, NULL, NULL, NULL, NULL, '2222222222', '', '', '2017-07-23 11:39:00', '2017-07-23 13:00:00', '2017-07-24 12:00:00', '', 'DAY', 200.00, '', 'CHECKOUT BY admin', 'CHECKOUT', '2017-07-23 12:06:31', 'admin', '2017-07-23 16:57:46', 'admin'),
-(25, 'CH170700026', 12345, '12345.png', 'MALE', 'chaiwat', '', 'chaiwat', '2556-03-02 00:00:00', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '2017-07-23 22:16:00', '2017-07-23 13:00:00', '2017-07-24 12:00:00', '', 'DAY', 0.00, '', 'CHECKOUT BY admin', 'CHECKOUT', '2017-07-23 22:17:24', 'admin', '2017-07-23 22:32:42', 'admin'),
-(26, 'CH170700027', 166, '', 'MALE', 'dfgsgd', '', 'dddd', '2560-03-03 00:00:00', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '2017-07-23 23:11:00', '2017-07-23 13:00:00', '2017-07-24 12:00:00', '', 'DAY', 0.00, '', 'CHECKOUT BY admin', 'CHECKOUT', '2017-07-23 23:12:29', 'admin', '2017-07-23 23:12:37', 'admin');
+INSERT INTO `ts_booked` (`bookedID`, `bookedCode`, `idcardno`, `idcardnoPath`, `titleName`, `firstName`, `middleName`, `lastName`, `birthdate`, `address`, `district`, `amphur`, `province`, `country`, `postcode`, `mobile`, `licenseplate`, `email`, `bookedDate`, `checkInAppointDate`, `checkOutAppointDate`, `is_breakfast`, `bookedType`, `cashPledge`, `checkPledge`, `cashPledgePath`, `comment`, `status`, `createDT`, `createBY`, `updateDT`, `updateBY`) VALUES
+(20, 'CH170700022', 111, '111.png', 'MALE', '11', '', '11', '2558-04-02 00:00:00', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '2017-07-21 00:19:00', '2017-07-21 13:00:00', '2017-07-21 12:00:00', '', 'DAY', 100.00, '0', '', 'CHECKOUT BY admin', 'CHECKOUT', '2017-07-21 00:20:24', 'admin', '2017-07-21 00:33:17', 'admin'),
+(21, 'CH170700023', 222, '', 'MALE', '222', '', '222', '2555-04-04 00:00:00', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '2017-07-21 00:20:00', '2017-07-21 13:00:00', '2017-07-22 12:00:00', '', 'DAY', 200.00, '0', '', 'CHECKOUT BY admin', 'CHECKOUT', '2017-07-21 00:21:13', 'admin', '2017-07-21 20:38:10', 'admin'),
+(22, 'BK170700002', 333, NULL, 'MALE', '333', '', '333', '2560-01-01 00:00:00', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '2017-07-21 00:21:00', '2017-07-21 13:00:00', '2017-07-22 12:00:00', 'NO', 'DAY', 300.00, '0', '', 'CHECKOUT BY admin', 'CHECKOUT', '2017-07-21 00:22:06', 'admin', '2017-07-21 00:31:42', 'admin'),
+(23, 'CH170700024', 666, '666.png', 'MALE', 'ไชยวัฒน์', '', 'ไชยวํฒน์', '2556-05-03 00:00:00', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '2017-07-21 00:39:00', '2017-07-21 13:00:00', '2017-07-22 12:00:00', '', 'DAY', 100.00, '0', '', 'CHECKOUT BY admin', 'CHECKOUT', '2017-07-21 00:40:02', 'admin', '2017-07-21 00:43:22', 'admin'),
+(24, 'CH170700025', 1234, '1234.png', 'MALE', 'homsang', '', 'chaiwat', '2555-05-08 00:00:00', '', NULL, NULL, NULL, NULL, NULL, '2222222222', '', '', '2017-07-23 11:39:00', '2017-07-23 13:00:00', '2017-07-24 12:00:00', '', 'DAY', 200.00, '0', '', 'CHECKOUT BY admin', 'CHECKOUT', '2017-07-23 12:06:31', 'admin', '2017-07-23 16:57:46', 'admin'),
+(25, 'CH170700026', 12345, '12345.png', 'MALE', 'chaiwat', '', 'chaiwat', '2556-03-02 00:00:00', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '2017-07-23 22:16:00', '2017-07-23 13:00:00', '2017-07-24 12:00:00', '', 'DAY', 0.00, '0', '', 'CHECKOUT BY admin', 'CHECKOUT', '2017-07-23 22:17:24', 'admin', '2017-07-23 22:32:42', 'admin'),
+(26, 'CH170700027', 166, '', 'MALE', 'dfgsgd', '', 'dddd', '2560-03-03 00:00:00', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '2017-07-23 23:11:00', '2017-07-23 13:00:00', '2017-07-24 12:00:00', '', 'DAY', 0.00, '0', '', 'CHECKOUT BY admin', 'CHECKOUT', '2017-07-23 23:12:29', 'admin', '2017-07-23 23:12:37', 'admin'),
+(27, 'CH170800001', 111, '111.png', 'MALE', '11', '', '11', '2558-04-02 00:00:00', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '2017-08-02 17:28:00', '2017-08-02 13:00:00', '2017-08-03 12:00:00', '', 'DAY', 300.00, '0', '', 'CHECKOUT BY admin', 'CHECKOUT', '2017-08-02 17:29:02', 'admin', '2017-08-02 23:52:17', 'admin'),
+(28, 'CH170800002', 666, '', 'MALE', 'ไชยวัฒน์', '', 'ไชยวํฒน์', '2556-05-03 00:00:00', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '2017-08-02 17:38:00', '2017-08-02 13:00:00', '2017-08-05 12:00:00', '', 'DAY', 0.00, '0', '', 'CHECKOUT BY admin', 'CHECKOUT', '2017-08-02 17:38:30', 'admin', '2017-08-06 21:04:55', 'admin'),
+(29, 'CH170800003', 1, '', 'MALE', '1', '', '1', '2559-03-03 00:00:00', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '2017-08-02 17:41:00', '2017-08-02 13:00:00', '2017-08-05 12:00:00', '', 'DAY', 200.00, '0', '', 'CHECKOUT BY admin', 'CHECKOUT', '2017-08-02 17:41:48', 'admin', '2017-08-02 17:49:19', 'admin'),
+(30, 'CH170800004', 111, '111.png', 'MALE', '11', '', 'chaiwat', '2558-04-02 00:00:00', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '2017-08-02 22:33:00', '2017-08-02 13:00:00', '2017-08-05 12:00:00', '', 'DAY', 200.00, '0', '', 'CHECKOUT BY admin', 'CHECKOUT', '2017-08-02 22:33:27', 'admin', '2017-08-06 21:04:48', 'admin'),
+(31, 'CH170800005', 111, '', 'MALE', '11', '', 'chaiwat', '2558-04-02 00:00:00', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '2017-08-02 22:45:00', '2017-08-02 13:00:00', '2017-08-03 12:00:00', '', 'DAY', 300.00, '0', '', 'CHECKOUT BY admin', 'CHECKOUT', '2017-08-02 22:45:28', 'admin', '2017-08-06 21:04:39', 'admin'),
+(32, 'CH170800006', 111, '', 'MALE', '11', '', 'chaiwat', '2558-04-02 00:00:00', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '2017-08-02 23:44:00', '2017-08-02 13:00:00', '2017-08-03 12:00:00', '', 'DAY', 200.00, '1', '', 'CHECKOUT BY admin', 'CHECKOUT', '2017-08-02 23:44:39', 'admin', '2017-08-07 23:03:15', 'admin'),
+(33, 'CH170800007', 111, '', 'MALE', '11', '', 'chaiwat', '2558-04-02 00:00:00', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '2017-08-02 23:53:00', '2017-08-02 13:00:00', '2017-08-03 12:00:00', '', 'DAY', 300.00, '1', '', 'CHECKOUT BY admin', 'CHECKOUT', '2017-08-02 23:53:14', 'admin', '2017-08-07 22:36:14', 'admin'),
+(34, 'CH170800008', 111, '', 'MALE', '11', '', 'chaiwat', '2558-04-02 00:00:00', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '2017-08-03 14:44:00', '2017-08-03 13:00:00', '2017-08-04 12:00:00', '', 'DAY', 300.00, '1', '', 'CHECKOUT BY admin', 'CHECKOUT', '2017-08-03 14:44:59', 'admin', '2017-08-07 22:36:10', 'admin'),
+(35, 'CH170800009', 111, '', 'MALE', '11', '', 'chaiwat', '2558-04-02 00:00:00', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '2017-08-03 14:45:00', '2017-08-03 13:00:00', '2017-08-06 12:00:00', '', 'DAY', 300.00, '1', '', 'CHECKOUT BY admin', 'CHECKOUT', '2017-08-03 14:45:48', 'admin', '2017-08-07 22:36:07', 'admin');
 
 -- --------------------------------------------------------
 
@@ -10549,15 +10560,24 @@ CREATE TABLE `ts_booked_room` (
 --
 
 INSERT INTO `ts_booked_room` (`bookedroomID`, `bookedID`, `roomID`, `checkinDate`, `checkoutDate`, `comment`, `status`, `createDT`, `createBY`, `updateDT`, `updateBY`) VALUES
-(23, 20, 220, '2017-07-21 13:00:00', '2017-07-22 12:00:00', 'CHECKOUT BY admin', 'CHECKOUT', '2017-07-21 00:20:24', 'admin', '2017-07-21 00:33:17', 'admin'),
-(24, 21, 218, '2017-07-21 13:00:00', '2017-07-22 12:00:00', 'CHECKOUT BY admin', 'CHECKOUT', '2017-07-21 00:21:13', 'admin', '2017-07-21 20:38:10', 'admin'),
+(23, 20, 220, '2017-07-21 13:00:00', '2017-07-21 12:00:00', 'CHECKOUT BY admin', 'CHECKOUT', '2017-07-21 00:20:24', 'admin', '2017-07-21 00:33:17', 'admin'),
+(24, 21, 218, '2017-07-21 13:00:00', '2017-07-21 12:00:00', 'CHECKOUT BY admin', 'CHECKOUT', '2017-07-21 00:21:13', 'admin', '2017-07-21 20:38:10', 'admin'),
 (25, 21, 216, '2017-07-21 13:00:00', '2017-07-22 12:00:00', 'CHECKOUT BY admin', 'CHECKOUT', '2017-07-21 00:21:13', 'admin', '2017-07-21 20:38:10', 'admin'),
 (26, 22, 214, '2017-07-21 13:00:00', '2017-07-22 12:00:00', 'CHECKOUT BY admin', 'CHECKOUT', '2017-07-21 00:22:06', 'admin', '2017-07-21 00:31:42', 'admin'),
 (27, 23, 212, '2017-07-21 13:00:00', '2017-07-22 12:00:00', 'CHECKOUT BY admin', 'CHECKOUT', '2017-07-21 00:40:02', 'admin', '2017-07-21 00:43:22', 'admin'),
 (28, 24, 202, '2017-07-23 13:00:00', '2017-07-24 12:00:00', 'CHECKOUT BY admin', 'CHECKOUT', '2017-07-23 12:06:31', 'admin', '2017-07-23 16:57:46', 'admin'),
 (29, 24, 204, '2017-07-23 13:00:00', '2017-07-24 12:00:00', 'CHECKOUT BY admin', 'CHECKOUT', '2017-07-23 12:06:31', 'admin', '2017-07-23 16:57:46', 'admin'),
 (30, 25, 102, '2017-07-23 13:00:00', '2017-07-24 12:00:00', 'CHECKOUT BY admin', 'CHECKOUT', '2017-07-23 22:17:24', 'admin', '2017-07-23 22:32:42', 'admin'),
-(31, 26, 101, '2017-07-23 13:00:00', '2017-07-24 12:00:00', 'CHECKOUT BY admin', 'CHECKOUT', '2017-07-23 23:12:29', 'admin', '2017-07-23 23:12:37', 'admin');
+(31, 26, 101, '2017-07-23 13:00:00', '2017-07-24 12:00:00', 'CHECKOUT BY admin', 'CHECKOUT', '2017-07-23 23:12:29', 'admin', '2017-07-23 23:12:37', 'admin'),
+(32, 27, 214, '2017-08-02 13:00:00', '2017-08-03 12:00:00', 'CHECKOUT BY admin', 'CHECKOUT', '2017-08-02 17:29:02', 'admin', '2017-08-02 23:52:17', 'admin'),
+(33, 28, 216, '2017-08-02 13:00:00', '2017-08-05 12:00:00', 'CHECKOUT BY admin', 'CHECKOUT', '2017-08-02 17:38:30', 'admin', '2017-08-06 21:04:55', 'admin'),
+(34, 29, 218, '2017-08-02 13:00:00', '2017-08-05 12:00:00', 'CHECKOUT BY admin', 'CHECKOUT', '2017-08-02 17:41:48', 'admin', '2017-08-02 17:49:19', 'admin'),
+(35, 30, 220, '2017-08-02 13:00:00', '2017-08-05 12:00:00', 'CHECKOUT BY admin', 'CHECKOUT', '2017-08-02 22:33:27', 'admin', '2017-08-06 21:04:48', 'admin'),
+(36, 31, 218, '2017-08-02 13:00:00', '2017-08-03 12:00:00', 'CHECKOUT BY admin', 'CHECKOUT', '2017-08-02 22:45:28', 'admin', '2017-08-06 21:04:39', 'admin'),
+(37, 32, 302, '2017-08-02 13:00:00', '2017-08-03 12:00:00', 'CHECKOUT BY admin', 'CHECKOUT', '2017-08-02 23:44:39', 'admin', '2017-08-06 20:58:05', 'admin'),
+(38, 33, 214, '2017-08-02 13:00:00', '2017-08-03 12:00:00', 'CHECKOUT BY admin', 'CHECKOUT', '2017-08-02 23:53:14', 'admin', '2017-08-03 11:25:10', 'admin'),
+(39, 34, 212, '2017-08-03 13:00:00', '2017-08-04 12:00:00', 'CHECKOUT BY admin', 'CHECKOUT', '2017-08-03 14:44:59', 'admin', '2017-08-06 20:57:58', 'admin'),
+(40, 35, 214, '2017-08-03 13:00:00', '2017-08-06 12:00:00', 'CHECKOUT BY admin', 'CHECKOUT', '2017-08-03 14:45:48', 'admin', '2017-08-06 20:57:46', 'admin');
 
 -- --------------------------------------------------------
 
@@ -10593,6 +10613,7 @@ CREATE TABLE `ts_cash_dtl` (
   `discount` double(10,2) NOT NULL,
   `vat` int(11) NOT NULL,
   `sumtotal` double(10,2) NOT NULL,
+  `checkService` enum('0','1') COLLATE utf8_unicode_ci NOT NULL COMMENT 'สถานะเก็บเงิน 0 = ยังไม่เก็บ 1 = เก็บแล้ว',
   `status` enum('OPEN','PAY','CANCLE','HIDDEN') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'OPEN',
   `createDT` datetime NOT NULL,
   `createBY` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -10604,14 +10625,23 @@ CREATE TABLE `ts_cash_dtl` (
 -- Dumping data for table `ts_cash_dtl`
 --
 
-INSERT INTO `ts_cash_dtl` (`cashdtlID`, `cashhdrID`, `bookedID`, `cashDate`, `discount`, `vat`, `sumtotal`, `status`, `createDT`, `createBY`, `updateDT`, `updateBY`) VALUES
-(16, 24, 22, '2017-07-21 00:31:42', 0.00, 0, 0.00, 'PAY', '2017-07-21 00:31:42', 'admin', '2017-07-21 00:31:42', 'admin'),
-(17, 21, 20, '2017-07-21 00:33:17', 0.00, 0, 200.00, 'PAY', '2017-07-21 00:33:17', 'admin', '2017-07-21 00:33:17', 'admin'),
-(18, 25, 23, '2017-07-21 00:43:22', 50.00, 0, 50.00, 'PAY', '2017-07-21 00:43:22', 'admin', '2017-07-21 00:43:22', 'admin'),
-(19, 23, 21, '2017-07-21 20:38:10', 0.00, 0, 0.00, 'PAY', '2017-07-21 20:38:10', 'admin', '2017-07-21 20:38:10', 'admin'),
-(20, 26, 24, '2017-07-23 16:57:46', 0.00, 0, 0.00, 'PAY', '2017-07-23 16:57:46', 'admin', '2017-07-23 16:57:46', 'admin'),
-(21, 28, 25, '2017-07-23 22:32:42', 0.00, 0, 0.00, 'PAY', '2017-07-23 22:32:42', 'admin', '2017-07-23 22:32:42', 'admin'),
-(22, 29, 26, '2017-07-23 23:12:37', 0.00, 0, 0.00, 'PAY', '2017-07-23 23:12:37', 'admin', '2017-07-23 23:12:37', 'admin');
+INSERT INTO `ts_cash_dtl` (`cashdtlID`, `cashhdrID`, `bookedID`, `cashDate`, `discount`, `vat`, `sumtotal`, `checkService`, `status`, `createDT`, `createBY`, `updateDT`, `updateBY`) VALUES
+(16, 24, 22, '2017-07-21 00:31:42', 0.00, 0, 0.00, '0', 'PAY', '2017-07-21 00:31:42', 'admin', '2017-07-21 00:31:42', 'admin'),
+(17, 21, 20, '2017-07-21 00:33:17', 0.00, 0, 200.00, '0', 'PAY', '2017-07-21 00:33:17', 'admin', '2017-07-21 00:33:17', 'admin'),
+(18, 25, 23, '2017-07-21 00:43:22', 50.00, 0, 50.00, '0', 'PAY', '2017-07-21 00:43:22', 'admin', '2017-07-21 00:43:22', 'admin'),
+(19, 23, 21, '2017-07-21 20:38:10', 0.00, 0, 0.00, '0', 'PAY', '2017-07-21 20:38:10', 'admin', '2017-07-21 20:38:10', 'admin'),
+(20, 26, 24, '2017-07-23 16:57:46', 0.00, 0, 0.00, '0', 'PAY', '2017-07-23 16:57:46', 'admin', '2017-07-23 16:57:46', 'admin'),
+(21, 28, 25, '2017-07-23 22:32:42', 0.00, 0, 0.00, '0', 'PAY', '2017-07-23 22:32:42', 'admin', '2017-07-23 22:32:42', 'admin'),
+(22, 29, 26, '2017-07-23 23:12:37', 0.00, 0, 0.00, '0', 'PAY', '2017-07-23 23:12:37', 'admin', '2017-07-23 23:12:37', 'admin'),
+(23, 32, 29, '2017-08-02 17:49:19', 0.00, 0, 50.00, '0', 'PAY', '2017-08-02 17:49:19', 'admin', '2017-08-07 00:14:00', 'admin'),
+(24, 30, 27, '2017-08-02 23:52:17', 0.00, 0, 0.00, '0', 'PAY', '2017-08-02 23:52:17', 'admin', '2017-08-02 23:52:17', 'admin'),
+(25, 36, 33, '2017-08-03 11:25:10', 0.00, 0, 0.00, '1', 'PAY', '2017-08-03 11:25:10', 'admin', '2017-08-07 22:36:13', 'admin'),
+(26, 38, 35, '2017-08-06 20:57:46', 0.00, 0, 0.00, '1', 'PAY', '2017-08-06 20:57:46', 'admin', '2017-08-07 22:36:09', 'admin'),
+(27, 37, 34, '2017-08-06 20:57:58', 0.00, 0, 0.00, '1', 'PAY', '2017-08-06 20:57:58', 'admin', '2017-08-07 22:36:11', 'admin'),
+(28, 35, 32, '2017-08-06 20:58:05', 0.00, 0, 0.00, '0', 'PAY', '2017-08-06 20:58:05', 'admin', '2017-08-07 22:57:24', 'admin'),
+(29, 34, 31, '2017-08-06 21:04:39', 0.00, 0, 0.00, '0', 'PAY', '2017-08-06 21:04:39', 'admin', '2017-08-07 22:57:24', 'admin'),
+(30, 33, 30, '2017-08-06 21:04:48', 0.00, 0, 0.00, '0', 'PAY', '2017-08-06 21:04:48', 'admin', '2017-08-06 21:04:48', 'admin'),
+(31, 31, 28, '2017-08-06 21:04:55', 0.00, 0, 0.00, '0', 'PAY', '2017-08-06 21:04:55', 'admin', '2017-08-06 21:04:55', 'admin');
 
 -- --------------------------------------------------------
 
@@ -10640,7 +10670,8 @@ CREATE TABLE `ts_cash_dtl_list` (
 
 INSERT INTO `ts_cash_dtl_list` (`cashdtllistID`, `cashdtlID`, `cashName`, `price`, `amount`, `unit`, `total`, `status`, `createDT`, `createBY`, `updateDT`, `updateBY`) VALUES
 (6, 17, 'test', '200.00', '1.00', 't', '200.00', 'OPEN', '2017-07-21 00:33:17', 'admin', '2017-07-21 00:33:17', 'admin'),
-(7, 18, 'test', '50.00', '1.00', 't', '50.00', 'OPEN', '2017-07-21 00:43:22', 'admin', '2017-07-21 00:43:22', 'admin');
+(7, 18, 'test', '50.00', '1.00', 't', '50.00', 'OPEN', '2017-07-21 00:43:22', 'admin', '2017-07-21 00:43:22', 'admin'),
+(8, 23, 'f', '50.00', '1.00', 'f', '50.00', 'OPEN', '2017-08-02 17:49:19', 'admin', '2017-08-02 17:49:19', 'admin');
 
 -- --------------------------------------------------------
 
@@ -10657,6 +10688,7 @@ CREATE TABLE `ts_cash_hdr` (
   `totalVat` decimal(10,2) NOT NULL DEFAULT '0.00',
   `totalDiscount` decimal(10,2) NOT NULL DEFAULT '0.00',
   `totalLast` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `checktotalLast` enum('0','1') COLLATE utf8_unicode_ci NOT NULL COMMENT 'สถานะเก็บเงิน 0 = ยังไม่เก็บ 1 = เก็บแล้ว',
   `comment` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status` enum('OPEN','PAY','CANCLE','HIDDEN') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'OPEN',
   `createDT` datetime NOT NULL,
@@ -10669,16 +10701,25 @@ CREATE TABLE `ts_cash_hdr` (
 -- Dumping data for table `ts_cash_hdr`
 --
 
-INSERT INTO `ts_cash_hdr` (`cashhdrID`, `cashCode`, `bookedID`, `roomID`, `cashDate`, `totalVat`, `totalDiscount`, `totalLast`, `comment`, `status`, `createDT`, `createBY`, `updateDT`, `updateBY`) VALUES
-(21, 'CH170700022', 20, 220, '2017-07-21 00:20:24', '0.00', '0.00', '600.00', '', 'PAY', '2017-07-21 00:20:24', 'admin', '2017-07-21 00:20:24', 'admin'),
-(22, 'CH170700023', 21, 218, '2017-07-21 00:21:13', '0.00', '0.00', '1200.00', '', 'PAY', '2017-07-21 00:21:13', 'admin', '2017-07-21 00:21:13', 'admin'),
-(23, 'CH170700023', 21, 216, '2017-07-21 00:21:13', '0.00', '0.00', '1200.00', '', 'PAY', '2017-07-21 00:21:13', 'admin', '2017-07-21 00:21:13', 'admin'),
-(24, 'BK170700002', 22, 214, '2017-07-21 00:31:08', '0.00', '0.00', '800.00', 'TRANSACTIONS BYadmin', 'PAY', '2017-07-21 00:31:08', 'admin', '2017-07-21 00:31:08', 'admin'),
-(25, 'CH170700024', 23, 212, '2017-07-21 00:40:02', '0.00', '0.00', '600.00', '', 'PAY', '2017-07-21 00:40:02', 'admin', '2017-07-21 00:40:02', 'admin'),
-(26, 'CH170700025', 24, 202, '2017-07-23 12:06:31', '0.00', '0.00', '1200.00', '', 'PAY', '2017-07-23 12:06:31', 'admin', '2017-07-23 12:06:31', 'admin'),
-(27, 'CH170700025', 24, 204, '2017-07-23 12:06:31', '0.00', '0.00', '1200.00', '', 'PAY', '2017-07-23 12:06:31', 'admin', '2017-07-23 12:06:31', 'admin'),
-(28, 'CH170700026', 25, 102, '2017-07-23 22:17:24', '0.00', '0.00', '500.00', '', 'PAY', '2017-07-23 22:17:24', 'admin', '2017-07-23 22:17:24', 'admin'),
-(29, 'CH170700027', 26, 101, '2017-07-23 23:12:29', '0.00', '0.00', '500.00', '', 'PAY', '2017-07-23 23:12:29', 'admin', '2017-07-23 23:12:29', 'admin');
+INSERT INTO `ts_cash_hdr` (`cashhdrID`, `cashCode`, `bookedID`, `roomID`, `cashDate`, `totalVat`, `totalDiscount`, `totalLast`, `checktotalLast`, `comment`, `status`, `createDT`, `createBY`, `updateDT`, `updateBY`) VALUES
+(21, 'CH170700022', 20, 220, '2017-07-21 00:20:24', '0.00', '0.00', '600.00', '0', '', 'PAY', '2017-07-21 00:20:24', 'admin', '2017-08-07 22:36:37', 'admin'),
+(22, 'CH170700023', 21, 218, '2017-07-21 00:21:13', '0.00', '0.00', '1200.00', '0', '', 'PAY', '2017-07-21 00:21:13', 'admin', '2017-08-07 22:36:37', 'admin'),
+(23, 'CH170700023', 21, 216, '2017-07-21 00:21:13', '0.00', '0.00', '1200.00', '0', '', 'PAY', '2017-07-21 00:21:13', 'admin', '2017-08-07 22:36:37', 'admin'),
+(24, 'BK170700002', 22, 214, '2017-07-21 00:31:08', '0.00', '0.00', '800.00', '0', 'TRANSACTIONS BYadmin', 'PAY', '2017-07-21 00:31:08', 'admin', '2017-08-07 22:36:36', 'admin'),
+(25, 'CH170700024', 23, 212, '2017-07-21 00:40:02', '0.00', '0.00', '600.00', '0', '', 'PAY', '2017-07-21 00:40:02', 'admin', '2017-08-07 22:36:38', 'admin'),
+(26, 'CH170700025', 24, 202, '2017-07-23 12:06:31', '0.00', '0.00', '1200.00', '0', '', 'PAY', '2017-07-23 12:06:31', 'admin', '2017-08-07 22:36:39', 'admin'),
+(27, 'CH170700025', 24, 204, '2017-07-23 12:06:31', '0.00', '0.00', '1200.00', '0', '', 'PAY', '2017-07-23 12:06:31', 'admin', '2017-08-07 22:36:39', 'admin'),
+(28, 'CH170700026', 25, 102, '2017-07-23 22:17:24', '0.00', '0.00', '500.00', '0', '', 'PAY', '2017-07-23 22:17:24', 'admin', '2017-08-07 22:36:39', 'admin'),
+(29, 'CH170700027', 26, 101, '2017-07-23 23:12:29', '0.00', '0.00', '500.00', '0', '', 'PAY', '2017-07-23 23:12:29', 'admin', '2017-08-07 22:36:40', 'admin'),
+(30, 'CH170800001', 27, 214, '2017-08-02 17:29:02', '0.00', '0.00', '800.00', '0', '', 'PAY', '2017-08-02 17:29:02', 'admin', '2017-08-07 22:36:40', 'admin'),
+(31, 'CH170800002', 28, 216, '2017-08-02 17:38:30', '0.00', '0.00', '1500.00', '0', '', 'PAY', '2017-08-02 17:38:30', 'admin', '2017-08-07 22:36:41', 'admin'),
+(32, 'CH170800003', 29, 218, '2017-08-02 17:41:48', '0.00', '0.00', '1700.00', '0', '', 'PAY', '2017-08-02 17:41:48', 'admin', '2017-08-07 22:36:41', 'admin'),
+(33, 'CH170800004', 30, 220, '2017-08-02 22:33:27', '0.00', '0.00', '1700.00', '0', '', 'PAY', '2017-08-02 22:33:27', 'admin', '2017-08-07 22:36:43', 'admin'),
+(34, 'CH170800005', 31, 218, '2017-08-02 22:45:28', '0.00', '0.00', '800.00', '1', '', 'PAY', '2017-08-02 22:45:28', 'admin', '2017-08-07 22:57:25', 'admin'),
+(35, 'CH170800006', 32, 302, '2017-08-02 23:44:39', '0.00', '0.00', '700.00', '1', '', 'PAY', '2017-08-02 23:44:39', 'admin', '2017-08-07 22:36:26', 'admin'),
+(36, 'CH170800007', 33, 214, '2017-08-02 23:53:14', '0.00', '0.00', '800.00', '1', '', 'PAY', '2017-08-02 23:53:14', 'admin', '2017-08-07 22:36:13', 'admin'),
+(37, 'CH170800008', 34, 212, '2017-08-03 14:44:59', '0.00', '0.00', '800.00', '1', '', 'PAY', '2017-08-03 14:44:59', 'admin', '2017-08-07 22:36:10', 'admin'),
+(38, 'CH170800009', 35, 214, '2017-08-03 14:45:48', '0.00', '0.00', '1800.00', '1', '', 'PAY', '2017-08-03 14:45:48', 'admin', '2017-08-07 22:36:08', 'admin');
 
 -- --------------------------------------------------------
 
@@ -11000,7 +11041,8 @@ INSERT INTO `ts_service` (`serviceID`, `bookedID`, `bookedroomID`, `serviceName`
 (11, 8, 0, 'test', '300.00', '1.00', 't', 'DESTROY', '', 'ORDER', '2017-07-11 14:42:03', 'admin', '2017-07-11 14:42:03', 'admin'),
 (12, 15, 0, 'test', '1000.00', '1.00', 't', 'DESTROY', '', 'ORDER', '2017-07-19 18:29:08', 'admin', '2017-07-19 18:29:08', 'admin'),
 (13, 20, 0, 'test', '200.00', '1.00', 't', 'DESTROY', '', 'ORDER', '2017-07-21 00:33:17', 'admin', '2017-07-21 00:33:17', 'admin'),
-(14, 23, 0, 'test', '50.00', '1.00', 't', 'DESTROY', '', 'ORDER', '2017-07-21 00:43:22', 'admin', '2017-07-21 00:43:22', 'admin');
+(14, 23, 0, 'test', '50.00', '1.00', 't', 'DESTROY', '', 'ORDER', '2017-07-21 00:43:22', 'admin', '2017-07-21 00:43:22', 'admin'),
+(15, 29, 0, 'f', '50.00', '1.00', 'f', 'DESTROY', '', 'ORDER', '2017-08-02 17:49:19', 'admin', '2017-08-02 17:49:19', 'admin');
 
 -- --------------------------------------------------------
 
@@ -18681,12 +18723,12 @@ ALTER TABLE `tm_usergroup`
 -- AUTO_INCREMENT for table `ts_booked`
 --
 ALTER TABLE `ts_booked`
-  MODIFY `bookedID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `bookedID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT for table `ts_booked_room`
 --
 ALTER TABLE `ts_booked_room`
-  MODIFY `bookedroomID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `bookedroomID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 --
 -- AUTO_INCREMENT for table `ts_booked_room_log`
 --
@@ -18696,22 +18738,22 @@ ALTER TABLE `ts_booked_room_log`
 -- AUTO_INCREMENT for table `ts_cash_dtl`
 --
 ALTER TABLE `ts_cash_dtl`
-  MODIFY `cashdtlID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `cashdtlID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT for table `ts_cash_dtl_list`
 --
 ALTER TABLE `ts_cash_dtl_list`
-  MODIFY `cashdtllistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `cashdtllistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `ts_cash_hdr`
 --
 ALTER TABLE `ts_cash_hdr`
-  MODIFY `cashhdrID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `cashhdrID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 --
 -- AUTO_INCREMENT for table `ts_service`
 --
 ALTER TABLE `ts_service`
-  MODIFY `serviceID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `serviceID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `zipcode`
 --

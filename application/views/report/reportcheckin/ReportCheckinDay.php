@@ -99,8 +99,12 @@
 								<?php
 								$checkPledge = ($report['checkPledge'] == '0')?'':'checked';
 								$pledge = ($report['status'] == 'CHECKOUT')? 0.00 : $report['cashPledge'];
-								echo "<label>".number_format($pledge,2)." "."<input type='checkbox' name='checkPledge' class='checkPledge' id='checkPledge".$report['bookedID']."' style='zoom: 1.5;' value=".$report['bookedID']." ".$checkPledge."></label>";
 								array_push($sumPledge, $pledge);
+								if($this->session->userdata('usergroupID') == 1){
+									echo "<label>".number_format($pledge,2)." "."<input type='checkbox' name='checkPledge' class='checkPledge' id='checkPledge".$report['bookedID']."' style='zoom: 1.5;' value=".$report['bookedID']." ".$checkPledge."></label>";
+								}else{
+									echo "<label>".number_format($pledge,2)." "."<input type='checkbox' name='checkPledge' class='checkPledge'  ".$checkPledge." style='zoom: 1.5;' disabled readonly></label>";
+								}
 								?>
 							</td>
 							<td align="right">
@@ -108,9 +112,12 @@
 								<?php
 								$checkedRetes = ($report['checktotalLast'] == '0')?'' : 'checked';
 								$retes = ($report['totalLast'] == 0.00)? 0.00 : ($report['totalLast'] - $report['cashPledge']);
-								echo "<label>".number_format($retes,2)." "."<input type='checkbox' name='checkrete' class='checkrete' id='checkrete".$report['bookedID']."' style='zoom: 1.5;' value=".$report['bookedID']." ".$checkedRetes."></label>";
-								// echo $report['totalLast'];
 								array_push($sumRetes, $a = ($retes == 0.00)? 0.00 :$report['totalLast'] - $report['cashPledge']);
+								if($this->session->userdata('usergroupID') == 1){
+									echo "<label>".number_format($retes,2)." "."<input type='checkbox' name='checkrete' class='checkrete' id='checkrete".$report['bookedID']."' style='zoom: 1.5;' value=".$report['bookedID']." ".$checkedRetes."></label>";
+								}else{
+									echo "<label>".number_format($pledge,2)." "."<input type='checkbox' name='checkrete' class='checkrete'  ".$checkedRetes." style='zoom: 1.5;' disabled readonly></label>";
+								}
 								?>
 							</td>
 							<td align="right">
@@ -118,8 +125,12 @@
 								<?php
 								$checkservice = ($report['checkservice'] == '0')?'':'checked';
 								$service= $report['sumtotal'];
-								echo "<label>".number_format($service,2)." "."<input type='checkbox' name='checkservice' class='checkservice' id='checkservice".$report['bookedID']."' style='zoom: 1.5;' value=".$report['bookedID']." ".$checkservice."></label>";
 								array_push($sumService,$report['sumtotal']);
+								if($this->session->userdata('usergroupID') == 1){
+									echo "<label>".number_format($service,2)." "."<input type='checkbox' name='checkservice' class='checkservice' id='checkservice".$report['bookedID']."' style='zoom: 1.5;' value=".$report['bookedID']." ".$checkservice."></label>";
+								}else{
+									echo "<label>".number_format($service,2)." "."<input type='checkbox' name='checkservice' class='checkservice' ".$checkservice." style='zoom: 1.5;' disabled readonly></label>";
+								}
 								?>
 							</td>
 							<td align="right">
