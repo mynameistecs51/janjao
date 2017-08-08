@@ -781,8 +781,6 @@ class Mdl_checkin extends CI_Model {
 		FROM ts_booked tb
 		INNER JOIN ts_booked_room tbr ON tb.bookedID = tbr.bookedID
 		INNER JOIN ts_cash_hdr tch ON tbr.bookedID = tch.bookedID
-		-- INNER JOIN ts_cash_hdr tch ON tbr.roomID = tch.roomID
-		-- INNER JOIN ts_cash_dtl tcd ON tch.cashhdrID = tcd.cashhdrID
 		LEFT JOIN ts_cash_dtl tcd ON tch.cashhdrID = tcd.cashhdrID
 		WHERE tb.status <> 'HIDDEN'
 		AND tb.status <> 'LATE'

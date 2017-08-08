@@ -107,7 +107,7 @@ class Packfunction {
 			'09' => 'กันยายน',
 			'10' => 'ตุลาคม',
 			'11' => 'พฤศจิกายน',
-			'12' => 'ธันวาคม'
+			'12' => 'ธันวาคม',
 			);
 	}
 
@@ -143,7 +143,7 @@ class Packfunction {
 		return $dmy.' 12:00';
 	}
 
-	 
+
 
 	public function getuserlogo($id=''){
 		$rs = $this->CI->mdl_packfunction->getuserlogo($id);
@@ -215,13 +215,13 @@ class Packfunction {
 	public function updateRoom($status='', $roomcode='')
 	{
 		$data = array(
-					'transaction'  => $status, 
+					'transaction'  => $status,
 					"updateDT"	   => $this->dtYMDnow(),
 					"updateBY"	   => $this->CI->session->userdata('UserName')
 				);
 		$this->CI->Mdl_packFunction->updateData($data,'tm_room','roomCODE',$roomcode);
 	}
 
-	
+
 
 }

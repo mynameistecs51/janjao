@@ -15,7 +15,7 @@
 	<!-- Page Features -->
 	<div class="row text-center">
 		<div class="col-lg-7" align="left">
-			<?php echo anchor(base_url().'report_checkin/PDF/'.$date = str_replace('/','_',$keyword), '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>  export PDF', 'class="btn btn-primary" target ="_blank"'); ?>
+			<?php //echo anchor(base_url().'report_checkin/PDF/'.$date = str_replace('/','_',$keyword), '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>  export PDF', 'class="btn btn-primary" target ="_blank"'); ?>
 		</div>
 		<div class="col-lg-5" align="right">
 			<div class="sh-left">
@@ -37,134 +37,109 @@
 			<table id="fairlist" class="table table-striped table-bordered" cellspacing="0" style="overflow-x:auto;width: 100%">
 				<thead style="background:#BDBDBD;font-size: 12px; ">
 					<tr >
-						<th style="text-align: center;width: 20px;">No.</th>
+						<!-- <th style="text-align: center;width: 20px;">No.</th> -->
 						<th style="text-align: center;width: 120px;">MONTH</th>
-						<th style="text-align: center;width: 230px;"> TOLTAL </th>
+						<th style="text-align: center;width: 230px;"> TOTAL </th>
 					</tr>
 				</thead>
 				<tbody style="font-size: 12px;">
 					<?php
-					$sumAll = array(); $roomAll = array(); $sumPledge = array(); $sumRetes = array();
-					$sumService = array(); $sumDiscount = array();
+					foreach ($repCheckout as $key => $value) {
+						// print_r($value);
+						echo $value['bookedCode'];
+					}
 					?>
-					<?php foreach ($getMonth as $keyMonth => $month): ?>
-						<tr>
-							<td style="text-align: center;width: 20px; font-size: 16px;"> <?php echo $keyMonth; ?> </td>
-							<td  style="text-align: center;width: 120px; font-size: 16px;"> <?php echo $month; ?></td>
-							<td>
-								<?php foreach ($repCheckout as $key => $report) :?>
-									<?php
-									//Pledge
-									$pledge = ($report['status'] == 'CHECKOUT')? 0.00 :$report['cashPledge'];
-									array_push($sumPledge, $pledge);
-
-									//retes
-									$retes = ($report['totalLast'] == 0.00)? 0.00 : ($report['totalLast'] - $report['cashPledge']);
-									array_push($sumRetes, $a = ($retes == 0.00)? 0.00 :$report['totalLast'] - $report['cashPledge']);
-
-									//service
-									$service= $report['sumtotal'];
-									array_push($sumService,$report['sumtotal']);
-
-									//discount
-									$discount = (empty($report['discount']))?0.00 : $report['discount'];
-									array_push($sumDiscount, $discount);
-
-									//sum ค่าห้อง + มัดจำ
-									$sum = (empty($report['sumtotal']))?$report['totalLast'] :  $report['totalLast'] + ($report['sumtotal'] - $report['cashPledge']) - $discount ;
-									array_push($sumAll, $sum);
-
-									echo number_format(array_sum($sumAll),2);
-									?>
-								<?php endforeach; ?>
-							</td>
-						</tr>
-					<?php endforeach ?>
-				</tbody>
-			</table>
+					<?php //for ($i=1; $i <= 12 ; $i++) :?>
+						<!-- <tr>
+							<td><?php echo $getMonth[$i]; ?></td>
+							<td></td>
+						</tr> -->
+						<?php //endfor;?>
+					</tbody>
+				</table>
+			</div>
 		</div>
-	</div>
 
-	<!-- /.row -->
-	<!--  END Fair List -->
+		<!-- /.row -->
+		<!--  END Fair List -->
 
-	<script src="<?php echo base_url()?>assets/js/jquery.datetimepicker.full.min.js"></script>
-	<script type="text/javascript">
-		$(function() {
-			checkrete();
-			checkPledge();
-			checkservice();
+		<script src="<?php echo base_url()?>assets/js/jquery.datetimepicker.full.min.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				checkrete();
+				checkPledge();
+				checkservice();
 
-			$.datetimepicker.setLocale('th');
-			$('#startDate').datetimepicker({
-				timepicker:true,
-				mask:true,
-				format:'d/m/Y',
-				lang:'th',
+				$.datetimepicker.setLocale('th');
+				$('#startDate').datetimepicker({
+					timepicker:true,
+					mask:true,
+					format:'d/m/Y',
+					lang:'th',
+				});
 			});
-		});
 
-		function checkPledge(){
-			$('.checkPledge').change(function() {
-				if($(this).is(':checked')){
-					$.ajax({
-						url: '<?php echo base_url()."report_checkin/checkPledge";?>',
-						type: 'post',
+			function checkPledge(){
+				$('.checkPledge').change(function() {
+					if($(this).is(':checked')){
+						$.ajax({
+							url: '<?php echo base_url()."report_checkin/checkPledge";?>',
+							type: 'post',
 						// dataType: 'json',
 						data: {'checkPledge': this.value,'checked': '1'},
 					});
-				}else if($(this).removeAttr('checked')) {
-					$.ajax({
-						url: '<?php echo base_url()."report_checkin/checkPledge";?>',
-						type: 'post',
-						dataType: 'json',
-						data: {'checkPledge': this.value,'checked': '0'},
-					});
-				}
-			});
-		}
+					}else if($(this).removeAttr('checked')) {
+						$.ajax({
+							url: '<?php echo base_url()."report_checkin/checkPledge";?>',
+							type: 'post',
+							dataType: 'json',
+							data: {'checkPledge': this.value,'checked': '0'},
+						});
+					}
+				});
+			}
 
-		function checkrete() {
-			$('.checkrete').change(function() {
-				if($(this).is(':checked')){
-					$.ajax({
-						url: '<?php echo base_url()."report_checkin/checkrete";?>',
-						type: 'post',
+			function checkrete() {
+				$('.checkrete').change(function() {
+					if($(this).is(':checked')){
+						$.ajax({
+							url: '<?php echo base_url()."report_checkin/checkrete";?>',
+							type: 'post',
 						// dataType: 'json',
 						data: {'checkrete': this.value,'checked': '1'},
 					});
-				}else if($(this).removeAttr('checked')) {
-					$.ajax({
-						url: '<?php echo base_url()."report_checkin/checkrete";?>',
-						type: 'post',
+					}else if($(this).removeAttr('checked')) {
+						$.ajax({
+							url: '<?php echo base_url()."report_checkin/checkrete";?>',
+							type: 'post',
 						// dataType: 'json',
 						data: {'checkrete': this.value,'checked': '0'},
 					});
-				}
-			});
+					}
+				});
 
-		}
+			}
 
-		function checkservice(){
-			$(".checkservice").change(function() {
-				if($(this).is(':checked')){
-					$.ajax({
-						url: '<?php echo base_url()."report_checkin/checkservice";?>',
-						type: 'post',
-						dataType: 'json',
-						data: {'checkservice': this.value,'checked': '1'},
-					});
-				}else if($(this).removeAttr('checked')) {
-					$.ajax({
-						url: '<?php echo base_url()."report_checkin/checkservice";?>',
-						type: 'post',
-						dataType: 'json',
-						data: {'checkservice': this.value,'checked': '0'},
-					});
-				}
-			});
-		}
-	</script>
+			function checkservice(){
+				$(".checkservice").change(function() {
+					if($(this).is(':checked')){
+						$.ajax({
+							url: '<?php echo base_url()."report_checkin/checkservice";?>',
+							type: 'post',
+							dataType: 'json',
+							data: {'checkservice': this.value,'checked': '1'},
+						});
+					}else if($(this).removeAttr('checked')) {
+						$.ajax({
+							url: '<?php echo base_url()."report_checkin/checkservice";?>',
+							type: 'post',
+							dataType: 'json',
+							data: {'checkservice': this.value,'checked': '0'},
+						});
+					}
+				});
+			}
+		</script>
 
 
 

@@ -41,8 +41,19 @@ class Report_checkin extends CI_Controller {
 
 	public function checkinyear($value='')
 	{
+		$numMonth = array();
 		$this->data['viewName']=$this->pagename;
-		$this->data['keyword']='';
+		for ($i=1; $i <= 12; $i++) {
+		// 	// array_push($numMonth, array('month'=> $i,'year' => date('Y')));
+		// 	// array_push($numMonth, $this->showList($i.'/'.date('Y')));
+		// 			$this->data['repCheckout'][$i] = $this->showList($i.'/'.date('Y'));
+
+		// 	$this->data['keyword'][$i]= $i.'/'.date('Y');
+		// $this->data['repCheckout'][$i] = $this->showList($this->data['keyword'][$i]);
+		}
+		// echo "<pre>";
+
+		$this->data['keyword']= '';
 		$this->data['repCheckout'] = $this->showList($this->data['keyword']);
 		$this->data['getMonth'] = $this->packfunction->getMonth();
 		$this->packfunction->packView($this->data,"report/reportcheckin/ReportCheckinYear");
@@ -119,7 +130,7 @@ class Report_checkin extends CI_Controller {
 		return $data_array;
 	}
 
-	public function search($keywork = "")
+	public function search()
 	{
 		$keywordDay = $this->input->post('keywordDay');
 		$keywordMonth = $this->input->post('startMonth');
@@ -147,7 +158,7 @@ class Report_checkin extends CI_Controller {
 		}else if(!empty($keywordYear)){
 			if($_POST){
 				$this->data['viewName']=$this->pagename;
-				$this->data['keyword']= '/'.$this->input->post('startYear') ;
+				$this->data['keyword']= $this->input->post('startYear') ;
 				$this->data['repCheckout'] = $this->showList($this->data['keyword']);
 				$this->data['getMonth'] = $this->packfunction->getMonth();
 				$this->packfunction->packView($this->data,"report/reportcheckin/ReportCheckinYear");
