@@ -46,33 +46,7 @@
 					$sumService = array(); $sumDiscount = array();
 					?>
 					<?php foreach ($getMonth as $keyMonth => $month): ?>
-						<?php //foreach ($repCheckout as $key => $report) :?>
-						<?php
-							// $datetime = explode('-',$report['checkInAppointDate']);
-							// if($datetime[1] == $keyMonth){
-							// 		//Pledge
-							// 	$pledge = ($report['status'] == 'CHECKOUT')? 0.00 :$report['cashPledge'];
-							// 	array_push($sumPledge, $pledge);
-
-							// 		//retes
-							// 	$retes = ($report['totalLast'] == 0.00)? 0.00 : ($report['totalLast'] - $report['cashPledge']);
-							// 	array_push($sumRetes, $a = ($retes == 0.00)? 0.00 :$report['totalLast'] - $report['cashPledge']);
-
-							// 		//service
-							// 	$service= $report['sumtotal'];
-							// 	array_push($sumService,$report['sumtotal']);
-
-							// 		//discount
-							// 	$discount = (empty($report['discount']))?0.00 : $report['discount'];
-							// 	array_push($sumDiscount, $discount);
-
-							// 		//sum ค่าห้อง + มัดจำ
-							// 	$sum = (empty($report['sumtotal']))?$report['totalLast'] :  $report['totalLast'] + ($report['sumtotal'] - $report['cashPledge']) - $discount ;
-							// 	array_push($sumAll, $sum);
-
-							// }
-						?>
-						<?php //endforeach; ?>
+						<?php //echo $getMonth['01']; ?>
 						<tr>
 							<!-- <td style="text-align: center;width: 20px; font-size: 16px;"> <?php echo $keyMonth; ?> </td> -->
 							<td  style="text-align: center;width: 120px; font-size: 16px;"> <?php echo $month; ?></td>
@@ -82,7 +56,7 @@
 									$datetime = explode('-',$report['checkInAppointDate']);
 									if($keyMonth == $datetime[1] ):
 									//Pledge
-										$pledge = ($report['status'] == 'CHECKOUT')? 0.00 :$report['cashPledge'];
+									$pledge = ($report['status'] == 'CHECKOUT')? 0.00 :$report['cashPledge'];
 									array_push($sumPledge, $pledge);
 
 									//retes
@@ -100,6 +74,7 @@
 									//sum ค่าห้อง + มัดจำ
 									$sum = (empty($report['sumtotal']))?$report['totalLast'] :  $report['totalLast'] + ($report['sumtotal'] - $report['cashPledge']) - $discount ;
 									array_push($sumAll, $sum);
+
 									endif;
 									?>
 								<?php endforeach; ?>
