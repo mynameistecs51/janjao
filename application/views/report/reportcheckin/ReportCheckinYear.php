@@ -14,10 +14,8 @@
 <div class="col-lg-12">
 	<!-- Page Features -->
 	<div class="row text-center">
-		<div class="col-lg-7" align="left">
-			<?php //echo anchor(base_url().'report_checkin/PDF/'.$date = str_replace('/','_',$keyword), '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>  export PDF', 'class="btn btn-primary" target ="_blank"'); ?>
-		</div>
-		<div class="col-lg-5" align="right">
+		<?php //echo anchor(base_url().'report_checkin/PDF/'.$date = str_replace('/','_',$keyword), '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>  export PDF', 'class="btn btn-primary" target ="_blank"'); ?>
+		<div class="col-lg-5 pull-right" align="right">
 			<div class="sh-left">
 				<form name="formSearch" id="formSearch" class="form-inline" method="POST" action="<?php echo base_url();?>report_checkin/search/">
 					ปี :
@@ -43,12 +41,74 @@
 					</tr>
 				</thead>
 				<tbody style="font-size: 12px;">
-					<?php foreach ($repCheckout as $key => $value) :?>
+					<?php
+					$sumAll = array(); $roomAll = array(); $sumPledge = array(); $sumRetes = array();
+					$sumService = array(); $sumDiscount = array();
+					?>
+					<?php foreach ($getMonth as $keyMonth => $month): ?>
+						<?php //foreach ($repCheckout as $key => $report) :?>
+						<?php
+							// $datetime = explode('-',$report['checkInAppointDate']);
+							// if($datetime[1] == $keyMonth){
+							// 		//Pledge
+							// 	$pledge = ($report['status'] == 'CHECKOUT')? 0.00 :$report['cashPledge'];
+							// 	array_push($sumPledge, $pledge);
+
+							// 		//retes
+							// 	$retes = ($report['totalLast'] == 0.00)? 0.00 : ($report['totalLast'] - $report['cashPledge']);
+							// 	array_push($sumRetes, $a = ($retes == 0.00)? 0.00 :$report['totalLast'] - $report['cashPledge']);
+
+							// 		//service
+							// 	$service= $report['sumtotal'];
+							// 	array_push($sumService,$report['sumtotal']);
+
+							// 		//discount
+							// 	$discount = (empty($report['discount']))?0.00 : $report['discount'];
+							// 	array_push($sumDiscount, $discount);
+
+							// 		//sum ค่าห้อง + มัดจำ
+							// 	$sum = (empty($report['sumtotal']))?$report['totalLast'] :  $report['totalLast'] + ($report['sumtotal'] - $report['cashPledge']) - $discount ;
+							// 	array_push($sumAll, $sum);
+
+							// }
+						?>
+						<?php //endforeach; ?>
 						<tr>
-							<td><?php echo $getMonth ?></td>
-							<td></td>
+							<!-- <td style="text-align: center;width: 20px; font-size: 16px;"> <?php echo $keyMonth; ?> </td> -->
+							<td  style="text-align: center;width: 120px; font-size: 16px;"> <?php echo $month; ?></td>
+							<td>
+								<?php foreach ($repCheckout as $key => $report) :?>
+									<?php
+									$datetime = explode('-',$report['checkInAppointDate']);
+									if($keyMonth == $datetime[1] ):
+									//Pledge
+										$pledge = ($report['status'] == 'CHECKOUT')? 0.00 :$report['cashPledge'];
+									array_push($sumPledge, $pledge);
+
+									//retes
+									$retes = ($report['totalLast'] == 0.00)? 0.00 : ($report['totalLast'] - $report['cashPledge']);
+									array_push($sumRetes, $a = ($retes == 0.00)? 0.00 :$report['totalLast'] - $report['cashPledge']);
+
+									//service
+									$service= $report['sumtotal'];
+									array_push($sumService,$report['sumtotal']);
+
+									//discount
+									$discount = (empty($report['discount']))?0.00 : $report['discount'];
+									array_push($sumDiscount, $discount);
+
+									//sum ค่าห้อง + มัดจำ
+									$sum = (empty($report['sumtotal']))?$report['totalLast'] :  $report['totalLast'] + ($report['sumtotal'] - $report['cashPledge']) - $discount ;
+									array_push($sumAll, $sum);
+									endif;
+									?>
+								<?php endforeach; ?>
+								<?php
+								echo number_format(array_sum($sumAll),2);
+								?>
+							</td>
 						</tr>
-					<?php endforeach;?>
+					<?php endforeach ?>
 				</tbody>
 			</table>
 		</div>
