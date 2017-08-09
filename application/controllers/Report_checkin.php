@@ -43,14 +43,14 @@ class Report_checkin extends CI_Controller {
 	{
 		$numMonth = array();
 		$this->data['viewName']=$this->pagename;
-		for ($i=1; $i <= 12; $i++) {
+		//for ($i=1; $i <= 12; $i++) {
 		// 	// array_push($numMonth, array('month'=> $i,'year' => date('Y')));
 		// 	// array_push($numMonth, $this->showList($i.'/'.date('Y')));
 		// 			$this->data['repCheckout'][$i] = $this->showList($i.'/'.date('Y'));
 
 		// 	$this->data['keyword'][$i]= $i.'/'.date('Y');
 		// $this->data['repCheckout'][$i] = $this->showList($this->data['keyword'][$i]);
-		}
+		//}
 		// echo "<pre>";
 
 		$this->data['keyword']= '';

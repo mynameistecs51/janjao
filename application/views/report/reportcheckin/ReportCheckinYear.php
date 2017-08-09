@@ -43,103 +43,97 @@
 					</tr>
 				</thead>
 				<tbody style="font-size: 12px;">
-					<?php
-					foreach ($repCheckout as $key => $value) {
-						// print_r($value);
-						echo $value['bookedCode'];
-					}
-					?>
-					<?php //for ($i=1; $i <= 12 ; $i++) :?>
-						<!-- <tr>
-							<td><?php echo $getMonth[$i]; ?></td>
+					<?php foreach ($repCheckout as $key => $value) :?>
+						<tr>
+							<td><?php echo $getMonth ?></td>
 							<td></td>
-						</tr> -->
-						<?php //endfor;?>
-					</tbody>
-				</table>
-			</div>
+						</tr>
+					<?php endforeach;?>
+				</tbody>
+			</table>
 		</div>
+	</div>
 
-		<!-- /.row -->
-		<!--  END Fair List -->
+	<!-- /.row -->
+	<!--  END Fair List -->
 
-		<script src="<?php echo base_url()?>assets/js/jquery.datetimepicker.full.min.js"></script>
-		<script type="text/javascript">
-			$(function() {
-				checkrete();
-				checkPledge();
-				checkservice();
+	<script src="<?php echo base_url()?>assets/js/jquery.datetimepicker.full.min.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			checkrete();
+			checkPledge();
+			checkservice();
 
-				$.datetimepicker.setLocale('th');
-				$('#startDate').datetimepicker({
-					timepicker:true,
-					mask:true,
-					format:'d/m/Y',
-					lang:'th',
-				});
+			$.datetimepicker.setLocale('th');
+			$('#startDate').datetimepicker({
+				timepicker:true,
+				mask:true,
+				format:'d/m/Y',
+				lang:'th',
 			});
+		});
 
-			function checkPledge(){
-				$('.checkPledge').change(function() {
-					if($(this).is(':checked')){
-						$.ajax({
-							url: '<?php echo base_url()."report_checkin/checkPledge";?>',
-							type: 'post',
+		function checkPledge(){
+			$('.checkPledge').change(function() {
+				if($(this).is(':checked')){
+					$.ajax({
+						url: '<?php echo base_url()."report_checkin/checkPledge";?>',
+						type: 'post',
 						// dataType: 'json',
 						data: {'checkPledge': this.value,'checked': '1'},
 					});
-					}else if($(this).removeAttr('checked')) {
-						$.ajax({
-							url: '<?php echo base_url()."report_checkin/checkPledge";?>',
-							type: 'post',
-							dataType: 'json',
-							data: {'checkPledge': this.value,'checked': '0'},
-						});
-					}
-				});
-			}
+				}else if($(this).removeAttr('checked')) {
+					$.ajax({
+						url: '<?php echo base_url()."report_checkin/checkPledge";?>',
+						type: 'post',
+						dataType: 'json',
+						data: {'checkPledge': this.value,'checked': '0'},
+					});
+				}
+			});
+		}
 
-			function checkrete() {
-				$('.checkrete').change(function() {
-					if($(this).is(':checked')){
-						$.ajax({
-							url: '<?php echo base_url()."report_checkin/checkrete";?>',
-							type: 'post',
+		function checkrete() {
+			$('.checkrete').change(function() {
+				if($(this).is(':checked')){
+					$.ajax({
+						url: '<?php echo base_url()."report_checkin/checkrete";?>',
+						type: 'post',
 						// dataType: 'json',
 						data: {'checkrete': this.value,'checked': '1'},
 					});
-					}else if($(this).removeAttr('checked')) {
-						$.ajax({
-							url: '<?php echo base_url()."report_checkin/checkrete";?>',
-							type: 'post',
+				}else if($(this).removeAttr('checked')) {
+					$.ajax({
+						url: '<?php echo base_url()."report_checkin/checkrete";?>',
+						type: 'post',
 						// dataType: 'json',
 						data: {'checkrete': this.value,'checked': '0'},
 					});
-					}
-				});
+				}
+			});
 
-			}
+		}
 
-			function checkservice(){
-				$(".checkservice").change(function() {
-					if($(this).is(':checked')){
-						$.ajax({
-							url: '<?php echo base_url()."report_checkin/checkservice";?>',
-							type: 'post',
-							dataType: 'json',
-							data: {'checkservice': this.value,'checked': '1'},
-						});
-					}else if($(this).removeAttr('checked')) {
-						$.ajax({
-							url: '<?php echo base_url()."report_checkin/checkservice";?>',
-							type: 'post',
-							dataType: 'json',
-							data: {'checkservice': this.value,'checked': '0'},
-						});
-					}
-				});
-			}
-		</script>
+		function checkservice(){
+			$(".checkservice").change(function() {
+				if($(this).is(':checked')){
+					$.ajax({
+						url: '<?php echo base_url()."report_checkin/checkservice";?>',
+						type: 'post',
+						dataType: 'json',
+						data: {'checkservice': this.value,'checked': '1'},
+					});
+				}else if($(this).removeAttr('checked')) {
+					$.ajax({
+						url: '<?php echo base_url()."report_checkin/checkservice";?>',
+						type: 'post',
+						dataType: 'json',
+						data: {'checkservice': this.value,'checked': '0'},
+					});
+				}
+			});
+		}
+	</script>
 
 
 
