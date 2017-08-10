@@ -55,7 +55,6 @@
 								<?php foreach ($repCheckout as $key => $report) :?>
 									<?php
 									$datetime = explode('-',$report['checkInAppointDate']); 
-									echo $keyMonth."==".$datetime[1]."<br>";
 									if($keyMonth == $datetime[1] ):
 										//Pledge
 										$pledge = ($report['status'] == 'CHECKOUT')? 0.00 :$report['cashPledge'];
