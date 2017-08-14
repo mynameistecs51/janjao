@@ -24,16 +24,16 @@ class Report_checkin extends CI_Controller {
 	public function index()
 	{
 		$this->data['viewName']=$this->pagename;
-		$this->data['keyword']='';
+		$this->data['keyword']= date('d/m/Y');
 		$this->data['repCheckout'] = $this->showList($this->data['keyword']);
 		$this->data['getMonth'] = $this->packfunction->getMonth();
 		$this->packfunction->packView($this->data,"report/reportcheckin/ReportCheckinDay");
 	}
 
-	public function checkinmonth($value='')
+	public function checkinmonth()
 	{
 		$this->data['viewName']=$this->pagename;
-		$this->data['keyword']='';
+		$this->data['keyword']= date('m/Y');
 		$this->data['repCheckout'] = $this->showList($this->data['keyword']);
 		$this->data['getMonth'] = $this->packfunction->getMonth();
 		$this->packfunction->packView($this->data,"report/reportcheckin/ReportCheckinMonth");
@@ -43,15 +43,6 @@ class Report_checkin extends CI_Controller {
 	{
 		$numMonth = array();
 		$this->data['viewName']=$this->pagename;
-		//for ($i=1; $i <= 12; $i++) {
-		// 	// array_push($numMonth, array('month'=> $i,'year' => date('Y')));
-		// 	// array_push($numMonth, $this->showList($i.'/'.date('Y')));
-		// 			$this->data['repCheckout'][$i] = $this->showList($i.'/'.date('Y'));
-
-		// 	$this->data['keyword'][$i]= $i.'/'.date('Y');
-		// $this->data['repCheckout'][$i] = $this->showList($this->data['keyword'][$i]);
-		//}
-		// echo "<pre>";
 
 		$this->data['keyword']= '';
 		$this->data['repCheckout'] = $this->showList($this->data['keyword']);

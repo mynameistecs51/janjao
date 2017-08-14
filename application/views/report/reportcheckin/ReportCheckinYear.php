@@ -31,9 +31,9 @@
 		</div>
 	</div>
 	<div class="row text-center" style="margin-top: 10px;">
-		<div class="col-lg-12" align="left">
-			<table id="fairlist" class="table table-striped table-bordered" cellspacing="0" style="overflow-x:auto;width: 100%">
-				<thead style="background:#BDBDBD;font-size: 12px; ">
+		<div class="col-lg-12" align="center">
+			<table id="fairlist" class="table table-striped table-bordered" cellspacing="0" style="overflow-x:auto;width: 50%;font-weight: bold;">
+				<thead style="background:#BDBDBD;font-size: 12px;">
 					<tr >
 						<!-- <th style="text-align: center;width: 20px;">No.</th> -->
 						<th style="text-align: center;width: 120px;">MONTH</th>
@@ -48,43 +48,43 @@
 					<?php foreach ($getMonth as $keyMonth => $month): ?>
 						<?php $sumAll = array(); ?>
 						<tr>
-							<!-- <td style="text-align: center;width: 20px; font-size: 16px;"> <?php echo $keyMonth; ?> </td> -->
-							<td  style="text-align: center;width: 120px; font-size: 16px;"> <?php echo $month; ?></td>
-							<td>
+							<td style="text-align: center;width: 120px; font-size: 16px;"> <?php echo $month; ?></td>
+							<td align="center">
 
 								<?php foreach ($repCheckout as $key => $report) :?>
 									<?php
-									$datetime = explode('-',$report['checkInAppointDate']); 
+									$datetime = explode('-',$report['checkInAppointDate']);
 									if($keyMonth == $datetime[1] ):
 										//Pledge
 										$pledge = ($report['status'] == 'CHECKOUT')? 0.00 :$report['cashPledge'];
-										array_push($sumPledge, $pledge);
+									array_push($sumPledge, $pledge);
 
 										//retes
-										$retes = ($report['totalLast'] == 0.00)? 0.00 : ($report['totalLast'] - $report['cashPledge']);
-										array_push($sumRetes, $a = ($retes == 0.00)? 0.00 :$report['totalLast'] - $report['cashPledge']);
+									$retes = ($report['totalLast'] == 0.00)? 0.00 : ($report['totalLast'] - $report['cashPledge']);
+									array_push($sumRetes, $a = ($retes == 0.00)? 0.00 :$report['totalLast'] - $report['cashPledge']);
 
 										//service
-										$service= $report['sumtotal'];
-										array_push($sumService,$report['sumtotal']);
+									$service= $report['sumtotal'];
+									array_push($sumService,$report['sumtotal']);
 
 										//discount
-										$discount = (empty($report['discount']))?0.00 : $report['discount'];
-										array_push($sumDiscount, $discount);
+									$discount = (empty($report['discount']))?0.00 : $report['discount'];
+									array_push($sumDiscount, $discount);
 
 										//sum ค่าห้อง + มัดจำ
-										$sum = (empty($report['sumtotal']))?$report['totalLast'] :  $report['totalLast'] + ($report['sumtotal'] - $report['cashPledge']) - $discount ;
-										array_push($sumAll, $sum);
+									$sum = (empty($report['sumtotal']))?$report['totalLast'] :  $report['totalLast'] + ($report['sumtotal'] - $report['cashPledge']) - $discount ;
+									array_push($sumAll, $sum);
 									endif;
 									?>
 								<?php endforeach; ?>
 								<?php
-								echo number_format(array_sum($sumAll),2);
+								echo number_format(array_sum($sumAll),2) ." บาท";
 								?>
 							</td>
 						</tr>
 					<?php endforeach ?>
 				</tbody>
+
 			</table>
 		</div>
 	</div>

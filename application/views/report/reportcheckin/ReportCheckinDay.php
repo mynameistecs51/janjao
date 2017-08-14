@@ -97,7 +97,7 @@
 							<td align="right">
 								<!-- เงินมัดจำ -->
 								<?php
-								$checkPledge = ($report['checkPledge'] == '0')?'':'checked';
+								$checkPledge = ($report['checkPledge'] == '0')?'' : 'checked disabled';
 								$pledge = ($report['status'] == 'CHECKOUT')? 0.00 : $report['cashPledge'];
 								array_push($sumPledge, $pledge);
 								if($this->session->userdata('usergroupID') == 1){
@@ -110,7 +110,7 @@
 							<td align="right">
 								<!-- ค่าห้อง (ค่าห้อง+มัดจำ)-มัดจำ -->
 								<?php
-								$checkedRetes = ($report['checktotalLast'] == '0')?'' : 'checked';
+								$checkedRetes = ($report['checktotalLast'] == '0')?'' : 'checked disabled';
 								$retes = ($report['totalLast'] == 0.00)? 0.00 : ($report['totalLast'] - $report['cashPledge']);
 								array_push($sumRetes, $a = ($retes == 0.00)? 0.00 :$report['totalLast'] - $report['cashPledge']);
 								if($this->session->userdata('usergroupID') == 1){
@@ -123,7 +123,7 @@
 							<td align="right">
 								<!-- service -->
 								<?php
-								$checkservice = ($report['checkservice'] == '0')?'':'checked';
+								$checkservice = ($report['checkservice'] == '0')?'' : 'checked disabled';
 								$service= $report['sumtotal'];
 								array_push($sumService,$report['sumtotal']);
 								if($this->session->userdata('usergroupID') == 1){
