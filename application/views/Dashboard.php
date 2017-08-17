@@ -490,14 +490,14 @@
 					// 'trigger': 'manual',
 					'trigger': 'focus',
 					'placement': 'top',
-					'title': 'สถานะ',
+					'title': 'สถานะ ทำความสะอาด',
 					'container': 'body',
 					content: function () {
 						var html = '<div class="container">';
 						html += '<div class="row">';
 						// html += '<div class="clearfix">';
-						html += '<button class="btn btn-success btn-xs col-sm-1 cleaningOK"><span class="glyphicon glyphicon-floppy-remove"> success</span></button>';
-						html += '<button class="btn btn-warning btn-xs col-sm-1 cancel"><span class="glyphicon glyphicon-floppy-remove"> cancel</span></button>';
+						html += '<button class="btn btn-success btn-xs col-sm-1 cleaningOK" ><span class="glyphicon glyphicon-floppy-remove"> success</span></button>';
+						html += '<button class="btn btn-warning btn-xs col-sm-1 cancel" style="margin-left:40px;"><span class="glyphicon glyphicon-floppy-remove"> cancel</span></button>';
 						// html += '</div>';
 						html += '</div>';
 						html += '</div>';
