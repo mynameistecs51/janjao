@@ -124,19 +124,19 @@
   	<div class="form-group">
   		<label for="mobile" class="col-sm-2 control-label">เบอร์มือถือ</label>
   		<div class="col-sm-8">
-  			<input type="tel" class="form-control" id="mobile" name="mobile" minlength="9" placeholder="082-2222222">
+  			<input type="tel" class="form-control" id="mobile" name="mobile" minlength="9" placeholder="">
   		</div>
   	</div>
   	<div class="form-group">
   		<label for="licenseplate" class="col-sm-2 control-label">ทะเบียนรถ</label>
   		<div class="col-sm-8">
-  			<input type="text" class="form-control" name="licenseplate" id="licenseplate" placeholder="1กก 1111">
+  			<input type="text" class="form-control" name="licenseplate" id="licenseplate" placeholder="">
   		</div>
   	</div>
   	<div class="form-group">
   		<label for="email" class="col-sm-2 control-label">อีเมลล์</label>
   		<div class="col-sm-8">
-  			<input type="email" class="form-control" id="email" name="email" placeholder="name@domain.com">
+  			<input type="email" class="form-control" id="email" name="email" placeholder="">
   		</div>
   	</div>
   	<div class="form-group">
@@ -170,7 +170,7 @@
   		<label for="deposit" class="col-sm-2 control-label">เงินมัดจำ <b style="color: #FF0000">*</b></label>
   		<div class="col-sm-8">
   			<div class="input-group">
-  				<input type="text" class="form-control" id="cashPledge" name="cashPledge" placeholder="300" value="">
+  				<input type="text" class="form-control" id="cashPledge" name="cashPledge" placeholder="0.00 บาท" value="">
   				<span class="input-group-addon">บาท</span>
   			</div>
   		</div>
@@ -296,7 +296,7 @@
               $('#address').val(res.data.address);
               $('#mobile').val(res.data.mobile);
               $('#licenseplate').val(res.data.licenseplate);
-              $('#email').val(res.data.email); 
+              $('#email').val(res.data.email);
               var bbd= res.data.birthdateD;
               var bbm= res.data.birthdateM;
               var bby= res.data.birthdateY;
@@ -310,12 +310,12 @@
               $('#address').val("");
               $('#mobile').val("");
               $('#licenseplate').val("");
-              $('#email').val(""); 
+              $('#email').val("");
             }
           },
           error:function(res){ }
         });
-      }); 
+      });
 
 
 
