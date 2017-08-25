@@ -11,22 +11,6 @@
 			<input type="text" class="form-control"  id="dtcheckin" style="width: 138px;margin-right: 10px;" placeholder="Check In" name="dtcheckin" value="<?php echo $dtcheckin; ?>">
 			CheckOut Date :
 			<input type="text" class="form-control"  id="dtcheckout" style="width: 138px;margin-right: 10px;" placeholder="Check Out" name="dtcheckout" value="<?php echo $dtcheckout; ?>">
-			<!--
-			Room Type :
-			<select class="form-control" name="roomType" style="width: 120px;margin-right: 10px;">
-				<option value="STANDARD" <?php echo $roomType=='STANDARD'? 'selected':''; ?> >STANDARD</option>
-				<option value="VIP" <?php echo $roomType=='VIP'? 'selected':''; ?>  >VIP</option>
-			</select>
-			Status :
-			<select class="form-control" name="roomstatus" style="width: 120px;margin-right: 10px;">
-				<option value="ALL"   <?php echo $roomstatus=='ALL'? 'selected':''; ?>  >ALL</option>
-				<option value="EMPTY" <?php echo $roomstatus=='EMPTY'? 'selected':''; ?>  >EMPTY</option>
-				<option value="BOOKED"  <?php echo $roomstatus=='BOOKED'? 'selected':''; ?>  >BOOKED</option>
-				<option value="CHECKIN" <?php echo $roomstatus=='CHECKIN'? 'selected':''; ?>  >CHECKIN</option>
-				<option value="CHECKOUT" <?php echo $roomstatus=='CHECKOUT'? 'selected':''; ?>  >CHECKOUT</option>
-				<option value="CLEANING" <?php echo $roomstatus=='CLEANING'? 'selected':''; ?>  >CLEANING</option>
-			</select>
-		-->
 	</form>
 </div>
 </div>
@@ -118,10 +102,10 @@
 					</span>
 				</div> ';
 			}else if($f1['roomtypeCode']=='STAIRCASE'  && $f1['status']=='ON'){
-				$html .=' <div class="col-sm-1 " style="margin:10px;"> </div> ';
+				$html .=' <div class="col-sm-1 " style="margin:10px;width:135px;height:135px;"> </div> ';
 
 			}else if($f1['status']=='OFF'){
-				$html .=' <div class="col-sm-1 " style="margin:10px;"> </div> ';
+				$html .=' <div class="col-sm-1 " style="margin:10px;width:135px;height:135px;"> </div> ';
 			}
 
 
@@ -207,10 +191,10 @@
 					</span>
 				</div> ';
 			}else if($f2['roomtypeCode']=='STAIRCASE'  && $f2['status']=='ON'){
-				$html .=' <div class="col-sm-1 " style="margin:10px;"> </div> ';
+				$html .=' <div class="col-sm-1 " style="margin:10px;width:135px;height:135px;"> </div> ';
 
 			}else if($f2['status']=='OFF'){
-				$html .=' <div class="col-sm-1 " style="margin:10px;"> </div> ';
+				$html .=' <div class="col-sm-1 " style="margin:10px;width:135px;height:135px;"> </div> ';
 			}
 
 		}
@@ -294,10 +278,10 @@
 					</span>
 				</div> ';
 			}else if($f3['roomtypeCode']=='STAIRCASE' && $f3['status']=='ON'){
-				$html .=' <div class="col-sm-1 " style="margin:10px;"> </div> ';
+				$html .=' <div class="col-sm-1 " style="margin:10px;width:135px;height:135px;"> </div> ';
 
 			}else if($f3['status']=='OFF'){
-				$html .=' <div class="col-sm-1 " style="margin:10px;"> </div> ';
+				$html .=' <div class="col-sm-1 " style="margin:10px;width:135px;height:135px;"> </div> ';
 			}
 
 
