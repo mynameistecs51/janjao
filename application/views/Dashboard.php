@@ -11,8 +11,8 @@
 			<input type="text" class="form-control"  id="dtcheckin" style="width: 138px;margin-right: 10px;" placeholder="Check In" name="dtcheckin" value="<?php echo $dtcheckin; ?>">
 			CheckOut Date :
 			<input type="text" class="form-control"  id="dtcheckout" style="width: 138px;margin-right: 10px;" placeholder="Check Out" name="dtcheckout" value="<?php echo $dtcheckout; ?>">
-	</form>
-</div>
+		</form>
+	</div>
 </div>
 <hr class="bd-header">
 <!-- Page Content -->
@@ -102,7 +102,7 @@
 					</span>
 				</div> ';
 			}else if($f1['roomtypeCode']=='STAIRCASE'  && $f1['status']=='ON'){
-				$html .=' <div class="col-sm-1 " style="margin:10px;"> </div> ';
+				$html .=' <div class="col-sm-1 " style="margin:10px;height:135px;"> </div> ';
 
 			}else if($f1['status']=='OFF'){
 				$html .=' <div class="col-sm-1 " style="margin:10px;width:135px;height:135px;"> </div> ';
@@ -191,7 +191,7 @@
 					</span>
 				</div> ';
 			}else if($f2['roomtypeCode']=='STAIRCASE'  && $f2['status']=='ON'){
-				$html .=' <div class="col-sm-1 " style="margin:10px;"> </div> ';
+				$html .=' <div class="col-sm-1 " style="margin:10px;height:135px;"> </div> ';
 
 			}else if($f2['status']=='OFF'){
 				$html .=' <div class="col-sm-1 " style="margin:10px;width:135px;height:135px;"> </div> ';
@@ -278,7 +278,7 @@
 					</span>
 				</div> ';
 			}else if($f3['roomtypeCode']=='STAIRCASE' && $f3['status']=='ON'){
-				$html .=' <div class="col-sm-1 " style="margin:10px;"> </div> ';
+				$html .=' <div class="col-sm-1 " style="margin:10px;height:135px;"> </div> ';
 
 			}else if($f3['status']=='OFF'){
 				$html .=' <div class="col-sm-1 " style="margin:10px;width:135px;height:135px;"> </div> ';
@@ -298,14 +298,14 @@
 <div class="col-lg-12" >
 	<div class=" col-sm-12 text-center"  >
 		<?php
-		
+
 		$html ='';
 		foreach ($getfloor4 as $f4) {
 			if($f4['bed']=="SINGLE"){
 				$bed = '		<i class="fa fa-bed fa-2x" aria-hidden="true"></i>';
 			}else{
 				$bed = '		<i class="fa fa-bed fa-2x" aria-hidden="true">&nbsp;</i>
-								<i class="fa fa-bed fa-2x" aria-hidden="true"></i>';
+				<i class="fa fa-bed fa-2x" aria-hidden="true"></i>';
 			}
 
 			if($f4['transaction']=='EMPTY' && $f4['roomtypeCode']!='STAIRCASE' && $f4['status']=='ON'){
@@ -367,7 +367,7 @@
 					</span>
 				</div> ';
 			}else if($f4['roomtypeCode']=='STAIRCASE' && $f4['status']=='ON'){
-				$html .=' <div class="col-sm-1 " style="margin:10px;"> </div> ';
+				$html .=' <div class="col-sm-1 " style="margin:10px;height:135px;"> </div> ';
 
 			}else if($f4['status']=='OFF'){
 				$html .=' <div class="col-sm-1 " style="margin:10px;width:135px;height:135px;"> </div> ';
