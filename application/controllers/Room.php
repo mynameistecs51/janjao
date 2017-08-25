@@ -110,31 +110,11 @@ class Room extends CI_Controller {
 	public function search(){
 		$this->data['viewName']=$this->pagename;
 		$this->data['keyword']=$this->input->post('keyword');
-		$this->data['getlist']=$this->Mdl_user->getList(trim($this->data['keyword']));
-		$this->packfunction->packView($this->data,"user/UserList");
+		$this->data['getRoomAll'] = $this->Mdl_room->getRoomAll($this->data['keyword']);
+		$this->packfunction->packView($this->data,"room/RoomList");
 	}
 
-	public function last($key=''){
-		$this->data['viewName']=$this->pagename;
-		$this->data['keyword']='';
-		$this->data['getlist']=$this->Mdl_user->getLast($key);
-		$this->packfunction->packView($this->data,"user/UserList");
-	}
-
-	public function create($ref=''){
-		$this->data['viewName']=$this->pagename;
-		$this->data['usergroup']=$this->Mdl_user->getUserGroup();
-		$this->data['countryList']=$this->mdl_packFunction->getCountryList();
-		$this->packfunction->packView($this->data,"user/UserCreate");
-	}
-
-	public function edit($key=''){
-		$this->data['viewName']=$this->pagename;
-		$this->data['userDtl']=$this->Mdl_user->getDetail($key);
-		$this->data['usergroup']=$this->Mdl_user->getUserGroup();
-		$this->data['countryList']=$this->mdl_packFunction->getCountryList();
-		$this->packfunction->packView($this->data,"user/UserEdit");
-	}
+	 
 
 	public function saveData()
 	{

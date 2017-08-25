@@ -9,7 +9,7 @@ class Mdl_room extends CI_Model {
 
 	}
 
-	public function getRoomAll()
+	public function getRoomAll($keyword='')
 	{
 		$sql = "
 		SELECT
@@ -34,9 +34,11 @@ class Mdl_room extends CI_Model {
 		#tm_rt.status
 		FROM tm_room tm_r
 		INNER JOIN tm_roomtype tm_rt
-		ON tm_r.roomtypeID = tm_rt.roomtypeID
-		ORDER BY tm_r.roomCODE ASC
-		";
+		ON tm_r.roomtypeID = tm_rt.roomtypeID ";
+		if($keyword!=''){
+			$sql .=" WHERE CONCAT(tm_r.roomCODE) LIKE '%".$keyword."%' ";
+		}
+		$sql .=" ORDER BY tm_r.roomCODE ASC ";
 		$query = $this->db->query($sql)->result_array();
 		return $query;
 	}
