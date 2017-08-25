@@ -314,13 +314,14 @@
 <div class="col-lg-12" >
 	<div class=" col-sm-12 text-center"  >
 		<?php
+		
 		$html ='';
 		foreach ($getfloor4 as $f4) {
 			if($f4['bed']=="SINGLE"){
 				$bed = '		<i class="fa fa-bed fa-2x" aria-hidden="true"></i>';
 			}else{
 				$bed = '		<i class="fa fa-bed fa-2x" aria-hidden="true">&nbsp;</i>
-				<i class="fa fa-bed fa-2x" aria-hidden="true"></i>';
+								<i class="fa fa-bed fa-2x" aria-hidden="true"></i>';
 			}
 
 			if($f4['transaction']=='EMPTY' && $f4['roomtypeCode']!='STAIRCASE' && $f4['status']=='ON'){
@@ -385,7 +386,9 @@
 				$html .=' <div class="col-sm-1 " style="margin:10px;"> </div> ';
 
 			}else if($f4['status']=='OFF'){
-				$html .=' <div class="col-sm-1 " style="margin:10px;"> </div> ';
+				$html .=' <div class="col-sm-1 " style="margin:10px;width:135px;height:135px;"> </div> ';
+			}else{
+				$html .=' <div class="col-sm-1 " style="margin:10px;width:135px;"> eee</div> ';
 			}
 
 		}

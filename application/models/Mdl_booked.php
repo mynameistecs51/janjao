@@ -332,11 +332,6 @@ class Mdl_booked extends CI_Model {
 		rt.bed,
 		r.roomCODE,
 		IFNULL(log.status,r.transaction) AS transaction,
-		-- CASE IFNULL(log.status,r.transaction)
-		-- WHEN 'CLEANING'
-		-- THEN ( CASE WHEN DATE_ADD(r.updateDT,INTERVAL 30 MINUTE) > now() THEN 'CLEANING' ELSE 'EMPTY' END )
-		-- ELSE IFNULL(log.status,r.transaction)
-		-- END AS transaction,
 		r.floor,
 		IFNULL(DATE_FORMAT(br.checkinDate,'%d/%m/%Y'),'') AS checkinDate,
 		IFNULL(DATE_FORMAT(br.checkoutDate,'%d/%m/%Y'),'') AS checkoutDate,
@@ -357,16 +352,15 @@ class Mdl_booked extends CI_Model {
 			) AS a ON br.bookedroomID=a.bookedroomID
 		) AS br ON r.roomCODE=br.roomID
 		LEFT JOIN (
-		SELECT
-		lg.roomID,
-		COUNT(lg.logroomdateID) AS total,
-		lg.status
-		FROM ts_booked_room_log lg
-		WHERE lg.logDate BETWEEN '".$df.":00' AND '".$dt.":00'
-		GROUP by lg.roomID
+			SELECT
+				lg.roomID,
+				COUNT(lg.logroomdateID) AS total,
+				lg.status
+			FROM ts_booked_room_log lg
+			WHERE lg.logDate BETWEEN '".$df.":00' AND '".$dt.":00'
+			GROUP by lg.roomID
 		) AS log ON r.roomCODE=log.roomID
-		WHERE r.status<>'DISABLE'
-		AND r.floor = '".$floor."'
+		WHERE r.floor = '".$floor."'
 		GROUP BY r.roomID
 		ORDER BY r.roomID ASC 
 		";
