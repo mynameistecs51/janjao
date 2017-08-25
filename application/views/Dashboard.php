@@ -102,7 +102,7 @@
 					</span>
 				</div> ';
 			}else if($f1['roomtypeCode']=='STAIRCASE'  && $f1['status']=='ON'){
-				$html .=' <div class="col-sm-1 " style="margin:10px;width:135px;height:135px;"> </div> ';
+				$html .=' <div class="col-sm-1 " style="margin:10px;"> </div> ';
 
 			}else if($f1['status']=='OFF'){
 				$html .=' <div class="col-sm-1 " style="margin:10px;width:135px;height:135px;"> </div> ';
@@ -191,7 +191,7 @@
 					</span>
 				</div> ';
 			}else if($f2['roomtypeCode']=='STAIRCASE'  && $f2['status']=='ON'){
-				$html .=' <div class="col-sm-1 " style="margin:10px;width:135px;height:135px;"> </div> ';
+				$html .=' <div class="col-sm-1 " style="margin:10px;"> </div> ';
 
 			}else if($f2['status']=='OFF'){
 				$html .=' <div class="col-sm-1 " style="margin:10px;width:135px;height:135px;"> </div> ';
@@ -278,7 +278,7 @@
 					</span>
 				</div> ';
 			}else if($f3['roomtypeCode']=='STAIRCASE' && $f3['status']=='ON'){
-				$html .=' <div class="col-sm-1 " style="margin:10px;width:135px;height:135px;"> </div> ';
+				$html .=' <div class="col-sm-1 " style="margin:10px;"> </div> ';
 
 			}else if($f3['status']=='OFF'){
 				$html .=' <div class="col-sm-1 " style="margin:10px;width:135px;height:135px;"> </div> ';
@@ -371,8 +371,6 @@
 
 			}else if($f4['status']=='OFF'){
 				$html .=' <div class="col-sm-1 " style="margin:10px;width:135px;height:135px;"> </div> ';
-			}else{
-				$html .=' <div class="col-sm-1 " style="margin:10px;width:135px;"> eee</div> ';
 			}
 
 		}
