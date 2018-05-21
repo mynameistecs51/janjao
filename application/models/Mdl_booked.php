@@ -331,7 +331,7 @@ class Mdl_booked extends CI_Model {
 		rt.price_short,
 		rt.bed,
 		r.roomCODE,
-		IFNULL(log.status,r.transaction) AS transaction,
+		IFNULL(log.status,'EMPTY') AS transaction,
 		r.floor,
 		IFNULL(DATE_FORMAT(br.checkinDate,'%d/%m/%Y'),'') AS checkinDate,
 		IFNULL(DATE_FORMAT(br.checkoutDate,'%d/%m/%Y'),'') AS checkoutDate,
@@ -353,17 +353,19 @@ class Mdl_booked extends CI_Model {
 		) AS br ON r.roomCODE=br.roomID
 		LEFT JOIN (
 			SELECT
-				lg.roomID,
-				COUNT(lg.logroomdateID) AS total,
-				lg.status
+			lg.roomID,
+			COUNT(lg.logroomdateID) AS total,
+			CASE 
+				WHEN COUNT(lg.logroomdateID) > 0 THEN lg.status
+				ELSE 'EMPTY'
+			END AS `status`
 			FROM ts_booked_room_log lg
 			WHERE lg.logDate BETWEEN '".$df.":00' AND '".$dt.":00'
 			GROUP by lg.roomID
 		) AS log ON r.roomCODE=log.roomID
 		WHERE r.floor = '".$floor."'
 		GROUP BY r.roomID
-		ORDER BY r.roomID ASC 
-		";
+		ORDER BY r.roomID ASC ";
 		$data = $this->db->query($sql);
 		return $data->result_array();
 	}
