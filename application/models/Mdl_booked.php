@@ -360,7 +360,7 @@ class Mdl_booked extends CI_Model {
 				ELSE 'EMPTY'
 			END AS `status`
 			FROM ts_booked_room_log lg
-			WHERE lg.logDate BETWEEN '".$df.":00' AND '".$dt.":00'
+			WHERE lg.logDate BETWEEN '".$df.":01' AND '".$dt.":00'
 			GROUP by lg.roomID
 		) AS log ON r.roomCODE=log.roomID
 		WHERE r.floor = '".$floor."'
