@@ -357,7 +357,7 @@ class Mdl_booked extends CI_Model {
 			COUNT(lg.logroomdateID) AS total,
 			CASE
 				WHEN COUNT(lg.logroomdateID) > 0 THEN lg.status
-				ELSE 'CLEANING'
+				ELSE 'EMPTY'
 			END AS `status`
 			FROM ts_booked_room_log lg
 			WHERE lg.logDate BETWEEN '".$df.":01' AND '".$dt.":00'
