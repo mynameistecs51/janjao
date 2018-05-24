@@ -331,7 +331,6 @@ class Mdl_booked extends CI_Model {
 		rt.price_short,
 		rt.bed,
 		r.roomCODE,
-		r.transaction AS statusLog,
 		IFNULL(log.status,'EMPTY') AS transaction,
 		r.floor,
 		IFNULL(DATE_FORMAT(br.checkinDate,'%d/%m/%Y'),'') AS checkinDate,
