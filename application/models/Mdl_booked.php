@@ -331,6 +331,7 @@ class Mdl_booked extends CI_Model {
 		rt.price_short,
 		rt.bed,
 		r.roomCODE,
+		r.transaction AS statusLog,
 		IFNULL(log.status,'EMPTY') AS transaction,
 		r.floor,
 		IFNULL(DATE_FORMAT(br.checkinDate,'%d/%m/%Y'),'') AS checkinDate,
@@ -342,12 +343,12 @@ class Mdl_booked extends CI_Model {
 		FROM tm_room r
 		LEFT JOIN tm_roomtype rt ON r.roomtypeID=rt.roomtypeID
 		LEFT JOIN (
-			SELECT br.bookedroomID,br.roomID,br.checkinDate,br.checkoutDate 
+			SELECT br.bookedroomID,br.roomID,br.checkinDate,br.checkoutDate
 			FROM ts_booked_room br
 			INNER JOIN (
-					SELECT roomID,MAX(bookedroomID) AS bookedroomID 
-					FROM ts_booked_room 
-					WHERE status <> 'CANCLE' 
+					SELECT roomID,MAX(bookedroomID) AS bookedroomID
+					FROM ts_booked_room
+					WHERE status <> 'CANCLE'
 					GROUP BY roomID
 			) AS a ON br.bookedroomID=a.bookedroomID
 		) AS br ON r.roomCODE=br.roomID
@@ -355,9 +356,9 @@ class Mdl_booked extends CI_Model {
 			SELECT
 			lg.roomID,
 			COUNT(lg.logroomdateID) AS total,
-			CASE 
+			CASE
 				WHEN COUNT(lg.logroomdateID) > 0 THEN lg.status
-				ELSE 'EMPTY'
+				ELSE 'CLEANING'
 			END AS `status`
 			FROM ts_booked_room_log lg
 			WHERE lg.logDate BETWEEN '".$df.":01' AND '".$dt.":00'

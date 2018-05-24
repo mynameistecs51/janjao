@@ -66,7 +66,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php $j= 1; ?>
+					<?php	$j= 1; ?>
 					<?php foreach ($getDetail as $key => $rowDetail) :?>
 						<?php $numRoom = count($rowDetail['selectRoom']); ?>
 						<?php	for($i=0;$i < $numRoom; $i++):?>
@@ -113,7 +113,6 @@
 									?>
 								</td>
 							</tr>
-
 						<?php endfor; ?>
 						<tr>
 							<td colspan="3"  ></td>
@@ -135,7 +134,7 @@
 					<tr style="background:#E6E6E6;" >
 						<td colspan="4" align="right">รวมสุทธิ</td>
 						<td  align="right" style="border-bottom:3px double black">
-							<?php $sumTotal = ( ($price * $numRoom)  +$rowDetail['cashPledge']); ?>
+							<?php $sumTotal =  (str_replace(',','',$price) * $numRoom)  + str_replace(',','',$rowDetail['cashPledge']); ?>
 							<?php echo number_format($sumTotal + ( ($sumTotal * $rowDetail['totalVat'] ) /100 ),2 ); ?>
 						</td>
 					</tr>

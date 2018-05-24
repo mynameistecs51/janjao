@@ -43,7 +43,7 @@
 				<i class="fa fa-bed fa-2x" aria-hidden="true"></i>';
 			}
 
-			if($f1['transaction']=='EMPTY' && $f1['roomtypeCode']!='STAIRCASE'  && $f1['status']=='ON'){
+ 			if($f1['transaction']=='EMPTY' && $f1['roomtypeCode']!='STAIRCASE'  && $f1['status']=='ON'){
 				$html .= '
 				<div class="col-sm-1 " style="margin:10px;">
 					<span class="button-checkbox ">
