@@ -44,16 +44,29 @@
 			}
 
  			if($f1['transaction']=='EMPTY' && $f1['roomtypeCode']!='STAIRCASE'  && $f1['status']=='ON'){
-				$html .= '
+ 				if($f1['transclean'] == 'CLEANING'){
+ 					$html .= '
 				<div class="col-sm-1 " style="margin:10px;">
 					<span class="button-checkbox ">
-						<button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
+						<button type="button" class="btn btn_cleaning" data-room="'.$f1['roomCODE'].'" data-color="success" style="width:120px;color: #fff;background-color:#449d44;border-color: #398439;">
 							'.$bed.'
-							<h4>'.$f1['roomCODE'].'</h4>'.$f1['roomtypeCode'].'
+							<h4>'.$f1['roomCODE'].' </h4>'.$f1['roomtypeCode'].'
 						</button>
-						<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f1['roomCODE'].'" data-priceday="'.$f1['price_day'].'" data-pricemonth="'.$f1['price_month'].'"  data-priceshort="'.$f1['price_short'].'"  value="'.$f1['roomCODE'].'" />
+						<!-- <input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f1['roomCODE'].'"  data-priceday="'.$f1['price_day'].'" data-pricemonth="'.$f1['price_month'].'"  data-priceshort="'.$f1['price_short'].'"  value="'.$f1['roomCODE'].'" /> -->
 					</span>
 				</div> ';
+ 				}else{
+					$html .= '
+					<div class="col-sm-1 " style="margin:10px;">
+						<span class="button-checkbox ">
+							<button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
+								'.$bed.'
+								<h4>'.$f1['roomCODE'].'</h4>'.$f1['roomtypeCode'].'
+							</button>
+							<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f1['roomCODE'].'" data-priceday="'.$f1['price_day'].'" data-pricemonth="'.$f1['price_month'].'"  data-priceshort="'.$f1['price_short'].'"  value="'.$f1['roomCODE'].'" />
+						</span>
+					</div> ';
+				}
 			}else if($f1['transaction']=='BOOKED' && $f1['roomtypeCode']!='STAIRCASE'  && $f1['status']=='ON'){
 				$html .= '
 				<div class="col-sm-1 " style="margin:10px;">
@@ -133,16 +146,29 @@
 			}
 
 			if($f2['transaction']=='EMPTY' && $f2['roomtypeCode']!='STAIRCASE'  && $f2['status']=='ON'){
-				$html .= '
+				if($f2['transclean'] == 'CLEANING'){
+ 					$html .= '
 				<div class="col-sm-1 " style="margin:10px;">
 					<span class="button-checkbox ">
-						<button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
+						<button type="button" class="btn btn_cleaning" data-room="'.$f1['roomCODE'].'" data-color="success" style="width:120px;color: #fff;background-color:#449d44;border-color: #398439;">
 							'.$bed.'
-							<h4>'.$f2['roomCODE'].'</h4>'.$f2['roomtypeCode'].'
+							<h4>'.$f1['roomCODE'].' </h4>'.$f1['roomtypeCode'].'
 						</button>
-						<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'" data-priceday="'.$f2['price_day'].'" data-pricemonth="'.$f2['price_month'].'"  data-priceshort="'.$f2['price_short'].'"  value="'.$f2['roomCODE'].'" />
+						<!-- <input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f1['roomCODE'].'"  data-priceday="'.$f1['price_day'].'" data-pricemonth="'.$f1['price_month'].'"  data-priceshort="'.$f1['price_short'].'"  value="'.$f1['roomCODE'].'" /> -->
 					</span>
 				</div> ';
+ 				}else{
+				$html .= '
+					<div class="col-sm-1 " style="margin:10px;">
+						<span class="button-checkbox ">
+							<button type="button" class="btn btn_room" data-color="danger" style="width:120px;">
+								'.$bed.'
+								<h4>'.$f2['roomCODE'].'</h4>'.$f2['roomtypeCode'].'
+							</button>
+							<input type="checkbox" class="hidden check_room" name="check_room[]"  id="'.$f2['roomCODE'].'" data-priceday="'.$f2['price_day'].'" data-pricemonth="'.$f2['price_month'].'"  data-priceshort="'.$f2['price_short'].'"  value="'.$f2['roomCODE'].'" />
+						</span>
+					</div> ';
+				}
 			}else if($f2['transaction']=='BOOKED' && $f2['roomtypeCode']!='STAIRCASE'  && $f2['status']=='ON'){
 				$html .= '
 				<div class="col-sm-1 " style="margin:10px;">
