@@ -122,10 +122,10 @@ class Home extends CI_Controller {
 			// $this->data['roomstatus']=$_POST['roomstatus'];
 			$this->data['viewName'] =$this->pagename;
 			$this->data['viewshow']='show';
-			$this->data['getfloor1']=$this->Mdl_booked->getRoom(1,$dtcheckin[0].' '.($dtcheckin[1]-2).":00",$this->data['dtcheckout']);
-			$this->data['getfloor2']=$this->Mdl_booked->getRoom(2,$dtcheckin[0].' '.($dtcheckin[1]-2).":00",$this->data['dtcheckout']);
-			$this->data['getfloor3']=$this->Mdl_booked->getRoom(3,$dtcheckin[0].' '.($dtcheckin[1]-2).":00",$this->data['dtcheckout']);
-			$this->data['getfloor4']=$this->Mdl_booked->getRoom(4,$dtcheckin[0].' '.($dtcheckin[1]-2).":00",$this->data['dtcheckout']);
+			$this->data['getfloor1']=$this->Mdl_booked->getRoom(1,$dtcheckin[0].' '.($dtcheckin[1]-3).":00",$this->data['dtcheckout']);
+			$this->data['getfloor2']=$this->Mdl_booked->getRoom(2,$dtcheckin[0].' '.($dtcheckin[1]-3).":00",$this->data['dtcheckout']);
+			$this->data['getfloor3']=$this->Mdl_booked->getRoom(3,$dtcheckin[0].' '.($dtcheckin[1]-3).":00",$this->data['dtcheckout']);
+			$this->data['getfloor4']=$this->Mdl_booked->getRoom(4,$dtcheckin[0].' '.($dtcheckin[1]-3).":00",$this->data['dtcheckout']);
 			$this->data['topPageName']='<b style="color:#D70F0F;font-size:18px;">Room Status</b>';
 			$this->packfunction->packView($this->data,'Dashboard');
 		}else{
