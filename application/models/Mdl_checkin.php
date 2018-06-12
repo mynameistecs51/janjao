@@ -699,7 +699,7 @@ class Mdl_checkin extends CI_Model {
 		#AND tb.status <> 'CANCLE'
 		#AND tb.status <> 'CHECKOUT'
 		WHERE MD5(tb.bookedID) = '".$value."'
-		GROUP BY tsch.roomID
+		GROUP BY tbr.roomID
 		";
 		$data = $this->db->query($sql)->result_array();
 		return $data;

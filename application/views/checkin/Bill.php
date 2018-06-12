@@ -1,15 +1,15 @@
 <style type="text/css">
-	@page{
-		size: a4;
-	}
-	@font-face {
-		font-family: TH_Charmonman;
-		src: url("<?php echo base_url(); ?>assets/fonts/TH Charmonman.ttf");
-	}
-	.headname{
-		font-family: "TH_Charmonman";
-		font-size: 16px;
-	}
+@page{
+	size: a4;
+}
+@font-face {
+	font-family: TH_Charmonman;
+	src: url("<?php echo base_url(); ?>assets/fonts/TH Charmonman.ttf");
+}
+.headname{
+	font-family: "TH_Charmonman";
+	font-size: 16px;
+}
 </style>
 <div class="row">
 	<div class="container"  id="example">
@@ -67,6 +67,7 @@
 				</thead>
 				<tbody>
 					<?php	$j= 1; ?>
+					<?php $amountPrice = array(); ?>
 					<?php foreach ($getDetail as $key => $rowDetail) :?>
 						<?php $numRoom = count($rowDetail['selectRoom']); ?>
 						<?php	for($i=0;$i < $numRoom; $i++):?>
@@ -75,8 +76,9 @@
 								<td style="border-bottom:1px solid black" >
 									ห้อง
 									<?php
-									echo $rowDetail['selectRoom'][$i]['cashr_roomID'];
-									echo $bed = ($rowDetail['selectRoom'][$i]['bed'] == "SINGLE")? "<li>เตียงเดี่ยว</li>" : "<li>เตียงคู่</li>";
+									// echo $rowDetail['selectRoom'][$i]['cashr_roomID'];
+									echo $rowDetail['selectRoom'][$i]['roomID'];
+									echo $bed = ($rowDetail['selectRoom'][$i]['bed'] == "SINGLE")? "<li>เตียงเดี่ยว ".$rowDetail['selectRoom'][$i]['roomtypeCode']."</li>" : "<li>เตียงคู่ ".$rowDetail['selectRoom'][$i]['roomtypeCode']."</li>";
 									?>
 								</td>
 								<td style="border-bottom:1px solid black" align="right">
@@ -103,12 +105,16 @@
 								</td>
 								<td style="border-bottom:1px solid black" align="right">
 									<?php
+
 									if($rowDetail['bookedType'] == 'SHORT'){
 										echo $price = number_format($rowDetail['selectRoom'][$i]['price_short'],2);
+										array_push($amountPrice,$price);
 									}else if($rowDetail['bookedType'] == 'DAY'){
 										echo $price = number_format($dateDtl->days * $rowDetail['selectRoom'][$i]['price_day'],2);
+										array_push($amountPrice,$price);
 									}else if($rowDetail['bookedType'] == 'MONTH'){
 										echo $price = number_format($dateDtl->m * $rowDetail['selectRoom'][$i]['price_month'],2);
+										array_push($amountPrice,$price);
 									}
 									?>
 								</td>
@@ -134,7 +140,7 @@
 					<tr style="background:#E6E6E6;" >
 						<td colspan="4" align="right">รวมสุทธิ</td>
 						<td  align="right" style="border-bottom:3px double black">
-							<?php $sumTotal =  (str_replace(',','',$price) * $numRoom)  + str_replace(',','',$rowDetail['cashPledge']); ?>
+							<?php $sumTotal =  str_replace(',','',array_sum($amountPrice))  + str_replace(',','',$rowDetail['cashPledge']); ?>
 							<?php echo number_format($sumTotal + ( ($sumTotal * $rowDetail['totalVat'] ) /100 ),2 ); ?>
 						</td>
 					</tr>
