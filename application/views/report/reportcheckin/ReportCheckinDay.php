@@ -116,7 +116,7 @@
 								if($this->session->userdata('usergroupID') == 1){
 									echo "<label>".number_format($retes,2)." "."<input type='checkbox' name='checkrete' class='checkrete' id='checkrete".$report['bookedID']."' style='zoom: 1.5;' value=".$report['bookedID']." ".$checkedRetes."></label>";
 								}else{
-									echo "<label>".number_format($pledge,2)." "."<input type='checkbox' name='checkrete' class='checkrete'  ".$checkedRetes." style='zoom: 1.5;' disabled readonly></label>";
+									echo "<label>".number_format($retes,2)." "."<input type='checkbox' name='checkrete' class='checkrete'  ".$checkedRetes." style='zoom: 1.5;' disabled readonly></label>";
 								}
 								?>
 							</td>
