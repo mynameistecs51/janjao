@@ -120,6 +120,10 @@
 								</td>
 							</tr>
 						<?php endfor; ?>
+						<tr height="25">
+							<td colspan="4" align="right">ส่วนลด</td>
+							<td colspan="2" align="right" style="border-bottom:1px solid black"><?php echo $rowDetail['checkinDiscount']; ?> </td>
+						</tr>
 						<tr>
 							<td colspan="3"  ></td>
 							<td align="right">เงินมัดจำ</td>
@@ -140,7 +144,7 @@
 					<tr style="background:#E6E6E6;" >
 						<td colspan="4" align="right">รวมสุทธิ</td>
 						<td  align="right" style="border-bottom:3px double black">
-							<?php $sumTotal =  str_replace(',','',array_sum($amountPrice))  + str_replace(',','',$rowDetail['cashPledge']); ?>
+							<?php $sumTotal =  str_replace(',','',array_sum($amountPrice))  + str_replace(',','',$rowDetail['cashPledge'] - $rowDetail['checkinDiscount']); ?>
 							<?php echo number_format($sumTotal + ( ($sumTotal * $rowDetail['totalVat'] ) /100 ),2 ); ?>
 						</td>
 					</tr>

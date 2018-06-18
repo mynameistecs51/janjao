@@ -188,6 +188,7 @@ class Checkin extends CI_Controller {
 					'cashPledgePath' =>  $rowBooked['cashPledgePath'],
 					'cashDate' => $rowBooked['cashDate'],
 					'totalVat' => $rowBooked['totalVat'],
+					'checkinDiscount' => $rowBooked['checkinDiscount'],
 					'totalDiscount' => $rowBooked['totalDiscount'],
 					'totalLast' => $rowBooked['totalLast'],
 					'comment' =>  $rowBooked['comment'],

@@ -39,134 +39,143 @@
 						<th style="text-align: center;width: 100px;">CHECKOUT DATE</th>
 						<th style="text-align: center;width: 10px;">UPDATE DTATE</th>
 						<th style="text-align: center;width: 80px;"> STATUS</th>
-						<th style="text-align: center;width: 150px;"> CASH PLEDGE</th>
-						<th style="text-align: center;width: 150px;"> RETES ROOM</th>
-						<th style="text-align: center;width: 150px;"> SERVICE </th>
-						<th style="text-align: center;width: 100px;"> DISCOUNT </th>
+						<th style="text-align: center;width: 100px;"> CASH PLEDGE</th>
+						<th style="text-align: center;width: 100px;"> RETES ROOM</th>
+						<th style="text-align: center;width: 100px;"> SERVICE </th>
+						<th style="text-align: center;width: 100px;"> CHECKIN DISCOUNT </th>
+						<th style="text-align: center;width: 100px;"> CHECKOUT DISCOUNT </th>
 						<th style="text-align: center;width: 230px;"># </th>
 					</tr>
 				</thead>
 				<tbody style="font-size: 12px;">
 					<?php
-					$sumAll = array(); $roomAll = array(); $sumPledge = array(); $sumRetes = array(); $sumService = array(); $sumDiscount = array();
+					$sumAll = array(); $roomAll = array(); $sumPledge = array(); $sumRetes = array(); $sumService = array(); $sumDiscount = array(); $sumCheckinDiscount = array();
 					?>
 					<?php $j=1; ?>
 					<?php if(count($repCheckout)>0) { ?>
-					<?php foreach ($repCheckout as $key => $report) :?>
-						<?php $numRoom = count($report['selectRoom']); ?>
+						<?php foreach ($repCheckout as $key => $report) :?>
+							<?php $numRoom = count($report['selectRoom']); ?>
+							<tr>
+								<td ><?php echo $j++; ?></td>
+								<td><?php echo $report['bookedCode']; ?></td>
+								<td>
+									<?php
+									echo $report['firstName']." ".$report['lastName'].$mobile = (empty($report['mobile']))?"": "( ".$report['mobile'].")";
+									?>
+								</td>
+								<td>
+									<?php
+									for($i=0;$i < $numRoom; $i++)
+									{
+										echo "<u>ROOM ".$report['selectRoom'][$i]['roomID']."</u>,&nbsp;&nbsp;";
+										array_push($roomAll,$report['selectRoom'][$i]['roomID']);
+									}
+									?>
+								</td>
+								<td>
+									<?php
+									$dateIn = explode('/',$report['checkinDate']); $yearIn = explode(" ",$dateIn[2]);
+									echo $dateIn[0]."/".$dateIn[1]."/".($yearIn[0]+543)."  <br> เวลา ".$yearIn[1];
+									?>
+								</td>
+								<td>
+									<?php
+									$dateOut = explode('/',$report['checkoutDate']); $yearYear = explode(" ",$dateOut[2]);
+									echo $dateOut[0]."/".$dateOut[1]."/".($yearYear[0]+543)." <br> เวลา ".$yearYear[1];?>
+								</td>
+								<td>
+									<?php
+									$dateCreate = explode('-',$report['updateDT']); $yearCreate = explode(" ",$dateCreate[2]);
+									echo $yearCreate[0]."/".$dateCreate[1]."/".($dateCreate[0]+543)." <br> เวลา ".date_format(date_create($yearCreate[1]),"H:i");
+									?>
+								</td>
+								<td>
+									<?php
+									echo $report['status'],"<br>";
+									echo "BY ",$report['updateBY'];
+									?>
+								</td>
+								<td align="right">
+									<!-- เงินมัดจำ -->
+									<?php
+									$checkPledge = ($report['checkPledge'] == '0')?'' : 'checked disabled';
+									$pledge = ($report['status'] == 'CHECKOUT')? 0.00 : $report['cashPledge'];
+									array_push($sumPledge, $pledge);
+									if($this->session->userdata('usergroupID') == 1){
+										echo "<label>".number_format($pledge,2)." "."<input type='checkbox' name='checkPledge' class='checkPledge' id='checkPledge".$report['bookedID']."' style='zoom: 1.5;' value=".$report['bookedID']." ".$checkPledge."></label>";
+									}else{
+										echo "<label>".number_format($pledge,2)." "."<input type='checkbox' name='checkPledge' class='checkPledge'  ".$checkPledge." style='zoom: 1.5;' disabled readonly></label>";
+									}
+									?>
+								</td>
+								<td align="right">
+									<!-- ค่าห้อง (ค่าห้อง+มัดจำ)-มัดจำ -->
+									<?php
+									$checkedRetes = ($report['checktotalLast'] == '0')?'' : 'checked disabled';
+									$retes = ($report['totalLast'] == 0.00)? 0.00 : ($report['totalLast'] - $report['cashPledge']);
+									array_push($sumRetes, $a = ($retes == 0.00)? 0.00 : $report['totalLast'] - $report['cashPledge']);
+									if($this->session->userdata('usergroupID') == 1){
+										echo "<label>".number_format($retes,2)." "."<input type='checkbox' name='checkrete' class='checkrete' id='checkrete".$report['bookedID']."' style='zoom: 1.5;' value=".$report['bookedID']." ".$checkedRetes."></label>";
+									}else{
+										echo "<label>".number_format($retes,2)." "."<input type='checkbox' name='checkrete' class='checkrete'  ".$checkedRetes." style='zoom: 1.5;' disabled readonly></label>";
+									}
+									?>
+								</td>
+								<td align="right">
+									<!-- service -->
+									<?php
+									$checkservice = ($report['checkservice'] == '0')?'' : 'checked disabled';
+									$service= $report['sumtotal'];
+									array_push($sumService,$report['sumtotal']);
+									if($this->session->userdata('usergroupID') == 1){
+										echo "<label>".number_format($service,2)." "."<input type='checkbox' name='checkservice' class='checkservice' id='checkservice".$report['bookedID']."' style='zoom: 1.5;' value=".$report['bookedID']." ".$checkservice."></label>";
+									}else{
+										echo "<label>".number_format($service,2)." "."<input type='checkbox' name='checkservice' class='checkservice' ".$checkservice." style='zoom: 1.5;' disabled readonly></label>";
+									}
+									?>
+								</td>
+								<td align="right">
+									<?php
+									$checkinDiscount = ($report['checkinDiscount'] == 0.00) ? '0.00' : $report['checkinDiscount'];
+									echo number_format($checkinDiscount,2);
+									array_push($sumCheckinDiscount,$checkinDiscount);
+									?>
+								</td>
+								<td align="right">
+									<?php
+									$checkoutdiscount = ($report['discount'] == 0.00 ) ? '0.00' : $report['discount'];
+									echo number_format($checkoutdiscount,2);
+									array_push($sumDiscount, $checkoutdiscount);
+									?>
+								</td>
+								<td align="center"> <!-- (ค่าห้อง + เงินมัดจำ)+(service-มัดจำ) -(checkinDiscount + checkoutDiscount) -->
+									<?php
+									$sum = (empty($report['sumtotal']))? ($report['totalLast'] - $checkinDiscount) :  $report['totalLast'] + ($report['sumtotal'] - $report['cashPledge']) - ($checkinDiscount + $checkoutdiscount);
+									echo number_format($sum,2);
+									array_push($sumAll, $sum);
+									?>
+									บาท
+								</td>
+							</tr>
+						<?php endforeach; ?>
 						<tr>
-							<td ><?php echo $j++; ?></td>
-							<td><?php echo $report['bookedCode']; ?></td>
-							<td>
-								<?php
-								echo $report['firstName']." ".$report['lastName'].$mobile = (empty($report['mobile']))?"": "( ".$report['mobile'].")";
-								?>
+							<td colspan="3">
 							</td>
-							<td>
-								<?php
-								for($i=0;$i < $numRoom; $i++)
-								{
-									echo "<u>ROOM ".$report['selectRoom'][$i]['roomID']."</u>,&nbsp;&nbsp;";
-									array_push($roomAll,$report['selectRoom'][$i]['roomID']);
-								}
-								?>
+							<td> <b>รวมพัก  <?php echo count($roomAll);?> ห้อง</b>
 							</td>
-							<td>
-								<?php
-								$dateIn = explode('/',$report['checkinDate']); $yearIn = explode(" ",$dateIn[2]);
-								echo $dateIn[0]."/".$dateIn[1]."/".($yearIn[0]+543)."  <br> เวลา ".$yearIn[1];
-								?>
+							<td colspan="4">
 							</td>
-							<td>
-								<?php
-								$dateOut = explode('/',$report['checkoutDate']); $yearYear = explode(" ",$dateOut[2]);
-								echo $dateOut[0]."/".$dateOut[1]."/".($yearYear[0]+543)." <br> เวลา ".$yearYear[1];?>
-							</td>
-							<td>
-								<?php
-								$dateCreate = explode('-',$report['updateDT']); $yearCreate = explode(" ",$dateCreate[2]);
-								echo $yearCreate[0]."/".$dateCreate[1]."/".($dateCreate[0]+543)." <br> เวลา ".date_format(date_create($yearCreate[1]),"H:i");
-								?>
-							</td>
-							<td>
-								<?php
-								echo $report['status'],"<br>";
-								echo "BY ",$report['updateBY'];
-								?>
-							</td>
-							<td align="right">
-								<!-- เงินมัดจำ -->
-								<?php
-								$checkPledge = ($report['checkPledge'] == '0')?'' : 'checked disabled';
-								$pledge = ($report['status'] == 'CHECKOUT')? 0.00 : $report['cashPledge'];
-								array_push($sumPledge, $pledge);
-								if($this->session->userdata('usergroupID') == 1){
-									echo "<label>".number_format($pledge,2)." "."<input type='checkbox' name='checkPledge' class='checkPledge' id='checkPledge".$report['bookedID']."' style='zoom: 1.5;' value=".$report['bookedID']." ".$checkPledge."></label>";
-								}else{
-									echo "<label>".number_format($pledge,2)." "."<input type='checkbox' name='checkPledge' class='checkPledge'  ".$checkPledge." style='zoom: 1.5;' disabled readonly></label>";
-								}
-								?>
-							</td>
-							<td align="right">
-								<!-- ค่าห้อง (ค่าห้อง+มัดจำ)-มัดจำ -->
-								<?php
-								$checkedRetes = ($report['checktotalLast'] == '0')?'' : 'checked disabled';
-								$retes = ($report['totalLast'] == 0.00)? 0.00 : ($report['totalLast'] - $report['cashPledge']);
-								array_push($sumRetes, $a = ($retes == 0.00)? 0.00 :$report['totalLast'] - $report['cashPledge']);
-								if($this->session->userdata('usergroupID') == 1){
-									echo "<label>".number_format($retes,2)." "."<input type='checkbox' name='checkrete' class='checkrete' id='checkrete".$report['bookedID']."' style='zoom: 1.5;' value=".$report['bookedID']." ".$checkedRetes."></label>";
-								}else{
-									echo "<label>".number_format($retes,2)." "."<input type='checkbox' name='checkrete' class='checkrete'  ".$checkedRetes." style='zoom: 1.5;' disabled readonly></label>";
-								}
-								?>
-							</td>
-							<td align="right">
-								<!-- service -->
-								<?php
-								$checkservice = ($report['checkservice'] == '0')?'' : 'checked disabled';
-								$service= $report['sumtotal'];
-								array_push($sumService,$report['sumtotal']);
-								if($this->session->userdata('usergroupID') == 1){
-									echo "<label>".number_format($service,2)." "."<input type='checkbox' name='checkservice' class='checkservice' id='checkservice".$report['bookedID']."' style='zoom: 1.5;' value=".$report['bookedID']." ".$checkservice."></label>";
-								}else{
-									echo "<label>".number_format($service,2)." "."<input type='checkbox' name='checkservice' class='checkservice' ".$checkservice." style='zoom: 1.5;' disabled readonly></label>";
-								}
-								?>
-							</td>
-							<td align="right">
-								<?php
-								$discount = (empty($report['discount']))?0.00 : $report['discount'];
-								echo number_format($discount,2);
-								array_push($sumDiscount, $discount);
-								?>
-							</td>
-							<td align="center"> <!-- (ค่าห้อง + เงินมัดจำ)+(service-มัดจำ)-->
-								<?php
-								$sum = (empty($report['sumtotal']))?$report['totalLast'] :  $report['totalLast'] + ($report['sumtotal'] - $report['cashPledge']) - $discount ;
-								echo number_format($sum,2);
-								array_push($sumAll, $sum);
-								?>
-								บาท
-							</td>
+							<td align="center"><?php echo number_format(array_sum($sumPledge),2); ?>  บาท</td>
+							<td align="center"><?php echo number_format(array_sum($sumRetes),2); ?>  บาท</td>
+							<td align="center"><?php echo number_format(array_sum($sumService),2); ?>  บาท </td>
+							<td align="center"><?php echo number_format(array_sum($sumCheckinDiscount),2); ?>  บาท </td>
+							<td align="center"><?php echo number_format(array_sum($sumDiscount),2); ?>  บาท </td>
+							<td align="center">	<b>รวมเงิน 	<?php  echo number_format(array_sum($sumAll),2);?> บาท</b>	</td>
 						</tr>
-					<?php endforeach; ?>
-					<tr>
-						<td colspan="3">
-						</td>
-						<td> <b>รวมพัก  <?php echo count($roomAll);?> ห้อง</b>
-						</td>
-						<td colspan="4">
-						</td>
-						<td align="center"><?php echo number_format(array_sum($sumPledge),2); ?>  บาท</td>
-						<td align="center"><?php echo number_format(array_sum($sumRetes),2); ?>  บาท</td>
-						<td align="center"><?php echo number_format(array_sum($sumService),2); ?>  บาท </td>
-						<td align="center"><?php echo number_format(array_sum($sumDiscount),2); ?>  บาท </td>
-						<td align="center">	<b>รวมเงิน 	<?php  echo number_format(array_sum($sumAll),2);?> บาท</b>	</td>
-					</tr>
 					<?php }else{ ?>
-					<tr>
-						<td colspan="13">No Booked And Checkin Data !</td>
-					</tr>
+						<tr>
+							<td colspan="13">No Booked And Checkin Data !</td>
+						</tr>
 					<?php } ?>
 				</tbody>
 			</table>

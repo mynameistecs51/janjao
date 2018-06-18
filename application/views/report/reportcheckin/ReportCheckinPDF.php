@@ -80,15 +80,16 @@ $html = '
 			<th style="text-align: center;width: 80px;"> UPDATE DTATE </th>
 			<th style="text-align: center;width: 80px;"> STATUS </th>
 			<th style="text-align: center;width: 90px;"> CASH PLEDGE </th>
-			<th style="text-align: center;width: 90px;"> RETES ROOM </th>
-			<th style="text-align: center;width: 90px;"> SERVICE </th>
-			<th style="text-align: center;width: 90px;"> DISCOUNT </th>
+			<th style="text-align: center;width: 60px;"> RETES ROOM </th>
+			<th style="text-align: center;width: 60px;"> SERVICE </th>
+			<th style="text-align: center;width: 60px;"> CHECKIN DISCOUNT </th>
+			<th style="text-align: center;width: 60px;"> CHECKOUT DISCOUNT </th>
 			<th style="text-align: center;width: 80px;"> # </th>
 		</tr>
 	</thead>
 	<tbody>';
 
-		$sumAll = array(); $roomAll = array(); $sumPledge = array(); $sumRetes = array(); $sumService = array(); $sumDiscount = array();
+		$sumAll = array(); $roomAll = array(); $sumPledge = array(); $sumRetes = array(); $sumService = array(); $sumDiscount = array(); $sumCheckinDiscount = array();
 		$j=1;
 		if(count($repCheckout)>0) {
 			foreach ($repCheckout as $key => $report) {
@@ -129,20 +130,25 @@ $html = '
 				//ค่าห้อง
 				$retes = ($report['totalLast'] == 0.00)? 0.00 : ($report['totalLast'] - $report['cashPledge']);
 				array_push($sumRetes, $a = ($retes == 0.00)? 0.00 :$report['totalLast'] - $report['cashPledge']);
-				$html .='<td style="text-align: center;width:  90px;">'.	number_format($retes,2).'</td>';
+				$html .='<td style="text-align: center;width:  60px;">'.	number_format($retes,2).'</td>';
 
 				//service
 				$service = $report['sumtotal'];
 				array_push($sumService,$report['sumtotal']);
-				$html .='<td style="text-align: center;width:  90px;">'.	number_format($service,2).'</td>';
+				$html .='<td style="text-align: center;width:  60px;">'.	number_format($service,2).'</td>';
 
-				//มัดจำ
+				// checkin ส่วนลด
+				$checkinDiscount = (empty($report['checkinDiscount']))?0.00 : $report['checkinDiscount'];
+				array_push($sumCheckinDiscount, $checkinDiscount);
+				$html .='<td style="text-align: center;width:  60px;">'.	number_format($checkinDiscount,2).'</td>';
+
+				//checkout ส่วนลด
 				$discount = (empty($report['discount']))?0.00 : $report['discount'];
 				array_push($sumDiscount, $discount);
-				$html .='<td style="text-align: center;width:  90px;">'.	number_format($discount,2).'</td>';
+				$html .='<td style="text-align: center;width:  60px;">'.	number_format($discount,2).'</td>';
 
 				//รวม
-				$sum = (empty($report['sumtotal']))?$report['totalLast'] :  $report['totalLast'] + ($report['sumtotal'] - $report['cashPledge']) - $discount ;
+				$sum = (empty($report['sumtotal']))? ($report['totalLast'] - $checkinDiscount ):  $report['totalLast'] + ($report['sumtotal'] - $report['cashPledge']) - ($discount + $checkinDiscount) ;
 				array_push($sumAll, $sum);
 				$html .='<td style="text-align: center;width:  80px;">'.number_format($sum,2).' บาท</td>';
 
@@ -160,6 +166,7 @@ $html = '
 			$html .= '<td align="center">'. number_format(array_sum($sumPledge),2).' บาท</td>';
 			$html .= '<td align="center">'. number_format(array_sum($sumRetes),2).'  บาท</td>';
 			$html .= '	<td align="center">'. number_format(array_sum($sumService),2).'  บาท </td>';
+			$html .= '	<td align="center">'. number_format(array_sum($sumCheckinDiscount),2).'  บาท </td>';
 			$html .= '	<td align="center">'. number_format(array_sum($sumDiscount),2).'  บาท </td>';
 			$html .= '	<td align="center">	<b> '. number_format(array_sum($sumAll),2).'  บาท</b>	</td>';
 			$html .= '</tr>';

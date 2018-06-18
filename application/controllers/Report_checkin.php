@@ -96,6 +96,7 @@ class Report_checkin extends CI_Controller {
 					'cashPledgePath' =>  $rowBooked['cashPledgePath'],
 					'totalLast' => $rowBooked['totalLast'],
 					'checktotalLast' => $rowBooked['checktotalLast'],
+					'checkinDiscount' => $rowBooked['checkinDiscount'],
 					'discount' => $rowBooked['discount'],	//form ts_cash_dtl
 					'sumtotal' => $rowBooked['sumtotal'], 	//form ts_cash_dtl
 					'checkservice' => $rowBooked['checkservice'],

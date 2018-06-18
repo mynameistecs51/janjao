@@ -28,42 +28,43 @@
 					ปี :
 					<select name="startYear" class="form-control"  style="width: 138px;margin-right: 10px;">
 						<?php for($i=(-2);$i <= (+2);$i++): ?>
-							<?php $selectedY = (date('Y')+$i == date('Y'))?'selected':'' ?>
-							<option value="<?php echo date('Y')+$i; ?>" <?php echo $selectedY; ?>><?php echo (date('Y')+$i)+543; ?></option>
-						<?php endfor; ?>
-					</select>
-					&nbsp;
-					<button  type="submit" class="btn btn-primary " style="float: right;">Search</button>
-				</form>
-			</div>
+						<?php $selectedY = (date('Y')+$i == date('Y'))?'selected':'' ?>
+						<option value="<?php echo date('Y')+$i; ?>" <?php echo $selectedY; ?>><?php echo (date('Y')+$i)+543; ?></option>
+					<?php endfor; ?>
+				</select>
+				&nbsp;
+				<button  type="submit" class="btn btn-primary " style="float: right;">Search</button>
+			</form>
 		</div>
 	</div>
-	<div class="row text-center" style="margin-top: 10px;">
-		<div class="col-lg-12" align="left">
-			<table id="fairlist" class="table table-striped table-bordered" cellspacing="0" style="overflow-x:auto;width: 100%">
-				<thead style="background:#BDBDBD;font-size: 12px; ">
-					<tr >
-						<th style="text-align: center;width: 40px;">No.</th>
-						<th style="text-align: center;width: 120px;">BOOKED No.</th>
-						<th style="text-align: center;width: 150px;">NAME </th>
-						<th style="text-align: center;width: 200px;">ROOM</th>
-						<th style="text-align: center;width: 100px;">CHECKIN DATE</th>
-						<th style="text-align: center;width: 100px;">CHECKOUT DATE</th>
-						<th style="text-align: center;width: 10px;">UPDATE DTATE</th>
-						<th style="text-align: center;width: 80px;"> STATUS</th>
-						<th style="text-align: center;width: 150px;"> CASH PLEDGE</th>
-						<th style="text-align: center;width: 150px;"> RETES ROOM</th>
-						<th style="text-align: center;width: 150px;"> SERVICE </th>
-						<th style="text-align: center;width: 100px;"> DISCOUNT </th>
-						<th style="text-align: center;width: 230px;"># </th>
-					</tr>
-				</thead>
-				<tbody style="font-size: 12px;">
-					<?php
-					$sumAll = array(); $roomAll = array(); $sumPledge = array(); $sumRetes = array(); $sumService = array(); $sumDiscount = array();
-					?>
-					<?php $j=1; ?>
-					<?php if(count($repCheckout)>0) { ?>
+</div>
+<div class="row text-center" style="margin-top: 10px;">
+	<div class="col-lg-12" align="left">
+		<table id="fairlist" class="table table-striped table-bordered" cellspacing="0" style="overflow-x:auto;width: 100%">
+			<thead style="background:#BDBDBD;font-size: 12px; ">
+				<tr >
+					<th style="text-align: center;width: 40px;">No.</th>
+					<th style="text-align: center;width: 120px;">BOOKED No.</th>
+					<th style="text-align: center;width: 150px;">NAME </th>
+					<th style="text-align: center;width: 200px;">ROOM</th>
+					<th style="text-align: center;width: 100px;">CHECKIN DATE</th>
+					<th style="text-align: center;width: 100px;">CHECKOUT DATE</th>
+					<th style="text-align: center;width: 10px;">UPDATE DTATE</th>
+					<th style="text-align: center;width: 80px;"> STATUS</th>
+					<th style="text-align: center;width: 100px;"> CASH PLEDGE</th>
+					<th style="text-align: center;width: 100px;"> RETES ROOM</th>
+					<th style="text-align: center;width: 100px;"> SERVICE </th>
+					<th style="text-align: center;width: 100px;"> CHECKIN DISCOUNT </th>
+					<th style="text-align: center;width: 100px;"> CHECKOUT DISCOUNT </th>
+					<th style="text-align: center;width: 230px;"># </th>
+				</tr>
+			</thead>
+			<tbody style="font-size: 12px;">
+				<?php
+				$sumAll = array(); $roomAll = array(); $sumPledge = array(); $sumRetes = array(); $sumService = array(); $sumDiscount = array(); $sumCheckinDiscount = array();
+				?>
+				<?php $j=1; ?>
+				<?php if(count($repCheckout)>0) { ?>
 					<?php foreach ($repCheckout as $key => $report) :?>
 						<?php $numRoom = count($report['selectRoom']); ?>
 						<tr>
@@ -130,16 +131,23 @@
 								array_push($sumService,$report['sumtotal']);
 								?>
 							</td>
-							<td align="center">
+							<td align="right">
 								<?php
-								$discount = (empty($report['discount']))?0.00 : $report['discount'];
-								echo number_format($discount,2);
-								array_push($sumDiscount, $discount);
+								$checkinDiscount = ($report['checkinDiscount'] == 0.00) ? '0.00' : $report['checkinDiscount'];
+								echo number_format($checkinDiscount,2);
+								array_push($sumCheckinDiscount,$checkinDiscount);
 								?>
 							</td>
-							<td align="center"> <!-- (ค่าห้อง + เงินมัดจำ)+(service-มัดจำ)-->
+							<td align="right">
 								<?php
-								$sum = (empty($report['sumtotal']))?$report['totalLast'] :  $report['totalLast'] + ($report['sumtotal'] - $report['cashPledge']) - $discount ;
+								$checkoutdiscount = ($report['discount'] == 0.00 ) ? '0.00' : $report['discount'];
+								echo number_format($checkoutdiscount,2);
+								array_push($sumDiscount, $checkoutdiscount);
+								?>
+							</td>
+							<td align="center"> <!-- (ค่าห้อง + เงินมัดจำ)+(service-มัดจำ) -(checkinDiscount + checkoutDiscount) -->
+								<?php
+								$sum = (empty($report['sumtotal']))? ($report['totalLast'] - $checkinDiscount) :  $report['totalLast'] + ($report['sumtotal'] - $report['cashPledge']) - ($checkinDiscount + $checkoutdiscount);
 								echo number_format($sum,2);
 								array_push($sumAll, $sum);
 								?>
@@ -157,34 +165,35 @@
 						<td align="center"><?php echo number_format(array_sum($sumPledge),2); ?>  บาท</td>
 						<td align="center"><?php echo number_format(array_sum($sumRetes),2); ?>  บาท</td>
 						<td align="center"><?php echo number_format(array_sum($sumService),2); ?>  บาท </td>
+						<td align="center"><?php echo number_format(array_sum($sumCheckinDiscount),2); ?>  บาท </td>
 						<td align="center"><?php echo number_format(array_sum($sumDiscount),2); ?>  บาท </td>
 						<td align="center">	<b>รวมเงิน 	<?php  echo number_format(array_sum($sumAll),2);?> บาท</b>	</td>
 					</tr>
-					<?php }else{ ?>
+				<?php }else{ ?>
 					<tr>
 						<td colspan="13">No Booked And Checkin Data !</td>
 					</tr>
-					<?php } ?>
-				</tbody>
-			</table>
-		</div>
+				<?php } ?>
+			</tbody>
+		</table>
 	</div>
+</div>
 
-	<!-- /.row -->
-	<!--  END Fair List -->
+<!-- /.row -->
+<!--  END Fair List -->
 
-	<script src="<?php echo base_url()?>assets/js/jquery.datetimepicker.full.min.js"></script>
-	<script type="text/javascript">
-		$(function() {
-			$.datetimepicker.setLocale('th');
-			$('#startDate').datetimepicker({
-				timepicker:true,
-				mask:true,
-				format:'d/m/Y',
-				lang:'th',
-			});
+<script src="<?php echo base_url()?>assets/js/jquery.datetimepicker.full.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$.datetimepicker.setLocale('th');
+		$('#startDate').datetimepicker({
+			timepicker:true,
+			mask:true,
+			format:'d/m/Y',
+			lang:'th',
 		});
-	</script>
+	});
+</script>
 
 
 
