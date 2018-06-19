@@ -528,7 +528,9 @@ class Mdl_checkin extends CI_Model {
 		FROM ts_booked tb
 		LEFT JOIN ts_booked_room br ON  tb.bookedID=br.bookedID
 		WHERE MD5(tb.bookedID) = '".$key."'
-		GROUP BY tb.bookedID ";
+		GROUP BY tb.createDT
+		-- GROUP BY tb.bookedID
+		";
 		$query 	= $this->db->query($sql);
 		$rs 	= $query->result_array();
 		if (count($rs) > 0) {
@@ -630,6 +632,7 @@ class Mdl_checkin extends CI_Model {
 		FROM ts_booked INNER JOIN ts_booked_room ON ts_booked.bookedID = ts_booked_room.bookedID
 		INNER JOIN ts_cash_hdr ON ts_booked_room.roomID = ts_cash_hdr.roomID
 		WHERE MD5(ts_booked.bookedID) = '".$id."'
+		GROUP BY ts_booked_room.checkoutDate
 		";
 		$query = $this->db->query($sql)->result_array();
 		return $query;
