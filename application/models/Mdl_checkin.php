@@ -187,7 +187,7 @@ class Mdl_checkin extends CI_Model {
 
 				$saveCheckRoom[$sr] = array(
 					'bookedID '     => $bookedID,
-					'roomID '       => $roomID[$i],
+					'roomID '       => $roomID[$sr],
 					'checkinDate '  => $this->packfunction->dtTosql($_POST['checkinDate']),
 					'checkoutDate ' => $this->packfunction->dtTosql($this->input->post('checkOutDate')),
 					'comment '      => $this->input->post('comment'),
@@ -216,7 +216,7 @@ class Mdl_checkin extends CI_Model {
 					$log = array(
 						'bookedID '    => $bookedID,
 						'bookedroomID' => $bookedroomID[$sr],
-						'roomID'       =>  $roomID[$i],
+						'roomID'       =>  $roomID[$sr],
 						'logDate'      => $startDate->format('Y-m-d').' 12:00:00',
 						'comment'      => $this->input->post('comment'),
 						'status'       => 'CHECKIN',
@@ -231,11 +231,11 @@ class Mdl_checkin extends CI_Model {
 
 		} // End ts_booked_room
 
-		$dataCashHDR[$i] = array(
+		$dataCashHDR[$sr] = array(
 			// 'cashhdrID ' => $this->input->post(''),
 				// 'cashCode ' => $bookedCode[0]['CODE'],
 			'bookedID ' => $bookedID,
-			'roomID ' =>  $roomID[$i],
+			'roomID ' =>  $roomID[$sr],
 			'cashDate ' => $this->packfunction->dtYMDnow(),
 			'totalVat ' => $this->input->post('vat'),
 			'totalDiscount ' => $this->input->post('discount'),
@@ -248,8 +248,8 @@ class Mdl_checkin extends CI_Model {
 			"updateBY"	   => $this->UserName
 			);
 		$this->db->where('bookedID',$bookedID);
-		$this->db->where('roomID' ,  $roomID[$i]);
-		$this->db->update('ts_cash_hdr',$dataCashHDR[$i]);
+		$this->db->where('roomID' ,  $roomID[$sr]);
+		$this->db->update('ts_cash_hdr',$dataCashHDR[$sr]);
 		endfor;
 	}
 
@@ -528,7 +528,7 @@ class Mdl_checkin extends CI_Model {
 		FROM ts_booked tb
 		LEFT JOIN ts_booked_room br ON  tb.bookedID=br.bookedID
 		WHERE MD5(tb.bookedID) = '".$key."'
-		GROUP BY tb.createDT
+		GROUP BY tb.bookedID,tb.createDT
 		-- GROUP BY tb.bookedID
 		";
 		$query 	= $this->db->query($sql);
