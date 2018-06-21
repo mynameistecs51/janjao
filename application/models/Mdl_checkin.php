@@ -229,7 +229,6 @@ class Mdl_checkin extends CI_Model {
 					$startDate->modify("+1 day");
 				}
 
-		} // End ts_booked_room
 
 		$dataCashHDR[$sr] = array(
 			// 'cashhdrID ' => $this->input->post(''),
@@ -238,7 +237,8 @@ class Mdl_checkin extends CI_Model {
 			'roomID ' =>  $roomID[$sr],
 			'cashDate ' => $this->packfunction->dtYMDnow(),
 			'totalVat ' => $this->input->post('vat'),
-			'totalDiscount ' => $this->input->post('discount'),
+			'checkinDiscount' => $this->input->post('checkindiscount'),
+			'totalDiscount ' => $chk_out = ($this->input->post('discount') == 0.00) ? 0.00 : $this->input->post('discount'),
 			'totalLast ' => $this->input->post('lastamount'),
 			'comment ' => "TRANSACTIONS BY".$this->UserName,
 			'status ' => 'PAY',
@@ -250,6 +250,8 @@ class Mdl_checkin extends CI_Model {
 		$this->db->where('bookedID',$bookedID);
 		$this->db->where('roomID' ,  $roomID[$sr]);
 		$this->db->update('ts_cash_hdr',$dataCashHDR[$sr]);
+
+		} // End foreach
 		endfor;
 	}
 
@@ -792,7 +794,7 @@ class Mdl_checkin extends CI_Model {
 		AND CONCAT(tb.bookedCode,tb.idcardno,tb.firstName,' ',tb.lastName,tbr.roomID,DATE_FORMAT(tb.checkInAppointDate,'%d/%m/%Y')) LIKE '%".$keyword."%'
 		GROUP BY tbr.bookedroomID
 		#GROUP BY tb.bookedCode
-		ORDER BY tb.bookedCode DESC
+		ORDER BY tb.updateDT DESC
 		";
 		$data = $this->db->query($sql)->result_array();
 		return $data;

@@ -221,7 +221,7 @@
   <div class="col-lg-8">
     <div class="col-lg-6">ภาษีมูลค่าเพิ่ม</div><div class="col-lg-5"><input type="text" name="vat" id="vat" class="form-control" value="0" style="text-align: right;height: 28px;"></div><div class="col-lg-1">%</div>
     <div class="col-lg-12" style="height: 5px;"></div>
-    <div class="col-lg-6">ส่วนลด</div><div class="col-lg-5"><input type="text" name="discount" id="discount" class="form-control" value="0.00" style="text-align: right;height: 28px;"></div><div class="col-lg-1">บาท</div>
+    <div class="col-lg-6">ส่วนลด</div><div class="col-lg-5"><input type="text" name="checkindiscount" id="checkindiscount" class="form-control" value="0.00" style="text-align: right;height: 28px;"></div><div class="col-lg-1">บาท</div>
     <div class="col-lg-12" style="height: 5px;"></div>
     <div class="col-lg-6">เงินมัดจำ</div><div class="col-lg-5"><input type="text" name="deposit" id="deposit"  class="form-control" value="0.00" style="text-align: right;height: 28px;" readonly></div><div class="col-lg-1">บาท</div>
     <div class="col-lg-12" style="height: 5px;"></div>
@@ -353,7 +353,7 @@ function calculateDay() {
           return diff;
         }
 
-        $('#vat, #discount, #cashPledge, #pay').on("keyup",function() {
+        $('#vat, #checkindiscount, #cashPledge, #pay').on("keyup",function() {
           sumtotal();
         });
 
@@ -444,7 +444,7 @@ function calculateDay() {
 
       var vat = $('#vat').val()!="" ? parseInt($('#vat').val()):0;
       var pay = $('#pay').val()!="" ? parseInt($('#pay').val()):0;
-      var discount = $('#discount').val()!="" ? parseInt($('#discount').val()):0; // ส่วนลด
+      var checkindiscount = $('#checkindiscount').val()!="" ? parseInt($('#checkindiscount').val()):0; // ส่วนลด
       var cashPledge = $('#cashPledge').val()!="" ? parseInt($('#cashPledge').val()):0;  // เงินมัดจำ
       var last=0;
 
@@ -458,7 +458,7 @@ function calculateDay() {
         $('#lastamount').val(parseInt(last).toFixed(2));
       }
 
-      var dis = (parseInt(discount)+parseInt(pay))-last;
+      var dis = (parseInt(checkindiscount)+parseInt(pay))-last;
 
       $('#change').val(dis.toFixed(2));
 
