@@ -36,57 +36,56 @@
 				<tbody>
 					<?php $j=1; ?>
 					<?php if(count($getCheckin)>0) { ?>
-					<?php foreach ($getCheckin as $key => $rowCheckin) :?>
-						<?php $numRoom = count($rowCheckin['selectRoom']); ?>
-						<tr id="row<?php echo $rowCheckin['bookedID']; ?>">
-							<td><?php echo $j++; ?></td>
-							<td><?php echo $rowCheckin['bookedCode'] ?></td>
-							<?php $mobile = (empty($rowCheckin['mobile']))?'':"(".$rowCheckin['mobile'].")"; ?>
-							<td><?php echo $rowCheckin['firstName']." ".$rowCheckin['lastName']." ".$mobile; ?></td>
-							<td >
-								<?php $color = $rowCheckin['status']=='CHECKIN' ? 'danger':'warning';
-								for($i=0;$i < $numRoom; $i++)
-								{
-									echo "<button class='col-lg-3 btn-".$color."' style='margin-left:5px;'>",$rowCheckin['selectRoom'][$i]['roomID']."</button> ";
-								}
-								?>
-							</td>
-							<td><?php echo $rowCheckin['bookedDate']; ?></td>
-							<td><?php echo $rowCheckin['status']=='CHECKIN' ? $rowCheckin['checkinDate']:'' ; ?></td>
-							<td><?php echo $rowCheckin['status']=='CHECKIN' ? $rowCheckin['checkoutDate']:'' ; ?></td>
-							<td><?php echo $rowCheckin['status']; ?></td>
-							<td >
-								<?php if($rowCheckin['status']=='CHECKIN'){ ?>
-								<button class="btn btn-primary btn-xs btn_edit" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="edit" style='margin-left:5px;'>
-									<i class="fa fa-edit fa-2x"></i>
-								</button>
-								<button class="btn btn-warning btn-xs btn_addservice" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="Add Service" style='margin-left:5px;'>
-									<i class="fa fa-cutlery fa-2x" title="Add Service"></i>
-								</button>
-								<button class="btn btn-success btn-xs btn_checkout" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="Checkout" style='margin-left:5px;'>
-									<i class="fa fa-sign-out fa-2x" title="Checkout"></i>
-								</button>
-								<!-- <button class="btn btn-info btn-xs btn_print" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="Print" style='margin-left:5px;'>
-									<i class="fa fa-print fa-2x" title="Print"></i>
-								</button> -->
-								<button class="btn btn-danger btn-xs btn_cancel" id="<?php echo $rowCheckin['bookedID']; ?>" title="Cancle" style='margin-left:5px;'>
-									<i class="fa fa-trash-o fa-2x" title="Cancle"></i>
-								</button>
-								<?php }else{ ?>
-								<button class="btn btn-danger btn-xs btn_checkin" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="edit" style='margin-left:5px;'>
-									<i class="fa fa-edit fa-2x"></i>
-								</button>
-								<button class="btn btn-danger btn-xs btn_cancel" id="<?php echo $rowCheckin['bookedID']; ?>" title="Add Service" style='margin-left:5px;'>
-									<i class="fa fa-trash-o fa-2x" title="Cancle"></i>
-								</button>
-								<?php } ?>
-							</td>
-						</tr>
-					<?php endforeach; ?>
+						<?php foreach ($getCheckin as $key => $rowCheckin) :?>
+							<?php $numRoom = count($rowCheckin['selectRoom']); ?>
+							<tr id="row<?php echo $rowCheckin['bookedID']; ?>">
+								<td><?php echo $j++; ?></td>
+								<td><?php echo $rowCheckin['bookedCode'] ?></td>
+								<?php $mobile = (empty($rowCheckin['mobile']))?'':"(".$rowCheckin['mobile'].")"; ?>
+								<td><?php echo $rowCheckin['firstName']." ".$rowCheckin['lastName']." ".$mobile; ?></td>
+								<td >
+									<?php $color = $rowCheckin['status']=='CHECKIN' ? 'danger':'warning';
+									for($i=0;$i < $numRoom; $i++)
+									{
+										echo "<button class='col-lg-3 btn-".$color."' style='margin-left:5px;'>",$rowCheckin['selectRoom'][$i]['roomID']."</button> ";
+									}
+									?>
+								</td>
+								<td><?php echo $rowCheckin['bookedDate']; ?></td>
+								<td><?php echo $rowCheckin['status']=='CHECKIN' ? $rowCheckin['checkinDate']:'' ; ?></td>
+								<td><?php echo $rowCheckin['status']=='CHECKIN' ? $rowCheckin['checkoutDate']:'' ; ?></td>
+								<td><?php echo $rowCheckin['status']; ?></td>
+								<td >
+									<?php if($rowCheckin['status']=='CHECKIN'){ ?>
+										<button class="btn btn-primary btn-xs btn_edit" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="edit" style='margin-left:5px;'>
+											<i class="fa fa-edit fa-2x"></i>
+										</button>
+										<button class="btn btn-warning btn-xs btn_addservice" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="Add Service" style='margin-left:5px;'>
+											<i class="fa fa-cutlery fa-2x" title="Add Service"></i>
+										</button>
+										<button class="btn btn-success btn-xs btn_checkout" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="Checkout" style='margin-left:5px;'>
+											<i class="fa fa-sign-out fa-2x" title="Checkout"></i>
+										</button>
+										<?php if($this->usergroupID == 1 || $this->usergroupID == 2): ?>
+											<button class="btn btn-danger btn-xs btn_cancel" id="<?php echo $rowCheckin['bookedID']; ?>" title="Cancle" style='margin-left:5px;'>
+												<i class="fa fa-trash-o fa-2x" title="Cancle"></i>
+											</button>
+										<?php endif ?>
+									<?php }else{ ?>
+										<button class="btn btn-danger btn-xs btn_checkin" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="edit" style='margin-left:5px;'>
+											<i class="fa fa-edit fa-2x"></i>
+										</button>
+										<button class="btn btn-danger btn-xs btn_cancel" id="<?php echo $rowCheckin['bookedID']; ?>" title="Add Service" style='margin-left:5px;'>
+											<i class="fa fa-trash-o fa-2x" title="Cancle"></i>
+										</button>
+									<?php } ?>
+								</td>
+							</tr>
+						<?php endforeach; ?>
 					<?php }else{ ?>
-					<tr>
-						<td colspan="9">No Booked And Checkin Data !</td>
-					</tr>
+						<tr>
+							<td colspan="9">No Booked And Checkin Data !</td>
+						</tr>
 					<?php } ?>
 				</tbody>
 			</table>
