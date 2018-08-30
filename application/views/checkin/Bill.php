@@ -108,13 +108,13 @@
 
 									if($rowDetail['bookedType'] == 'SHORT'){
 										echo $price = number_format($rowDetail['selectRoom'][$i]['price_short'],2);
-										array_push($amountPrice,$price);
+										array_push($amountPrice, str_replace(',','',$price));
 									}else if($rowDetail['bookedType'] == 'DAY'){
 										echo $price = number_format($dateDtl->days * $rowDetail['selectRoom'][$i]['price_day'],2);
-										array_push($amountPrice,$price);
+										array_push($amountPrice, str_replace(',','',$price));
 									}else if($rowDetail['bookedType'] == 'MONTH'){
 										echo $price = number_format($dateDtl->m * $rowDetail['selectRoom'][$i]['price_month'],2);
-										array_push($amountPrice,$price);
+										array_push($amountPrice, str_replace(',','',$price));
 									}
 									?>
 								</td>
@@ -144,6 +144,7 @@
 					<tr style="background:#E6E6E6;" >
 						<td colspan="4" align="right">รวมสุทธิ</td>
 						<td  align="right" style="border-bottom:3px double black">
+							<?php //echo str_replace(',','',array_sum($amountPrice)); ?>
 							<?php $sumTotal =  str_replace(',','',array_sum($amountPrice))  + str_replace(',','',$rowDetail['cashPledge'] - $rowDetail['checkinDiscount']); ?>
 							<?php echo number_format($sumTotal + ( ($sumTotal * $rowDetail['totalVat'] ) /100 ),2 ); ?>
 						</td>
