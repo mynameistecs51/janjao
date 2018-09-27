@@ -125,7 +125,7 @@ class Report_checkin extends CI_Controller {
 	public function search()
 	{
 		$keywordDay = $this->input->post('keywordDay');
-		$keywordMonth = $this->input->post('startMonth');
+		$this->data['keywordMonth'] = $this->input->post('startMonth');
 		$keywordYear = $this->input->post('startYear');
 		if(!empty($keywordDay )){
 			if($_POST){
@@ -135,17 +135,17 @@ class Report_checkin extends CI_Controller {
 				$this->data['getMonth'] = $this->packfunction->getMonth();
 				$this->packfunction->packView($this->data,"report/reportcheckin/ReportCheckinDay");
 			}else{
-				redirect('report/reportbooked/booked','refresh');
+				redirect('report_checkin/booked','refresh');
 			}
-		}else if(!empty($keywordMonth)){
+		}else if(!empty($this->data['keywordMonth'])){
 			if($_POST){
 				$this->data['viewName']=$this->pagename;
-				$this->data['keyword']= '/'.$keywordMonth.'/'.$this->input->post('startYear') ;
+				$this->data['keyword']= '/'.$this->data['keywordMonth'].'/'.$this->input->post('startYear') ;
 				$this->data['repCheckout'] = $this->showList($this->data['keyword']);
 				$this->data['getMonth'] = $this->packfunction->getMonth();
 				$this->packfunction->packView($this->data,"report/reportcheckin/ReportCheckinMonth");
 			}else{
-				redirect('report/report_checkin/checkinmonth','refresh');
+				redirect('report_checkin/checkinmonth','refresh');
 			}
 		}else if(!empty($keywordYear)){
 			if($_POST){
@@ -155,10 +155,10 @@ class Report_checkin extends CI_Controller {
 				$this->data['getMonth'] = $this->packfunction->getMonth();
 				$this->packfunction->packView($this->data,"report/reportcheckin/ReportCheckinYear");
 			}else{
-				redirect('report/report_checkin/checkinmonth','refresh');
+				redirect('report_checkin/checkinmonth','refresh');
 			}
 		}else{
-			redirect('report/report_checkin/','refresh');
+			redirect('report_checkin/','refresh');
 		}
 	}
 

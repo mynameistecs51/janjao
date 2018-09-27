@@ -21,7 +21,14 @@
 					เดือน :
 					<select name="startMonth" class="form-control"  style="width: 138px;margin-right: 10px;">
 						<?php foreach ($getMonth as $keyMonth => $valueMonth) :?>
-							<?php $selectedM = ($keyMonth == date('m'))?'selected':'' ?>
+							<?php
+							if(empty($keywordMonth)){
+								$selectedM = ($keyMonth == date('m'))?"selected" : "";
+							}else{
+								$selectedM = ($keyMonth == $keywordMonth)? "selected" : "";
+							}
+							?>
+							<?php //$selectedM = ($keyMonth == date('m'))?'selected':'' ?>
 							<option value="<?php echo $keyMonth; ?>" <?php echo $selectedM; ?>><?php echo $valueMonth; ?></option>
 						<?php endforeach; ?>
 					</select>
