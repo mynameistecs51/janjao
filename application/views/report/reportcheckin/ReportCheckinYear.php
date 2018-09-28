@@ -21,8 +21,16 @@
 					ปี :
 					<select name="startYear" class="form-control"  style="width: 138px;margin-right: 10px;">
 						<?php for($i=(-4);$i <= (+2);$i++): ?>
-						<?php $selectedY = (date('Y')+$i == date('Y'))?'selected':'' ?>
-						<option value="<?php echo date('Y')+$i; ?>" <?php echo $selectedY; ?>><?php echo (date('Y')+$i)+543; ?></option>
+
+						<?php
+							if(empty($keywordYear)){
+								$selectedY = ('/'.date('Y')+$i == '/'.date('Y'))?'selected':'';
+							}else{
+								$selectedY = ('/'.$keywordYear == ('/'.date('Y')+$i))? "selected" : "";
+							}
+							?>
+						<?php //$selectedY = (date('Y')+$i == date('Y'))?'selected':''; ?>
+						<option value="/<?php echo date('Y')+$i; ?>" <?php echo $selectedY; ?>><?php echo (date('Y')+$i)+543; ?></option>
 					<?php endfor; ?>
 				</select>
 				<button  type="submit" class="btn btn-primary " style="float: right;">Search</button>

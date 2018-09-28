@@ -793,7 +793,7 @@ class Mdl_checkin extends CI_Model {
 		WHERE tb.status <> 'HIDDEN'
 		AND tb.status <> 'LATE'
 		AND tb.status <> 'CANCLE'
-		AND CONCAT(tb.bookedCode,tb.idcardno,tb.firstName,' ',tb.lastName,tbr.roomID,DATE_FORMAT(tb.checkInAppointDate,'%d/%m/%Y')) LIKE '%".$keyword."%'
+		AND CONCAT(tb.bookedCode,tb.idcardno,tb.firstName,' ',tb.lastName,tbr.roomID,DATE_FORMAT(tb.checkInAppointDate,'%d/%m/%Y'),DATE_FORMAT(tb.checkInAppointDate,'%Y')) LIKE '%".$keyword."%'
 		GROUP BY tbr.bookedroomID
 		#GROUP BY tb.bookedCode
 		ORDER BY tb.updateDT DESC
