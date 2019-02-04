@@ -72,10 +72,12 @@
 											</button>
 										<?php endif ?>
 									<?php }else{ ?>
-										<button class="btn btn-danger btn-xs btn_checkin" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="edit" style='margin-left:5px;'>
-											<i class="fa fa-edit fa-2x"></i>
-										</button>
-										<button class="btn btn-danger btn-xs btn_cancel" id="<?php echo $rowCheckin['bookedID']; ?>" title="Add Service" style='margin-left:5px;'>
+										<?php if($this->usergroupID == 1 || $this->usergroupID == 2): ?>
+											<button class="btn btn-danger btn-xs btn_checkin" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="edit" style='margin-left:5px;'>
+												<i class="fa fa-edit fa-2x"></i>
+											</button>
+										<?php endif; ?>
+										<button class="btn btn-danger btn-xs btn_cancel" id="<?php echo $rowCheckin['bookedID']; ?>" title="Cancle Service" style='margin-left:5px;'>
 											<i class="fa fa-trash-o fa-2x" title="Cancle"></i>
 										</button>
 									<?php } ?>

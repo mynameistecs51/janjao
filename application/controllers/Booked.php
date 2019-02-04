@@ -13,6 +13,7 @@ class Booked extends CI_Controller {
 		$this->ip_addr = $this->input->ip_address();
 		$this->userID = $this->session->userdata('userID'); // ID จากตาราง Session
 		$this->UserName = $this->session->userdata('UserName');
+		$this->usergroupID = $this->session->userdata('usergroupID');
 		if($this->userID==""){
 			// ถ้าไม่มี session หรือ ไม่มีการ Login ให้กลับไป authen
 			redirect('authen/');
@@ -178,7 +179,7 @@ class Booked extends CI_Controller {
 			$data = ["status"=>"false"];
 			echo json_encode($data);
 		}
-		
+
 	}
 
 }?>
