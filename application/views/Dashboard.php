@@ -348,7 +348,7 @@
 			}
 
 			if($f4['transaction']=='EMPTY' && $f4['roomtypeCode']!='STAIRCASE' && $f4['status']=='ON'){
-				if($f1['transclean'] == 'CLEANING'){
+				if($f4['transclean'] == 'CLEANING'){
  					$html .= '
 				<div class="col-sm-1 " style="margin:10px;">
 					<span class="button-checkbox ">
