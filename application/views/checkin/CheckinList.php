@@ -57,9 +57,11 @@
 								<td><?php echo $rowCheckin['status']; ?></td>
 								<td >
 									<?php if($rowCheckin['status']=='CHECKIN'): ?>
-										<!-- <button class="btn btn-primary btn-xs btn_edit" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="edit" style='margin-left:5px;'>
-											<i class="fa fa-edit fa-2x"></i>
-										</button> -->
+										<?php if($this->usergroupID == 1 || $this->usergroupID == 2): ?>
+											<button class="btn btn-primary btn-xs btn_edit" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="edit" style='margin-left:5px;'>
+												<i class="fa fa-edit fa-2x"></i>
+											</button>
+										<?php endif; ?>
 										<button class="btn btn-warning btn-xs btn_addservice" id="<?php echo MD5($rowCheckin['bookedID']); ?>" title="Add Service" style='margin-left:5px;'>
 											<i class="fa fa-cutlery fa-2x" title="Add Service"></i>
 										</button>
