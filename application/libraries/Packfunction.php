@@ -187,7 +187,7 @@ class Packfunction {
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="glyphicon glyphicon-user" style="padding-left: 0px;padding-right: 5px;"></i>  '.$this->CI->session->userdata("UserName").'<b class="caret"></b> </a>
 					<ul class="dropdown-menu">
 						<li>
-							<a href="#">Profile Setting</a>
+							<a href="'.base_url().'profile">Profile Setting</a>
 						</li>
 						<li>
 							<a href="'.base_url().'/authen/logout">Logout</a>
