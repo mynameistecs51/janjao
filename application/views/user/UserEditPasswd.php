@@ -1,4 +1,5 @@
 <?php
+
 if(isset($userDtl['userID'])){ ?>
 	<div class="form-horizontal">
 		<input  type="hidden" name="userID" id="userID" value="<?php echo $userDtl['userID'] ?>" >
@@ -145,7 +146,8 @@ if(isset($userDtl['userID'])){ ?>
 		}
 	</script>
 
-	<script src="<?php echo base_url()?>assets/js/bootstrap-select.min.js" type="text/javascript"></script>
+	<script src="<?php echo base_url()?>assets/js/jquery.js" type="text/javascript"></script>
+	<!-- <script src="<?php //echo base_url()?>assets/js/bootstrap-select.min.js" type="text/javascript"></script> -->
 	<!--  END Fair List -->
 
 	<script type="text/javascript">

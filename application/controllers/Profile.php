@@ -24,8 +24,6 @@ class Profile extends CI_Controller {
   public function index(){
   	$this->data['viewName']=$this->pagename;
   	$this->data['userDtl']=$this->Mdl_user->getDetail($this->userID);
-  	// $this->data['usergroup']=$this->Mdl_user->getUserGroup();
-  	// $this->data['countryList']=$this->mdl_packFunction->getCountryList();
   	$this->data['getlist']=$this->Mdl_user->getList( $this->UserName);
   	$this->data['usergroupID'] = $this->usergroupID;
   	$this->packfunction->packView($this->data,"profile/Profile");

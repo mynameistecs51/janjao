@@ -1,9 +1,9 @@
     <!-- Page Name -->
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/datatable/css/dataTables.bootstrap.min.css">
-    <div class="col-lg-12">
-    	<i style="font-size: 18px;">USER DETAIL <u> <?php echo $this->session->userdata('UserName'); ?> </u></i>
+
+    <div class="col-lg-6">
+    	<i style="font-size: 18px;">SERVICE LIST</i>
     </div>
-    <hr style="margin-top: 30px;">
+    <hr class="col-lg-12" style="margin-top: 6px;">
 
 
     <!-- Page Content -->
@@ -12,7 +12,7 @@
     	<div class="row text-center" style="margin-top: 10px;">
     		<div class="col-lg-12" align="left">
     			<table id="fairlist" class="table table-striped table-bordered" cellspacing="0" width="100%" >
-    				<thead>
+    				<thead style="background:#BDBDBD;font-size: 12px; ">
     					<tr>
     						<th width="60">No.</th>
     						<th width="150">UserName</th>
@@ -35,12 +35,10 @@
     									<button class="btn btn-info btn-xs btn_edit" id="<?php echo MD5($rs['userID']); ?>" title="edit" style='margin-left:5px;'>
     										<i class="fa fa-id-card-o fa-2x" aria-hidden="true"></i>
     									</button>
+
     									<button class="btn btn-warning btn-xs btn_edit_passwd" id="<?php echo MD5($rs['userID']); ?>" title="edit password" style='margin-left:5px;'>
     										<i class="fa fa-unlock fa-2x" aria-hidden="true"></i>
     									</button>
-    									<!-- <button class="btn btn-danger btn-xs btn_cancel" id="<?php //echo $rs['userID']; ?>" title="Cancle" style='margin-left:5px;'>
-    										<i class="fa fa-trash-o fa-2x" title="Cancle"></i>
-    									</button> -->
     								</td>
     							</tr>
     							<?php $n++; }  ?>
@@ -53,45 +51,27 @@
     					</tbody>
     				</table>
     			</div>
-
-
     		</div>
+    		<div class="div_modal"> <!-- show modal Bill --> </div>
     		<!-- /.row -->
 
-    		<div class="div_modal"> <!-- show modal Bill --> </div>
-    		<!--  END Fair List -->
     		<script type="text/javascript">
-    			$(function() {
+    			$( document ).ready(function() {
+    				userEdit();
+    				userEditPwd();
+    			} );
+
+    			function userEdit() {
     				$('.btn_edit').click(function(){
-    					var id = $(this).attr('id');
-    					load_page('<?php echo base_url()."user/edit/"; ?>'+id,'.:: EDIT User ::.','<?php echo base_url()."profile/saveUpdate/"; ?>');
+    					load_page('<?php echo base_url(); ?>index.php/User/edit/'+$(this).attr('id'),'.:: EDIT USER ::.','<?php echo base_url()."profile/saveUpdate"; ?>');
     				});
+    			}
+
+    			function userEditPwd() {
     				$('.btn_edit_passwd').click(function(){
-    					var id = $(this).attr('id');
-    					console.log(id);
-    					load_page('<?php echo base_url()."user/edit_passwd/"; ?>'+id,'.:: EDIT Password User ::.','<?php echo base_url()."profile/saveUpdate/"; ?>');
+    					load_page('<?php echo base_url(); ?>index.php/User/edit_passwd/'+$(this).attr('id'),'.:: EDIT PASSWORD ::.','<?php echo base_url()."profile/saveUpdate"; ?>');
     				});
-    				$('.btn_cancel').click(function(){
-    					var cfm = confirm("ยืนยันการลบรายการ !");
-    					if(cfm == true){
-    						var id = $(this).attr('id');
-    						$.ajax({
-    							url: '<?php echo base_url()."user/saveCancle/";?>',
-    							data:{key:id},
-    							type: 'POST',
-    							dataType: 'json',
-    							success:function(res){
-    								$('tbody tr#row'+id).remove();
-    							},
-    							error:function(res){
-    								alert("พบข้อผิดพลาด !");
-    							}
-    						});
-    					}else{
-    						return false;
-    					}
-    				});
-    			});
+    			}
 
     			function load_page(loadUrl,texttitle,urlsend){
     				var screenname= texttitle;
@@ -110,7 +90,7 @@
     			function modal_form(n,screenname,url)
     			{
     				var div='';
-    				div+='<form action="'+url+'"  role="form" data-toggle="validator" id="form" method="post" enctype="multipart/form-data" onSubmit="JavaScript:return confirmvalid();">';
+    				div+='<form action="'+url+'"  role="form" data-toggle="validator" id="form" method="post" enctype="multipart/form-data">';
     				div+='<!-- Modal -->';
     				div+='<div class="modal modal-wide fade" id="myModal'+n+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">';
     				div+='<div class="modal-dialog" style="width:90%;">';
@@ -122,8 +102,8 @@
     				div+='<div class="modal-body">';
     				div+='</div>';
     				div+='<div class="modal-footer" style="text-align:center; background:#F6CECE;">';
-    				div+='<button type="submit" id="save" class="btn btn-success"><span class="   glyphicon glyphicon-floppy-saved"> บันทึก</span></button>';
-    				div+='<button type="reset" class="btn btn-danger " data-dismiss="modal"><span class="glyphicon glyphicon-floppy-remove"> ยกเลิก</span></button>';
+    				div+='<button type="submit" id="save" class="btn btn-modal"><span class="   glyphicon glyphicon-floppy-saved"> บันทึก</span></button>';
+    				div+='<button type="reset" class="btn btn-modal " data-dismiss="modal"><span class="glyphicon glyphicon-floppy-remove"> ยกเลิก</span></button>';
     				div+='</div>';
     				div+='</div><!-- /.modal-content -->';
     				div+='</div><!-- /.modal-dialog -->';
