@@ -69,7 +69,7 @@
 
     			function userEditPwd() {
     				$('.btn_edit_passwd').click(function(){
-    					load_page('<?php echo base_url(); ?>index.php/User/edit_passwd/'+$(this).attr('id'),'.:: EDIT PASSWORD ::.','<?php echo base_url()."profile/saveUpdate"; ?>');
+    					load_page('<?php echo base_url(); ?>index.php/User/edit_passwd/'+$(this).attr('id'),'.:: EDIT PASSWORD ::.','<?php echo base_url()."profile/saveUpdatePwd"; ?>');
     				});
     			}
 
@@ -102,8 +102,8 @@
     				div+='<div class="modal-body">';
     				div+='</div>';
     				div+='<div class="modal-footer" style="text-align:center; background:#F6CECE;">';
-    				div+='<button type="submit" id="save" class="btn btn-modal"><span class="   glyphicon glyphicon-floppy-saved"> บันทึก</span></button>';
-    				div+='<button type="reset" class="btn btn-modal " data-dismiss="modal"><span class="glyphicon glyphicon-floppy-remove"> ยกเลิก</span></button>';
+    				div+='<button type="submit" id="save" class="btn btn-modal btn-success"><span class="   glyphicon glyphicon-floppy-saved"> บันทึก</span></button>';
+    				div+='<button type="reset" class="btn btn-modal btn-warning" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-remove"> ยกเลิก</span></button>';
     				div+='</div>';
     				div+='</div><!-- /.modal-content -->';
     				div+='</div><!-- /.modal-dialog -->';
